@@ -1,4 +1,7 @@
 
+archlinuxcn
+https://repo.archlinuxcn.org/
+
 aur-emulators
 https://maximalisimus.github.io/aur-emulators/x86_64
 
