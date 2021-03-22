@@ -46,4 +46,3 @@ Server = https://maximalisimus.github.io/$repo/$arch
 
 
 
-
