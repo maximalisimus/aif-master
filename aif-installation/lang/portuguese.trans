@@ -637,23 +637,9 @@ _CloseInstBody="Fechar instalador ?"
 _yesno_order_ttl="A passagem de vários menus"
 _yesno_order_bd="\nSe você tem um kernel LTS?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Instalar um emulador de PlayStation-3 "
-_yesno_rpcs3_bd="\nInstalar um emulador de PlayStation-3?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Configuração Do Bluetooth"
 _yesno_bluetooth_bd="\nInstalar o controlador e o gerenciador de dispositivos bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Instalação de pacotes do AUR"
-_aur_pkg_bd="\nPor favor, selecione os pacotes para a instalação!\n"
-_aur_dbl_pkg_ttl="Escolha a versão do pacote"
-_aur_dbl_pkg_bd="\nEste pacote tem várias versões.\nPor favor, selecione a você!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Instalação do emulador"
-_eml_pkg_bd="\nPor favor, seleccione as emuladores para instalar!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Remover o arquivo de Log?"
@@ -747,14 +733,6 @@ _yn_netctl_bd="\nQuer escolher o modelo e editar \ lo ?\n"
 _ntctl_tmpmn_bd="\nPor favor, selecione o modelo desejado para o gerente de rede netctl.\n"
 _inntctl_ttl="Escrever o nome do modelo netctl"
 _inntctl_bd="\nPor favor, digite o novo nome para o modelo.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="A rede sem fio."
-_msg_wt_bd="\nVocê escolheu o modelo para uma rede sem fios. Este modelo requer a introdução de um SSID da rede sem fio e uma senha. A configuração será colocado em seu novo modelo. Se esta opção você não precisa de um, apenas deixe linhas em branco.\n"
-_ib_ssid_ttl="Escrever o nome do SSID da rede sem fios"
-_ib_ssid_bd="\nPor favor, insira o nome da sua rede sem fio.\n"
-_ib_pass_ttl="A entrada de uma senha de rede sem fio"
-_ib_pass_bd="\nPor favor, digite a senha da sua rede wireless\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Sincronização de tempo"

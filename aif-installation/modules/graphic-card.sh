@@ -59,10 +59,10 @@ install_ati(){
     # All non-NVIDIA cards / virtualisation
     elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'ati|amd' | awk '/ATI|AMD/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=2
     elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'intel|lenovo' | awk '/Intel|Lenovo/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=3
-    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'via' | awk '/VIA/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=18
-    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'virtualbox' | awk '/VirtualBox/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=19
-    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'vmware' | awk '/VMware/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=20
-    else HIGHLIGHT_SUB_GC=21
+    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'via' | awk '/VIA/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=10
+    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'virtualbox' | awk '/VirtualBox/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=11
+    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'vmware' | awk '/VMware/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=12
+    else HIGHLIGHT_SUB_GC=13
     fi
     
     skip_orderers_resume
@@ -78,18 +78,10 @@ install_ati(){
     "7" $"Nvidia (+ $INTEGRATED_GC)" \
     "8" $"Nvidia-dkms" \
     "9" $"Nvidia-dkms (+ $INTEGRATED_GC)" \
-    "10" $"Nvidia-340xx" \
-    "11" $"Nvidia-340xx (+ $INTEGRATED_GC)" \
-    "12" $"Nvidia-340xx-dkms" \
-    "13" $"Nvidia-340xx-dkms (+ $INTEGRATED_GC)" \
-    "14" $"Nvidia-390xx" \
-    "15" $"Nvidia-390xx (+ $INTEGRATED_GC)" \
-    "16" $"Nvidia-390xx-dkms" \
-    "17" $"Nvidia-390xx-dkms (+ $INTEGRATED_GC)" \
-    "18" $"xf86-video-openchrome" \
-    "19" $"virtualbox-guest-xxx" \
-    "20" $"xf86-video-vmware" \
-    "21" "$_GCUnknOpt / xf86-video-fbdev" 2>${ANSWER}
+    "10" $"xf86-video-openchrome" \
+    "11" $"virtualbox-guest-xxx" \
+    "12" $"xf86-video-vmware" \
+    "13" "$_GCUnknOpt / xf86-video-fbdev" 2>${ANSWER}
 
    case $(cat ${ANSWER}) in
         "1") lspci -k | grep -Ei "3d|vga" > /tmp/.vga
@@ -197,63 +189,8 @@ install_ati(){
 				nvd_select_dep
 				wait
 				modificate_xorg
-             ;;
-        "10") NVIDIA_INST=1
-				
-				wait
-				nvd_select_dep
-             ;;
-        "11") [[ $INTEGRATED_GC == "ATI" ]] &&  install_ati || install_intel
-				wait
-				NVIDIA_INST=1
-				
-				wait
-				nvd_select_dep
-				wait
-				modificate_xorg
-             ;;
-        "12") NVIDIA_INST=1
-				
-				wait
-				nvd_select_dep
-             ;;
-        "13") [[ $INTEGRATED_GC == "ATI" ]] &&  install_ati || install_intel
-				NVIDIA_INST=1
-				
-				wait
-				nvd_select_dep
-				wait
-				modificate_xorg
-             ;;
-        "14") NVIDIA_INST=1
-				
-				wait
-				nvd_select_dep
-             ;;
-        "15") [[ $INTEGRATED_GC == "ATI" ]] &&  install_ati || install_intel
-				wait
-				NVIDIA_INST=1
-				
-				wait
-				nvd_select_dep
-				wait
-				modificate_xorg
-             ;;
-        "16") NVIDIA_INST=1
-				
-				wait
-				nvd_select_dep
-             ;;
-        "17") [[ $INTEGRATED_GC == "ATI" ]] &&  install_ati || install_intel
-				wait
-				NVIDIA_INST=1
-				
-				wait
-				nvd_select_dep
-				wait
-				modificate_xorg
-             ;;                                       
-        "18") # Via
+             ;;                                     
+        "10") # Via
             clear
             info_search_pkg
             _list_openchrome=$(check_s_lst_pkg "${_openchrome[*]}")
@@ -261,7 +198,7 @@ install_ati(){
             clear
             [[ ${_list_openchrome[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_openchrome[*]} 2>/tmp/.errlog
              ;;            
-        "19") # VirtualBox
+        "11") # VirtualBox
             dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_VBoxInstTitle" --msgbox "$_VBoxInstBody" 0 0
             clear
             info_search_pkg
@@ -276,7 +213,7 @@ install_ati(){
             arch_chroot "systemctl enable vboxservice"
             echo -e "vboxguest\nvboxsf\nvboxvideo" > ${MOUNTPOINT}/etc/modules-load.d/virtualbox.conf
              ;;
-        "20") # VMWare
+        "12") # VMWare
             clear
             info_search_pkg
             _list_vmware_pkg=$(check_s_lst_pkg "${_vmware_pkg[*]}")
@@ -286,7 +223,7 @@ install_ati(){
             clear
             [[ ${_clist_vmware_pkg[*]} != "" ]] && ps_in_pkg "${_clist_vmware_pkg[*]}"
              ;;
-        "21") # Generic / Unknown
+        "13") # Generic / Unknown
             clear
             info_search_pkg
             _list_generic_pkg=$(check_s_lst_pkg "${_generic_pkg[*]}")

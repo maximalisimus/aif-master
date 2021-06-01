@@ -658,30 +658,13 @@ _CloseInstBody="Закрыть установщик?"
 _yesno_order_ttl="Пропуск нескольких меню"
 _yesno_order_bd="\nУстановлено ли у вас ядро LTS?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Установка эмулятора PlayStation-3"
-_yesno_rpcs3_bd="\nУстановить эмулятор PlayStation-3?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Установка Bluetooth"
 _yesno_bluetooth_bd="\nУстановить драйвера и менеджер устройств bluetooth?\n"
 
-# Aur package menu
-_aur_pkg_ttl="Установка пакетов из AUR"
-_aur_pkg_bd="\nПожалуйста, выберите необходимые вам пакеты для установки!\n"
-_aur_dbl_pkg_ttl="Выбор версии пакета"
-_aur_dbl_pkg_bd="\nДанный пакет имеет несколько версий.\nПожалуйста выберите необходимую вам!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Установка эмуляторов"
-_eml_pkg_bd="\nПожалуйста, выберите необходимые вам эмуляторы для установки!\n"
-
 # Remove packages log
 _yesno_rmrf_ttl="Удалить Лог файл?"
 _yesno_rmrf_bd="\nСоздан лог файл удаленных старых версий пакетов.\nУдалить этот лог-файл?\n"
-
-# Remote repository
-_rmt_rpstr_ttl="Обновление пакетов из удаленного репозитория"
 
 #
 # User groups
@@ -769,14 +752,6 @@ _ntctl_tmpmn_bd="\nПожалуйста, выберите необходимый
 _inntctl_ttl="Ввод имени шаблона netctl"
 _inntctl_bd="\nПожалуйста, введите новое имя шаблона.\n"
 #
-# Wifi template configuration
-_msg_wt_ttl="Беспроводная сеть."
-_msg_wt_bd="\nВы выбрали шаблон для беспроводной сети. Данный шаблон требует ввода SSID беспроводной сети и пароль. Настройка будет введена в ваш новый шаблон. Если же данная настройка вам не нужна, просто оставте строки пустыми.\n"
-_ib_ssid_ttl="Ввод имени SSID беспроводной сети"
-_ib_ssid_bd="\nПожалуйста, введите имя вашей беспроводной сети.\n"
-_ib_pass_ttl="Ввод пароля беспроводной сети"
-_ib_pass_bd="\nПожалуйста, введите пароль вашей беспроводной сети\n"
-#
 # Network time protocol server language
 _mn_tmsnc_ttl="Синхронизация времени"
 _mn_tmsnc_bd="\nПожалуйста, выберите необходимую настройку.\n"
@@ -815,3 +790,8 @@ _restrinct_desc_3="Запретить внесение изменений"
 _restrinct_desc_4="Не синхронизироваться с хостом"
 _restrinct_desc_5="Не принимать запросы"
 #
+## Docker docker-compose
+_yn_mn_docker="Установка docker и docker-compose."
+_yn_mn_docker_bd="\nУстановить данные пакеты ?\n"
+#
+

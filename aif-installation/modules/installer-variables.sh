@@ -191,6 +191,7 @@ _netctl_edit=""
 # Server variables
 _ssh_setup_once=0
 _ssh_run_once=0
+_docker_run_once=0
 _prmtrtlg_once=0
 _prmtrtlg_clck=0
 _mail_srv_once=0
@@ -223,14 +224,12 @@ _ntp_cl_str_2="mask"
 _ntp_cl_str_3="nomodify notrap"
 _ntp_client_str=""
 
-# Emulator packages Init
-
-
-# Aur packages init
-
-
 # Package manager init
-
+_pm_uniq=""
+_pm_n=""
+_pm_menu=""
+_required_packages=""
+_pm_once=0
 
 # Color dialog configurated
 _dlgrc_hm_sts=0
@@ -253,10 +252,6 @@ _dlg_rt_rt_bp="$filesdir/dlg-rt-rt.bp"
 # /config/remove_old_v_pkg_function.sh			# Remove duble package on old version
 # /config/dependences_function.sh				# Dependences for script
 # /config/verify_package_folder.sh				# Check required folder and required files
-# /config/aur_kernel_function.sh				# Aur old kernel for Archlinux
-# /config/nvidia340xx_function.sh				# nvidia-340xx drivers
-# /config/nvidia390xx_function.sh				# nvidia-340xx drivers
-# /config/wfconf.sh								# WiFi menu configuration connected
 # /modules/core-functions.sh					# language, checks
 # /modules/configuration-functions.sh			# Keyboard, locale, time zone, FSTAB, mkinitcpio, user controls
 # /modules/system-partitioning.sh				# managing partitions, installing the boot

@@ -643,23 +643,9 @@ _CloseInstBody="Luk Installationen?"
 _yesno_order_ttl="Pass flere menuer"
 _yesno_order_bd="\nHar du en LTS-kerne installeret?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installerer PlayStation-3-emulatoren"
-_yesno_rpcs3_bd="\nInstallere PlayStation-3 emulator?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Indstilling Af Bluetooth"
 _yesno_bluetooth_bd="\nAt installere drivere og enhedshåndteringen bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Installerer pakker fra AUR"
-_aur_pkg_bd="\nVælg venligst de pakker du skal installere!\n"
-_aur_dbl_pkg_ttl="Pakningsstørrelse"
-_aur_dbl_pkg_bd="\nDenne pakke har flere versioner.\nVælg den, du har brug for!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installation af emulatorer"
-_eml_pkg_bd="\nVælg venligst de emulatorer du skal installere!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Slet logfilen?"
@@ -753,14 +739,6 @@ _yn_netctl_bd="\nØnsker at vælge en skabelon og redigere det ?\n"
 _ntctl_tmpmn_bd="\nVælg den ønskede skabelon for et netværk Manager netctl.\n"
 _inntctl_ttl="Indtast navnet på den skabelon, netctl"
 _inntctl_bd="\nIndtast venligst et nyt skabelon\navn.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Trådløse netværk."
-_msg_wt_bd="\nDu har valgt en skabelon til dit trådløse netværk. Denne skabelon kræver, at du indtaster det trådløse netværks SSID og password. Indstillingen vil blive introduceret til dit nye skabelon. Hvis denne indstilling er ikke nødvendig, bare efterlade tomt.\n"
-_ib_ssid_ttl="Indtast SSID ' et for det trådløse netværk"
-_ib_ssid_bd="\nAngiv navnet på dit trådløse netværk.\n"
-_ib_pass_ttl="Indtast adgangskoden til det trådløse netværk"
-_ib_pass_bd="\nIndtast adgangskoden til det trådløse netværk\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Synkronisering af tid"

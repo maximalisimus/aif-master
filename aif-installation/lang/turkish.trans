@@ -662,23 +662,9 @@ _CloseInstBody="Yükleyici kapatılsın mı?"
 _yesno_order_ttl="Birden fazla menü atlama"
 _yesno_order_bd="\nLTS çekirdeğiniz yüklü mü?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="PlayStation-3 emülatörünü yükleme"
-_yesno_rpcs3_bd="\nPlayStation-3 emülatörünü yükleyin?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Bluetooth Kurulumu"
 _yesno_bluetooth_bd="\nSürücüleri ve Bluetooth cihaz Yöneticisini yükleyin?\n"
-
-# Aur package menu
-_aur_pkg_ttl="AUR & # 39; dan paketleri yükleme"
-_aur_pkg_bd="\nLütfen yüklemek için ihtiyacınız olan paketleri seçin!\n"
-_aur_dbl_pkg_ttl="Paket sürümünü seçme"
-_aur_dbl_pkg_bd="\nBu paketin çeşitli sürümleri vardır.\nLütfen ihtiyacınız olanı seçin!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Emülatör kurulumu"
-_eml_pkg_bd="\nLütfen yüklemek için ihtiyacınız olan emülatörleri seçin!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Günlük dosyasını sil?"
@@ -772,14 +758,6 @@ _yn_netctl_bd="\nArzu şablonu seçmek ve düzenlemek için mi ?\n"
 _ntctl_tmpmn_bd="\nLütfen, kullanmak istediğiniz şablonu seçin ağ yöneticisi netctl.\n"
 _inntctl_ttl="Giriş şablonu adı netctl"
 _inntctl_bd="\nLütfen yeni bir ad yazın şablonu.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Kablosuz ağ."
-_msg_wt_bd="\nSeçtiğiniz desen için kablosuz ağ. Bu şablon girişi gerektirir kablosuz ağ SSID ve şifre. Özelleştirme tanıtılacak yeni modeli. Eğer bu ayar gerekmez, sadece bırak satırı boş.\n"
-_ib_ssid_ttl="Enter SSID kablosuz ağ"
-_ib_ssid_bd="\nLütfen bir isim girin kablosuz ağ.\n"
-_ib_pass_ttl="Şifre girişi kablosuz ağ"
-_ib_pass_bd="\nLütfen bir şifre girin kablosuz ağ\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Zaman senkronizasyonu"

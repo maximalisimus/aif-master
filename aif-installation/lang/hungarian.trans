@@ -654,23 +654,9 @@ _CloseInstBody="Bezárod a telepítőt?"
 _yesno_order_ttl="Több menük átadása"
 _yesno_order_bd="\nVan telepítve LTS kernel?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="A PlayStation-3 emulátor telepítése"
-_yesno_rpcs3_bd="\nTelepítse PlayStation-3 emulátort?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="A Bluetooth Beállítása"
 _yesno_bluetooth_bd="\nAz illesztőprogramok, valamint az Eszközkezelő telepítéséhez a bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Csomagok telepítése az AUR-ból"
-_aur_pkg_bd="\nKérjük, válassza ki a csomagokat telepíteni kell!\n"
-_aur_dbl_pkg_ttl="A csomag verziója"
-_aur_dbl_pkg_bd="\nEnnek a csomagnak több változata is van.\nKérem, válassza ki azt, amire szüksége van!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Emulátorok telepítése"
-_eml_pkg_bd="\nKérjük, válassza ki a emulátorok telepíteni kell!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Törölni a naplófájlt?"
@@ -764,14 +750,6 @@ _yn_netctl_bd="\nAkarod, hogy válasszon ki egy sablont, majd szerkessze meg ?\n
 _ntctl_tmpmn_bd="\nKérjük, válassza ki a kívánt sablont a hálózatkezelő netctl.\n"
 _inntctl_ttl="Adja meg a sablon neve netctl"
 _inntctl_bd="\nKérjük, írja be az új sablon nevét.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Vezeték nélküli hálózat."
-_msg_wt_bd="\nKiválasztott sablon a vezeték nélküli hálózat számára. Ez a sablon használatához adja meg a vezeték nélküli hálózat SSID azonosítóját, valamint a jelszót. A beállítás bevezetésre kerül az új sablon. Ha ez a beállítás nem szükséges, csak hagyja üresen.\n"
-_ib_ssid_ttl="Adja meg az SSID a vezeték nélküli hálózat"
-_ib_ssid_bd="\nKérjük, adja meg a vezeték nélküli hálózat nevét.\n"
-_ib_pass_ttl="Adja meg a vezeték nélküli hálózat jelszavát"
-_ib_pass_bd="\nKérjük, írja be a jelszót, a vezeték nélküli hálózat\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Idő szinkronizálás"

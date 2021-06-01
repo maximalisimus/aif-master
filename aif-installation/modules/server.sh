@@ -132,6 +132,30 @@ function info_ssh_connect()
 	unset _nfo_ssh_info
 }
 
+function docker_menu_setup()
+{
+	if [[ $_docker_run_once -eq 0 ]]; then
+		clear
+		_docker_run_once=1
+		info_search_pkg
+		wait
+		clear
+		wait
+		_list_docker_pkg=$(check_s_lst_pkg "${_docker_pkg[*]}")
+	fi
+	dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_mn_docker" --yesno "$_yn_mn_docker_bd" 0 0
+	if [[ $? -eq 0 ]]; then
+		pacstrap ${MOUNTPOINT} ${_list_docker_pkg[*]} 2>/tmp/.errlog
+		wait
+		check_for_error
+		wait
+		arch_chroot "systemctl enable docker.service" 2>/tmp/.errlog
+		wait
+		check_for_error
+		wait
+	fi
+}
+
 function ssh_to_setup()
 {
 	if [[ $_ssh_run_once -eq 0 ]]; then
@@ -155,39 +179,31 @@ function ssh_to_setup()
 				unset _my_ip
 				info_ssh_connect "${_myip_addr[0]}"
 				unset _myip_addr
-				_ssh_setup_once=1
 			fi
 		fi
 	fi
+	menu_conf_ssh
 }
 
 menu_conf_ssh()
 {
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_ssh_2" \
 	--menu "$_mn_srv_bd" 0 0 4 \
- 	"1" "$_mn_cnf_ssh_1" \
-	"2" "$_mn_cnf_ssh_2" \
-	"3" "$_Back" 2>${ANSWER}
+	"1" "$" \
+ 	"2" "$_mn_cnf_ssh_1" \
+	"3" "$_mn_cnf_ssh_2" \
+	"4" "$_Back" 2>${ANSWER}
 	case $(cat ${ANSWER}) in
-		"1") port_ssh_conf
+		"1") 
 			;;
-		"2") onoff_prmrtlg
+		"2") port_ssh_conf
+			;;
+		"3") onoff_prmrtlg
 			;;
 		*) server_menu
 			;;
 	esac
 	menu_conf_ssh
-}
-
-ssh_menu()
-{
-	ssh_to_setup
-	wait
-	if [[ $_ssh_setup_once -eq 1 ]]; then
-		menu_conf_ssh
-	else
-		server_menu
-	fi
 }
 
 server_menu()
@@ -205,19 +221,22 @@ server_menu()
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_srv_ttl" \
 	--menu "$_mn_srv_bd" 0 0 6 \
  	"1" "$_mn_srv_1" \
-	"2" "$_mn_srv_2" \
-	"3" "$_mn_srv_3" \
-	"4" "$_mn_srv_4" \
-	"5" "$_Back" 2>${ANSWER}
+ 	"2" "docker docker-compose" \
+	"3" "$_mn_srv_2" \
+	"4" "$_mn_srv_3" \
+	"5" "$_mn_srv_4" \
+	"6" "$_Back" 2>${ANSWER}
 
 	case $(cat ${ANSWER}) in
-		"1") ssh_menu
+		"1") ssh_to_setup
 			;;
-		"2") email_srv_setup
+		"2") docker_menu_setup
 			;;
-		"3") namp_srv_setup
+		"3") email_srv_setup
 			;;
-		"4") ftp_server_setup
+		"4") namp_srv_setup
+			;;
+		"5") ftp_server_setup
 			;;
 		*) main_menu_online
 			;;

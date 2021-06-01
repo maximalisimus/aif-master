@@ -627,23 +627,9 @@ _CloseInstBody="Fermer l'installateur ?"
 _yesno_order_ttl="Sauter plusieurs menus"
 _yesno_order_bd="\nAvez-vous installé le noyau LTS?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installation de l'émulateur PlayStation-3"
-_yesno_rpcs3_bd="\nInstaller un émulateur PlayStation-3?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Installation Bluetooth"
 _yesno_bluetooth_bd="\nInstaller le pilote et le gestionnaire de périphériques bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Installation de paquets depuis AUR"
-_aur_pkg_bd="\nVeuillez sélectionner les paquets dont vous avez besoin pour l'installation!\n"
-_aur_dbl_pkg_ttl="Sélection de la version du package"
-_aur_dbl_pkg_bd="\nCe paquet a plusieurs versions.\nVeuillez choisir ce dont vous avez besoin!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installation des émulateurs"
-_eml_pkg_bd="\nVeuillez sélectionner les émulateurs dont vous avez besoin pour l'installation!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Supprimer le fichier Journal?"
@@ -737,14 +723,6 @@ _yn_netctl_bd="\nVous voulez choisir le modèle et le modifier son ?\n"
 _ntctl_tmpmn_bd="\nS'il vous plaît, sélectionnez le modèle de votre choix pour le gestionnaire de réseau netctl.\n"
 _inntctl_ttl="Entrer le nom du modèle de netctl"
 _inntctl_bd="\nS'il vous plaît, entrez le nouveau nom du modèle.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Le réseau sans fil."
-_msg_wt_bd="\nVous avez choisi un modèle pour un réseau sans fil. Ce modèle nécessite la saisie SSID du réseau sans fil et le mot de passe. La personnalisation sera introduit dans votre nouveau modèle. Si cette configuration vous n'avez pas besoin, il suffit de laisser des lignes vides.\n"
-_ib_ssid_ttl="Entrer le nom SSID du réseau sans fil"
-_ib_ssid_bd="\nS'il vous plaît, entrez le nom de votre réseau sans fil.\n"
-_ib_pass_ttl="Entrer le mot de passe du réseau sans fil"
-_ib_pass_bd="\nS'il vous plaît, entrez le mot de passe de votre réseau sans fil\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="La synchronisation de l'heure"

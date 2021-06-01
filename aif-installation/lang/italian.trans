@@ -627,23 +627,9 @@ _CloseInstBody="Chiudere il programma di installazione?"
 _yesno_order_ttl="Saltare più menu"
 _yesno_order_bd="\nHai installato un kernel LTS?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installare L'emulatore PlayStation-3"
-_yesno_rpcs3_bd="\nInstallare L'emulatore PlayStation-3?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Installazione Bluetooth"
 _yesno_bluetooth_bd="\nInstallare driver e Gestione dispositivi bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Installazione di pacchetti da AUR"
-_aur_pkg_bd="\nSi prega di scegliere i pacchetti necessari per l'installazione!\n"
-_aur_dbl_pkg_ttl="Selezione della versione del pacchetto"
-_aur_dbl_pkg_bd="\nQuesto pacchetto ha diverse versioni.\nScelga prego quello che avete bisogno di!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installazione di emulatori"
-_eml_pkg_bd="\nSi prega di scegliere gli emulatori necessari per l'installazione!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Eliminare il file di log?"
@@ -737,14 +723,6 @@ _yn_netctl_bd="\nDesidera scegliere un modello e modificare il suo ?\n"
 _ntctl_tmpmn_bd="\nPer favore, selezionare il modello desiderato per il gestore di rete netctl.\n"
 _inntctl_ttl="Immettere il nome del modello netctl"
 _inntctl_bd="\nSi prega di inserire il nuovo nome del modello.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Rete wireless."
-_msg_wt_bd="\nSi è scelto un modello per la rete wireless. Questo modello richiede l'inserimento di una rete wireless SSID e la password. La configurazione sarà introdotto il nuovo modello. Se questa impostazione non è necessaria, basta lasciare righe vuote.\n"
-_ib_ssid_ttl="Immettere il nome SSID della rete wireless"
-_ib_ssid_bd="\nSi prega di inserire il nome della vostra rete wireless.\n"
-_ib_pass_ttl="Immettere la password di rete wireless"
-_ib_pass_bd="\nSi prega di inserire la password della rete wireless\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Tempo di sincronizzazione"

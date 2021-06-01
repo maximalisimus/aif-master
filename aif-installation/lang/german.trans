@@ -635,23 +635,9 @@ _CloseInstBody="Installer schliessen und neu starten?"
 _yesno_order_ttl="Überspringen mehrerer Menüs"
 _yesno_order_bd="\nHaben Sie den LTS-Kernel installiert?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installieren Des PlayStation-3-emulators"
-_yesno_rpcs3_bd="\nPlayStation-3-Emulator installieren?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Bluetooth-Installation"
 _yesno_bluetooth_bd="\nTreiber und Bluetooth geratemanager installieren?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Installieren von Paketen von AUR"
-_aur_pkg_bd="\nBitte wählen Sie die Pakete, die Sie installieren möchten!\n"
-_aur_dbl_pkg_ttl="Auswählen der Paketversion"
-_aur_dbl_pkg_bd="\nDieses Paket hat mehrere Versionen.\nBitte wählen Sie die gewünschte!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installieren von Emulatoren"
-_eml_pkg_bd="\nBitte wählen Sie die Emulatoren, die Sie installieren möchten!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Löschen Sie Die Protokolldatei?"
@@ -745,14 +731,6 @@ _yn_netctl_bd="\nMöchten, wählen Sie eine Vorlage und Bearbeiten Sie es ?\n"
 _ntctl_tmpmn_bd="\nBitte wählen Sie die gewünschte Vorlage für den Netzwerk\Manager netctl.\n"
 _inntctl_ttl="Geben Sie einen Namen der Vorlage netctl"
 _inntctl_bd="\nBitte geben Sie einen neuen Namen für die Vorlage ein.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Drahtloses Netzwerk."
-_msg_wt_bd="\nSie haben eine Vorlage für ein Wireless\Netzwerk. Diese Vorlage erfordert die Eingabe der SSID des drahtlosen Netzwerks und das Passwort. Die Einstellung wird eingegeben in Ihre neue Vorlage. Wenn Sie diese Einstellung nicht benötigen, einfach lassen Sie die Zeile leer.\n"
-_ib_ssid_ttl="Eingabe der SSID des drahtlosen Netzwerks"
-_ib_ssid_bd="\nBitte geben Sie den Namen Ihres drahtlosen Netzwerks.\n"
-_ib_pass_ttl="Kennwort des drahtlosen Netzwerks"
-_ib_pass_bd="\nBitte geben Sie das Passwort Ihres drahtlosen Netzwerks\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Zeitsynchronisation"

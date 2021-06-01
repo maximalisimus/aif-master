@@ -1216,8 +1216,7 @@ install_gep()
     "4" "$_menu_add_pkg" \
     "5" "$_menu_extra_pkg" \
     "6" "$_menu_pkg_meneger" \
-    "7" "$_eml_pkg_ttl" \
-    "8" "$_aur_pkg_ttl" \
+    "7" "$_MMInstServer" \
     "9" "$_Back" 2>${ANSWER}
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
@@ -1234,10 +1233,8 @@ install_gep()
          ;;
     "6") pkg_manager_install
          ;;
-    "7") eml_ustanovka
-        ;;
-    "8") aur_pkginstall
-        ;;
+    "7") server_menu
+		;;
       *) # Back to NAME Menu
         install_desktop_menu
          ;;
@@ -1266,7 +1263,8 @@ install_gep_i686()
     "3" "$_menu_ttf_theme" \
     "4" "$_menu_add_pkg" \
     "5" "$_menu_extra_pkg" \
-    "6" "$_Back" 2>${ANSWER}
+    "6" "$_MMInstServer" \
+    "7" "$_Back" 2>${ANSWER}
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
     case $(cat ${ANSWER}) in
@@ -1280,6 +1278,8 @@ install_gep_i686()
          ;;
     "5") install_otherpkg
          ;;
+    "6") server_menu
+		;;
       *) # Back to NAME Menu
         install_desktop_menu
          ;;

@@ -633,23 +633,9 @@ _CloseInstBody="Close installer?"
 _yesno_order_ttl="Pass multiple menus"
 _yesno_order_bd="\nDo you have an LTS kernel installed?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installing the PlayStation-3 emulator"
-_yesno_rpcs3_bd="\nInstall PlayStation-3 emulator?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Setting The Bluetooth"
 _yesno_bluetooth_bd="\nTo install drivers and the device Manager the bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Installing packages from AUR"
-_aur_pkg_bd="\nPlease select the packages you need to install!\n"
-_aur_dbl_pkg_ttl="The version of the package"
-_aur_dbl_pkg_bd="\nThis package has several versions.\nPlease choose the one you need!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installing emulators"
-_eml_pkg_bd="\nPlease select the emulators you need to install!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Delete the Log file?"
@@ -743,14 +729,6 @@ _yn_netctl_bd="\nWant to choose a template and edit it ?\n"
 _ntctl_tmpmn_bd="\nPlease select the required template for a network Manager netctl.\n"
 _inntctl_ttl="Enter the name of the template netctl"
 _inntctl_bd="\nPlease enter a new template name.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Wireless network."
-_msg_wt_bd="\nYou have chosen a template for your wireless network. This template requires you to enter the wireless network SSID and password. The setting will be introduced to your new template. If this setting is not needed, just leave blank.\n"
-_ib_ssid_ttl="Enter the SSID of your wireless network"
-_ib_ssid_bd="\nPlease enter the name of your wireless network.\n"
-_ib_pass_ttl="Enter the wireless network password"
-_ib_pass_bd="\nPlease enter the password of your wireless network\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Time synchronization"

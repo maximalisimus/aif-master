@@ -7,6 +7,8 @@
 ##
 #
 # Install base menu
+#
+_archi=$(uname -m)
 _pcm_conff="/etc/pacman.conf"
 _pcm_tempf="$filesdir/new.conf"
 _rank_mirror=(pacman-contrib)
@@ -16,11 +18,13 @@ _lts_pkg=(linux-lts linux-lts-headers linux-lts-docs)
 _krnl_pkg=(linux linux-headers linux-docs)
 #
 # User and Groups
+#
 _us_gr_users=(adm ftp games http log rfkill sys systemd-journal users uucp wheel)
 _us_gr_system=(dbus kmem locate lp mail nobody proc smmsp tty utmp)
 _us_gr_presystemd=(audio disk floppy input kvm optical scanner storage video)
 #
 # Package Network tools
+#
 _network_menu=(netctl connman networkmanager wicd-gtk)
 _ln_menu=""
 _network_pkg=(samba libwbclient smb4k smbclient smbnetfs libgtop)
@@ -30,15 +34,19 @@ _net_connect_var=(rp-pppoe networkmanager-openconnect networkmanager-openvpn net
 _wicd_pkg=(wicd wicd-gtk)
 #
 # Server list of packages
+#
 _ssh_pkg=(openssh)
+_docker_pkg=(docker docker-compose)
 _mail_srv_pkg=(postfix)
-_namp_srv_pkg=(nginx apache mysql php phpmyadmin php-fpm php-apache php-mcrypt)
+_namp_srv_pkg=(nginx apache mysql++ mariadb mariadb-clients php phpmyadmin php-fpm php-apache)
 _ftp_srv_pkg=(atftp bftpd curlftpfs filezilla gftp lftp tnftp vsftpd)
 #
 # Network time protocol server packages
+#
 _ntp_pkg=(ntp networkmanager-dispatcher-ntpd)
 #
 # Packages for wireless tools
+#
 _wifi_pkg=(iw wireless_tools wpa_actiond wpa_supplicant wicd)
 _wifi_menu=""
 _broadcom=(b43-fwcutter)
@@ -51,6 +59,7 @@ _menu_wifi=("Show_Devices" "Broadcom_802.11b/g/n" "Intel_PRO/Wireless_2100" "Int
 _bluetooth=(blueman bluez bluez-libs bluez-plugins bluez-utils bluez-tools)
 #
 # Package for grub and uefi menu
+#
 _grub_pkg=(grub os-prober)
 _syslinux_pkg=(syslinux)
 _grub_uefi_pkg=(grub os-prober efibootmgr dosfstools)
@@ -58,9 +67,11 @@ _reefind_pkg=(refind-efi efibootmgr dosfstools)
 _systemd_boot_pkg=(efibootmgr dosfstools)
 #
 # Alsa xorg packages
+#
 _x_pkg=(alsa-utils alsa-plugins volumeicon pavucontrol pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulseeffects pulsemixer pasystray pamixer pulseview rhythmbox audacious audacity xf86-input-synaptics xf86-input-keyboard xf86-input-mouse)
 #
 # Graphic Card packages
+#
 _intel_pkg=(xf86-video-intel libva-intel-driver intel-ucode)
 _ati_pkg=(xf86-video-ati)
 _nvd_pkg=(nvidia nvidia-settings nvidia-utils lib32-nvidia-utils pangox-compat)
@@ -75,6 +86,7 @@ _vmware_pkg=(xf86-video-vmware xf86-input-vmmouse)
 _generic_pkg=(xf86-video-fbdev)
 #
 # Desktop environment packages
+#
 _desktop_menu=("Deepin" "Deepin_Deepin-Extra" "Cinnamon" "Enlightenment" "Gnome-Shell_minimal" "Gnome" "Gnome_Gnome-Extras" "KDE-5-Base_minimal" "KDE-5" "LXDE" "LXQT" "MATE" "MATE_MATE-Extras" "Xfce" "Xfce_Xfce-Extras" "Awesome-WM" "Fluxbox-WM" "i3-WM" "Ice-WM" "Openbox-WM" "Pek-WM") # WindowMaker-WM
 _d_menu=(deepin deepin-extra cinnamon enlightenment gnome-shell gnome gnome-extra plasma-desktop plasma lxde lxqt mate mate-extra xfce4 xfce4-goodies awesome fluxbox i3-wm icewm openbox pekwm) # windowmaker
 _deepin_pkg=(deepin lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings)
@@ -101,6 +113,7 @@ _pekwm_pkg=(pekwm pekwm-themes polkit-gnome)
 _windowmaker_pkg=(windowmaker polkit-gnome)
 #
 # Common for Desktop packages
+#
 _general_pkg=(gnome-keyring dconf dconf-editor python2-xdg xdg-user-dirs xdg-utils rp-pppoe polkit gvfs gvfs-afc gvfs-smb print-manager system-config-printer acpid avahi cups cronie)
 #
 # DM packages
@@ -122,18 +135,46 @@ _zsh_sh=(zsh-completions)
 _archivers_pkg=(ark xarchiver unzip zip unrar p7zip file-roller)
 _ttf_theme_pkg=(gnome-icon-theme ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono terminus-font breeze breeze-grub breeze-icons fontforge faenza-icon-theme adwaita-icon-theme alacarte)
 # gimp gimp-help-ru
+#
 _gr_editor=(gimp)
 _office=(libreoffice-fresh)
+#
 # libreoffice-fresh libreoffice-fresh-ru
+#
 _minimal_pkg=(grub-customizer xterm gnome-terminal lxterminal cmake brasero acetoneiso2 fuseiso chromium opera tor torbrowser-launcher transmission-gtk curl git wget gwget ksysguard doublecmd-gtk2 krusader blender vlc inkscape okular gedit geany leafpad parcellite gimp pinta krita seexpr-krita krita-plugin-gmic galculator)
 _virtualization=(virtualbox qemu qemu-arch-extra)
 emulator_packages=(desmume gens mednafen mupen64plus pcsx2 ppsspp)
-_archi=$(uname -m)
+_pkg_manager_folder="$filesdir/package-manager/"
+#
 if [[ "${_archi[*]}" = "x86_64" ]]; then
     _other_pkg=(keepassxc veracrypt kicad kicad-library kicad-library-3d smplayer wine wine-mono wine_gecko winetricks supertuxkart) # truecrypt
-    emulator_packages=(desmume gens mednafen mupen64plus pcsx2 ppsspp)
+    _emulator_pkg=(desmume gens mednafen mupen64plus pcsx2 ppsspp)
 else
     _other_pkg=(keepassxc veracrypt kicad kicad-library kicad-library-3d smplayer wine-mono winetricks supertuxkart) # truecrypt
-    emulator_packages=(desmume mednafen mupen64plus ppsspp)
+    emulator_pkg=(desmume mednafen mupen64plus ppsspp)
 fi
-
+#
+# Programing
+#
+_arduino_pkg=(arduino arduino-avr-core arduino-cli arduino-builder avr-gcc avrdude avr-binutils avr-libc arduino-ctags arduino-docs)
+if [[ "${_archi[*]}" = "x86_64" ]]; then
+	_gcc_cpp_pkg=(gcc gcc-libs lib32-gcc-libs binutils)
+	_mingw_w64_pkg=(mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads)
+	_python_pkg=(python python-pip python-setuptools python-virtualenv python-virtualenvwrapper python-wheel)
+	_python2_pkg=(python2 python2-pip python2-setuptools python2-virtualenv python2-wheel)
+	_qt_creator_pkg=(qtcreator qt5-base qt5-doc qt6-base qt6-doc)
+	_java_pkg=(jre-openjdk jdk-openjdk)
+	_java_ide=(intellij-idea-community-edition eclipse-ecj)
+	_perl_pkg=(perl)
+	_ruby_pkg=(ruby ruby-irb)
+else
+	_gcc_cpp_pkg=(gcc gcc-libs binutils)
+	_mingw_w64_pkg=(mingw-w64-binutils mingw-w64-headers)
+	_python_pkg=(python python-pip python-setuptools python-virtualenv python-virtualenvwrapper python-wheel)
+	_python2_pkg=(python2 python2-pip python2-setuptools python2-virtualenv python2-wheel)
+	_qt_creator_pkg=(qtcreator qt5-base qt5-doc qt6-base qt6-doc)
+	_java_pkg=(jre-openjdk jdk-openjdk)
+	_java_ide=(intellij-idea-community-edition eclipse-ecj)
+	_perl_pkg=(perl)
+	_ruby_pkg=(ruby ruby-irb)
+fi

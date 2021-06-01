@@ -632,23 +632,9 @@ _CloseInstBody="Installer Afsluiten?"
 _yesno_order_ttl="Meerdere menu ' s doorgeven"
 _yesno_order_bd="\nHeb je een LTS kernel geïnstalleerd?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installeren van de PlayStation-3 emulator"
-_yesno_rpcs3_bd="\nPlayStation-3 emulator installeren?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Instellen Van Bluetooth"
 _yesno_bluetooth_bd="\nOm drivers en de apparaatbeheerder de bluetooth te installeren?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Pakketten van AUR installeren"
-_aur_pkg_bd="\nSelecteer de pakketten die u moet installeren!\n"
-_aur_dbl_pkg_ttl="De versie van het pakket"
-_aur_dbl_pkg_bd="\nDit pakket heeft verschillende versies.\nKies alsjeblieft degene die je nodig hebt!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installeer emulators"
-_eml_pkg_bd="\nSelecteer de emulators die u moet installeren!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Het logbestand verwijderen?"
@@ -742,14 +728,6 @@ _yn_netctl_bd="\nWilt u een template en bewerk het ?\n"
 _ntctl_tmpmn_bd="\nSelecteer de gewenste sjabloon voor een netwerk Manager netctl.\n"
 _inntctl_ttl="Voer de naam van de sjabloon netctl"
 _inntctl_bd="\nVoer een nieuwe naam voor de sjabloon.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Draadloos netwerk."
-_msg_wt_bd="\nU hebt gekozen voor een sjabloon voor uw draadloze netwerk. Dit sjabloon moet u de SSID van het draadloze netwerk en het wachtwoord. De instelling zal worden ingevoerd om de nieuwe sjabloon. Als deze instelling is niet nodig, maar laat leeg.\n"
-_ib_ssid_ttl="Voer de SSID van uw draadloze netwerk"
-_ib_ssid_bd="\nVoer de naam van uw draadloze netwerk.\n"
-_ib_pass_ttl="Voer het wachtwoord draadloos netwerk"
-_ib_pass_bd="\nVoer het wachtwoord van uw draadloze netwerk\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Tijd synchronisatie"

@@ -20,7 +20,7 @@ ANSWER="/tmp/.aif"
 ABSOLUT_FILENAME=$(readlink -e "$0")
 filesdir=$(dirname "$ABSOLUT_FILENAME")
 # Save retyping
-VERSION="MAXIMALISIMUS Installation Framework 2.6"
+VERSION="MAXIMALISIMUS Installation Framework 2.7"
 
 _sh_files=$(find "$filesdir/config" -maxdepth 1 -type f -iname "*.sh" | xargs)
 _files=( $_sh_files )
