@@ -791,6 +791,7 @@ _restrinct_desc_4="Не синхронизироваться с хостом"
 _restrinct_desc_5="Не принимать запросы"
 #
 ## Docker docker-compose
+#
 _yn_mn_docker="Установка docker и docker-compose."
 _yn_mn_docker_bd="\nУстановить данные пакеты ?\n"
 #
