@@ -67,7 +67,8 @@ function email_srv_setup()
 function onoff_prmrtlg()
 {
 	if [[ $_prmtrtlg_once -eq "0" ]]; then
-		echo "PermitRootLogin no" >> ${MOUNTPOINT}/etc/ssh/sshd_config
+		# echo "PermitRootLogin no" >> ${MOUNTPOINT}/etc/ssh/sshd_config
+		sed -i "/^#PermitRootLogin/c PermitRootLogin no" ${MOUNTPOINT}/etc/ssh/sshd_config
 		_prmtrtlg_once=1
 		_prmtrtlg_clck=1
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_cnf_ssh_2" --msgbox "$_nff_ptrtlg_bd_2" 0 0
