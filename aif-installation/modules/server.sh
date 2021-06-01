@@ -184,21 +184,32 @@ function ssh_to_setup()
 	fi
 	menu_conf_ssh
 }
+function protocol_ssh()
+{
+	sed -i "/Port/i\Protocol 2" ${MOUNTPOINT}/etc/ssh/sshd_config
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_protocol_ssh_hd" --msgbox "$_protocol_ssh_bd" 0 0
+}
 
 menu_conf_ssh()
 {
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_ssh_2" \
 	--menu "$_mn_srv_bd" 0 0 4 \
-	"1" "$" \
- 	"2" "$_mn_cnf_ssh_1" \
-	"3" "$_mn_cnf_ssh_2" \
-	"4" "$_Back" 2>${ANSWER}
+	"1" "$_yn_ssh_qn" \
+	"2" "$_protocol_ssh_hd"
+ 	"3" "$_mn_cnf_ssh_1" \
+	"4" "$_mn_cnf_ssh_2" \
+	"5" "$_Back" 2>${ANSWER}
 	case $(cat ${ANSWER}) in
-		"1") 
+		"1") dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_ssh_qn" --yesno "$_yn_ssh_qn_bd" 0 0
+			if [[ $? -eq 0 ]]; then
+				cp -f ${_sshd_conf_file} ${_sshd_conf_dir}
+			fi
 			;;
-		"2") port_ssh_conf
+		"2") protocol_ssh
 			;;
-		"3") onoff_prmrtlg
+		"3") port_ssh_conf
+			;;
+		"4") onoff_prmrtlg
 			;;
 		*) server_menu
 			;;

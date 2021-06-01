@@ -189,11 +189,12 @@ _netctl_mn_once=0
 _netctl_edit=""
 
 # Server variables
+_sshd_conf_dir="${MOUNTPOINT}/etc/ssh/"
+_sshd_conf_file="$filesdir/config/sshd_config"
 _ssh_setup_once=0
 _ssh_run_once=0
 _docker_run_once=0
 _prmtrtlg_once=0
-_prmtrtlg_clck=0
 _mail_srv_once=0
 _lmp_srv_once=0
 _lmenu_nmpsrv=""

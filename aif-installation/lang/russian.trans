@@ -794,4 +794,15 @@ _restrinct_desc_5="Не принимать запросы"
 _yn_mn_docker="Установка docker и docker-compose."
 _yn_mn_docker_bd="\nУстановить данные пакеты ?\n"
 #
+# SSH Server Config
+#
+_yn_ssh_qn="Копирование настроек SSHD"
+_yn_ssh_qn_bd="\nСкопировать готовые настройки sshd ?\n"
+_protocol_ssh_hd="Протокол SSH"
+_protocol_ssh_bd="\nВключить протокол версии 2 ?\n"
+_pass_auth_hd="Отключение проверки пароля"
+_pass_auth_bd="\nОтключить проверку пароля ?\n"
+_auth_publ_hd="Аутентификацию по открытому ключу"
+_auth_publ_bd="\nВключить аутентификацию по открытому ключу ?\n"
+
 
