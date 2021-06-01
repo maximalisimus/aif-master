@@ -157,6 +157,7 @@ fi
 # Programing
 #
 _arduino_pkg=(arduino arduino-avr-core arduino-cli arduino-builder avr-gcc avrdude avr-binutils avr-libc arduino-ctags arduino-docs)
+#
 if [[ "${_archi[*]}" = "x86_64" ]]; then
 	_gcc_cpp_pkg=(gcc gcc-libs lib32-gcc-libs binutils)
 	_mingw_w64_pkg=(mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads)
