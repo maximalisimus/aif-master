@@ -16,7 +16,7 @@ net.ipv6.conf.default.forwarding=1
 net.ipv6.conf.all.forwarding=1
 После этого рекомендуется дважды проверить, что после перезагрузки пересылка работает как положено.
 
-
+ 
 
 # lspci | grep -E "3D|VGA"
 
