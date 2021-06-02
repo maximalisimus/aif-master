@@ -217,7 +217,52 @@ menu_conf_ssh()
 	esac
 	menu_conf_ssh
 }
-
+function firewall_install()
+{
+	if [[ $_firewall_once -eq 0 ]]; then
+		_firewall_once=1
+		clear
+		info_search_pkg
+		_list_firewall_pkg=$(check_s_lst_pkg "${_firewall[*]}")
+		wait
+		clear
+		for j in ${_list_firewall_pkg[*]}; do
+			_mlist_firewall="${_mlist_firewall} $j - on"
+		done
+	fi
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_fw_hd" --yesno "${_progr_bd} ${_list_firewall_pkg[*]]}" 0 0
+	if [[ $? -eq 0 ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_fw_hd" --checklist "$_yn_fw_bd" 0 0 7 ${_mlist_firewall} 2>${ANSWER}
+		_chlmn_firewall=$(cat ${ANSWER})
+		[[ ${_chlmn_firewall[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_chlmn_firewall[*]} 2>/tmp/.errlog
+		wait
+		[[ ${_chlmn_firewall[*]} != "" ]] && check_for_error
+	fi
+	server_menu
+}
+function file2ban_install()
+{
+	if [[ $_file2ban_once -eq 0 ]]; then
+		_file2ban_once=1
+		clear
+		info_search_pkg
+		_list_file2ban_pkg=$(check_s_lst_pkg "${_fail2ban[*]}")
+		wait
+		clear
+		for j in ${_list_file2ban_pkg[*]}; do
+			_mlist_file2ban="${_mlist_file2ban} $j - on"
+		done
+	fi
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_f2b_hd" --yesno "${_progr_bd} ${_list_file2ban_pkg[*]]}" 0 0
+	if [[ $? -eq 0 ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_f2b_hd" --checklist "$_yn_f2b_bd" 0 0 7 ${_mlist_file2ban} 2>${ANSWER}
+		_chlmn_file2ban=$(cat ${ANSWER})
+		[[ ${_chlmn_file2ban[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_chlmn_file2ban[*]} 2>/tmp/.errlog
+		wait
+		[[ ${_chlmn_file2ban[*]} != "" ]] && check_for_error
+	fi
+	server_menu
+}
 server_menu()
 {
 	# Depending on the answer, first check whether partition(s) are mounted and whether base has been installed
@@ -237,6 +282,8 @@ server_menu()
 	"3" "$_mn_srv_2" \
 	"4" "$_mn_srv_3" \
 	"5" "$_mn_srv_4" \
+	"6" "$_yn_fw_hd" \
+	"7" "$_yn_f2b_hd" \
 	"6" "$_Back" 2>${ANSWER}
 
 	case $(cat ${ANSWER}) in
@@ -249,6 +296,10 @@ server_menu()
 		"4") namp_srv_setup
 			;;
 		"5") ftp_server_setup
+			;;
+		"6") firewall_install
+			;;
+		"7") file2ban_install
 			;;
 		*) main_menu_online
 			;;

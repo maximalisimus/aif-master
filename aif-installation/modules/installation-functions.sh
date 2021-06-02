@@ -1217,6 +1217,7 @@ install_gep()
     "5" "$_menu_extra_pkg" \
     "6" "$_menu_pkg_meneger" \
     "7" "$_MMInstServer" \
+    "8" "$_progr_hd" \
     "9" "$_Back" 2>${ANSWER}
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
@@ -1234,6 +1235,8 @@ install_gep()
     "6") pkg_manager_install
          ;;
     "7") server_menu
+		;;
+	"8") installing_programming
 		;;
       *) # Back to NAME Menu
         install_desktop_menu
@@ -1264,7 +1267,8 @@ install_gep_i686()
     "4" "$_menu_add_pkg" \
     "5" "$_menu_extra_pkg" \
     "6" "$_MMInstServer" \
-    "7" "$_Back" 2>${ANSWER}
+    "7" "$_progr_hd" \
+    "8" "$_Back" 2>${ANSWER}
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
     case $(cat ${ANSWER}) in
@@ -1280,6 +1284,8 @@ install_gep_i686()
          ;;
     "6") server_menu
 		;;
+	"7") installing_programming
+		;;
       *) # Back to NAME Menu
         install_desktop_menu
          ;;
@@ -1287,7 +1293,7 @@ install_gep_i686()
     
     check_for_error
     
-    install_gep_old
+    install_gep_i686
 }
 
 install_shara_components()

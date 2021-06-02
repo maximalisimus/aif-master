@@ -268,9 +268,10 @@ edit_configs() {
    "11" "$_ncl_nname" \
    "12" "/etc/ntp.conf" \
    "13" "/etc/systemd/timesyncd.conf" \
-   "14" "$BOOTLOADER" \
-   "15" "$DM" \
-   "16" "$_Back" 2>${ANSWER}
+   "14" "/etc/ssh/sshd_config" \
+   "15" "$BOOTLOADER" \
+   "16" "$DM" \
+   "17" "$_Back" 2>${ANSWER}
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
     case $(cat ${ANSWER}) in
@@ -300,7 +301,9 @@ edit_configs() {
 			;;
 		"13") FILE="${MOUNTPOINT}/etc/systemd/timesyncd.conf"
 			;;
-        "14") case $BOOTLOADER in
+		"14") FILE="${MOUNTPOINT}/etc/ssh/sshd_config"
+			;;
+        "15") case $BOOTLOADER in
                    "Grub") FILE="${MOUNTPOINT}/etc/default/grub"
                            ;;
                "Syslinux") FILE="${MOUNTPOINT}/boot/syslinux/syslinux.cfg"
@@ -314,7 +317,7 @@ edit_configs() {
                            ;;
               esac
             ;;
-        "15") case $DM in
+        "16") case $DM in
                    "LXDM") FILE="${MOUNTPOINT}/etc/lxdm/lxdm.conf" 
                            ;;
                 "LightDM") FILE="${MOUNTPOINT}/etc/lightdm/lightdm.conf" 

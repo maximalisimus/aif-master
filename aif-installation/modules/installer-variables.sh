@@ -200,6 +200,13 @@ _lmp_srv_once=0
 _lmenu_nmpsrv=""
 _ftp_srv_once=0
 _menu_list_ftp=""
+_list_docker_pkg=""
+_firewall_once=0
+_list_firewall_pkg=""
+_mlist_firewall=""
+_file2ban_once=0
+_list_file2ban_pkg=""
+_mlist_file2ban=""
 
 # Network time protocol server variables
 _tmsnc_init_once=0
@@ -243,6 +250,37 @@ _dlgrc_hm_bp="$filesdir/dlg-home.bp"
 _dlgrc_rt_st_bp="$filesdir/dlg-rt-st.bp"
 _dlg_rt_rt_bp="$filesdir/dlg-rt-rt.bp"
 
+# Programming
+_arduino_once=0
+_c_cpp_once=0
+_list_ccpp_pkg=""
+_lmenu_ccpp=""
+_lmenu_arduino=""
+_list_arduino_pkg=""
+_mingww64_once=0
+_list_mingww64_pkg=""
+_lmenu_mingww64=""
+_python3_once=0
+_list_py3_pkg=""
+_lmenu_py3=""
+_python2_once=0
+_list_py2_pkg=""
+_lmenu_py2=""
+_qtcreator_once=0
+_lmenu_qtcreator=""
+_list_qtcreator_pkg=""
+_java_once=0
+_list_java_pkg=""
+_list_java_ide_pkg=""
+_lmenu_java=""
+_lmenu_java_ide=""
+_perl_once=0
+_list_perl_pkg=""
+_lmenu_perl=""
+_ruby_once=0
+_list_ruby_pkg=""
+_lmenu_ruby=""
+
 # /config/dialogrc-conf.sh						# Color dialog interface configured
 # /modules/installer-variables.sh				# list of variables
 # /config/list-pkg-forms.sh						# list of packages for uses the script
@@ -266,3 +304,5 @@ _dlg_rt_rt_bp="$filesdir/dlg-rt-rt.bp"
 # /modules/server.sh							# Server menu, Server utilites installation
 # /modules/network.sh							# Network Function
 # /modules/ntp_configuration.sh					# Network Time Synchronized protocol configuration
+# /modules/programming.sh						# Programming menu
+

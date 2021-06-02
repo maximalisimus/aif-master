@@ -40,6 +40,8 @@ _docker_pkg=(docker docker-compose)
 _mail_srv_pkg=(postfix)
 _namp_srv_pkg=(nginx apache mysql++ mariadb mariadb-clients php phpmyadmin php-fpm php-apache)
 _ftp_srv_pkg=(atftp bftpd curlftpfs filezilla gftp lftp tnftp vsftpd)
+_firewall=(ufw gufw)
+_fail2ban=(fail2ban)
 #
 # Network time protocol server packages
 #
