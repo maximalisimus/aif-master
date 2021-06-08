@@ -25,7 +25,10 @@ VERSION="MAXIMALISIMUS Installation Framework 2.7"
 set -o pipefail ;
 shopt -s lastpipe ;
 
-find "$filesdir/config" -maxdepth 1 -type f -iname "*.sh" -print0 | while read -d $'\0' -r ; do source "$REPLY" ; done ;
+for i in $filesdir/config/*.sh
+do
+	source "$i"
+done
 # _sh_files=$(find "$filesdir/config" -maxdepth 1 -type f -iname "*.sh" | xargs)
 # _files=( $_sh_files )
 # unset _sh_files
@@ -34,7 +37,10 @@ find "$filesdir/config" -maxdepth 1 -type f -iname "*.sh" -print0 | while read -
 # done
 # unset _files
 
-find "$filesdir/modules" -maxdepth 1 -type f -iname "*.sh" -print0 | while read -d $'\0' -r ; do source "$REPLY" ; done ;
+for i in $filesdir/modules/*.sh
+do
+	source "$i"
+done
 # _sh_files=$(find "$filesdir/modules" -maxdepth 1 -type f -iname "*.sh" | xargs)
 # _files=( $_sh_files )
 # unset _sh_files
