@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 function ftp_server_setup()
 {
@@ -306,5 +306,4 @@ server_menu()
 	esac
 	server_menu
 }
-
 

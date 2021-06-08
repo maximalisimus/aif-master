@@ -22,7 +22,10 @@ filesdir=$(dirname "$ABSOLUT_FILENAME")
 # Save retyping
 VERSION="MAXIMALISIMUS Installation Framework 2.7"
 
-shopt -s lastpipe ; find "$filesdir/config" -maxdepth 1 -type f -iname "*.sh" -print0 | while read -d $'\0' -r ; do source "$REPLY" ; done ;
+set -o pipefail ;
+shopt -s lastpipe ;
+
+find "$filesdir/config" -maxdepth 1 -type f -iname "*.sh" -print0 | while read -d $'\0' -r ; do source "$REPLY" ; done ;
 # _sh_files=$(find "$filesdir/config" -maxdepth 1 -type f -iname "*.sh" | xargs)
 # _files=( $_sh_files )
 # unset _sh_files
@@ -31,7 +34,7 @@ shopt -s lastpipe ; find "$filesdir/config" -maxdepth 1 -type f -iname "*.sh" -p
 # done
 # unset _files
 
-shopt -s lastpipe ; find "$filesdir/modules" -maxdepth 1 -type f -iname "*.sh" -print0 | while read -d $'\0' -r ; do source "$REPLY" ; done ;
+find "$filesdir/modules" -maxdepth 1 -type f -iname "*.sh" -print0 | while read -d $'\0' -r ; do source "$REPLY" ; done ;
 # _sh_files=$(find "$filesdir/modules" -maxdepth 1 -type f -iname "*.sh" | xargs)
 # _files=( $_sh_files )
 # unset _sh_files
