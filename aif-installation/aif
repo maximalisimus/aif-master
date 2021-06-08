@@ -23,7 +23,6 @@ filesdir=$(dirname "$ABSOLUT_FILENAME")
 VERSION="MAXIMALISIMUS Installation Framework 2.7"
 
 set -o pipefail ;
-shopt -s lastpipe ;
 
 for i in $filesdir/config/*.sh
 do
