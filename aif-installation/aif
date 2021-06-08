@@ -24,7 +24,7 @@ VERSION="MAXIMALISIMUS Installation Framework 2.7"
 
 set -o pipefail ;
 
-for i in $filesdir/config/*.sh
+for i in "$filesdir"/config/*.sh
 do
 	source "$i"
 done
@@ -36,7 +36,7 @@ done
 # done
 # unset _files
 
-for i in $filesdir/modules/*.sh
+for i in "$filesdir"/modules/*.sh
 do
 	source "$i"
 done
