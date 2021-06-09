@@ -4,6 +4,34 @@
 ##                                                                  ##
 ######################################################################
 
+info_ssh_connect()
+{
+	clear
+	_myip="$1"
+	_usr_lst=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
+	_user_lists=( "${_usr_lst[*]}" )
+	unset _usr_lst
+	_nfo_ssh_info="${_nfo_ssh_bd} ${_myip} \n${_nfo_ssh_prmr} ${_user_lists[0]}@${_myip}"
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_msg_ssh_nfo_ttl" --msgbox "$_nfo_ssh_info" 0 0
+	wait
+	unset _myip
+	unset _user_lists
+	unset _nfo_ssh_info
+}
+
+edit_file_sshd()
+{
+	SSHD_FILES="${MOUNTPOINT}/etc/ssh/sshd_config"
+	if [[ -e "$SSHD_FILES" ]]; then
+		nano "$SSHD_FILES"
+		wait
+	else
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SeeConfErrTitle" --msgbox "$_SeeConfErrBody1" 0 0
+		wait
+	fi
+	menu_conf_ssh
+}
+
 function onoff_prmrtlg()
 {
 	if [[ $_prmtrtlg_once -eq "0" ]]; then
@@ -63,34 +91,6 @@ function protocol_ssh()
 {
 	sed -i "/Port/i\Protocol 2" ${MOUNTPOINT}/etc/ssh/sshd_config
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_protocol_ssh_hd" --msgbox "$_protocol_ssh_msg" 0 0
-}
-
-function info_ssh_connect()
-{
-	clear
-	_myip="$1"
-	_usr_lst=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
-	_user_lists=( "${_usr_lst[*]}" )
-	unset _usr_lst
-	_nfo_ssh_info="${_nfo_ssh_bd} ${_myip} \n${_nfo_ssh_prmr} ${_user_lists[0]}@${_myip}"
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_msg_ssh_nfo_ttl" --msgbox "$_nfo_ssh_info" 0 0
-	wait
-	unset _myip
-	unset _user_lists
-	unset _nfo_ssh_info
-}
-
-edit_file_sshd()
-{
-	SSHD_FILES="${MOUNTPOINT}/etc/ssh/sshd_config"
-	if [[ -e "$SSHD_FILES" ]]; then
-		nano "$SSHD_FILES"
-		wait
-	else
-		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SeeConfErrTitle" --msgbox "$_SeeConfErrBody1" 0 0
-		wait
-	fi
-	menu_conf_ssh
 }
 
 menu_sshd_config()
