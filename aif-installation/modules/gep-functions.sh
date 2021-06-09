@@ -136,14 +136,23 @@ apps_desktop_install()
 			_user_lists=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
 			wait
 			for j in ${_usr_list[*]}; do
-				echo "[Desktop Entry]" > "${MOUNTPOINT}/home/${j}/List_of_applications.desktop"
-				echo "Encoding=UTF-8" >> "${MOUNTPOINT}/home/${j}/List_of_applications.desktop"
-				echo "URL=https://wiki.archlinux.org/title/List_of_applications" >> "${MOUNTPOINT}/home/${j}/List_of_applications.desktop"
-				echo "Type=Link" >> "${MOUNTPOINT}/home/${j}/List_of_applications.desktop"
-				echo "Name=List of Applications" >> "${MOUNTPOINT}/home/${j}/List_of_applications.desktop"
-				echo "Icon=text-html" >> "${MOUNTPOINT}/home/${j}/List_of_applications.desktop"
-				echo "" >> "${MOUNTPOINT}/home/${j}/List_of_applications.desktop"
-				chmod +x "${MOUNTPOINT}/home/${j}/List_of_applications.desktop"
+				echo "[Desktop Entry]" > "${MOUNTPOINT}/home/${j}/List_of_applications_EN.desktop"
+				echo "Encoding=UTF-8" >> "${MOUNTPOINT}/home/${j}/List_of_applications_EN.desktop"
+				echo "URL=https://wiki.archlinux.org/title/List_of_applications" >> "${MOUNTPOINT}/home/${j}/List_of_applications_EN.desktop"
+				echo "Type=Link" >> "${MOUNTPOINT}/home/${j}/List_of_applications_EN.desktop"
+				echo "Name=List of Applications EN" >> "${MOUNTPOINT}/home/${j}/List_of_applications_EN.desktop"
+				echo "Icon=text-html" >> "${MOUNTPOINT}/home/${j}/List_of_applications_EN.desktop"
+				echo "" >> "${MOUNTPOINT}/home/${j}/List_of_applications_EN.desktop"
+				chmod +x "${MOUNTPOINT}/home/${j}/List_of_applications_EN.desktop"
+				wait
+				echo "[Desktop Entry]" > "${MOUNTPOINT}/home/${j}/List_of_applications_RU.desktop"
+				echo "Encoding=UTF-8" >> "${MOUNTPOINT}/home/${j}/List_of_applications_RU.desktop"
+				echo "URL=https://www.linuxsecrets.com/archlinux-wiki/wiki.archlinux.org/index.php/List_of_applications_(%D0%A0%D1%2583%D1%2581%D1%2581%D0%BA%D0%B8%D0%B9).html" >> "${MOUNTPOINT}/home/${j}/List_of_applications_RU.desktop"
+				echo "Type=Link" >> "${MOUNTPOINT}/home/${j}/List_of_applications_RU.desktop"
+				echo "Name=List of Applications RU" >> "${MOUNTPOINT}/home/${j}/List_of_applications_RU.desktop"
+				echo "Icon=text-html" >> "${MOUNTPOINT}/home/${j}/List_of_applications_RU.desktop"
+				echo "" >> "${MOUNTPOINT}/home/${j}/List_of_applications_RU.desktop"
+				chmod +x "${MOUNTPOINT}/home/${j}/List_of_applications_RU.desktop"
 				wait
 			done
 			wait

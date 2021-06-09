@@ -154,10 +154,10 @@ _pkg_manager_folder="$filesdir/package-manager/"
 #
 if [[ "${_archi[*]}" = "x86_64" ]]; then
     _other_pkg=(keepassxc veracrypt kicad kicad-library kicad-library-3d smplayer wine wine-mono wine_gecko winetricks supertuxkart) # truecrypt
-    _emulator_pkg=(desmume gens mednafen mupen64plus pcsx2 ppsspp)
+    _emulator_pkg=(dosbox desmume gens mednafen mupen64plus pcsx2 ppsspp)
 else
     _other_pkg=(keepassxc veracrypt kicad kicad-library kicad-library-3d smplayer wine-mono winetricks supertuxkart) # truecrypt
-    emulator_pkg=(desmume mednafen mupen64plus ppsspp)
+    emulator_pkg=(dosbox desmume mednafen mupen64plus ppsspp)
 fi
 #
 # Programing
