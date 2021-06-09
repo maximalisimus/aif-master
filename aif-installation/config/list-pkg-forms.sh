@@ -147,7 +147,7 @@ _office=(libreoffice-fresh)
 #
 # libreoffice-fresh libreoffice-fresh-ru
 #
-_minimal_pkg=(grub-customizer xterm gnome-terminal lxterminal cmake brasero acetoneiso2 fuseiso chromium opera tor torbrowser-launcher transmission-gtk curl git wget gwget ksysguard doublecmd-gtk2 krusader blender vlc inkscape okular gedit geany leafpad parcellite gimp pinta krita seexpr-krita krita-plugin-gmic galculator)
+_minimal_pkg=(grub-customizer xterm gnome-terminal lxterminal brasero acetoneiso2 fuseiso chromium opera tor torbrowser-launcher transmission-gtk curl git wget gwget ksysguard doublecmd-gtk2 krusader blender vlc inkscape okular gedit geany leafpad mousepad parcellite gimp pinta krita krita-plugin-gmic galculator)
 _virtualization=(virtualbox qemu qemu-arch-extra)
 emulator_packages=(desmume gens mednafen mupen64plus pcsx2 ppsspp)
 _pkg_manager_folder="$filesdir/package-manager/"
@@ -165,6 +165,7 @@ fi
 _arduino_pkg=(arduino arduino-avr-core arduino-cli arduino-builder avr-gcc avrdude avr-binutils avr-libc arduino-ctags arduino-docs)
 #
 if [[ "${_archi[*]}" = "x86_64" ]]; then
+	_make_cmake_pkg=(make cmake)
 	_gcc_cpp_pkg=(gcc gcc-libs lib32-gcc-libs binutils)
 	_mingw_w64_pkg=(mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads)
 	_python_pkg=(python python-pip python-setuptools python-virtualenv python-virtualenvwrapper python-wheel)
@@ -175,6 +176,7 @@ if [[ "${_archi[*]}" = "x86_64" ]]; then
 	_perl_pkg=(perl)
 	_ruby_pkg=(ruby ruby-irb)
 else
+	_make_cmake_pkg=(make cmake)
 	_gcc_cpp_pkg=(gcc gcc-libs binutils)
 	_mingw_w64_pkg=(mingw-w64-binutils mingw-w64-headers)
 	_python_pkg=(python python-pip python-setuptools python-virtualenv python-virtualenvwrapper python-wheel)

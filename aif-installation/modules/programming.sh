@@ -4,6 +4,29 @@
 ##                                                                  ##
 ######################################################################
 
+function makecmake_install()
+{
+	if [[ $_makecmake_once -eq 0 ]]; then
+		_makecmake_once=1
+		clear
+		info_search_pkg
+		_list_makecmake_pkg=$(check_s_lst_pkg "${_make_cmake_pkg[*]}")
+		wait
+		clear
+		for j in ${_list_makecmake_pkg[*]}; do
+			_lmenu_makecmake="${_lmenu_makecmake} $j - on"
+		done
+	fi
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Arduino" --yesno "${_progr_bd} ${_list_makecmake_pkg[*]]}" 0 0
+	if [[ $? -eq 0 ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Arduino" --checklist "$_lmp_srv_bd" 0 0 7 ${_lmenu_makecmake} 2>${ANSWER}
+		_chlmn_makecmake=$(cat ${ANSWER})
+		[[ ${_chlmn_makecmake[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_chlmn_makecmake[*]} 2>/tmp/.errlog
+		wait
+		[[ ${_chlmn_makecmake[*]} != "" ]] && check_for_error
+	fi
+}
+
 function arduino_install()
 {
 	if [[ $_arduino_once -eq 0 ]]; then
@@ -222,42 +245,45 @@ installing_programming()
        SUB_MENU="programming_package"
        HIGHLIGHT_SUB=1
     else
-       if [[ $HIGHLIGHT_SUB != 10 ]]; then
+       if [[ $HIGHLIGHT_SUB != 11 ]]; then
           HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
        fi
     fi
     
-    dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_progr_hd" --menu "$_progr_bd_2" 0 0 10 \
-    "1" "Arduino" \
-    "2" "C/C++" \
-    "3" "MingW-W64" \
-    "4" "Python 3" \
-    "5" "Python 2" \
-    "6" "QT Creator" \
-    "7" "Java / Java IDE" \
-    "8" "Perl" \
-    "9" "Ruby" \
-    "10" "$_Back" 2>${ANSWER}
+    dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_progr_hd" --menu "$_progr_bd_2" 0 0 11 \
+    "1" "Make / Cmake"
+    "2" "Arduino" \
+    "3" "C/C++" \
+    "4" "MingW-W64" \
+    "5" "Python 3" \
+    "6" "Python 2" \
+    "7" "QT Creator" \
+    "8" "Java / Java IDE" \
+    "9" "Perl" \
+    "10" "Ruby" \
+    "11" "$_Back" 2>${ANSWER}
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
     case $(cat ${ANSWER}) in
-    "1") arduino_install
+    "1") makecmake_install
+		;;
+    "2") arduino_install
          ;;
-    "2") c_cpp_install
+    "3") c_cpp_install
          ;;
-    "3") mingww64_install
+    "4") mingww64_install
          ;;
-    "4") python3_install
+    "5") python3_install
          ;;
-    "5") python2_install
+    "6") python2_install
          ;;
-    "6") qtcreator_install
+    "7") qtcreator_install
          ;;
-    "7") java_install
+    "8") java_install
          ;;
-    "8") perl_install
+    "9") perl_install
          ;;
-    "9") ruby_install
+    "10") ruby_install
          ;;
       *) # Back to NAME Menu
         if [[ ${_archi[*]} == "x86_64" ]]; then

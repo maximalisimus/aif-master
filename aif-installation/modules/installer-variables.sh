@@ -252,6 +252,9 @@ _dlgrc_rt_st_bp="$filesdir/dlg-rt-st.bp"
 _dlg_rt_rt_bp="$filesdir/dlg-rt-rt.bp"
 
 # Programming
+_makecmake_once=0
+_list_makecmake_pkg=""
+_lmenu_makecmake=""
 _arduino_once=0
 _c_cpp_once=0
 _list_ccpp_pkg=""
@@ -282,6 +285,9 @@ _ruby_once=0
 _list_ruby_pkg=""
 _lmenu_ruby=""
 
+# Packages
+_apps_desktop_once=0
+
 # /config/dialogrc-conf.sh						# Color dialog interface configured
 # /modules/installer-variables.sh				# list of variables
 # /config/list-pkg-forms.sh						# list of packages for uses the script
@@ -307,3 +313,4 @@ _lmenu_ruby=""
 # /modules/network.sh							# Network Function
 # /modules/ntp_configuration.sh					# Network Time Synchronized protocol configuration
 # /modules/programming.sh						# Programming menu
+# /modules/gep-functions.sh						# Package Menu functions

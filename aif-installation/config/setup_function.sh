@@ -4,6 +4,45 @@
 ##                                                                  ##
 ######################################################################
 
+info_search_pkg()
+{
+    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_nfo_search_pkg_title" --infobox "$_nfo_search_pkg_body" 0 0
+}
+
+search_translit_pkg()
+{
+    stp=$(pacman -Ss | grep -Ei "core|extra|community|multilib" | sed 's/extra\///' | sed 's/core\///' | sed 's/community\///' | sed 's/multilib\///' | grep -E "^$1" | awk '{print $1}' | grep -Ei "$2$")
+    echo "${stp[*]}"
+}
+
+function check_s_lst_pkg {
+    local temp_pkg
+    temp_pkg=("$@")
+    declare -a new_pkg
+    temp=""
+    for i in ${temp_pkg[*]}; do
+        pacman -Ss $i 1>/dev/null 2>/dev/null
+        err=$?
+        if [[ $err -eq 0 ]]; then 
+            new_pkg=("${new_pkg[*]}" "$i")
+        fi
+    done
+    echo ${new_pkg[*]}
+}
+
+function check_q_lst_pkg {
+    local temp_pkg
+    temp_pkg=("$@")
+    declare -a new_pkg
+    temp=""
+    for i in ${temp_pkg[*]}; do
+        pacman --root ${MOUNTPOINT} --dbpath ${MOUNTPOINT}/var/lib/pacman -Qs $i 1>/dev/null 2>/dev/null
+        err=$?
+        [[ $err != "0" ]] && new_pkg=("${new_pkg[@]}" "$i")
+    done
+    echo ${new_pkg[*]}
+}
+
 pkg_setup()
 {
    _dir="$1"
