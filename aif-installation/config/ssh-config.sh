@@ -80,14 +80,53 @@ function info_ssh_connect()
 	unset _nfo_ssh_info
 }
 
-edit_menu_sshd()
+edit_file_sshd()
 {
 	SSHD_FILES="${MOUNTPOINT}/etc/ssh/sshd_config"
 	if [[ -e "$SSHD_FILES" ]]; then
 		nano "$SSHD_FILES"
+		wait
 	else
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SeeConfErrTitle" --msgbox "$_SeeConfErrBody1" 0 0
+		wait
 	fi
+	menu_conf_ssh
+}
+
+menu_sshd_config()
+{
+	if [[ $SUB_MENU != "sshd-config" ]]; then
+       SUB_MENU="sshd-config"
+       HIGHLIGHT_SUB=1
+    else
+       if [[ $HIGHLIGHT_SUB != 11 ]]; then
+          HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
+       fi
+    fi
+    
+    dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_edit_sshd_hd2" \
+	--menu "$_edit_sshd_bd" 0 0 11 \
+	"1" "$_yn_ssh_qn" \
+	"2" "$_protocol_ssh_hd" \
+ 	"3" "$_mn_cnf_ssh_1" \
+	"4" "$_mn_cnf_ssh_2" \
+	"5" "$_Back" 2>${ANSWER}
+	case $(cat ${ANSWER}) in
+		"1") dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_ssh_qn" --yesno "$_yn_ssh_qn_bd" 0 0
+			if [[ $? -eq 0 ]]; then
+				cp -f ${_sshd_conf_file} ${_sshd_conf_dir}
+			fi
+			;;
+		"2") protocol_ssh
+			;;
+		"3") port_ssh_conf
+			;;
+		"4") onoff_prmrtlg
+			;;
+		*) menu_conf_ssh
+			;;
+	esac
+	menu_sshd_config
 }
 
 menu_conf_ssh()
@@ -96,37 +135,26 @@ menu_conf_ssh()
        SUB_MENU="ssh-config"
        HIGHLIGHT_SUB=1
     else
-       if [[ $HIGHLIGHT_SUB != 8 ]]; then
+       if [[ $HIGHLIGHT_SUB != 5 ]]; then
           HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
        fi
     fi
 	
 	dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_ssh_2" \
-	--menu "$_mn_srv_bd" 0 0 8 \
+	--menu "$_mn_srv_bd" 0 0 5 \
 	"1" "$_msg_ssh_nfo_ttl" \
 	"2" "$_auto_sshd_nfo_hd" \
-	"4" "$_yn_ssh_qn" \
-	"5" "$_protocol_ssh_hd"
- 	"6" "$_mn_cnf_ssh_1" \
-	"7" "$_mn_cnf_ssh_2" \
-	"8" "$_Back" 2>${ANSWER}
+	"3" "$_edit_sshd_hd" \
+	"4" "$_edit_sshd_hd2" \
+	"5" "$_Back" 2>${ANSWER}
 	case $(cat ${ANSWER}) in
 		"1") info_ssh_connect
 			;;
 		"2") sshd_autostart
 			;;
-		"3") 
+		"3") edit_file_sshd
 			;;
-		"4") dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_ssh_qn" --yesno "$_yn_ssh_qn_bd" 0 0
-			if [[ $? -eq 0 ]]; then
-				cp -f ${_sshd_conf_file} ${_sshd_conf_dir}
-			fi
-			;;
-		"5") protocol_ssh
-			;;
-		"6") port_ssh_conf
-			;;
-		"7") onoff_prmrtlg
+		"4") menu_sshd_config
 			;;
 		*) server_menu
 			;;
