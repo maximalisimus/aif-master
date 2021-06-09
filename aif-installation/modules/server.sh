@@ -149,10 +149,13 @@ function ssh_to_setup()
 				wait
 				unset _myip_addr
 				wait
+				_ssh_setup_once=1
 			fi
+			menu_conf_ssh
 		fi
+	else
+		menu_conf_ssh
 	fi
-	menu_conf_ssh
 }
 
 function firewall_install()
