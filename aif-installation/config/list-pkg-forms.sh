@@ -1,5 +1,3 @@
-#!/bin/bash
-##
 ## File for form in lists packages to master
 ##
 ## 23 July 2019 years

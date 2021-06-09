@@ -1,5 +1,3 @@
-#!/bin/bash
-
 function arduino_install()
 {
 	if [[ $_arduino_once -eq 0 ]]; then

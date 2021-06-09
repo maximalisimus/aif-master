@@ -1,4 +1,3 @@
-#!/bin/bash
 manager_pkg_start()
 {
    _pm_n=$(find "$_pkg_manager_folder" -maxdepth 1 -type f -iname "${_pm_uniq[*]}*" | rev | cut -d '/' -f1 | cut -d '-' -f4-11 | rev)

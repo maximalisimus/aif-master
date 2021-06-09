@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 gen_dlgrc_conf()
 {
     echo "#" > "$1"

@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 setup_graphics_card() {
 
 # Save repetition

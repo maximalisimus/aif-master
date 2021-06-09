@@ -1,4 +1,3 @@
-#!/bin/bash
 ustanovka_pocketov()
 {
    _dir="$1"

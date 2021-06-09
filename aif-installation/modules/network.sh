@@ -1,5 +1,3 @@
-#!/bin/bash
-
 function outline_dhcpcd()
 {
 	if [[ $_dhcpcd_out_once -eq 0 ]]; then

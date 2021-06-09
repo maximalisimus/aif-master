@@ -1,4 +1,3 @@
-#!/bin/bash
 setcolor()
 {
     SETCOLOR_SUCCESS="echo -en \\033[1;32m"

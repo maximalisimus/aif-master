@@ -1,5 +1,3 @@
-#!/bin/bash
-
 function ftp_server_setup()
 {
 	if [[ $_ftp_srv_once -eq 0 ]]; then
