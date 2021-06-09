@@ -1,4 +1,10 @@
-ustanovka_pocketov()
+######################################################################
+##                                                                  ##
+##                   Install package functions                      ##
+##                                                                  ##
+######################################################################
+
+pkg_setup()
 {
    _dir="$1"
    _pkg="$2"
@@ -58,48 +64,3 @@ function ps_in_pkg()
 	unset _tmp_pkg
 	unset _tmp_pkg_mn
 }
-
-function mirror_config()
-{
-	dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_Mirror_Conf_ttl" --yesno "$_yn_mirror_conf_bd" 0 0
-	if [[ $? -eq 0 ]]; then
-		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "_Mirror_Conf_ttl" \
-		--checklist "_Mirror_Conf_bd" 0 0 5 \
-		"1" "http" "on" \
-		"2" "https" "on" \
-		"3" "IPv4" "on" \
-		"4" "IPv6" "on" \
-		"5" "Use Mirror status" "on" 2>${ANSWER}
-		clear
-		var=$(cat ${ANSWER} | sed 's/[ \t]*/\n/g' | awk '!/^$/{print $0}' | sed s/[^0-9]//g)
-		# [ -f ./tmp.log ] && rm -rf ./tmp.log
-		# cat ${ANSWER} | sed 's/[ \t]*/\n/g' | awk '!/^$/{print $0}' | sed s/[^0-9]//g >> ./tmp.log
-		# var=""
-		# while read line; do
-		#	var="${var} $line"
-		# done < ./tmp.log
-		# [ -f ./tmp.log ] && rm -rf ./tmp.log
-		arr=( $var )
-		unset var
-		for i in ${arr[*]}; do
-			case $i in
-				"1") _mirror_conf_str="${_mirror_conf_str}&protocol=http"
-					;;
-				"2") _mirror_conf_str="${_mirror_conf_str}&protocol=https"
-					;;
-				"3") _mirror_conf_str="${_mirror_conf_str}&ip_version=4"
-					;;
-				"4") _mirror_conf_str="${_mirror_conf_str}&ip_version=6"
-					;;
-				"5") _mirror_conf_str="${_mirror_conf_str}&use_mirror_status=on"
-					;;    
-			esac
-		done
-		unset arr
-	else
-		_mirror_conf_str="&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on"
-	fi
-		
-}
-# mirror_config
-# echo "${_mirror_conf_str}"

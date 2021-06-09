@@ -1,3 +1,9 @@
+######################################################################
+##                                                                  ##
+##                   WiFi configuration Menu                        ##
+##                                                                  ##
+######################################################################
+
 _wifi_adapter=$(ip address show | grep -Ei "^[0-9]" | awk '{print $2}' | sed 's/://g'  | grep -Evi "lo" | grep -Ei "w")
 _wifi_adptr=( $_wifi_adapter )
 _intrfc=""

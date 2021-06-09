@@ -206,6 +206,9 @@ _file2ban_once=0
 _list_file2ban_pkg=""
 _mlist_file2ban=""
 
+# SSH Variables
+_auto_sshd_nfo_once=0
+
 # Network time protocol server variables
 _tmsnc_init_once=0
 _tmsnc_stp_once=0
@@ -289,6 +292,7 @@ _lmenu_ruby=""
 # /config/remove_old_v_pkg_function.sh			# Remove duble package on old version
 # /config/dependences_function.sh				# Dependences for script
 # /config/verify_package_folder.sh				# Check required folder and required files
+# /config/ssh-config.sh							# SSH Configuration
 # /modules/core-functions.sh					# language, checks
 # /modules/configuration-functions.sh			# Keyboard, locale, time zone, FSTAB, mkinitcpio, user controls
 # /modules/system-partitioning.sh				# managing partitions, installing the boot
@@ -303,4 +307,3 @@ _lmenu_ruby=""
 # /modules/network.sh							# Network Function
 # /modules/ntp_configuration.sh					# Network Time Synchronized protocol configuration
 # /modules/programming.sh						# Programming menu
-

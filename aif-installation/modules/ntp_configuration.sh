@@ -1,3 +1,9 @@
+######################################################################
+##                                                                  ##
+##                   NTP Configuration                              ##
+##                                                                  ##
+######################################################################
+
 function tmsnc_msg_stp()
 {
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_tmsnc_err_ttl" --msgbox "$_tmsnc_msg_stp" 0 0

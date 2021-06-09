@@ -1,3 +1,11 @@
+######################################################################
+##                                                                  ##
+##                  Dependences configuration                       ##
+##                You need the "Dialog" package                     ##
+##                      for this script                             ##
+##                                                                  ##
+######################################################################
+
 setcolor()
 {
     SETCOLOR_SUCCESS="echo -en \\033[1;32m"
