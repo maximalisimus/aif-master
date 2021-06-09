@@ -82,8 +82,17 @@ function info_ssh_connect()
 
 menu_conf_ssh()
 {
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_ssh_2" \
-	--menu "$_mn_srv_bd" 0 0 5 \
+	if [[ $SUB_MENU != "ssh-config" ]]; then
+       SUB_MENU="ssh-config"
+       HIGHLIGHT_SUB=1
+    else
+       if [[ $HIGHLIGHT_SUB != 7 ]]; then
+          HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
+       fi
+    fi
+	
+	dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_ssh_2" \
+	--menu "$_mn_srv_bd" 0 0 7 \
 	"1" "$_msg_ssh_nfo_ttl" \
 	"2" "$_auto_sshd_nfo_hd" \
 	"3" "$_yn_ssh_qn" \

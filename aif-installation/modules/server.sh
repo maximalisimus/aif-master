@@ -141,10 +141,14 @@ function ssh_to_setup()
 				sshd_autostart
 				wait
 				_my_ip=$(sudo ip -o address show | grep -vi "::" | grep -v "127" | awk '{print $4}' | cut -d '/' -f1)
+				wait
 				_myip_addr=( $_my_ip )
 				unset _my_ip
+				wait
 				info_ssh_connect "${_myip_addr[0]}"
+				wait
 				unset _myip_addr
+				wait
 			fi
 		fi
 	fi
