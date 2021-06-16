@@ -503,6 +503,8 @@ set_root_password() {
        arch_chroot "passwd root" < /tmp/.passwd >/dev/null 2>/tmp/.errlog
        rm /tmp/.passwd
        check_for_error
+       mkdir -p "${MOUNTPOINT}/root/.gnupg/"
+       echo -e -n "keyid-format 0xlong\nthrow-keyids\nno-emit-version\nno-comments\n" > "${MOUNTPOINT}/root/.gnupg/gpg.conf"
     else
        dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_PassRtErrTitle" --msgbox "$_PassRtErrBody" 0 0
        set_root_password
@@ -603,7 +605,8 @@ create_new_user() {
         arch_chroot "cp /etc/skel/.bashrc /home/${USER}"
         arch_chroot "chown -R ${USER}:users /home/${USER}"
         sed -i '/%wheel ALL=(ALL) ALL/s/^#//' ${MOUNTPOINT}/etc/sudoers
-      
+        mkdir -p "${MOUNTPOINT}/home/${USER}/.gnupg/"
+        echo -e -n "keyid-format 0xlong\nthrow-keyids\nno-emit-version\nno-comments\n" > "${MOUNTPOINT}/home/${USER}/.gnupg/gpg.conf"
 }
 
 run_mkinitcpio() {
