@@ -30,14 +30,6 @@ panel-position = bottom
 indicators = ~spacer;~separator;~session;~separator;~layout;~separator;~language;~separator;~a11y;~separator;~power;~separator;~spacer;~host;~spacer;~clock;~spacer
 
 
-/etc/lxdm/lxdm.conf
-# bg=/usr/share/backgrounds/default.png
-
-
-SLiM:
- cp /path/to/new_background.jpg /usr/share/slim/themes/<theme_name>/background.jpg
-
-
 
 
 
