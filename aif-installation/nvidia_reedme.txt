@@ -126,3 +126,9 @@ set mydesk (xdg-user-dir DESKTOP)
 echo "$mydesk"
 
 
+
+
+
+
+
+
