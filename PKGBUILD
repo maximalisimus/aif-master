@@ -1,6 +1,6 @@
 pkgname=aif-master
 _pkgrun="aif"
-pkgver=2.7
+pkgver=2.6
 pkgrel=1
 arch=('any')
 url="https://github.com/maximalisimus/$pkgname/"
