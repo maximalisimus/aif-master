@@ -30,72 +30,12 @@ panel-position = bottom
 indicators = ~spacer;~separator;~session;~separator;~layout;~separator;~language;~separator;~a11y;~separator;~power;~separator;~spacer;~host;~spacer;~clock;~spacer
 
 
-GreetMessage=Welcome to %hostname%
-
-Autologin:
-# groupadd -r autologin
-# gpasswd -a username autologin
-sudo groupadd test
-sudo usermod -G -a имя_группы имя_пользователя
-
-sudo usermod -R группа пользователь
-sudo delgroup имя_группы
-
-
-/etc/lightdm/lightdm-gtk-greeter.conf
-[Seat:*]
-pam-service=lightdm
-pam-autologin-service=lightdm-autologin
-autologin-user=username
-autologin-user-timeout=0
-
-
-
-
 /etc/lxdm/lxdm.conf
 # bg=/usr/share/backgrounds/default.png
-
-Enabling Auto-Login
-/etc/lxdm/lxdm.conf
-[base]
-# autologin=carl
-
-Enable Timeout Auto-Login
-/etc/lxdm/lxdm.conf
-#timeout=10
-
-
-
-/etc/sddm.conf.d/autologin.conf
-[Autologin]
-User=ivan
-Session=plasma.desktop
-
-
 
 
 SLiM:
  cp /path/to/new_background.jpg /usr/share/slim/themes/<theme_name>/background.jpg
-Enable Autologin:
-Edit /etc/slim.conf to uncomment the auto_login command and replace no with yes:
-/etc/slim.conf
-auto_login          yes
-
-
-
-
-/etc/gdm/custom.conf
-# Enable automatic login for user
-[daemon]
-AutomaticLogin=username
-AutomaticLoginEnable=True
-
-or for an automatic login with a delay:
-/etc/gdm/custom.conf
-[daemon]
-TimedLoginEnable=true
-TimedLogin=username
-TimedLoginDelay=1
 
 
 
