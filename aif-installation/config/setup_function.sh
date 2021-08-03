@@ -30,39 +30,19 @@ function check_s_lst_pkg {
     echo ${new_pkg[*]}
 }
 
-function check_q_lst_pkg {
-    local temp_pkg
-    temp_pkg=("$@")
-    declare -a new_pkg
-    temp=""
-    for i in ${temp_pkg[*]}; do
-        pacman --root ${MOUNTPOINT} --dbpath ${MOUNTPOINT}/var/lib/pacman -Qs $i 1>/dev/null 2>/dev/null
-        err=$?
-        if [[ $err != "0" ]]; then
-			new_pkg=("${new_pkg[@]}" "$i")
-		fi
-    done
-    echo ${new_pkg[*]}
-}
-
-pkg_setup()
+manual_pkg_setup()
 {
-   _dir="$1"
-   _pkg="$2"
-   _pkg_full=$(find $_dir -maxdepth 1 -type f -iname "$_pkg*")
-   _pkg_name=$(echo "${_pkg_full[*]}" | rev | cut -d '/' -f1 | rev)
-   cp -f ${_pkg_full[*]} /var/lib/pacman/local/
-   cp -f ${_pkg_full[*]} ${MOUNTPOINT}/var/lib/pacman/local/
-   pacman --root ${MOUNTPOINT} --dbpath ${MOUNTPOINT}/var/lib/pacman -U /var/lib/pacman/local/${_pkg_name[*]} --noconfirm
+   _full_pkg="${1}"
+   _full_name="${2}"
+   cp -f ${_full_pkg} ${MOUNTPOINT}/var/lib/pacman/local/
+   pacman --root ${MOUNTPOINT} --dbpath ${MOUNTPOINT}/var/lib/pacman -U ${MOUNTPOINT}/var/lib/pacman/local/${_full_name} --noconfirm
    # DEBUG
-   # echo "$_pkg_full"
-   # echo "$_pkg_full" >> "$filesdir"/setup-pkgs.txt
-   # echo "$_pkg_name"
+   # echo "$_full_pkg"
+   # echo "$_full_name"
    # DEBUG
-   unset _dir
-   unset _pkg
-   unset _pkg_full
-   unset _pkg_name
+   rm -rf "$_full_pkg"
+   unset _full_pkg
+   unset _full_name
 }
 
 function create_script()
