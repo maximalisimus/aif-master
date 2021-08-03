@@ -1,4 +1,8 @@
-﻿#!/bin/bash
+######################################################################
+##                                                                  ##
+##                Server installation functions                     ##
+##                                                                  ##
+######################################################################
 
 function ftp_server_setup()
 {
@@ -64,74 +68,100 @@ function email_srv_setup()
 	fi
 }
 
-function onoff_prmrtlg()
+function docker_menu_setup()
 {
-	if [[ $_prmtrtlg_once -eq "0" ]]; then
-		echo "PermitRootLogin no" >> ${MOUNTPOINT}/etc/ssh/sshd_config
-		_prmtrtlg_once=1
-		_prmtrtlg_clck=1
-		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_cnf_ssh_2" --msgbox "$_nff_ptrtlg_bd_2" 0 0
-	else
-		if [[ $_prmtrtlg_clck -eq "0" ]]; then
-			sed -i "/^PermitRootLogin/c PermitRootLogin no" ${MOUNTPOINT}/etc/ssh/sshd_config
-			_prmtrtlg_clck=1
-			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_cnf_ssh_2" --msgbox "$_nff_ptrtlg_bd_2" 0 0
+	if [[ $_docker_run_once -eq 0 ]]; then
+		clear
+		_docker_run_once=1
+		info_search_pkg
+		_list_docker_pkg=$(check_s_lst_pkg "${_docker_pkg[*]}")
+		wait
+		clear
+	fi
+	dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_mn_docker" --yesno "$_yn_mn_docker_bd" 0 0
+	if [[ $? -eq 0 ]]; then
+		pacstrap ${MOUNTPOINT} ${_list_docker_pkg[*]} 2>/tmp/.errlog
+		wait
+		check_for_error
+		wait
+		arch_chroot "systemctl enable docker.service" 2>/tmp/.errlog
+		wait
+		check_for_error
+		wait
+	fi
+}
+function antivirus_setup()
+{
+	if [[ $_clamav_once -eq 0 ]]; then
+		clear
+		_clamav_once=1
+		info_search_pkg
+		_list_clamav_pkg=$(check_s_lst_pkg "${_clamav_pkg[*]}")
+		wait
+		for j in ${_list_clamav_pkg[*]}; do
+			_mn_clamav="${_mn_clamav} $j - off"
+		done
+		clear
+	fi
+	dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_antivirus_hd" --yesno "$_antivirus_yn_bd" 0 0
+	if [[ $? -eq 0 ]]; then
+		dialog --backtitle "VERSION - SYSTEM (ARCHI)" --title "$_antivirus_hd" --checklist "$_antivirus_bd" 0 0 5 ${_mn_clamav} 2>${ANSWER}
+		wait
+		variable=$(cat ${ANSWER})
+		if [[ "${variable[*]}" == *"$_clamav_gui"* ]]; then
+			dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_antivirus_hd" --yesno "$_antivirus_ctk_hd" 0 0
+			if [[ $? -eq 0 ]]; then
+				check_xorg
+				wait
+				check_de
+				wait
+				check_dm
+				wait
+				pacstrap ${MOUNTPOINT} ${variable[*]} 2>/tmp/.errlog
+				wait
+				check_for_error
+				wait
+			else
+				antivirus_setup
+			fi
 		else
-			_prmtrtlg_clck=0
-			sed -i "/^PermitRootLogin/c PermitRootLogin yes" ${MOUNTPOINT}/etc/ssh/sshd_config
-			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_cnf_ssh_2" --msgbox "$_nff_ptrtlg_bd_1" 0 0
+			pacstrap ${MOUNTPOINT} ${variable[*]} 2>/tmp/.errlog
+			wait
+			check_for_error
+			wait
 		fi
 	fi
 }
-
-function port_ssh_conf()
+function sshd_autostart()
 {
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_cnf_ssh_1" --inputbox "$_sshcnf_port_bd" 0 0 "" 2>${ANSWER}
-	declare -i _ch_sshcnf_port
-	_ch_sshcnf_port=$(cat ${ANSWER})
-	clear
-	while [[ $_ch_sshcnf_port -le 1025 ]]; do
-		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_nfo_ssh_port_ttl" --msgbox "$_nfo_ssh_port_bd" 0 0
-		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_cnf_ssh_1" --inputbox "$_sshcnf_port_bd" 0 0 "" 2>${ANSWER}
-		_ch_sshcnf_port=$(cat ${ANSWER})
-		while [[ $_ch_sshcnf_port -ge 65536 ]]; do
-			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_nfo_ssh_port_ttl" --msgbox "$_nfo_ssh_port_bd" 0 0
-			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_cnf_ssh_1" --inputbox "$_sshcnf_port_bd" 0 0 "" 2>${ANSWER}
-			_ch_sshcnf_port=$(cat ${ANSWER})
-		done
-	done
-	while [[ $_ch_sshcnf_port -ge 65536 ]]; do
-		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_nfo_ssh_port_ttl" --msgbox "$_nfo_ssh_port_bd" 0 0
-		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_cnf_ssh_1" --inputbox "$_sshcnf_port_bd" 0 0 "" 2>${ANSWER}
-		_ch_sshcnf_port=$(cat ${ANSWER})
-		while [[ $_ch_sshcnf_port -le 1025 ]]; do
-			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_nfo_ssh_port_ttl" --msgbox "$_nfo_ssh_port_bd" 0 0
-			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_cnf_ssh_1" --inputbox "$_sshcnf_port_bd" 0 0 "" 2>${ANSWER}
-			_ch_sshcnf_port=$(cat ${ANSWER})
-		done
-	done
-	clear
-	_str="${_ch_sshcnf_port[*]}"
-	unset _ch_sshcnf_port
-	sed -i "/^\#Port/c Port $_str" ${MOUNTPOINT}/etc/ssh/sshd_config
-	sed -i "/^Port/c Port $_str" ${MOUNTPOINT}/etc/ssh/sshd_config
+	if [[ $_auto_sshd_nfo_once -eq 0 ]]; then
+		dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_auto_sshd_nfo_hd" --yesno "$_auto_sshd_nfo_bd" 0 0
+		if [[ $? -eq 0 ]]; then
+			_auto_sshd_nfo_once=1
+			wait
+			arch_chroot "systemctl enable sshd.service" 2>/tmp/.errlog
+			wait
+			check_for_error
+			wait
+			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_auto_sshd_nfo_hd" --msgbox "$_auto_sshd_nfo_msg" 0 0
+			wait
+		fi
+	else
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_auto_sshd_nfo_hd" --msgbox "$_auto_sshd_nfo_msg" 0 0
+		wait
+		dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_auto_sshd_nfo_hd" --yesno "$_auto_sshd_nfo_bd2" 0 0
+		if [[ $? -eq 0 ]]; then
+			_auto_sshd_nfo_once=0
+			wait
+			arch_chroot "systemctl disable sshd.service" 2>/tmp/.errlog
+			wait
+			check_for_error
+			wait
+			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_auto_sshd_nfo_hd" --msgbox "$_auto_sshd_nfo_msg2" 0 0
+			wait
+		fi
+	fi
 }
-
-function info_ssh_connect()
-{
-	clear
-	_myip="$1"
-	_usr_lst=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
-	_user_lists=( "${_usr_lst[*]}" )
-	unset _usr_lst
-	_nfo_ssh_info="${_nfo_ssh_bd} ${_myip} \n${_nfo_ssh_prmr} ${_user_lists[0]}@${_myip}"
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_msg_ssh_nfo_ttl" --msgbox "$_nfo_ssh_info" 0 0
-	wait
-	unset _myip
-	unset _user_lists
-	unset _nfo_ssh_info
-}
-
 function ssh_to_setup()
 {
 	if [[ $_ssh_run_once -eq 0 ]]; then
@@ -148,48 +178,73 @@ function ssh_to_setup()
 			if [[ ${_list_ssh_pkg[*]} != "" ]]; then
 				pacstrap ${MOUNTPOINT} ${_list_ssh_pkg[*]} 2>/tmp/.errlog
 				check_for_error
-				arch_chroot "systemctl enable sshd.service" 2>/tmp/.errlog
-				check_for_error
+				wait
+				sshd_autostart
+				wait
 				_my_ip=$(sudo ip -o address show | grep -vi "::" | grep -v "127" | awk '{print $4}' | cut -d '/' -f1)
+				wait
 				_myip_addr=( $_my_ip )
 				unset _my_ip
+				wait
 				info_ssh_connect "${_myip_addr[0]}"
+				wait
 				unset _myip_addr
+				wait
 				_ssh_setup_once=1
 			fi
+			menu_conf_ssh
 		fi
-	fi
-}
-
-menu_conf_ssh()
-{
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_ssh_2" \
-	--menu "$_mn_srv_bd" 0 0 4 \
- 	"1" "$_mn_cnf_ssh_1" \
-	"2" "$_mn_cnf_ssh_2" \
-	"3" "$_Back" 2>${ANSWER}
-	case $(cat ${ANSWER}) in
-		"1") port_ssh_conf
-			;;
-		"2") onoff_prmrtlg
-			;;
-		*) server_menu
-			;;
-	esac
-	menu_conf_ssh
-}
-
-ssh_menu()
-{
-	ssh_to_setup
-	wait
-	if [[ $_ssh_setup_once -eq 1 ]]; then
-		menu_conf_ssh
 	else
-		server_menu
+		menu_conf_ssh
 	fi
 }
 
+function firewall_install()
+{
+	if [[ $_firewall_once -eq 0 ]]; then
+		_firewall_once=1
+		clear
+		info_search_pkg
+		_list_firewall_pkg=$(check_s_lst_pkg "${_firewall[*]}")
+		wait
+		clear
+		for j in ${_list_firewall_pkg[*]}; do
+			_mlist_firewall="${_mlist_firewall} $j - on"
+		done
+	fi
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_fw_hd" --yesno "${_progr_bd} ${_list_firewall_pkg[*]]}" 0 0
+	if [[ $? -eq 0 ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_fw_hd" --checklist "$_yn_fw_bd" 0 0 7 ${_mlist_firewall} 2>${ANSWER}
+		_chlmn_firewall=$(cat ${ANSWER})
+		[[ ${_chlmn_firewall[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_chlmn_firewall[*]} 2>/tmp/.errlog
+		wait
+		[[ ${_chlmn_firewall[*]} != "" ]] && check_for_error
+	fi
+	server_menu
+}
+function file2ban_install()
+{
+	if [[ $_file2ban_once -eq 0 ]]; then
+		_file2ban_once=1
+		clear
+		info_search_pkg
+		_list_file2ban_pkg=$(check_s_lst_pkg "${_fail2ban[*]}")
+		wait
+		clear
+		for j in ${_list_file2ban_pkg[*]}; do
+			_mlist_file2ban="${_mlist_file2ban} $j - on"
+		done
+	fi
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_f2b_hd" --yesno "${_progr_bd} ${_list_file2ban_pkg[*]]}" 0 0
+	if [[ $? -eq 0 ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_f2b_hd" --checklist "$_yn_f2b_bd" 0 0 7 ${_mlist_file2ban} 2>${ANSWER}
+		_chlmn_file2ban=$(cat ${ANSWER})
+		[[ ${_chlmn_file2ban[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_chlmn_file2ban[*]} 2>/tmp/.errlog
+		wait
+		[[ ${_chlmn_file2ban[*]} != "" ]] && check_for_error
+	fi
+	server_menu
+}
 server_menu()
 {
 	# Depending on the answer, first check whether partition(s) are mounted and whether base has been installed
@@ -203,26 +258,37 @@ server_menu()
     fi
 	
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_srv_ttl" \
-	--menu "$_mn_srv_bd" 0 0 6 \
+	--menu "$_mn_srv_bd" 0 0 8 \
  	"1" "$_mn_srv_1" \
-	"2" "$_mn_srv_2" \
-	"3" "$_mn_srv_3" \
-	"4" "$_mn_srv_4" \
-	"5" "$_Back" 2>${ANSWER}
+ 	"2" "docker docker-compose" \
+	"3" "$_mn_srv_2" \
+	"4" "$_mn_srv_3" \
+	"5" "$_mn_srv_4" \
+	"6" "$_yn_fw_hd" \
+	"7" "$_yn_f2b_hd" \
+	"8" "$_antivirus_hd" \
+	"9" "$_Back" 2>${ANSWER}
 
 	case $(cat ${ANSWER}) in
-		"1") ssh_menu
+		"1") ssh_to_setup
 			;;
-		"2") email_srv_setup
+		"2") docker_menu_setup
 			;;
-		"3") namp_srv_setup
+		"3") email_srv_setup
 			;;
-		"4") ftp_server_setup
+		"4") namp_srv_setup
 			;;
-		*) main_menu_online
+		"5") ftp_server_setup
+			;;
+		"6") firewall_install
+			;;
+		"7") file2ban_install
+			;;
+		"8") antivirus_setup
+			;;
+		*) install_apps_menu
 			;;
 	esac
 	server_menu
 }
-
 

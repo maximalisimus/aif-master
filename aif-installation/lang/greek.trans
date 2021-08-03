@@ -564,13 +564,11 @@ _yesno_tnc_body="\nΝα ορίσετε ένα σύνολο διαφορετικ�
 _yn_s_tnc_ttl="Εγκατάσταση συνδέσεων Manager"
 _yn_s_tnc_bd="\nΘέλετε να επιλέξετε επιπλέον τύποι των ενώσεων για το Manager;\n"
 
-# Programs to TimeShoft and Github-Desktop
+# Programs to TimeShift
 _yesno_timeshift_title="Εγκατάσταση Timeshift"
 _yesno_timeshift_body="\nΕγκαταστήσετε Το Timeshift;\n"
-_yesno_github_desktop_title="Ρύθμιση Του Github-Desktop"
-_yesno_github_desktop_body="\nΟρισμός Github-Desktop;\n"
 
-# Config Disk Devaces
+# Config Disk Devices
 _sh_dev_title="Επιλογή συσκευής"
 _sh_dev_body="\nΠαρακαλώ, επιλέξτε τη δική σας συσκευή\n"
 _rsvd_nfo1="Η συσκευή"
@@ -596,9 +594,7 @@ _info_tmpfs_body="\n$_info_tmpfs_bd1\n$_info_tmpfs_bd2\n$_info_tmpfs_bd3\n$_info
 _input_size_tmpfs_title="Τάση του όγκου φάκελο tmp"
 _input_size_tmpfs_body="\nΠαρακαλώ εισάγετε το επιθυμητό ποσό. Για παράδειγμα: 1G\n"
 
-# Shell and Windows Fonts
-_yn_win_fnts_ttl="Εγκατάσταση γραμματοσειρών των Windows"
-_yn_win_fnts_bd="\nΝα εγκαταστήσετε τις γραμματοσειρές των Windows;\n"
+# Shell
 _shell_friendly_menu="Επιλογή και εγκατάσταση SHELL"
 _select_shell_menu_ttl="Επιλογή SHELL για την εγκατάσταση"
 _select_shell_menu_bd="\nΠαρακαλώ επιλέξτε ένα ΚΈΛΥΦΟΣ για το χρήστη"
@@ -608,19 +604,6 @@ _scrn_strp_ttl="Ρύθμιση screenfetch υποδοχής"
 _scrn_strp_bd="\nΠροσθέστε το screenfetch χαιρετισμό κατά την εκκίνηση;\n"
 _menu_ch_usr_ttl="Επιλογή χρηστών"
 _menu_ch_usr_bd="\nΠαρακαλώ επιλέξτε τους χρήστες, για τους οποίους πρέπει να αλλάξετε SHELL\n"
-
-# General Menu Package
-_InstGeMenuGE="Εγκατάσταση κοινά πακέτα και προγράμματα"
-_menu_gen_title="Εγκατάσταση κοινά πακέτα και προγράμματα"
-_menu_gen_body="\nΕγκατάσταση κοινά πακέτα και προγράμματα για όλα τα περιβάλλοντα επιφάνειας εργασίας.\n"
-_menu_gengen="Εγκατάσταση κοινά πακέτα"
-_menu_archivers="Εγκατάσταση υποστήριξης αρχείων"
-_menu_ttf_theme="Εγκατάσταση γραμματοσειρών και τόσο"
-_menu_add_pkg="Εγκατάσταση ελάχιστη ποσότητα πακέτων λογισμικού"
-_menu_extra_pkg="Εγκατάσταση πρόσθετων προγραμμάτων (kicad,v-box, wine)."
-_menu_pkg_meneger="Εγκατάσταση γραφικό διαχειριστή πακέτων του pacman"
-_ch_mn_bd="\nΕπιλέξτε παρακαλώ, απαραίτητα πακέτα για την εγκατάσταση.\n"
-_pm_menu_body="\nΕπιλέξτε παρακαλώ δέσμης διαχειριστής για την εγκατάσταση.\n"
 
 # Information to search and installation on packages your system
 _nfo_search_pkg_title="Παρακαλώ περιμένετε"
@@ -644,23 +627,9 @@ _CloseInstBody="Τερματισμός προγράμματος εγκατάστ
 _yesno_order_ttl="Το πέρασμα λίγων μενού"
 _yesno_order_bd="\nΈχει εγκατασταθεί αν έχετε πυρήνα LTS;\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Εγκατάσταση εξομοιωτών PlayStation-3 "
-_yesno_rpcs3_bd="\nΟρισμός εξομοιωτής PlayStation-3;\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Εγκατάσταση Bluetooth"
 _yesno_bluetooth_bd="\nΝα εγκαταστήσετε το πρόγραμμα οδήγησης και ο διευθυντής συσκευές bluetooth;\n"
-
-# Aur package menu
-_aur_pkg_ttl="Εγκατάσταση πακέτων από το AUR"
-_aur_pkg_bd="\nΠαρακαλώ επιλέξτε χρειάζεστε πακέτα για την εγκατάσταση!\n"
-_aur_dbl_pkg_ttl="Για να επιλέξετε την έκδοση του πακέτου"
-_aur_dbl_pkg_bd="\nΑυτό το πακέτο έχει πολλαπλές εκδόσεις.\nΠαρακαλώ επιλέξτε τις πληροφορίες που χρειάζεστε!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Εγκατάσταση emulators"
-_eml_pkg_bd="\nΠαρακαλώ επιλέξτε τις απαραίτητες σας εξομοιωτές για την εγκατάσταση!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Να διαγράψετε το αρχείο Καταγραφής;"
@@ -754,14 +723,6 @@ _yn_netctl_bd="\nΘέλετε να επιλέξετε ένα πρότυπο κα
 _ntctl_tmpmn_bd="\nΠαρακαλώ επιλέξτε πρότυπο για τον διευθυντή netctl.\n"
 _inntctl_ttl="Πληκτρολογήστε το όνομα του προτύπου netctl"
 _inntctl_bd="\nΠαρακαλώ, πληκτρολογήστε ένα νέο όνομα για το πρότυπο.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Το ασύρματο δίκτυο."
-_msg_wt_bd="\nΜπορείτε να επιλέξετε ένα πρότυπο για το ασύρματο δίκτυο. Αυτό το πρότυπο απαιτεί να εισαγάγετε το SSID του ασύρματου δικτύου σας και τον κωδικό πρόσβασης. Η ρύθμιση θα εισαχθεί στο νέο σας πρότυπο. Εάν αυτή η ρύθμιση δεν χρειάζεται, απλά αφήστε κενές γραμμές.\n"
-_ib_ssid_ttl="Εισαγάγετε το όνομα SSID του ασύρματου δικτύου"
-_ib_ssid_bd="\nΠαρακαλώ εισάγετε το όνομα του ασύρματου δικτύου.\n"
-_ib_pass_ttl="Εισαγάγετε τον κωδικό πρόσβασης του ασύρματου δικτύου"
-_ib_pass_bd="\nΠαρακαλώ, πληκτρολογήστε τον κωδικό πρόσβασης του ασύρματου δικτύου\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Συγχρονισμός ώρας"

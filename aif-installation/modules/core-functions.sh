@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 ######################################################################
 ##                                                                  ##
 ##                        Core Functions                            ##
@@ -164,6 +162,34 @@ check_base() {
         main_menu_online
     fi
     
+}
+
+check_xorg() {
+	if [[ $AXI_INSTALLED -eq 0 ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_ErrTitle" --msgbox "$_ErrNoXorg" 0 0
+		install_desktop_menu
+	fi
+}
+
+check_de() {
+	if [[ $_DE_INSTALLED -eq 0 ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_ErrTitle" --msgbox "$_ErrNoDE" 0 0
+		install_desktop_menu
+	fi
+}
+
+check_dm() {
+	if [[ $_DM_INSTALLED -eq 0 ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_ErrTitle" --msgbox "$_ErrNoDM" 0 0
+		install_desktop_menu
+	fi
+}
+
+check_nm() {
+	if [[ $_NM_INSTALLED -eq 0 ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_ErrTitle" --msgbox "$_ErrNoNM" 0 0
+		install_desktop_menu
+	fi
 }
 
 # Simple code to show devices / partitions.

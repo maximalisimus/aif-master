@@ -5,6 +5,7 @@
 ##
 ## Written by "Just" (6th September 2015)
 ##
+##
 
 # Accessibility
 _InstAccOpt="Accessibility Packages (optional)"
@@ -582,13 +583,11 @@ _yesno_tnc_body="\nУстановить набор различных соеди
 _nfo_search_pkg_title="Пожалуйста подождите"
 _nfo_search_pkg_body="Поиск и проверка пакетов для установки"
 
-# Programs to TimeShoft and Github-Desktop
+# Programs to TimeShift
 _yesno_timeshift_title="Установка TimeShift"
 _yesno_timeshift_body="\nУстановить TimeShift?\n"
-_yesno_github_desktop_title="Установка Github-Desktop"
-_yesno_github_desktop_body="\nУстановить Github-Desktop?\n"
 
-# Config Disk Devaces
+# Config Disk Devices
 _sh_dev_title="Выбор устройства"
 _sh_dev_body="\nПожалуйста, выберите необходимое устройство\n"
 _rsvd_nfo1="Устройство "
@@ -614,9 +613,7 @@ _info_tmpfs_body="\n$_info_tmpfs_bd1\n$_info_tmpfs_bd2\n$_info_tmpfs_bd3\n$_info
 _input_size_tmpfs_title="Ввод объема папки tmp"
 _input_size_tmpfs_body="\nПожалуйста введите желаемый объем. Например: 1G\n"
 
-# Shell and Windows Fonts
-_yn_win_fnts_ttl="Установка шрифтов Windows"
-_yn_win_fnts_bd="\nУстановить шрифты Windows?\n"
+# Shell
 _shell_friendly_menu="Выбор и установка SHELL"
 _select_shell_menu_ttl="Выбор SHELL для установки"
 _select_shell_menu_bd="\nПожалуйста, выберите SHELL для пользователя"
@@ -626,19 +623,6 @@ _scrn_strp_ttl="Настройка screenfetch приветствия"
 _scrn_strp_bd="\nДобавить screenfetch приветствие в автозагрузку?\n"
 _menu_ch_usr_ttl="Выбор пользователей"
 _menu_ch_usr_bd="\nПожалуйста выберите пользователей, для которых необходимо изменить SHELL\n"
-
-# General Menu Package
-_InstGeMenuGE="Установка общих пакетов и программ"
-_menu_gen_title="Установка общих пакетов и программ"
-_menu_gen_body="\nУстановка общих пакетов и программ для всех окружений рабочего стола.\n"
-_menu_gengen="Установка общих пакетов"
-_menu_archivers="Установка поддержки архивов"
-_menu_ttf_theme="Установка шрифтов и тем"
-_menu_add_pkg="Установка минимального пакета программ"
-_menu_extra_pkg="Установка дополнительных программ (kicad,v-box, wine)."
-_menu_pkg_meneger="Установка графического менеджера пакетов pamac"
-_ch_mn_bd="\nВыберите, пожалуйста, необходимые пакеты для установки.\n"
-_pm_menu_body="\nВыберите, пожалуйста, пакетный менеджер для установки.\n"
 
 # Main Menu
 _MMTitle=" Главное меню "
@@ -658,30 +642,13 @@ _CloseInstBody="Закрыть установщик?"
 _yesno_order_ttl="Пропуск нескольких меню"
 _yesno_order_bd="\nУстановлено ли у вас ядро LTS?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Установка эмулятора PlayStation-3"
-_yesno_rpcs3_bd="\nУстановить эмулятор PlayStation-3?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Установка Bluetooth"
 _yesno_bluetooth_bd="\nУстановить драйвера и менеджер устройств bluetooth?\n"
 
-# Aur package menu
-_aur_pkg_ttl="Установка пакетов из AUR"
-_aur_pkg_bd="\nПожалуйста, выберите необходимые вам пакеты для установки!\n"
-_aur_dbl_pkg_ttl="Выбор версии пакета"
-_aur_dbl_pkg_bd="\nДанный пакет имеет несколько версий.\nПожалуйста выберите необходимую вам!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Установка эмуляторов"
-_eml_pkg_bd="\nПожалуйста, выберите необходимые вам эмуляторы для установки!\n"
-
 # Remove packages log
 _yesno_rmrf_ttl="Удалить Лог файл?"
 _yesno_rmrf_bd="\nСоздан лог файл удаленных старых версий пакетов.\nУдалить этот лог-файл?\n"
-
-# Remote repository
-_rmt_rpstr_ttl="Обновление пакетов из удаленного репозитория"
 
 #
 # User groups
@@ -769,14 +736,6 @@ _ntctl_tmpmn_bd="\nПожалуйста, выберите необходимый
 _inntctl_ttl="Ввод имени шаблона netctl"
 _inntctl_bd="\nПожалуйста, введите новое имя шаблона.\n"
 #
-# Wifi template configuration
-_msg_wt_ttl="Беспроводная сеть."
-_msg_wt_bd="\nВы выбрали шаблон для беспроводной сети. Данный шаблон требует ввода SSID беспроводной сети и пароль. Настройка будет введена в ваш новый шаблон. Если же данная настройка вам не нужна, просто оставте строки пустыми.\n"
-_ib_ssid_ttl="Ввод имени SSID беспроводной сети"
-_ib_ssid_bd="\nПожалуйста, введите имя вашей беспроводной сети.\n"
-_ib_pass_ttl="Ввод пароля беспроводной сети"
-_ib_pass_bd="\nПожалуйста, введите пароль вашей беспроводной сети\n"
-#
 # Network time protocol server language
 _mn_tmsnc_ttl="Синхронизация времени"
 _mn_tmsnc_bd="\nПожалуйста, выберите необходимую настройку.\n"
@@ -815,3 +774,140 @@ _restrinct_desc_3="Запретить внесение изменений"
 _restrinct_desc_4="Не синхронизироваться с хостом"
 _restrinct_desc_5="Не принимать запросы"
 #
+#
+## Antiviruses
+#
+_antivirus_hd="Антивирус ClamAV"
+_antivirus_bd="\nПожалуйста, выберите необходимые пакеты для установки.\n"
+_antivirus_yn_bd="\nУстановить антивирус ClamAV?\n"
+_antivirus_ctk_hd="Установка ClamTK"
+#
+#
+## Docker docker-compose
+#
+_yn_mn_docker="Установка docker и docker-compose."
+_yn_mn_docker_bd="\nУстановить данные пакеты ?\n"
+#
+#
+## FireWall / File2Ban
+#
+_yn_fw_hd="Фаервол"
+_yn_fw_bd="\nУстановить фаервол ?\n"
+_yn_f2b_hd="Fail2Ban"
+_yn_f2b_bd="\nУстановить блокировщик атак Fail2Ban ?\n"
+#
+#
+## SSH Server Config
+#
+_auto_sshd_nfo_hd="Автоматический запуск службы SSH."
+_auto_sshd_nfo_bd="\nВключить автозапуск службы SSHD ?\n"
+_auto_sshd_nfo_bd2="\nОтключить автозапуск службы SSHD ?\n"
+_auto_sshd_nfo_msg="\nАвтозапуск службы SSHD включен.\n"
+_auto_sshd_nfo_msg2="\nАвтозапуск службы SSHD отключен.\n"
+_yn_ssh_qn="Копирование настроек SSHD"
+_yn_ssh_qn_bd="\nСкопировать готовые настройки sshd ?\n"
+_edit_sshd_hd2="Изменение параметров sshd_config"
+_edit_sshd_hd="Редактирование файла sshd_config"
+_edit_sshd_bd="\nРедактирование настроек /etc/ssh/sshd_config\n"
+_port_ssh_hd="Порт ssh"
+_port_ssh_msg="\nПорт ssh изменён:"
+_protocol_ssh_hd="Протокол SSH"
+_protocol_ssh_bd="\nВключить протокол версии 2 ?\n"
+_protocol_ssh_msg="\nПротокол версии 2 включен.\n"
+_mn_cnf_ssh_hd="Вход под root."
+_pass_auth_hd="Проверка пароля"
+_pass_auth_bd="\nОтключить/включить проверку пароля ?\n"
+_auth_publ_hd="Аутентификация по открытому ключу"
+_auth_publ_bd="\nВключить аутентификацию по открытому ключу ?\n"
+_auth_keyf_hd="Файл публичных ключей"
+_auth_keyf_bd="\nДобавить расположение файла открытых ключей?\n"
+_client_session_hd_1="Время неактивной сессии"
+_client_session_hd_2="Количество проверок доступности"
+_client_session_bd_1="\nУкажите время, в течение которого, неактивная сессия будет завершена\n"
+_client_session_bd_2="\nУкажите количество проверок доступности клиента, \n которые могут оставаться без ответа.\n"
+_rhosts_hd="Уязвимость RHOSTS"
+_rhosts_bd="\nОтключить уязвимость файла .RHOSTS со списком хостов и пользователей ?\n"
+_host_auth_hd="Аутентификация на базе хоста"
+_host_auth_bd="\nОтключить аутентификацию на базе хоста, которая позволяет пользователю с определённого хоста подключаться к серверу?\n"
+_empty_pass_hd="Пустые пароли"
+_empty_pass_bd="\nЗапретить пустые пароли?\n"
+_logs_ssh_hd="Анализ логов"
+_log_ssh_bd="\nВключить анализ логов, для расширенного контроля над системой ?\n"
+_x11_ssh_hd="Пересылка X11 через ssh"
+_x11_ssh_bd="\nОтключить пересылку X11 через ssh?\n Данный протокол не ориентирован на безопасность.\n"
+_allow_users_hd="Разрешить доступ пользователям"
+_allow_users_bd="\nРазрешить доступ только перечисленным пользователям?\n"
+_deny_users_hd="Запретить доступ пользователям"
+_deny_users_bd="\nЗапретить доступ только перечисленным пользователям?\n"
+_allow_group_hd="Разрешить доступ группе пользователей"
+_allow_group_bd="\nВыбранных пользователей можно добавить в группу и\n разрешить доступ только этой группе.\n"
+#
+_add_group_hd="Добавить группу пользователей"
+_add_group_bd="\nПожалуйста, введите наименование новой группы.\n"
+__del_group_hd="Удалить группу пользователей"
+__del_group_bd="\nПожалуйста, выберите группу, которую вы желаете удалить.\n"
+_add_user_group_hd="Добавить пользователей в новую группу"
+_add_user_group_bd="\nПожалуйста, выберите пользователей и группу(ы),\n в которую(ые) жеалете добавить выбранных пользователей.\n"
+#
+#
+## Programing
+#
+_progr_hd="Программирование"
+_progr_bd="\nУстановить пакеты и их зависимости?\n"
+_progr_bd_2="\nВыбор языка программирования\n"
+#
+#
+## List of Applications
+#
+_lst_of_apps_hd="Список приложений"
+_lst_of_apps_yn="\nДобавить ссылку на список приложений ArchLinux на рабочий стол?\nДанный список содержит разделы пакетов\n консольных и графических приложений, отделенных друг от друга.\n"
+_lst_of_apps_msg="\Ссылка на список приложений Archlinux добавлена на рабочий стол.\n"
+#
+#
+## WiFi Menu
+#
+_wifi_menu_hd="Настройка WiFi соединения"
+_wifi_menu_bd="\nПожалуйста, выберите интерфейс, шифрование соединения (WEP/WPA),\nНайдите SSID \nи установите данное соединение.\n"
+_wifi_menu_mn_1="Выбор интерфейса"
+_wifi_menu_mn_2="Шифрование (WEP/WPA)"
+_wifi_menu_mn_3="Поиск SSID"
+# ip address show
+_selintfc_bd="\nПожалуйста, выберите WiFi адаптер.\n"
+# wpa wep
+_typewf_con_bd="\nПожалуйста, выберите шифрование соединения (WEP/WPA).\n"
+# wep type 0 or 1
+_wep_keyorpass_hd="Выбор типа пароля WEP соединения"
+_wep_keyorpass_bd="\nПожалуйста, выберите тип WEP пароля.\n"
+_wep_keyorpass_mn_1="Тип 0"
+_wep_keyorpass_mn_2="Тип 2"
+# search SSID
+_srch_ssid_bd="\nПожалуйста, выберите одну из найденных WiFi сетей по SSID.\n"
+_inpass_hd="Ввод пароля WiFi сети"
+_inpass_bd="\nПожалуйста, введите пароль от вашей SSID сети.\n"
+#
+#
+## Error Xorg, Desktop environment, Desktop manager, Network manager
+#
+_ErrNoXorg="\nСначала необходимо установить Xorg.\n\n"
+_ErrNoDE="\nСначала необходимо установить любое окружение рабояего стола \n (Deepin, Gnome, LXDE, Mate, XFCE4, KDE...).\n\n"
+_ErrNoDM="\nСначала необходимо установить любой менеджер дисплея \n (GDM, LXDM, LighDM, SDDM, XDM, SliM).\n\n"
+_ErrNoNM="\nСначала необходимо установить любой менеджер сетевых соединений \n (Netctl, Connman, NetworkManager, WiCd, DHCPCD).\n\n"
+#
+## IP Forwarding
+#
+_yn_ipv46_forward_hd="Перенаправление портов."
+_yn_ipv46_forward_bd="Включить перенаправление портов ipv4/ipv6 ?"
+_ipv46_fd_bd_1="Форвардинг портов (или перенаправление портов) – "
+_ipv46_fd_bd_2="это процесс переадресации запросов одного порта \nна другой хост, порт или сеть."
+_ipv46_fd_bd_3="Поскольку этот процесс изменяет назначение передаваемого пакета,"
+_ipv46_fd_bd_4="он считается операцией NAT."
+_ipv46_fd_bd_5="Включить или выключить можно в файле: /etc/sysctl.d/30-ipforward.conf."
+_ipv46_fd_bd_6="net.ipv4.ip_forward=1"
+_ipv46_fd_bd_7="net.ipv6.conf.default.forwarding=1"
+_ipv46_fd_bd_8="net.ipv6.conf.all.forwarding=1"
+_yn_ipv46_fd_fbd="\n${_ipv46_fd_bd_1}\n${_ipv46_fd_bd_2}\n${_ipv46_fd_bd_3}\n${_ipv46_fd_bd_4}\n\n${_ipv46_fd_bd_5}\n\n${_ipv46_fd_bd_6}\n${_ipv46_fd_bd_7}\n${_ipv46_fd_bd_8}\n\n"
+#
+## General Menu Package
+#
+_InstGeMenuGE="Установка общих пакетов и программ"
+

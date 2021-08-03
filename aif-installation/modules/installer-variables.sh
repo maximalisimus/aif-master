@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 ######################################################################
 ##                                                                  ##
 ##                   Installer Variables                            ##
@@ -38,18 +36,12 @@ GRAPHIC_CARD=""             # graphics card
 INTEGRATED_GC=""            # Integrated graphics card for NVIDIA
 NVIDIA_INST=0               # Indicates if NVIDIA proprietary driver has been installed
 SHOW_ONCE=0                 # Show de_wm information only once
+_nvd_dep_once=0				# Nvidia dependensis once
+_nvd_dep_mn=""				# Nvidia dependensis menu
+_nvdthf_once=0				# Nvidia 340 download packages in repositories once
+_nvdthn_once=0				# Nvidia 390 download packages in repositories once
 _dm_menu_once=0             # Dm menu once forms to search dm
 _nm_once=0                  # Nm menu once forms to search nm
-_gengen_once=0              # General once forms menu
-_archivers_once=0           # Archivers once forms menu
-_ttf_once=0                 # TTF Theme once forms menu
-_stpkg_once=0               # Standart packages once forms menu
-_other_pkg_once=0           # Additional package once forms menu
-_gengen_menu=""             # General packages save menu
-archivers_menu=""           # Archivers save menu
-_ttf_menu=""                # TTF Theme save menu
-_standart_pkg_menu=""       # Standart package save menu
-_other_pkg_menu=""          # Additional package save menu
 _wifi_menu=""
 _dm_desktop_menu=""
 _list_dm_menu=""
@@ -122,8 +114,7 @@ _list_zsh_sh=""
 _mn_shll_sh=""
 
 # Architecture
-ARCHI=$(uname -m)            # Display whether 32 or 64 bit system
-_archi=$(uname -m)
+ARCHI=$(uname -m)           # Display whether 32 or 64 bit system
 SYSTEM="Unknown"            # Display whether system is BIOS or UEFI. Default is "unknown"
 ROOT_PART=""                # ROOT partition
 UEFI_PART=""                # UEFI partition
@@ -164,6 +155,10 @@ FS_OPTS=""                     # FS mount options available
 CHK_NUM=16                     # Used for FS mount options checklist length
 _orders=0                      # Skip, resume installation
 _sstmd_rslvd_once=0			   # Disable systemd-resolved
+# _xorg_installer = $AXI_INSTALLED
+_DE_INSTALLED=0					# Desktop environment installed (Deepin, Gnome, LXDE, Mate, XFCE4...)
+_DM_INSTALLED=0					# Display manager installed (GDM, LXDM, LighDM, SDDM, XDM)
+_NM_INSTALLED=0					# Network manager installed (Netctl, Connman, NetworkManager, WiCd, DHCPCD)
 
 # Language Support
 CURR_LOCALE="en_US.UTF-8"      # Default Locale
@@ -185,15 +180,30 @@ _netctl_mn_once=0
 _netctl_edit=""
 
 # Server variables
+_sshd_conf_dir="${MOUNTPOINT}/etc/ssh/"
+_sshd_conf_file="$filesdir/config/sshd_config"
 _ssh_setup_once=0
 _ssh_run_once=0
+_docker_run_once=0
 _prmtrtlg_once=0
-_prmtrtlg_clck=0
 _mail_srv_once=0
 _lmp_srv_once=0
 _lmenu_nmpsrv=""
 _ftp_srv_once=0
 _menu_list_ftp=""
+_list_docker_pkg=""
+_firewall_once=0
+_list_firewall_pkg=""
+_mlist_firewall=""
+_file2ban_once=0
+_list_file2ban_pkg=""
+_mlist_file2ban=""
+_clamav_once=0
+_list_clamav_pkg=""
+_mn_clamav=""
+
+# SSH Variables
+_auto_sshd_nfo_once=0
 
 # Network time protocol server variables
 _tmsnc_init_once=0
@@ -219,25 +229,6 @@ _ntp_cl_str_2="mask"
 _ntp_cl_str_3="nomodify notrap"
 _ntp_client_str=""
 
-# Emulator packages Init
-_eml_pkg_once=0
-else_eml_package_list=""
-eml_check_dbl_list=""
-eml_dbl_name=""
-eml_dbl_list=""
-eml_all_name=""
-eml_full_name=""
-full_eml_menu=""
-
-# Aur packages init
-dbl_name=""
-dbl_list=""
-check_dbl_list=""
-all_name=""
-full_name=""
-full_menu=""
-aur_pkg_once=0
-
 # Package manager init
 _pm_uniq=""
 _pm_n=""
@@ -256,16 +247,57 @@ _dlgrc_hm_bp="$filesdir/dlg-home.bp"
 _dlgrc_rt_st_bp="$filesdir/dlg-rt-st.bp"
 _dlg_rt_rt_bp="$filesdir/dlg-rt-rt.bp"
 
+# Programming
+_makecmake_once=0
+_list_makecmake_pkg=""
+_lmenu_makecmake=""
+_arduino_once=0
+_c_cpp_once=0
+_list_ccpp_pkg=""
+_lmenu_ccpp=""
+_lmenu_arduino=""
+_list_arduino_pkg=""
+_mingww64_once=0
+_list_mingww64_pkg=""
+_lmenu_mingww64=""
+_python3_once=0
+_list_py3_pkg=""
+_lmenu_py3=""
+_python2_once=0
+_list_py2_pkg=""
+_lmenu_py2=""
+_qtcreator_once=0
+_lmenu_qtcreator=""
+_list_qtcreator_pkg=""
+_java_once=0
+_list_java_pkg=""
+_list_java_ide_pkg=""
+_lmenu_java=""
+_lmenu_java_ide=""
+_perl_once=0
+_list_perl_pkg=""
+_lmenu_perl=""
+_ruby_once=0
+_list_ruby_pkg=""
+_lmenu_ruby=""
+_golang_once=0
+_list_golang_pkg=""
+_lmenu_golang=""
+
+
+# Packages
+_apps_desktop_once=0
+_youtube_dl_setup=0
+
+# General Menu Package
+
+
 # /config/dialogrc-conf.sh						# Color dialog interface configured
 # /modules/installer-variables.sh				# list of variables
 # /config/list-pkg-forms.sh						# list of packages for uses the script
 # /config/setup_function.sh						# Function to setup on local package, p.c. build package in aur
-# /config/package-manager_function.sh			# Setup function to package manager - pamac
-# /config/package_function.sh					# Setup local package on build in aur
-# /config/emulators_function.sh					# Setup packages on emulators
-# /config/remove_old_v_pkg_function.sh			# Remove duble package on old version
 # /config/dependences_function.sh				# Dependences for script
-# /config/verify_package_folder.sh				# Check required folder and required files
+# /config/ssh-config.sh							# SSH Configuration
 # /modules/core-functions.sh					# language, checks
 # /modules/configuration-functions.sh			# Keyboard, locale, time zone, FSTAB, mkinitcpio, user controls
 # /modules/system-partitioning.sh				# managing partitions, installing the boot
@@ -279,3 +311,5 @@ _dlg_rt_rt_bp="$filesdir/dlg-rt-rt.bp"
 # /modules/server.sh							# Server menu, Server utilites installation
 # /modules/network.sh							# Network Function
 # /modules/ntp_configuration.sh					# Network Time Synchronized protocol configuration
+# /modules/programming.sh						# Programming menu
+# /modules/apps-functions.sh					# Package Menu functions

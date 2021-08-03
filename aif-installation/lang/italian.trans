@@ -547,13 +547,11 @@ _yesno_tnc_body="\nImpostare una serie di connessioni diverse per NetworkManager
 _yn_s_tnc_ttl="Installazione delle connessioni NetworkManager"
 _yn_s_tnc_bd="\nVuoi scegliere i tipi di connessioni aggiuntive per NetworkManager?\n"
 
-# Programs to TimeShoft and Github-Desktop
+# Programs to TimeShift
 _yesno_timeshift_title="Installazione Di Timeshift"
 _yesno_timeshift_body="\nInstallare Timeshift?\n"
-_yesno_github_desktop_title="Installazione Di GitHub-Desktop"
-_yesno_github_desktop_body="\nInstallare GitHub-Desktop?\n"
 
-# Config Disk Devaces
+# Config Disk Devices
 _sh_dev_title="Selezione del dispositivo"
 _sh_dev_body="\nSi prega di scegliere il dispositivo desiderato\n"
 _rsvd_nfo1="Dispositivo"
@@ -579,9 +577,7 @@ _info_tmpfs_body="\n$_info_tmpfs_bd1\n$_info_tmpfs_bd2\n$_info_tmpfs_bd3\n$_info
 _input_size_tmpfs_title="Immissione del volume della cartella tmp"
 _input_size_tmpfs_body="\nSi prega di inserire il volume desiderato. Ad esempio: 1G\n"
 
-# Shell and Windows Fonts
-_yn_win_fnts_ttl="Installazione dei font di Windows"
-_yn_win_fnts_bd="\nInstallare i font di Windows?\n"
+# Shell
 _shell_friendly_menu="Selezione e installazione di SHELL"
 _select_shell_menu_ttl="Scelta della SHELL da installare"
 _select_shell_menu_bd="\nSi prega di scegliere SHELL per l'utente"
@@ -591,19 +587,6 @@ _scrn_strp_ttl="Configurazione screenfetch saluti"
 _scrn_strp_bd="\nAggiungere un saluto screenfetch all'avvio?\n"
 _menu_ch_usr_ttl="Selezione degli utenti"
 _menu_ch_usr_bd="\nSi prega di selezionare gli utenti per i quali si desidera modificare la SHELL\n"
-
-# General Menu Package
-_InstGeMenuGE="Installazione di pacchetti e programmi condivisi"
-_menu_gen_title="Installazione di pacchetti e programmi condivisi"
-_menu_gen_body="\nInstallare pacchetti e programmi condivisi per tutti gli ambienti desktop.\n"
-_menu_gengen="Installazione di pacchetti condivisi"
-_menu_archivers="Installazione del supporto per gli archivi"
-_menu_ttf_theme="Installazione di font e temi"
-_menu_add_pkg="Installazione di un pacchetto minimo di programmi"
-_menu_extra_pkg="Installazione di programmi aggiuntivi (kicad, v-box, wine)."
-_menu_pkg_meneger="Installazione del gestore grafico dei pacchetti pacman"
-_ch_mn_bd="\nSi prega di scegliere i pacchetti necessari per l'installazione.\n"
-_pm_menu_body="\nSi prega di scegliere un gestore di pacchetti per l'installazione.\n"
 
 # Information to search and installation on packages your system
 _nfo_search_pkg_title="Si prega di attendere"
@@ -627,23 +610,9 @@ _CloseInstBody="Chiudere il programma di installazione?"
 _yesno_order_ttl="Saltare più menu"
 _yesno_order_bd="\nHai installato un kernel LTS?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installare L'emulatore PlayStation-3"
-_yesno_rpcs3_bd="\nInstallare L'emulatore PlayStation-3?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Installazione Bluetooth"
 _yesno_bluetooth_bd="\nInstallare driver e Gestione dispositivi bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Installazione di pacchetti da AUR"
-_aur_pkg_bd="\nSi prega di scegliere i pacchetti necessari per l'installazione!\n"
-_aur_dbl_pkg_ttl="Selezione della versione del pacchetto"
-_aur_dbl_pkg_bd="\nQuesto pacchetto ha diverse versioni.\nScelga prego quello che avete bisogno di!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installazione di emulatori"
-_eml_pkg_bd="\nSi prega di scegliere gli emulatori necessari per l'installazione!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Eliminare il file di log?"
@@ -737,14 +706,6 @@ _yn_netctl_bd="\nDesidera scegliere un modello e modificare il suo ?\n"
 _ntctl_tmpmn_bd="\nPer favore, selezionare il modello desiderato per il gestore di rete netctl.\n"
 _inntctl_ttl="Immettere il nome del modello netctl"
 _inntctl_bd="\nSi prega di inserire il nuovo nome del modello.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Rete wireless."
-_msg_wt_bd="\nSi è scelto un modello per la rete wireless. Questo modello richiede l'inserimento di una rete wireless SSID e la password. La configurazione sarà introdotto il nuovo modello. Se questa impostazione non è necessaria, basta lasciare righe vuote.\n"
-_ib_ssid_ttl="Immettere il nome SSID della rete wireless"
-_ib_ssid_bd="\nSi prega di inserire il nome della vostra rete wireless.\n"
-_ib_pass_ttl="Immettere la password di rete wireless"
-_ib_pass_bd="\nSi prega di inserire la password della rete wireless\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Tempo di sincronizzazione"

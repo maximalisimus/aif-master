@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 ######################################################################
 ##                                                                  ##
 ##                 Configuration Functions                          ##
@@ -7,6 +5,51 @@
 ######################################################################
 
 
+function mirror_config()
+{
+	dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_Mirror_Conf_ttl" --yesno "$_yn_mirror_conf_bd" 0 0
+	if [[ $? -eq 0 ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "_Mirror_Conf_ttl" \
+		--checklist "_Mirror_Conf_bd" 0 0 5 \
+		"1" "http" "on" \
+		"2" "https" "on" \
+		"3" "IPv4" "on" \
+		"4" "IPv6" "on" \
+		"5" "Use Mirror status" "on" 2>${ANSWER}
+		clear
+		var=$(cat ${ANSWER} | sed 's/[ \t]*/\n/g' | awk '!/^$/{print $0}' | sed s/[^0-9]//g)
+		# [ -f ./tmp.log ] && rm -rf ./tmp.log
+		# cat ${ANSWER} | sed 's/[ \t]*/\n/g' | awk '!/^$/{print $0}' | sed s/[^0-9]//g >> ./tmp.log
+		# var=""
+		# while read line; do
+		#	var="${var} $line"
+		# done < ./tmp.log
+		# [ -f ./tmp.log ] && rm -rf ./tmp.log
+		arr=( $var )
+		unset var
+		for i in ${arr[*]}; do
+			case $i in
+				"1") _mirror_conf_str="${_mirror_conf_str}&protocol=http"
+					;;
+				"2") _mirror_conf_str="${_mirror_conf_str}&protocol=https"
+					;;
+				"3") _mirror_conf_str="${_mirror_conf_str}&ip_version=4"
+					;;
+				"4") _mirror_conf_str="${_mirror_conf_str}&ip_version=6"
+					;;
+				"5") _mirror_conf_str="${_mirror_conf_str}&use_mirror_status=on"
+					;;    
+			esac
+		done
+		unset arr
+	else
+		_mirror_conf_str="&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on"
+	fi
+		
+}
+# mirror_config
+# echo "${_mirror_conf_str}"
+#
 # Adapted from AIS. Added option to allow users to edit the mirrorlist.
 configure_mirrorlist() {
 
@@ -460,6 +503,8 @@ set_root_password() {
        arch_chroot "passwd root" < /tmp/.passwd >/dev/null 2>/tmp/.errlog
        rm /tmp/.passwd
        check_for_error
+       mkdir -p "${MOUNTPOINT}/root/.gnupg/"
+       echo -e -n "keyid-format 0xlong\nthrow-keyids\nno-emit-version\nno-comments\n" > "${MOUNTPOINT}/root/.gnupg/gpg.conf"
     else
        dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_PassRtErrTitle" --msgbox "$_PassRtErrBody" 0 0
        set_root_password
@@ -560,7 +605,8 @@ create_new_user() {
         arch_chroot "cp /etc/skel/.bashrc /home/${USER}"
         arch_chroot "chown -R ${USER}:users /home/${USER}"
         sed -i '/%wheel ALL=(ALL) ALL/s/^#//' ${MOUNTPOINT}/etc/sudoers
-      
+        mkdir -p "${MOUNTPOINT}/home/${USER}/.gnupg/"
+        echo -e -n "keyid-format 0xlong\nthrow-keyids\nno-emit-version\nno-comments\n" > "${MOUNTPOINT}/home/${USER}/.gnupg/gpg.conf"
 }
 
 run_mkinitcpio() {

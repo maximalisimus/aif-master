@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 ######################################################################
 ##                                                                  ##
 ##                 Swappiness config                                ##
@@ -97,14 +95,14 @@ swap_menu() {
        fi
     fi
     
-   dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_swap_menu_title" \
+   dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_swap_menu_title" \
     --menu "$_swap_menu_body" 0 0 4 \
     "1" "$_sw_menu_info" \
     "2" "$_sw_menu_temp_swpns" \
     "3" "$_sw_menu_swpns" \
     "4" "$_Back"    2>${ANSWER} 
-    variable=($(cat ${ANSWER}))
-    case $variable in
+    HIGHLIGHT_SUB=$(cat ${ANSWER})
+    case $(cat ${ANSWER}) in
         "1") show_mem
              ;;
         "2") set_temp_swpns

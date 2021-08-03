@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=./shutdown-poweroff.sh
+Type=Application
+Name=Shutdown
+Terminal=false
+Icon=./poweroff-icon.png
+StartupNotify=false

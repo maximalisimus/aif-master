@@ -582,13 +582,11 @@ _yesno_tnc_body="\nNetworkManager için bir dizi farklı bağlantı kurun?\n"
 _yn_s_tnc_ttl="Networkmanager bağlantılarını yükleme"
 _yn_s_tnc_bd="\nNetworkManager için ek bağlantı türleri seçmek ister misiniz?\n"
 
-# Programs to TimeShoft and Github-Desktop
+# Programs to TimeShift
 _yesno_timeshift_title="Yükleme Timeshift"
 _yesno_timeshift_body="\nTimeshift'i Yükleyin?\n"
-_yesno_github_desktop_title="Github-Desktop Kurulumu"
-_yesno_github_desktop_body="\nGithub-Desktop Yükleyin?\n"
 
-# Config Disk Devaces
+# Config Disk Devices
 _sh_dev_title="Cihaz seçimi"
 _sh_dev_body="\nLütfen gerekli cihazı seçin\n"
 _rsvd_nfo1="Cihaz"
@@ -614,9 +612,7 @@ _info_tmpfs_body="\n$_info_tmpfs_bd1\n$_info_tmpfs_bd2\n$_info_tmpfs_bd3\n$_info
 _input_size_tmpfs_title="Tmp klasör hacmini girme"
 _input_size_tmpfs_body="\nLütfen istediğiniz hacmi girin. Örneğin: 1G\n"
 
-# Shell and Windows Fonts
-_yn_win_fnts_ttl="Windows yazı tiplerini yükleme"
-_yn_win_fnts_bd="\nWindows yazı tiplerini yükle?\n"
+# Shell
 _shell_friendly_menu="Kabuk seçimi ve kurulumu"
 _select_shell_menu_ttl="Yüklemek için kabuk seçimi"
 _select_shell_menu_bd="\nKullanıcı için kabuk seçiniz"
@@ -626,19 +622,6 @@ _scrn_strp_ttl="Özelleştirme screenfetch selamlar"
 _scrn_strp_bd="\nBaşlangıçta screenfetch tebrik Ekle?\n"
 _menu_ch_usr_ttl="Kullanıcı seçimi"
 _menu_ch_usr_bd="\nLütfen kabuğu değiştirmek istediğiniz kullanıcıları seçin\n"
-
-# General Menu Package
-_InstGeMenuGE="Paylaşılan paketleri ve programları yükleme"
-_menu_gen_title="Paylaşılan paketleri ve programları yükleme"
-_menu_gen_body="\nTüm masaüstü ortamları için paylaşılan paketleri ve programları yükleyin.\n"
-_menu_gengen="Paylaşılan paketleri yükleme"
-_menu_archivers="Arşiv desteği yükleme"
-_menu_ttf_theme="Yazı tipleri ve temalar yükleme"
-_menu_add_pkg="Minimum program paketini yükleme"
-_menu_extra_pkg="Ek programların yüklenmesi (kicad, V-box, wine)."
-_menu_pkg_meneger="Pacman grafik paket Yöneticisini yükleme"
-_ch_mn_bd="\nLütfen yüklemek için gerekli paketleri seçin.\n"
-_pm_menu_body="\nYüklemek için lütfen toplu iş Yöneticisini seçin.\n"
 
 # Information to search and installation on packages your system
 _nfo_search_pkg_title="Lütfen bekleyin"
@@ -662,23 +645,9 @@ _CloseInstBody="Yükleyici kapatılsın mı?"
 _yesno_order_ttl="Birden fazla menü atlama"
 _yesno_order_bd="\nLTS çekirdeğiniz yüklü mü?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="PlayStation-3 emülatörünü yükleme"
-_yesno_rpcs3_bd="\nPlayStation-3 emülatörünü yükleyin?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Bluetooth Kurulumu"
 _yesno_bluetooth_bd="\nSürücüleri ve Bluetooth cihaz Yöneticisini yükleyin?\n"
-
-# Aur package menu
-_aur_pkg_ttl="AUR & # 39; dan paketleri yükleme"
-_aur_pkg_bd="\nLütfen yüklemek için ihtiyacınız olan paketleri seçin!\n"
-_aur_dbl_pkg_ttl="Paket sürümünü seçme"
-_aur_dbl_pkg_bd="\nBu paketin çeşitli sürümleri vardır.\nLütfen ihtiyacınız olanı seçin!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Emülatör kurulumu"
-_eml_pkg_bd="\nLütfen yüklemek için ihtiyacınız olan emülatörleri seçin!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Günlük dosyasını sil?"
@@ -772,14 +741,6 @@ _yn_netctl_bd="\nArzu şablonu seçmek ve düzenlemek için mi ?\n"
 _ntctl_tmpmn_bd="\nLütfen, kullanmak istediğiniz şablonu seçin ağ yöneticisi netctl.\n"
 _inntctl_ttl="Giriş şablonu adı netctl"
 _inntctl_bd="\nLütfen yeni bir ad yazın şablonu.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Kablosuz ağ."
-_msg_wt_bd="\nSeçtiğiniz desen için kablosuz ağ. Bu şablon girişi gerektirir kablosuz ağ SSID ve şifre. Özelleştirme tanıtılacak yeni modeli. Eğer bu ayar gerekmez, sadece bırak satırı boş.\n"
-_ib_ssid_ttl="Enter SSID kablosuz ağ"
-_ib_ssid_bd="\nLütfen bir isim girin kablosuz ağ.\n"
-_ib_pass_ttl="Şifre girişi kablosuz ağ"
-_ib_pass_bd="\nLütfen bir şifre girin kablosuz ağ\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Zaman senkronizasyonu"

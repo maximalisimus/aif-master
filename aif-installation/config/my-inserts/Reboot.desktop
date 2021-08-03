@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=./shutdown-reboot.sh
+Type=Application
+Name=Reboot
+Terminal=false
+Icon=./reboot-icon.png
+StartupNotify=false

@@ -555,13 +555,11 @@ _yesno_tnc_body="\nInstallieren Sie eine Reihe von verschiedenen verbindungen f�
 _yn_s_tnc_ttl="NetworkManager-verbindungen einrichten"
 _yn_s_tnc_bd="\nMöchten Sie zusätzliche Verbindungstypen für den NetworkManager auswählen?\n"
 
-# Programs to TimeShoft and Github-Desktop
+# Programs to TimeShift
 _yesno_timeshift_title="Installieren Von Timeshift"
 _yesno_timeshift_body="\nTimeshift Installieren?\n"
-_yesno_github_desktop_title="GitHub-Desktop Installieren"
-_yesno_github_desktop_body="\nGithub-Desktop Installieren?\n"
 
-# Config Disk Devaces
+# Config Disk Devices
 _sh_dev_title="Gerät auswählen"
 _sh_dev_body="\nBitte wählen Sie das gewünschte Gerät\n"
 _rsvd_nfo1="Gerät"
@@ -587,9 +585,7 @@ _info_tmpfs_body="\n$_info_tmpfs_bd1\n$_info_tmpfs_bd2\n$_info_tmpfs_bd3\n$_info
 _input_size_tmpfs_title="Geben Sie die Lautstärke des tmp-Ordners ein"
 _input_size_tmpfs_body="\nBitte geben Sie das gewünschte Volumen ein. Zum Beispiel: 1G\n"
 
-# Shell and Windows Fonts
-_yn_win_fnts_ttl="Installieren von Windows-Schriftarten"
-_yn_win_fnts_bd="\nWindows-Schriftarten installieren?\n"
+# Shell
 _shell_friendly_menu="SHELL auswählen und installieren"
 _select_shell_menu_ttl="SHELL für die Installation auswählen"
 _select_shell_menu_bd="\nBitte wählen Sie SHELL für Benutzer"
@@ -599,19 +595,6 @@ _scrn_strp_ttl="Konfigurieren screenfetch Grüße"
 _scrn_strp_bd="\nHinzufügen screenfetch Gruß zum Autostart?\n"
 _menu_ch_usr_ttl="Benutzer auswählen"
 _menu_ch_usr_bd="\nBitte wählen Sie die Benutzer aus, für die Sie die SHELL ändern MÖCHTEN\n"
-
-# General Menu Package
-_InstGeMenuGE="Allgemeine Pakete und Programme installieren"
-_menu_gen_title="Allgemeine Pakete und Programme installieren"
-_menu_gen_body="\nInstallieren Sie gemeinsame Pakete und Programme für alle Desktop-Umgebungen.\n"
-_menu_gengen="Allgemeine Pakete installieren"
-_menu_archivers="Stützeinrichtung Archive"
-_menu_ttf_theme="Installieren von Schriftarten und Designs"
-_menu_add_pkg="Installieren eines minimalen Softwarepakets"
-_menu_extra_pkg="Installation zusätzlicher Programme (kicad, V-box, wine)."
-_menu_pkg_meneger="Installieren des pacman-Paket-grafikmanagers"
-_ch_mn_bd="\nBitte wählen Sie die erforderlichen Pakete zu installieren.\n"
-_pm_menu_body="\nBitte wählen Sie einen Batch-Manager für die Installation.\n"
 
 # Information to search and installation on packages your system
 _nfo_search_pkg_title="Bitte warten"
@@ -635,23 +618,9 @@ _CloseInstBody="Installer schliessen und neu starten?"
 _yesno_order_ttl="Überspringen mehrerer Menüs"
 _yesno_order_bd="\nHaben Sie den LTS-Kernel installiert?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installieren Des PlayStation-3-emulators"
-_yesno_rpcs3_bd="\nPlayStation-3-Emulator installieren?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Bluetooth-Installation"
 _yesno_bluetooth_bd="\nTreiber und Bluetooth geratemanager installieren?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Installieren von Paketen von AUR"
-_aur_pkg_bd="\nBitte wählen Sie die Pakete, die Sie installieren möchten!\n"
-_aur_dbl_pkg_ttl="Auswählen der Paketversion"
-_aur_dbl_pkg_bd="\nDieses Paket hat mehrere Versionen.\nBitte wählen Sie die gewünschte!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installieren von Emulatoren"
-_eml_pkg_bd="\nBitte wählen Sie die Emulatoren, die Sie installieren möchten!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Löschen Sie Die Protokolldatei?"
@@ -745,14 +714,6 @@ _yn_netctl_bd="\nMöchten, wählen Sie eine Vorlage und Bearbeiten Sie es ?\n"
 _ntctl_tmpmn_bd="\nBitte wählen Sie die gewünschte Vorlage für den Netzwerk\Manager netctl.\n"
 _inntctl_ttl="Geben Sie einen Namen der Vorlage netctl"
 _inntctl_bd="\nBitte geben Sie einen neuen Namen für die Vorlage ein.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Drahtloses Netzwerk."
-_msg_wt_bd="\nSie haben eine Vorlage für ein Wireless\Netzwerk. Diese Vorlage erfordert die Eingabe der SSID des drahtlosen Netzwerks und das Passwort. Die Einstellung wird eingegeben in Ihre neue Vorlage. Wenn Sie diese Einstellung nicht benötigen, einfach lassen Sie die Zeile leer.\n"
-_ib_ssid_ttl="Eingabe der SSID des drahtlosen Netzwerks"
-_ib_ssid_bd="\nBitte geben Sie den Namen Ihres drahtlosen Netzwerks.\n"
-_ib_pass_ttl="Kennwort des drahtlosen Netzwerks"
-_ib_pass_bd="\nBitte geben Sie das Passwort Ihres drahtlosen Netzwerks\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Zeitsynchronisation"

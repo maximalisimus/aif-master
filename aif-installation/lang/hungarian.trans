@@ -574,13 +574,11 @@ _yesno_tnc_body="\nKülönböző kapcsolatok beállítása a NetworkManager-hez?
 _yn_s_tnc_ttl="A NetworkManager kapcsolatok beállítása"
 _yn_s_tnc_bd="\nSzeretne további kapcsolattípusokat választani a NetworkManager-hez?\n"
 
-# Programs to TimeShoft and Github-Desktop
+# Programs to TimeShift
 _yesno_timeshift_title="Timeshift Telepítése"
 _yesno_timeshift_body="\nTimeshift Telepítése?\n"
-_yesno_github_desktop_title="A Github-Asztal Telepítése"
-_yesno_github_desktop_body="\nTelepítse Github-Desktop?\n"
 
-# Config Disk Devaces
+# Config Disk Devices
 _sh_dev_title="Eszközválasztás"
 _sh_dev_body="\nVálassza ki a kívánt eszközt\n"
 _rsvd_nfo1="Eszköz"
@@ -606,9 +604,7 @@ _info_tmpfs_body="\n$_info_tmpfs_bd1\n$_info_tmpfs_bd2\n$_info_tmpfs_bd3\n$_info
 _input_size_tmpfs_title="Adja meg a tmp mappa méretét"
 _input_size_tmpfs_body="\nAdja meg a kívánt hangerőt. Például: 1G\n"
 
-# Shell and Windows Fonts
-_yn_win_fnts_ttl="Windows betűtípusok telepítése"
-_yn_win_fnts_bd="\nWindows betűtípusok telepítése?\n"
+# Shell
 _shell_friendly_menu="SHELL kiválasztása és telepítése"
 _select_shell_menu_ttl="A telepítendő parancsértelmező kiválasztása"
 _select_shell_menu_bd="\nKérjük, válassza ki a SHELL a felhasználó számára"
@@ -618,19 +614,6 @@ _scrn_strp_ttl="Screenfetch beállítása Üdvözöljük"
 _scrn_strp_bd="\nScreenfetch üdvözlés hozzáadása indításkor?\n"
 _menu_ch_usr_ttl="Felhasználói kiválasztás"
 _menu_ch_usr_bd="\nKérjük, válassza ki a felhasználókat, akiknek módosítani szeretné a SHELL\n"
-
-# General Menu Package
-_InstGeMenuGE="Általános csomagok és Programok telepítése"
-_menu_gen_title="Általános csomagok és Programok telepítése"
-_menu_gen_body="\nTelepítse az összes asztali környezet közös csomagjait és programjait.\n"
-_menu_gengen="Megosztott csomagok telepítése"
-_menu_archivers="Levéltári támogatás telepítése"
-_menu_ttf_theme="Betűtípusok és témák telepítése"
-_menu_add_pkg="A minimális szoftvercsomag telepítése"
-_menu_extra_pkg="További programok telepítése (kicad,v-box, bor)."
-_menu_pkg_meneger="Grafikus csomagkezelő telepítése, pacman"
-_ch_mn_bd="\nVálassza ki a telepítendő csomagokat.\n"
-_pm_menu_body="\nVálassza ki a telepítendő csomagkezelőt.\n"
  
 # Information to search and installation on packages your system
 _nfo_search_pkg_title="Kérem, várjon."
@@ -654,23 +637,9 @@ _CloseInstBody="Bezárod a telepítőt?"
 _yesno_order_ttl="Több menük átadása"
 _yesno_order_bd="\nVan telepítve LTS kernel?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="A PlayStation-3 emulátor telepítése"
-_yesno_rpcs3_bd="\nTelepítse PlayStation-3 emulátort?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="A Bluetooth Beállítása"
 _yesno_bluetooth_bd="\nAz illesztőprogramok, valamint az Eszközkezelő telepítéséhez a bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Csomagok telepítése az AUR-ból"
-_aur_pkg_bd="\nKérjük, válassza ki a csomagokat telepíteni kell!\n"
-_aur_dbl_pkg_ttl="A csomag verziója"
-_aur_dbl_pkg_bd="\nEnnek a csomagnak több változata is van.\nKérem, válassza ki azt, amire szüksége van!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Emulátorok telepítése"
-_eml_pkg_bd="\nKérjük, válassza ki a emulátorok telepíteni kell!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Törölni a naplófájlt?"
@@ -764,14 +733,6 @@ _yn_netctl_bd="\nAkarod, hogy válasszon ki egy sablont, majd szerkessze meg ?\n
 _ntctl_tmpmn_bd="\nKérjük, válassza ki a kívánt sablont a hálózatkezelő netctl.\n"
 _inntctl_ttl="Adja meg a sablon neve netctl"
 _inntctl_bd="\nKérjük, írja be az új sablon nevét.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Vezeték nélküli hálózat."
-_msg_wt_bd="\nKiválasztott sablon a vezeték nélküli hálózat számára. Ez a sablon használatához adja meg a vezeték nélküli hálózat SSID azonosítóját, valamint a jelszót. A beállítás bevezetésre kerül az új sablon. Ha ez a beállítás nem szükséges, csak hagyja üresen.\n"
-_ib_ssid_ttl="Adja meg az SSID a vezeték nélküli hálózat"
-_ib_ssid_bd="\nKérjük, adja meg a vezeték nélküli hálózat nevét.\n"
-_ib_pass_ttl="Adja meg a vezeték nélküli hálózat jelszavát"
-_ib_pass_bd="\nKérjük, írja be a jelszót, a vezeték nélküli hálózat\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Idő szinkronizálás"

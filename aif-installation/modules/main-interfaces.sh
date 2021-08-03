@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 ######################################################################
 ##                                                                  ##
 ##                 Main Interfaces                                  ##
@@ -203,31 +201,34 @@ install_desktop_menu() {
 
     dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstDEMenuTitle" --menu "$_InstDEMenuBody" 0 0 7 \
     "1" "$_AXITitle" \
-    "2" "$_GCtitle" \
-    "3" "$_InstDEMenuDE" \
+    "2" "$_InstDEMenuDE" \
+    "3" "$_InstDEMenuDM" \
     "4" "$_InstDEMenuNM" \
-    "5" "$_InstDEMenuDM" \
+    "5" "$_GCtitle" \
     "6" "$_InstGeMenuGE" \
     "7" "$_Back" 2>${ANSWER}
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
     case $(cat ${ANSWER}) in
-        "1") [[ AXI_INSTALLED -eq 0 ]] && install_alsa_xorg_input
+        "1") if [[ $AXI_INSTALLED -eq 0 ]]; then
+				install_alsa_xorg_input
+			fi
             ;;
-        "2") # _InstDEMenuGISD 
-            setup_graphics_card 
+        "2") check_xorg
+			install_de_wm 
              ;;
-        "3") install_de_wm
+        "3") check_xorg 
+			 check_de
+			 install_dm
              ;;
         "4") install_nm
              ;;
-        "5") install_dm
+        "5") check_xorg
+			 check_de
+			 check_dm
+			 install_graphics_card
              ;;
-        "6") if [[ ${_archi[*]} == "x86_64" ]]; then
-                install_gep
-            else
-                install_gep_old
-            fi
+        "6") install_apps_menu
              ;;
           *) main_menu_online
              ;;
@@ -249,12 +250,12 @@ edit_configs() {
        SUB_MENU="edit configs"
        HIGHLIGHT_SUB=1
     else
-       if [[ $HIGHLIGHT_SUB != 14 ]]; then
+       if [[ $HIGHLIGHT_SUB != 19 ]]; then
           HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
        fi
     fi
 
-   dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SeeConfOptTitle" --menu "$_SeeConfOptBody" 0 0 14 \
+   dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SeeConfOptTitle" --menu "$_SeeConfOptBody" 0 0 11 \
    "1" "/etc/vconsole.conf" \
    "2" "/etc/locale.conf" \
    "3" "/etc/hostname" \
@@ -264,13 +265,16 @@ edit_configs() {
    "7" "/etc/fstab" \
    "8" "/etc/resolv.conf" \
    "9" "/etc/sysctl.d/00-sysctl.conf" \
-   "10" "/etc/dhcpcd.conf" \
-   "11" "$_ncl_nname" \
-   "12" "/etc/ntp.conf" \
-   "13" "/etc/systemd/timesyncd.conf" \
-   "14" "$BOOTLOADER" \
-   "15" "$DM" \
-   "16" "$_Back" 2>${ANSWER}
+   "10" "/etc/sysctl.d/40-ipv6.conf" \
+   "11" "/etc/sysctl.d/30-ipforward.conf" \
+   "12" "/etc/dhcpcd.conf" \
+   "13" "$_ncl_nname" \
+   "14" "/etc/ntp.conf" \
+   "15" "/etc/systemd/timesyncd.conf" \
+   "16" "/etc/ssh/sshd_config" \
+   "17" "$BOOTLOADER" \
+   "18" "$DM" \
+   "19" "$_Back" 2>${ANSWER}
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
     case $(cat ${ANSWER}) in
@@ -292,15 +296,21 @@ edit_configs() {
              ;;
         "9") FILE="${MOUNTPOINT}/etc/sysctl.d/00-sysctl.conf"
             ;;
-        "10") FILE="${MOUNTPOINT}/etc/dhcpcd.conf"
+        "10") FILE="${MOUNTPOINT}/etc/sysctl.d/40-ipv6.conf"
 			;;
-		"11") [ -e $_netctl_edit ] && FILE="$_netctl_edit"
+		"11") FILE="${MOUNTPOINT}/etc/sysctl.d/30-ipforward.conf"
 			;;
-		"12") FILE="${MOUNTPOINT}/etc/ntp.conf"
+        "12") FILE="${MOUNTPOINT}/etc/dhcpcd.conf"
 			;;
-		"13") FILE="${MOUNTPOINT}/etc/systemd/timesyncd.conf"
+		"13") [ -e $_netctl_edit ] && FILE="$_netctl_edit"
 			;;
-        "14") case $BOOTLOADER in
+		"14") FILE="${MOUNTPOINT}/etc/ntp.conf"
+			;;
+		"15") FILE="${MOUNTPOINT}/etc/systemd/timesyncd.conf"
+			;;
+		"16") FILE="${MOUNTPOINT}/etc/ssh/sshd_config"
+			;;
+        "17") case $BOOTLOADER in
                    "Grub") FILE="${MOUNTPOINT}/etc/default/grub"
                            ;;
                "Syslinux") FILE="${MOUNTPOINT}/boot/syslinux/syslinux.cfg"
@@ -314,7 +324,7 @@ edit_configs() {
                            ;;
               esac
             ;;
-        "15") case $DM in
+        "18") case $DM in
                    "LXDM") FILE="${MOUNTPOINT}/etc/lxdm/lxdm.conf" 
                            ;;
                 "LightDM") FILE="${MOUNTPOINT}/etc/lightdm/lightdm.conf" 
@@ -354,10 +364,6 @@ function mainmenu_finishexit()
 	wait
 	echo -n  -e "\e[1;31mPlease wait ...\e[0m"\\r
 	clear
-	pkg_manager_unset
-	eml_zavershenie
-	aur_pkg_finish
-	rm -rf "$_pcm_tempf"
 	echo -n  -e "\e[1;32mPlease wait ...\e[0m"\\r
 	if [[ -f "$filesdir/remove_pkg.log" ]]; then
 		dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yesno_rmrf_ttl" --yesno "$_yesno_rmrf_bd" 0 0
@@ -374,6 +380,7 @@ function mainmenu_finishexit()
 			echo ""
 		fi
 	fi
+	wait
 	un_us_dlgrc_conf
 	exit 0
 }
@@ -391,12 +398,11 @@ main_menu_online() {
     "3" "$_MMConfBse" \
     "4" "$_MMConfUsr" \
     "5" "$_MMInstDE" \
-    "6" "$_MMInstServer" \
-    "7" "$_swap_menu_title" \
-    "8" "$_rsrvd_menu_title" \
-    "9" "$_MMRunMkinit" \
-    "10" "$_SeeConfOpt" \
-    "11" "$_Done" 2>${ANSWER}
+    "6" "$_swap_menu_title" \
+    "7" "$_rsrvd_menu_title" \
+    "8" "$_MMRunMkinit" \
+    "9" "$_SeeConfOpt" \
+    "10" "$_Done" 2>${ANSWER}
 
     HIGHLIGHT=$(cat ${ANSWER})
     
@@ -421,15 +427,13 @@ main_menu_online() {
              ;;            
         "5") install_desktop_menu
              ;;
-        "6") server_menu
-			;;
-        "7") swap_menu
+        "6") swap_menu
             ;;
-        "8") rsrvd_menu
+        "7") rsrvd_menu
             ;;
-        "9") run_mkinitcpio
+        "8") run_mkinitcpio
              ;;
-        "10") edit_configs
+        "9") edit_configs
              ;;            
           *) dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --yesno "$_CloseInstBody" 0 0
           

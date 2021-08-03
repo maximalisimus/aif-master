@@ -1,5 +1,9 @@
-#!/bin/bash
-#
+######################################################################
+##                                                                  ##
+##                   NTP Configuration                              ##
+##                                                                  ##
+######################################################################
+
 function tmsnc_msg_stp()
 {
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_tmsnc_err_ttl" --msgbox "$_tmsnc_msg_stp" 0 0
@@ -92,11 +96,21 @@ function sntp_menu_client()
 		if [[ $? -eq 0 ]]; then
 			 if [[ $_sntp_async -eq 0 ]]; then
 				_sntp_async=1
+				arch_chroot "systemctl enable systemd-timesyncd.service" 2>/tmp/.errlog
+				wait
+				arch_chroot "systemctl start systemd-timesyncd.service" 2>/tmp/.errlog
+				wait
 				arch_chroot "timedatectl set-ntp true" 2>/tmp/.errlog
 				check_for_error
 			else
 				_sntp_async=0
+				wait
 				arch_chroot "timedatectl set-ntp false" 2>/tmp/.errlog
+				wait
+				arch_chroot "systemctl disable systemd-timesyncd.service" 2>/tmp/.errlog
+				wait
+				arch_chroot "systemctl stop systemd-timesyncd.service" 2>/tmp/.errlog
+				wait
 				check_for_error
 			fi
 			wait           

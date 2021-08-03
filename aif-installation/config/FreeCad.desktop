@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=FreeCad
+GenericName=3D modeler
+Comment=3D modeling
+Keywords=3d;modeling;
+Exec=
+Icon=
+Terminal=false
+Type=Application
+Categories=Graphics;3DGraphics;

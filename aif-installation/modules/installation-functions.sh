@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 ######################################################################
 ##                                                                  ##
 ##                    Installation Functions                        ##
@@ -47,38 +45,6 @@ mirrorlist_question()
     fi
 }
 
-function check_s_lst_pkg {
-    local temp_pkg
-    temp_pkg=("$@")
-    declare -a new_pkg
-    temp=""
-    for i in ${temp_pkg[*]}; do
-        pacman -Ss $i 1>/dev/null 2>/dev/null
-        err=$?
-        if [[ $err -eq 0 ]]; then 
-            new_pkg=("${new_pkg[*]}" "$i")
-        fi
-    done
-    echo ${new_pkg[*]}
-}
-function check_q_lst_pkg {
-    local temp_pkg
-    temp_pkg=("$@")
-    declare -a new_pkg
-    temp=""
-    for i in ${temp_pkg[*]}; do
-        pacman --root ${MOUNTPOINT} --dbpath ${MOUNTPOINT}/var/lib/pacman -Qs $i 1>/dev/null 2>/dev/null
-        err=$?
-        [[ $err != "0" ]] && new_pkg=("${new_pkg[@]}" "$i")
-    done
-    echo ${new_pkg[*]}
-}
-
-info_search_pkg()
-{
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_nfo_search_pkg_title" --infobox "$_nfo_search_pkg_body" 0 0
-}
-
 install_wireless_programm()
 {
     if [[ $_net_cntrl == "0" ]]; then
@@ -95,147 +61,33 @@ install_wireless_programm()
     fi
 }
 
-search_translit_pkg()
-{
-    stp=$(pacman -Ss | grep -Ei "core|extra|community|multilib" | sed 's/extra\///' | sed 's/core\///' | sed 's/community\///' | sed 's/multilib\///' | grep -E "^$1" | awk '{print $1}' | grep -E "$2$")
-    echo "${stp[*]}"
-}
-
-install_gengen()
-{
-    _gengen_menu=""
-    if [[ $_gengen_once == "0" ]]; then
-        _gengen_once=1
-        clear
-        info_search_pkg
-        _list_general_pkg=$(check_s_lst_pkg "${_general_pkg[*]}")
-        wait
-        _gengen_menu=""
-        for i in ${_list_general_pkg[*]}; do
-            _gengen_menu="${_gengen_menu} ${i} - on"
-        done
-        wait
-        clear
-    fi
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_menu_gengen" --checklist "$_ch_mn_bd" 0 0 16 ${_gengen_menu} 2>${ANSWER}
-    _ch_gengen=$(cat ${ANSWER})
-    clear
-    [[ ${_ch_gengen[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_ch_gengen[*]} 2>/tmp/.errlog
-    arch_chroot "systemctl enable acpid avahi-daemon cronie org.cups.cupsd.service systemd-timesyncd.service" 2>/tmp/.errlog
-    check_for_error
-}
-install_archivers()
-{
-    if [[ $_archivers_once == "0" ]]; then
-        _archivers_once=1
-        clear
-        info_search_pkg
-        _list_archivers_pkg=$(check_s_lst_pkg "${_archivers_pkg[*]}")
-        wait
-        _clist_archivers_pkg=$(check_q_lst_pkg "${_list_archivers_pkg[*]}")
-        wait
-        for i in ${_clist_archivers_pkg[*]}; do
-            archivers_menu="${archivers_menu} ${i} - on"
-        done
-        wait
-        clear
-    fi
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_menu_archivers" --checklist "$_ch_mn_bd" 0 0 16 ${archivers_menu} 2>${ANSWER}
-    _ch_archivers=$(cat ${ANSWER})
-    clear
-    [[ ${_ch_archivers[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_ch_archivers[*]} 2>/tmp/.errlog
-}
-
-install_ttftheme()
-{
-    if [[ $_ttf_once == "0" ]]; then
-        _ttf_once=1
-        clear
-        info_search_pkg
-        _list_ttf_theme_pkg=$(check_s_lst_pkg "${_ttf_theme_pkg[*]}")
-        wait
-        _clist_ttf_theme_pkg=$(check_q_lst_pkg "${_list_ttf_theme_pkg[*]}")
-        wait
-        for i in ${_clist_ttf_theme_pkg[*]}; do
-            _ttf_menu="${_ttf_menu} ${i} - on"
-        done
-        wait
-        clear
-    fi
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_menu_ttf_theme" --checklist "$_ch_mn_bd" 0 0 16 ${_ttf_menu} 2>${ANSWER}
-    _ch_ttf=$(cat ${ANSWER})
-    clear
-    [[ ${_ch_ttf[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_ch_ttf[*]} 2>/tmp/.errlog
-    check_for_error
-}
-install_standartpkg()
-{
-    if [[ $_stpkg_once == "0" ]]; then
-        _stpkg_once=1
-        clear
-        info_search_pkg
-        _list_gr_editor=$(check_s_lst_pkg "${_gr_editor[*]}")
-        wait
-        [[ ${_list_gr_editor[*]} != "" ]] && _tr_gr_editor=$(search_translit_pkg "${_gr_editor[*]}" "$_user_local")
-        wait
-        [[ ${_tr_gr_editor[*]} != "" ]] && _list_gr_editor="${_list_gr_editor} ${_tr_gr_editor[*]}"
-        _list_office=$(check_s_lst_pkg "${_office}")
-        wait
-        [[ ${_list_office[*]} != "" ]] && _tr_office=$(search_translit_pkg "${_office}" "$_user_local")
-        wait
-        [[ ${_tr_office[*]} != "" ]] && _list_office="${_list_office} ${_tr_office[*]}"
-        _list_minimal_pkg=$(check_s_lst_pkg "${_minimal_pkg[*]}")
-        wait
-        [[ ${_list_gr_editor[*]} != "" ]] && _list_minimal_pkg="${_list_minimal_pkg} ${_list_gr_editor[*]}"
-        [[ ${_list_office[*]} != "" ]] && _list_minimal_pkg="${_list_minimal_pkg} ${_list_office[*]}"
-        wait
-        _clist_minimal_pkg=$(check_q_lst_pkg "${_list_minimal_pkg[*]}")
-        wait
-        for i in ${_clist_minimal_pkg[*]}; do
-            _standart_pkg_menu="${_standart_pkg_menu} ${i} - on"
-        done
-        _standart_pkg_menu="${_standart_pkg_menu} ${_gr_editor[*]} - on"
-        wait
-        clear
-    fi
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_menu_add_pkg" --checklist "$_ch_mn_bd" 0 0 16 ${_standart_pkg_menu} 2>${ANSWER}
-    _ch_standart_pkg=$(cat ${ANSWER})
-    clear
-    [[ ${_ch_standart_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_ch_standart_pkg[*]} 2>/tmp/.errlog
-}
-install_otherpkg()
-{
-    if [[ $_other_pkg_once == "0" ]]; then
-        _other_pkg_once=1
-        clear
-        info_search_pkg
-        _list_other_pkg=$(check_s_lst_pkg "${_other_pkg[*]}")
-        wait
-        _clist_other_pkg=$(check_q_lst_pkg "${_list_other_pkg[*]}")
-        wait
-        for i in ${_clist_other_pkg[*]}; do
-            _other_pkg_menu="${_other_pkg_menu} ${i} - on"
-        done
-        clear
-    fi
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_menu_extra_pkg" --checklist "$_ch_mn_bd" 0 0 16 ${_other_pkg_menu} 2>${ANSWER}
-    _ch_other_pkg=$(cat ${ANSWER})
-    clear
-    [[ ${_ch_other_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_ch_other_pkg[*]} 2>/tmp/.errlog
-}
-
 install_base() {
     ipv6_disable()
     {
         dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yesno_ipv6_title" --yesno "$_yesno_ipv6_body" 0 0
          if [[ $? -eq 0 ]]; then
-            [ -e ${MOUNTPOINT}/etc/sysctl.d/ ] || mkdir ${MOUNTPOINT}/etc/sysctl.d/
+            [ -e ${MOUNTPOINT}/etc/sysctl.d/ ] || mkdir -p ${MOUNTPOINT}/etc/sysctl.d/
             echo "# if problem to download packets then create file:" > ${MOUNTPOINT}/etc/sysctl.d/40-ipv6.conf
             echo "# /etc/sysctl.d/40-ipv6.conf" >> ${MOUNTPOINT}/etc/sysctl.d/40-ipv6.conf
             echo "" >> ${MOUNTPOINT}/etc/sysctl.d/40-ipv6.conf
             echo "net.ipv6.conf.all.disable_ipv6=1" >> ${MOUNTPOINT}/etc/sysctl.d/40-ipv6.conf
         fi  
     }
+    ipv46_forwarding()
+    {
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_ipv46_forward_hd" --msgbox "$_yn_ipv46_fd_fbd" 0 0
+		wait
+		dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_ipv46_forward_hd" --yesno "$_yn_ipv46_forward_bd" 0 0
+         if [[ $? -eq 0 ]]; then
+            [ -e ${MOUNTPOINT}/etc/sysctl.d/ ] || mkdir -p ${MOUNTPOINT}/etc/sysctl.d/
+            echo "# You can enable or disable forwarding by setting one or zero in the line with ipv4 (ipv6)." > ${MOUNTPOINT}/etc/sysctl.d/30-ipforward.conf
+            echo "# /etc/sysctl.d/30-ipforward.conf" >> ${MOUNTPOINT}/etc/sysctl.d/30-ipforward.conf
+            echo "" >> ${MOUNTPOINT}/etc/sysctl.d/30-ipforward.conf
+            echo "${_ipv46_fd_bd_6}" >> ${MOUNTPOINT}/etc/sysctl.d/30-ipforward.conf
+            echo "${_ipv46_fd_bd_7}" >> ${MOUNTPOINT}/etc/sysctl.d/30-ipforward.conf
+            echo "${_ipv46_fd_bd_8}" >> ${MOUNTPOINT}/etc/sysctl.d/30-ipforward.conf
+        fi 
+	}
     dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstBseTitle" \
     --menu "$_InstBseBody" 0 0 4 \
     "1" "$_InstBaseLK" \
@@ -252,12 +104,19 @@ install_base() {
             _list_krnl_pkg=$(check_s_lst_pkg "${_krnl_pkg[*]}")
             wait
             clear
-            [[ ${_list_base_pkg[*]} != "" ]] && ps_in_pkg "base" "${_list_base_pkg[*]}" \
-            || pacstrap ${MOUNTPOINT} base 2>/tmp/.errlog
+            if [[ ${_list_base_pkg[*]} != "" ]]; then
+				ps_in_pkg "base" "${_list_base_pkg[*]}"
+			else
+				pacstrap ${MOUNTPOINT} base 2>/tmp/.errlog
+			fi
             wait
-            [[ ${_list_krnl_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_krnl_pkg[*]} 2>/tmp/.errlog
+            if [[ ${_list_krnl_pkg[*]} != "" ]]; then
+				pacstrap ${MOUNTPOINT} ${_list_krnl_pkg[*]} 2>/tmp/.errlog
+			fi
             wait
              ipv6_disable
+             wait
+             ipv46_forwarding
             _orders=1
              ;;
         "2") # Latest Kernel and base-devel
@@ -268,12 +127,19 @@ install_base() {
             _list_krnl_pkg=$(check_s_lst_pkg "${_krnl_pkg[*]}")
             wait
             clear
-            [[ ${_list_base_devel[*]} != "" ]] && ps_in_pkg "base" "base-devel" "${_list_base_devel[*]}" \
-            || pacstrap ${MOUNTPOINT} base base-devel 2>/tmp/.errlog
+            if [[ ${_list_base_devel[*]} != "" ]]; then
+				ps_in_pkg "base" "base-devel" "${_list_base_devel[*]}"
+			else
+				pacstrap ${MOUNTPOINT} base base-devel 2>/tmp/.errlog
+            fi
             wait
-            [[ ${_list_krnl_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_krnl_pkg[*]} 2>/tmp/.errlog
+            if [[ ${_list_krnl_pkg[*]} != "" ]]; then
+				pacstrap ${MOUNTPOINT} ${_list_krnl_pkg[*]} 2>/tmp/.errlog
+            fi
             wait
             ipv6_disable
+            wait
+            ipv46_forwarding
             _orders=1
              ;;
         "3") # LTS Kernel
@@ -284,11 +150,18 @@ install_base() {
              _list_base_pkg=$(check_s_lst_pkg "${_base_pkg[*]}")
              wait
              clear
-             [[ ${_list_lts_pkg[*]} != "" ]] && LTS=1
-             [[ ${_list_lts_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} base ${_list_lts_pkg[*]} 2>/tmp/.errlog \
-             || pacstrap ${MOUNTPOINT} base 2>/tmp/.errlog
-             [[ ${_list_base_pkg[*]} != "" ]] && ps_in_pkg "${_list_base_pkg[*]}"
+             if [[ ${_list_lts_pkg[*]} != "" ]]; then
+				LTS=1
+				pacstrap ${MOUNTPOINT} base ${_list_lts_pkg[*]} 2>/tmp/.errlog
+             else
+				pacstrap ${MOUNTPOINT} base 2>/tmp/.errlog
+             fi
+             if [[ ${_list_base_pkg[*]} != "" ]]; then
+				ps_in_pkg "${_list_base_pkg[*]}"
+             fi
              ipv6_disable
+             wait
+             ipv46_forwarding
             _orders=1
              ;;
         "4") # LTS Kernel and base-devel
@@ -299,11 +172,18 @@ install_base() {
               _list_base_devel=$(check_s_lst_pkg "${_base_devel_pkg[*]}")
              wait
              clear
-             [[ ${_list_lts_pkg[*]} != "" ]] && LTS=1
-              [[ ${_list_lts_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} base base-devel ${_list_lts_pkg[*]} 2>/tmp/.errlog \
-              || pacstrap ${MOUNTPOINT} base base-devel 2>/tmp/.errlog
-              [[ ${_list_base_devel[*]} != "" ]] && ps_in_pkg "${_list_base_devel[*]}"
+             if [[ ${_list_lts_pkg[*]} != "" ]]; then
+				LTS=1
+				pacstrap ${MOUNTPOINT} base base-devel ${_list_lts_pkg[*]} 2>/tmp/.errlog
+             else
+				pacstrap ${MOUNTPOINT} base base-devel 2>/tmp/.errlog
+             fi
+             if [[ ${_list_base_devel[*]} != "" ]]; then
+				ps_in_pkg "${_list_base_devel[*]}"
+             fi
              ipv6_disable
+             wait
+             ipv46_forwarding
             _orders=1
              ;;
           *) install_base_menu
@@ -363,8 +243,9 @@ bios_bootloader() {
             _list_grub_pkg=$(check_s_lst_pkg "${_grub_pkg[*]}")
             wait
             clear
-            [[ ${_list_grub_pkg[*]} != "" ]] && ps_in_pkg "${_list_grub_pkg[*]}"
-             
+            if [[ ${_list_grub_pkg[*]} != "" ]]; then
+				ps_in_pkg "${_list_grub_pkg[*]}"
+            fi 
              # An LVM VG/LV can consist of multiple devices. Where LVM used, user must select the device manually.
              if [[ $LVM_ROOT -eq 1 ]]; then
                 select_grub_device
@@ -441,8 +322,9 @@ uefi_bootloader() {
           _list_grub_uefi_pkg=$(check_s_lst_pkg "${_grub_uefi_pkg[*]}")
          wait
          clear
-         [[ ${_list_grub_uefi_pkg[*]} != "" ]] && ps_in_pkg "${_list_grub_uefi_pkg[*]}"
-          
+         if [[ ${_list_grub_uefi_pkg[*]} != "" ]]; then
+			ps_in_pkg "${_list_grub_uefi_pkg[*]}"
+         fi 
           dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " Grub-install " --infobox "$_PlsWaitBody" 0 0
           sleep 1
           arch_chroot "grub-install --target=x86_64-efi --efi-directory=${UEFI_MOUNT} --bootloader-id=arch_grub --recheck" 2>/tmp/.errlog
@@ -472,8 +354,9 @@ uefi_bootloader() {
               _list_reefind_pkg=$(check_s_lst_pkg "${_reefind_pkg[*]}")
               wait
               clear
-              [[ ${_list_reefind_pkg[*]} != "" ]] && ps_in_pkg "${_list_reefind_pkg[*]}"
-
+              if [[ ${_list_reefind_pkg[*]} != "" ]]; then
+				ps_in_pkg "${_list_reefind_pkg[*]}"
+			  fi
               dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SetRefiDefTitle" --yesno "$_SetRefiDefBody ${UEFI_MOUNT}/EFI/boot $_SetRefiDefBody2" 0 0
               
               if [[ $? -eq 0 ]]; then
@@ -506,8 +389,9 @@ uefi_bootloader() {
           _list_systemd_boot_pkg=$(check_s_lst_pkg "${_systemd_boot_pkg[*]}")
           wait
           clear
-          [[ ${_list_systemd_boot_pkg[*]} != "" ]] && ps_in_pkg "${_list_systemd_boot_pkg[*]}"
-          
+          if [[ ${_list_systemd_boot_pkg[*]} != "" ]]; then
+			ps_in_pkg "${_list_systemd_boot_pkg[*]}"
+          fi
           arch_chroot "bootctl --path=${UEFI_MOUNT} install" 2>>/tmp/.errlog
           check_for_error
           
@@ -566,9 +450,15 @@ install_wireless_firmware() {
         wait
         _list_intel_2200=$(check_s_lst_pkg "${_intel_2200[*]}")
         wait
-        [[ ${_list_broadcom[*]} != "" ]] && _list_wifi_adapter_pkg="${_list_wifi_adapter_pkg} ${_list_broadcom[*]}"
-        [[ ${_list_intel_2100[*]} != "" ]] && _list_wifi_adapter_pkg="${_list_wifi_adapter_pkg} ${_list_intel_2100[*]}"
-        [[ ${_list_intel_2200[*]} != "" ]] && _list_wifi_adapter_pkg="${_list_wifi_adapter_pkg} ${_list_intel_2200[*]}"
+        if [[ ${_list_broadcom[*]} != "" ]]; then 
+			_list_wifi_adapter_pkg="${_list_wifi_adapter_pkg} ${_list_broadcom[*]}"
+        fi
+        if [[ ${_list_intel_2100[*]} != "" ]]; then
+			_list_wifi_adapter_pkg="${_list_wifi_adapter_pkg} ${_list_intel_2100[*]}"
+        fi
+        if [[ ${_list_intel_2200[*]} != "" ]]; then
+			_list_wifi_adapter_pkg="${_list_wifi_adapter_pkg} ${_list_intel_2200[*]}"
+        fi
         _wifi_menu="${_menu_wifi[0]} -"
         for i in ${_list_wifi_adapter_pkg[*]}; do
             if [[ ! $i =~ .(2100) ]] && [[ ! $i =~ .(2200) ]]; then
@@ -676,12 +566,10 @@ install_alsa_xorg_input() {
     info_search_pkg
     _list_x_pkg=$(check_s_lst_pkg "${_x_pkg[*]}")
     wait
-    _clist_x_pkg=$(check_q_lst_pkg "${_list_x_pkg[*]}")
-    wait
     clear
-    if [[ ${_clist_x_pkg[*]} != "" ]]; then 
+    if [[ ${_list_x_pkg[*]} != "" ]]; then 
         _x_pkg_menu_cl=""
-        for i in ${_clist_x_pkg[*]}; do
+        for i in ${_list_x_pkg[*]}; do
             _x_pkg_menu_cl="${_x_pkg_menu_cl} $i - on"
         done
         dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_alsa_pkg_ttl" --yesno "$_yn_alsa_pkg_bd" 0 0
@@ -690,7 +578,7 @@ install_alsa_xorg_input() {
             _chl_x_pkg=$(cat ${ANSWER})
             [[ ${_chl_x_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_chl_x_pkg[*]} 2>/tmp/.errlog  
         else
-            pacstrap ${MOUNTPOINT} ${_clist_x_pkg[*]} 2>/tmp/.errlog
+            pacstrap ${MOUNTPOINT} ${_list_x_pkg[*]} 2>/tmp/.errlog
         fi
     fi
     check_for_error
@@ -740,256 +628,6 @@ install_alsa_xorg_input() {
 
 }
 
-setup_graphics_card() {
-
-# Save repetition
-install_intel(){
-    clear
-    info_search_pkg
-    _list_intel_pkg=$(check_s_lst_pkg "${_intel_pkg[*]}")
-    wait
-    clear
-    [[ ${_list_intel_pkg[*]} != "" ]] && ps_in_pkg "${_list_intel_pkg[*]}"
-    
-    sed -i 's/MODULES=""/MODULES="i915"/' ${MOUNTPOINT}/etc/mkinitcpio.conf
-           
-    # Intel microcode (Grub, Syslinux and systemd-boot). rEFInd is yet to be added.
-    # Done as seperate if statements in case of multiple bootloaders.
-    if [[ -e ${MOUNTPOINT}/boot/grub/grub.cfg ]]; then
-        dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " grub-mkconfig " --infobox "$_PlsWaitBody" 0 0
-        sleep 1
-        arch_chroot "grub-mkconfig -o /boot/grub/grub.cfg" 2>>/tmp/.errlog
-    fi
-               
-    if [[ -e ${MOUNTPOINT}/boot/syslinux/syslinux.cfg ]]; then
-        sed -i 's/..\/initramfs-linux.img/..\/intel-ucode.img,..\/initramfs-linux.img/g' ${MOUNTPOINT}/boot/syslinux/syslinux.cfg
-        sed -i 's/..\/initramfs-linux-lts.img/..\/intel-ucode.img,..\/initramfs-linux-lts.img/g' ${MOUNTPOINT}/boot/syslinux/syslinux.cfg
-        sed -i 's/..\/initramfs-linux-fallback.img/..\/intel-ucode.img,..\/initramfs-linux-fallback.img/g' ${MOUNTPOINT}/boot/syslinux/syslinux.cfg
-        sed -i 's/..\/initramfs-linux-lts-fallback.img/..\/intel-ucode.img,..\/initramfs-linux-lts-fallback.img/g' ${MOUNTPOINT}/boot/syslinux/syslinux.cfg
-    fi
-               
-    if [[ -e ${MOUNTPOINT}${UEFI_MOUNT}/loader/entries/arch.conf ]]; then
-        sed -i '/linux \//a initrd \/intel-ucode.img' ${MOUNTPOINT}${UEFI_MOUNT}/loader/entries/arch.conf                    
-    fi
-}
-
-# Save repetition
-install_ati(){
-    clear
-    info_search_pkg
-    _list_ati_pkg=$(check_s_lst_pkg "${_ati_pkg[*]}")
-    wait
-    clear
-    [[ ${_list_ati_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_ati_pkg[*]} 2>/tmp/.errlog
-    sed -i 's/MODULES=""/MODULES="radeon"/' ${MOUNTPOINT}/etc/mkinitcpio.conf
-}
-
-# Search Vedo Driver to nvidia-390xx in template 'nvidia-[0-9]{3}'
-_nvidia_name=""
-nvidia_search()
-{
-    nvsearch=$(pacman -Ss | grep -Ei "core|extra|community|multilib" | sed 's/extra\///' | sed 's/core\///' | sed 's/community\///' | sed 's/multilib\///' | grep -E "nvidia-[0-9]{3}xx" | awk '{print $1}' | awk '/^nvidia-[0-9]{3}xx$/')
-    _nvidia_name=${nvsearch[*]}
-}
-
-# Main menu. Correct option for graphics card should be automatically highlighted.
-
-    GRAPHIC_CARD=""
-    INTEGRATED_GC="N/A"
-    GRAPHIC_CARD=$(lspci | grep -Ei "3d|vga" | sed 's/.*://' | sed 's/(.*//' | sed 's/^[ \t]*//')
-    GRAPHIC_CARD_Integrated=$(lscpu | grep -Ei "intel|lenovo" | sed 's/.*://' | sed 's/(.*//' | sed 's/^[ \t]*//' | grep -vi "genuine")
-    # Highlight menu entry depending on GC detected. Extra work is needed for NVIDIA
-    if  [[ $(echo "$GRAPHIC_CARD" | grep -Ei "nvidia" | awk '/NVIDIA/' RS=" ") != "" ]]; then 
-        HIGHLIGHT_SUB_GC=7
-        # If NVIDIA, first need to know the integrated GC
-        [[ $(echo "$GRAPHIC_CARD_Integrated") != "" ]] && INTEGRATED_GC="Intel" || INTEGRATED_GC="ATI"
-      
-    # All non-NVIDIA cards / virtualisation
-    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'ati|amd' | awk '/ATI|AMD/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=2
-    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'intel|lenovo' | awk '/Intel|Lenovo/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=3
-    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'via' | awk '/VIA/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=10
-    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'virtualbox' | awk '/VirtualBox/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=11
-    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'vmware' | awk '/VMware/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=12
-    else HIGHLIGHT_SUB_GC=13
-    fi
-    
-    skip_orderers_resume
-    
-   dialog --default-item ${HIGHLIGHT_SUB_GC} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_GCtitle" \
-    --menu "$GRAPHIC_CARD\n" 0 0 11 \
-    "1" "$_DevShowOpt" \
-    "2" $"xf86-video-ati" \
-    "3" $"xf86-video-intel" \
-    "4" $"xf86-video-nouveau" \
-    "5" $"xf86-video-nouveau (+ $INTEGRATED_GC)" \
-    "6" $"Nvidia" \
-    "7" $"Nvidia (+ $INTEGRATED_GC)" \
-    "8" $"Nvidia-xxx(auto-search new-version)" \
-    "9" $"Nvidia-xxx(auto-search new-version) (+ $INTEGRATED_GC)" \
-    "10" $"xf86-video-openchrome" \
-    "11" $"virtualbox-guest-xxx" \
-    "12" $"xf86-video-vmware" \
-    "13" "$_GCUnknOpt / xf86-video-fbdev" 2>${ANSWER}
-
-   case $(cat ${ANSWER}) in
-        "1") lspci -k | grep -Ei "3d|vga" > /tmp/.vga
-            if [[ $(cat /tmp/.vga) != "" ]]; then
-                dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_DevShowOpt" --textbox /tmp/.vga 0 0
-            else
-                dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_DevShowOpt" --msgbox "$_WirelessErrBody" 7 30
-            fi
-            ;;
-        "2") # ATI/AMD
-            install_ati
-             ;;
-        "3") # Intel
-            install_intel
-             ;;
-        "4") # Nouveau
-            clear
-            info_search_pkg
-            _list_nouveau=$(check_s_lst_pkg "${_nouveau[*]}")
-            wait
-            clear
-            [[ ${_list_nouveau[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_nouveau[*]} 2>/tmp/.errlog
-            sed -i 's/MODULES=""/MODULES="nouveau"/' ${MOUNTPOINT}/etc/mkinitcpio.conf       
-             ;;
-        "5") # Nouveau / NVIDIA
-            [[ $INTEGRATED_GC == "ATI" ]] &&  install_ati || install_intel  
-            clear
-            info_search_pkg
-            _list_nouveau=$(check_s_lst_pkg "${_nouveau[*]}")
-            wait
-            clear
-            [[ ${_list_nouveau[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_nouveau[*]} 2>/tmp/.errlog
-            sed -i 's/MODULES=""/MODULES="nouveau"/' ${MOUNTPOINT}/etc/mkinitcpio.conf       
-             ;;
-        "6") # NVIDIA
-            arch_chroot "pacman -Rdds --noconfirm mesa"
-            clear
-            info_search_pkg
-            [[ $LTS == 0 ]] && _list_nvidia_pkg=$(check_s_lst_pkg "${_nvidia_pkg[*]}") || _list_nvidia_lts_pkg=$(check_s_lst_pkg "${_nvidia_lts_pkg[*]}")
-            wait
-            clear
-            # Now deal with kernel installed
-            [[ $LTS == 0 ]] && ps_in_pkg "${_list_nvidia_pkg[*]}" \
-            || ps_in_pkg "${_list_nvidia_lts_pkg[*]}"
-            NVIDIA_INST=1
-             ;;
-        "7") # NVIDIA-GF
-            [[ $INTEGRATED_GC == "ATI" ]] &&  install_ati || install_intel
-            arch_chroot "pacman -Rdds --noconfirm mesa"
-            clear
-            info_search_pkg
-            [[ $LTS == 0 ]] && _list_nvidia_pkg=$(check_s_lst_pkg "${_nvidia_pkg[*]}") || _list_nvidia_lts_pkg=$(check_s_lst_pkg "${_nvidia_lts_pkg[*]}")
-            wait
-            clear
-            # Now deal with kernel installed
-            [[ $LTS == 0 ]] && ps_in_pkg "${_list_nvidia_pkg[*]}" \
-            || ps_in_pkg "${_list_nvidia_lts_pkg[*]}"
-            NVIDIA_INST=1
-             ;;
-        "8") # NVIDIA-xxx
-            arch_chroot "pacman -Rdds --noconfirm mesa"
-            # Now deal with kernel installed
-            clear
-            info_search_pkg
-            nvidia_search
-            wait
-            _nvidia_xxx=($_nvidia_name $_nvidia_name-utils $_nvidia_name-settings)
-            _nvidia_lts_xxx=($_nvidia_name-lts $_nvidia_name-utils $_nvidia_name-settings)
-            [[ $LTS == 0 ]] && _list_nvidia_xxx=$(check_s_lst_pkg "${_nvidia_xxx[*]}") || _list_nvidia_lts_xxx=$(check_s_lst_pkg "${_nvidia_lts_xxx[*]}")
-            wait
-            clear
-            [[ $LTS == 0 ]] && ps_in_pkg "${_list_nvidia_xxx[*]}" \
-            || ps_in_pkg "${_list_nvidia_lts_xxx[*]}"
-            NVIDIA_INST=1
-             ;;          
-        "9") # NVIDIA-xxx
-            [[ $INTEGRATED_GC == "ATI" ]] &&  install_ati || install_intel
-            arch_chroot "pacman -Rdds --noconfirm mesa"
-            clear
-            # Now deal with kernel installed
-            info_search_pkg
-            nvidia_search
-            wait
-            _nvidia_xxx=($_nvidia_name $_nvidia_name-utils $_nvidia_name-settings)
-            _nvidia_lts_xxx=($_nvidia_name-lts $_nvidia_name-utils $_nvidia_name-settings)
-            [[ $LTS == 0 ]] && _list_nvidia_xxx=$(check_s_lst_pkg "${_nvidia_xxx[*]}") || _list_nvidia_lts_xxx=$(check_s_lst_pkg "${_nvidia_lts_xxx[*]}")
-            wait
-            clear
-            [[ $LTS == 0 ]] && ps_in_pkg "${_list_nvidia_xxx[*]}" \
-            || ps_in_pkg "${_list_nvidia_lts_xxx[*]}"
-            NVIDIA_INST=1
-             ;;            
-        "10") # Via
-            clear
-            info_search_pkg
-            _list_openchrome=$(check_s_lst_pkg "${_openchrome[*]}")
-            wait
-            clear
-            [[ ${_list_openchrome[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_openchrome[*]} 2>/tmp/.errlog
-             ;;            
-        "11") # VirtualBox
-            dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_VBoxInstTitle" --msgbox "$_VBoxInstBody" 0 0
-            clear
-            info_search_pkg
-            [[ $LTS == 0 ]] && _list_vbox_pkg=$(check_s_lst_pkg "${_vbox_pkg[*]}") || _list_vbox_lts_pkg=$(check_s_lst_pkg "${_vbox_lts_pkg[*]}")
-            wait
-            clear
-            [[ $LTS == 0 ]] && ps_in_pkg "${_list_vbox_pkg[*]}" \
-            || pacstrap ${MOUNTPOINT} ${_list_vbox_lts_pkg[*]} 2>/tmp/.errlog
-      
-            # Load modules and enable vboxservice whatever the kernel
-            arch_chroot "modprobe -a vboxguest vboxsf vboxvideo"  
-            arch_chroot "systemctl enable vboxservice"
-            echo -e "vboxguest\nvboxsf\nvboxvideo" > ${MOUNTPOINT}/etc/modules-load.d/virtualbox.conf
-             ;;
-        "12") # VMWare
-            clear
-            info_search_pkg
-            _list_vmware_pkg=$(check_s_lst_pkg "${_vmware_pkg[*]}")
-            wait
-            _clist_vmware_pkg=$(check_q_lst_pkg "${_list_vmware_pkg[*]}")
-            wait
-            clear
-            [[ ${_clist_vmware_pkg[*]} != "" ]] && ps_in_pkg "${_clist_vmware_pkg[*]}"
-             ;;
-        "13") # Generic / Unknown
-            clear
-            info_search_pkg
-            _list_generic_pkg=$(check_s_lst_pkg "${_generic_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_generic_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_generic_pkg[*]} 2>/tmp/.errlog
-             ;;
-          *) install_desktop_menu
-             ;;
-    esac
-    check_for_error
-
- # Create a basic xorg configuration file for NVIDIA proprietary drivers where installed
- # if that file does not already exist.
- if [[ $NVIDIA_INST == 1 ]] && [[ ! -e "${MOUNTPOINT}/etc/X11/xorg.conf.d/20-nvidia.conf" ]]; then
-    echo -e -n "# /etc/X11/xorg.conf.d/20-nvidia.conf\n" > "${MOUNTPOINT}/etc/X11/xorg.conf.d/20-nvidia.conf"
-    echo -e -n "Section \"Device\"\n" >> "${MOUNTPOINT}/etc/X11/xorg.conf.d/20-nvidia.conf"
-    echo -e -n "\tIdentifier \"Nvidia Card\"\n" >> "${MOUNTPOINT}/etc/X11/xorg.conf.d/20-nvidia.conf"
-    echo -e -n "\tDriver \"nvidia\"\n" >> "${MOUNTPOINT}/etc/X11/xorg.conf.d/20-nvidia.conf"
-    echo -e -n "\tVendorName \"NVIDIA Corporation\"\n" >> "${MOUNTPOINT}/etc/X11/xorg.conf.d/20-nvidia.conf"
-    echo -e -n "\tOption \"NoLogo\" \"true\"\n" >> "${MOUNTPOINT}/etc/X11/xorg.conf.d/20-nvidia.conf"
-    echo -e -n "\t#Option \"UseEDID\" \"false\"\n" >> "${MOUNTPOINT}/etc/X11/xorg.conf.d/20-nvidia.conf"
-    echo -e -n "\t#Option \"ConnectedMonitor\" \"DFP\"\n" >> "${MOUNTPOINT}/etc/X11/xorg.conf.d/20-nvidia.conf"
-    echo -e -n "\t# ...\n" >> "${MOUNTPOINT}/etc/X11/xorg.conf.d/20-nvidia.conf"
-    echo -e -n "EndSection\n" >> "${MOUNTPOINT}/etc/X11/xorg.conf.d/20-nvidia.conf"
- fi
- 
- # Where NVIDIA has been installed allow user to check and amend the file
- if [[ $NVIDIA_INST == 1 ]]; then
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_NvidiaConfTitle" --msgbox "$_NvidiaConfBody" 0 0
-    nano "${MOUNTPOINT}/etc/X11/xorg.conf.d/20-nvidia.conf"
- fi
-
-}
 fixed_deepin_desktop()
 {
     # /etc/systemd/system/resume@.service
@@ -1045,49 +683,49 @@ install_de_wm() {
         clear
         for i in ${_list_d_menu[*]}; do
             case $i in
-                "${_d_menu[0]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[0]}" # deepin
+                "$_de_pkg_1") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[0]}" # deepin
                     ;;
-                "${_d_menu[1]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[1]}" # deepin+depping-extra
+                "$_de_pkg_2") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[1]}" # deepin+depping-extra
                     ;;
-                "${_d_menu[2]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[2]}" # cinnamon
+                "$_de_pkg_3") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[2]}" # cinnamon
                     ;;
-                "${_d_menu[3]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[3]}" # enlightenment
+                "$_de_pkg_4") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[3]}" # enlightenment
                     ;;
-                "${_d_menu[4]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[4]}" # gnome-shell
+                "$_de_pkg_5") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[4]}" # gnome-shell
                     ;;
-                "${_d_menu[5]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[5]}" # gnome
+                "$_de_pkg_6") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[5]}" # gnome
                     ;;
-                "${_d_menu[6]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[6]}" # gnome-extra
+                "$_de_pkg_7") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[6]}" # gnome-extra
                     ;;
-                "${_d_menu[7]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[7]}" # plasma-desktop
+                "$_de_pkg_8") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[7]}" # plasma-desktop
                     ;;
-                "${_d_menu[8]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[8]}" # plasma
+                "$_de_pkg_9") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[8]}" # plasma
                     ;;
-                "${_d_menu[9]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[9]}" # lxde
+                "$_de_pkg_10") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[9]}" # lxde
                     ;;
-                "${_d_menu[10]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[10]}" # lxqt
+                "$_de_pkg_11") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[10]}" # lxqt
                     ;;
-                "${_d_menu[11]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[11]}" # mate
+                "$_de_pkg_12") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[11]}" # mate
                     ;;
-                "${_d_menu[12]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[12]}" # mate-extra
+                "$_de_pkg_13") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[12]}" # mate-extra
                     ;;
-                "${_d_menu[13]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[13]}" # xfce4
+                "$_de_pkg_14") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[13]}" # xfce4
                     ;;
-                "${_d_menu[14]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[14]}" # xfce4-goodies
+                "$_de_pkg_15") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[14]}" # xfce4-goodies
                     ;;
-                "${_d_menu[15]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[15]}" # awesome
+                "$_de_pkg_16") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[15]}" # awesome
                     ;;
-                "${_d_menu[16]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[16]}" # fluxbox
+                "$_de_pkg_17") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[16]}" # fluxbox
                     ;;
-                "${_d_menu[17]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[17]}" # i3-wm
+                "$_de_pkg_18") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[17]}" # i3-wm
                     ;;
-                "${_d_menu[18]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[18]}" # icewm
+                "$_de_pkg_19") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[18]}" # icewm
                     ;;
-                "${_d_menu[19]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[19]}" # openbox
+                "$_de_pkg_20") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[19]}" # openbox
                     ;;
-                "${_d_menu[20]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[20]}" # pekwm
+                "$_de_pkg_21") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[20]}" # pekwm
                     ;;
-                "${_d_menu[21]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[21]}" # windowmaker
+                "$_de_pkg_22") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[21]}" # windowmaker
                     ;;
             esac
         done
@@ -1101,24 +739,6 @@ install_de_wm() {
        
    case $(cat ${ANSWER}) in
         "${_desktop_menu[0]}") # Deepin
-             clear
-             info_search_pkg
-            _list_deepin_pkg=$(check_s_lst_pkg "${_deepin_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_deepin_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_deepin_pkg[*]} 2>/tmp/.errlog
-            LIGHTDM_INSTALLED=1
-            DEEPIN_INSTALLED=1
-            arch_chroot "systemctl enable lightdm.service" >/dev/null 2>>/tmp/.errlog
-            DM="LightDM"
-            sed -i '/^\[Seat:\*\]/a \greeter-session=lightdm-deepin-greeter' "${MOUNTPOINT}/etc/lightdm/lightdm.conf"
-            if [[ $NM_INSTALLED -eq 0 ]]; then          
-                arch_chroot "systemctl enable NetworkManager.service && systemctl enable NetworkManager-dispatcher.service" 2>>/tmp/.errlog
-                NM_INSTALLED=1
-                NM_COMPONENT_INSTALLED=0
-            fi
-             ;;
-        "${_desktop_menu[1]}") # Deepin+Deepin-Extra
              clear
              info_search_pkg
             _list_deepine_pkg=$(check_s_lst_pkg "${_deepine_pkg[*]}")
@@ -1135,6 +755,28 @@ install_de_wm() {
                 NM_INSTALLED=1
                 NM_COMPONENT_INSTALLED=0
             fi
+            wait
+            _DE_INSTALLED=1
+             ;;
+        "${_desktop_menu[1]}") # Deepin+Deepin-Extra
+             clear
+             info_search_pkg
+            _list_deepine_extra_pkg=$(check_s_lst_pkg "${_deepine_extra_pkg[*]}")
+            wait
+            clear
+            [[ ${_list_deepine_extra_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_deepine_extra_pkg[*]} 2>/tmp/.errlog
+            LIGHTDM_INSTALLED=1
+            DEEPIN_INSTALLED=1
+            arch_chroot "systemctl enable lightdm.service" >/dev/null 2>>/tmp/.errlog
+            DM="LightDM"
+            sed -i '/^\[Seat:\*\]/a \greeter-session=lightdm-deepin-greeter' "${MOUNTPOINT}/etc/lightdm/lightdm.conf"
+            if [[ $NM_INSTALLED -eq 0 ]]; then          
+                arch_chroot "systemctl enable NetworkManager.service && systemctl enable NetworkManager-dispatcher.service" 2>>/tmp/.errlog
+                NM_INSTALLED=1
+                NM_COMPONENT_INSTALLED=0
+            fi
+            wait
+            _DE_INSTALLED=1
              ;;
         "${_desktop_menu[2]}") # Cinnamon
              clear
@@ -1143,6 +785,8 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_cinnamon_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_cinnamon_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;;
         "${_desktop_menu[3]}") # Enlightement
              clear
@@ -1151,6 +795,8 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_enlightenment_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_enlightenment_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;;
         "${_desktop_menu[4]}") # Gnome-Shell
              clear
@@ -1160,6 +806,8 @@ install_de_wm() {
              clear
              [[ ${_list_gnome_shell_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_gnome_shell_pkg[*]} 2>/tmp/.errlog
              GNOME_INSTALLED=1
+             wait
+             _DE_INSTALLED=1
              ;;
         "${_desktop_menu[5]}") # Gnome
              clear
@@ -1168,8 +816,9 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_gnome_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_gnome_pkg[*]} 2>/tmp/.errlog
-           
              GNOME_INSTALLED=1
+             wait
+             _DE_INSTALLED=1
              ;;            
         "${_desktop_menu[6]}") # Gnome + Extras
              clear
@@ -1178,8 +827,9 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_gnome_extras_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_gnome_extras_pkg[*]} 2>/tmp/.errlog
-           
              GNOME_INSTALLED=1
+             wait
+             _DE_INSTALLED=1
              ;;
         "${_desktop_menu[7]}") # KDE5 BASE
              clear
@@ -1188,6 +838,8 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_kde5base_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_kde5base_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;;
         "${_desktop_menu[8]}") # KDE5 
              clear
@@ -1202,8 +854,9 @@ install_de_wm() {
                 NM_INSTALLED=1
                 NM_COMPONENT_INSTALLED=0
              fi
-               
-             KDE_INSTALLED=1
+             K_DE_INSTALLED=1
+             wait
+             _DE_INSTALLED=1
              ;;
          "${_desktop_menu[9]}") # LXDE
               clear
@@ -1212,7 +865,7 @@ install_de_wm() {
               wait
               clear
               [[ ${_list_lxde_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_lxde_pkg[*]} 2>/tmp/.errlog
-              LXDE_INSTALLED=1
+              LX_DE_INSTALLED=1
              ;;
          "${_desktop_menu[10]}") # LXQT
               clear
@@ -1222,6 +875,8 @@ install_de_wm() {
             clear
             [[ ${_list_lxqt_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_lxqt_pkg[*]} 2>/tmp/.errlog
               LXQT_INSTALLED=1
+              wait
+              _DE_INSTALLED=1
               ;;
          "${_desktop_menu[11]}") # MATE
               clear
@@ -1230,6 +885,8 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_mate_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_mate_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;;
         "${_desktop_menu[12]}") # MATE + Extras
                clear
@@ -1237,6 +894,8 @@ install_de_wm() {
             _list_mateextra_pkg=$(check_s_lst_pkg "${_mateextra_pkg[*]}")
             wait
             [[ ${_list_mateextra_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_mateextra_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;;                 
         "${_desktop_menu[13]}") # Xfce
               clear
@@ -1245,6 +904,8 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_xfce4_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_xfce4_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;;            
         "${_desktop_menu[14]}") # Xfce + Extras
               clear
@@ -1253,6 +914,8 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_xfce4_extra_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_xfce4_extra_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;;
         "${_desktop_menu[15]}") # Awesome
               clear
@@ -1261,6 +924,8 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_awesome_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_awesome_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;;
         "${_desktop_menu[16]}") #Fluxbox
               clear
@@ -1269,6 +934,8 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_fluxbox_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_fluxbox_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;; 
         "${_desktop_menu[17]}") #i3
               clear
@@ -1277,6 +944,8 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_i3wm_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_i3wm_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;; 
         "${_desktop_menu[18]}") #IceWM
               clear
@@ -1285,6 +954,8 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_icewm_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_icewm_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;; 
         "${_desktop_menu[19]}") #Openbox
               clear
@@ -1293,6 +964,8 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_openbox_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_openbox_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;; 
         "${_desktop_menu[20]}") #PekWM
               clear
@@ -1301,6 +974,8 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_pekwm_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_pekwm_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;;
         "${_desktop_menu[21]}") #WindowMaker
              clear
@@ -1309,6 +984,8 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_windowmaker_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_windowmaker_pkg[*]} 2>/tmp/.errlog
+            wait
+            _DE_INSTALLED=1
              ;;        
           *) install_desktop_menu
              ;;
@@ -1387,14 +1064,14 @@ dm_menu(){
             esac
 }
 
- if [[ $DM_INSTALLED -eq 0 ]]; then
+  if [[ $DM_INSTALLED -eq 0 ]]; then
          # Gnome without KDE
-         if [[ $GNOME_INSTALLED -eq 1 ]] && [[ $KDE_INSTALLED -eq 0 ]]; then
+         if [[ $GNOME_INSTALLED -eq 1 ]] && [[ $K_DE_INSTALLED -eq 0 ]]; then
             arch_chroot "systemctl enable gdm.service" >/dev/null 2>/tmp/.errlog
             DM="GDM"
 
          # Gnome with KDE
-         elif [[ $GNOME_INSTALLED -eq 1 ]] && [[ $KDE_INSTALLED -eq 1 ]]; then   
+         elif [[ $GNOME_INSTALLED -eq 1 ]] && [[ $K_DE_INSTALLED -eq 1 ]]; then   
              dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_DmChTitle" \
                --menu "$_DmChBody" 12 45 2 \
                "1" $"GDM  (Gnome)" \
@@ -1413,13 +1090,13 @@ dm_menu(){
               esac    
               
          # KDE without Gnome      
-        elif [[ $KDE_INSTALLED -eq 1 ]] && [[ $GNOME_INSTALLED -eq 0 ]]; then
+        elif [[ $K_DE_INSTALLED -eq 1 ]] && [[ $GNOME_INSTALLED -eq 0 ]]; then
             arch_chroot "sddm --example-config > /etc/sddm.conf"
             arch_chroot "systemctl enable sddm.service" >/dev/null 2>>/tmp/.errlog
             DM="SDDM"
             
          # LXDM, without KDE or Gnome 
-         elif [[ $LXDE_INSTALLED -eq 1 ]] && [[ $KDE_INSTALLED -eq 0 ]] && [[ $GNOME_INSTALLED -eq 0 ]]; then
+         elif [[ $LX_DE_INSTALLED -eq 1 ]] && [[ $K_DE_INSTALLED -eq 0 ]] && [[ $GNOME_INSTALLED -eq 0 ]]; then
             arch_chroot "systemctl enable lxdm.service" >/dev/null 2>/tmp/.errlog
             DM="LXDM"
 
@@ -1437,7 +1114,8 @@ dm_menu(){
         check_for_error
         dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $DM $_DmDoneTitle" --msgbox "\n$DM $_DMDoneBody" 0 0
         DM_INSTALLED=1
-         
+        wait
+        _DM_INSTALLED=1
   # if A display manager has already been installed and enabled (DM_INSTALLED=1), show a message instead.
   else  
          dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_DmInstTitle" --msgbox "$_DmInstBody" 0 0
@@ -1446,99 +1124,6 @@ dm_menu(){
 }
 
 # General Menu Package
-
-# back - install_desktop_menu
-install_gep()
-{
-    if [[ $SUB_MENU != "general_package" ]]; then
-       SUB_MENU="general_package"
-       HIGHLIGHT_SUB=1
-    else
-       if [[ $HIGHLIGHT_SUB != 9 ]]; then
-          HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
-       fi
-    fi
-    
-    dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_menu_gen_title" --menu "$_menu_gen_body" 0 0 9 \
-    "1" "$_menu_gengen" \
-    "2" "$_menu_archivers" \
-    "3" "$_menu_ttf_theme" \
-    "4" "$_menu_add_pkg" \
-    "5" "$_menu_extra_pkg" \
-    "6" "$_menu_pkg_meneger" \
-    "7" "$_eml_pkg_ttl" \
-    "8" "$_aur_pkg_ttl" \
-    "9" "$_Back" 2>${ANSWER}
-    
-    HIGHLIGHT_SUB=$(cat ${ANSWER})
-    case $(cat ${ANSWER}) in
-    "1") install_gengen
-         ;;
-    "2") install_archivers
-         ;;
-    "3") install_ttftheme
-         ;;
-    "4") install_standartpkg
-         ;;
-    "5") install_otherpkg
-         ;;
-    "6") pkg_manager_install
-         ;;
-    "7") eml_ustanovka
-        ;;
-    "8") aur_pkginstall
-        ;;
-      *) # Back to NAME Menu
-        install_desktop_menu
-         ;;
-    esac
-    
-    check_for_error
-    
-    install_gep
-}
-
-# back - install_desktop_menu
-install_gep_old()
-{
-    if [[ $SUB_MENU != "general_package" ]]; then
-       SUB_MENU="general_package"
-       HIGHLIGHT_SUB=1
-    else
-       if [[ $HIGHLIGHT_SUB != 6 ]]; then
-          HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
-       fi
-    fi
-    
-    dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_menu_gen_title" --menu "$_menu_gen_body" 0 0 6 \
-    "1" "$_menu_gengen" \
-    "2" "$_menu_archivers" \
-    "3" "$_menu_ttf_theme" \
-    "4" "$_menu_add_pkg" \
-    "5" "$_menu_extra_pkg" \
-    "6" "$_Back" 2>${ANSWER}
-    
-    HIGHLIGHT_SUB=$(cat ${ANSWER})
-    case $(cat ${ANSWER}) in
-    "1") install_gengen
-         ;;
-    "2") install_archivers
-         ;;
-    "3") install_ttftheme
-         ;;
-    "4") install_standartpkg
-         ;;
-    "5") install_otherpkg
-         ;;
-      *) # Back to NAME Menu
-        install_desktop_menu
-         ;;
-    esac
-    
-    check_for_error
-    
-    install_gep_old
-}
 
 install_shara_components()
 {
@@ -1550,20 +1135,18 @@ install_shara_components()
             info_search_pkg
             _list_network_pkg=$(check_s_lst_pkg "${_network_pkg[*]}")
             wait
-            _clist_list_network_pkg=$(check_q_lst_pkg "${_list_network_pkg[*]}")
-            wait
             clear
             dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yesno_shara_title" --yesno "$_yn_alsa_pkg_bd" 0 0
              if [[ $? -eq 0 ]]; then
                 _shara_pkg_mn_list=""
-                for k in ${_clist_list_network_pkg[*]}; do  
+                for k in ${_list_network_pkg[*]}; do  
                     _shara_pkg_mn_list="${_shara_pkg_mn_list} $k - on"
                 done
                 dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_chl_shara_ttl" --checklist "$_chl_xpkg_bd" 0 0 16 ${_shara_pkg_mn_list} 2>${ANSWER}
                 _check_shara_pkg=$(cat ${ANSWER})
                 [[ ${_check_shara_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_check_shara_pkg[*]} 2>/tmp/.errlog
              else
-                pacstrap ${MOUNTPOINT} ${_clist_list_network_pkg[*]} 2>/tmp/.errlog
+                pacstrap ${MOUNTPOINT} ${_list_network_pkg[*]} 2>/tmp/.errlog
              fi
              check_for_error
         fi
@@ -1577,50 +1160,46 @@ install_nm() {
             _nm_once=1
             clear
             info_search_pkg
-            _list_network_menu=$(check_s_lst_pkg "${_network_menu[*]}")
+            _list_nm_pkg=$(check_s_lst_pkg "${_nm_pkg_list[*]}")
             wait
             clear
             _ln_menu=""
-            for i in ${_list_network_menu[*]}; do
+            for i in ${_list_nm_pkg[*]}; do
                 _ln_menu="${_ln_menu} $i -"
             done
-            _ln_menu="${_ln_menu} dhcpcd -"
+            # _ln_menu="${_ln_menu} dhcpcd -"
         fi
     dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstNMTitle" --menu "$_InstNMBody" 0 0 4 ${_ln_menu} 2>${ANSWER}
           
       case $(cat ${ANSWER}) in
-      "${_network_menu[0]}") # netctl
+      "$_nm_pkg_1") # netctl
 			netctl_instalation
             ;;
-      "${_network_menu[1]}") # connman
+      "$_nm_pkg_2") # connman
            pacstrap ${MOUNTPOINT} ${_network_menu[1]} 2>/tmp/.errlog
            install_shara_components
            arch_chroot "systemctl enable connman.service" 2>>/tmp/.errlog
            ;;
-      "dhcpcd") # dhcpcd
+      "$_nm_pkg_3") # dhcpcd
            clear
            install_shara_components
            arch_chroot "systemctl enable dhcpcd.service" 2>/tmp/.errlog
            ;;
-      "${_network_menu[2]}") # Network Manager
+      "$_nm_pkg_4") # Network Manager
            clear
            info_search_pkg
            _list_net=$(check_s_lst_pkg "${_networkmanager_pkg[*]}")
            wait
-           _clist_list_net=$(check_q_lst_pkg "${_list_net[*]}")
-           wait
            _list_net_connect=$(check_s_lst_pkg "${_net_connect_var[*]}")
            wait
-           _clist_list_net_conn=$(check_q_lst_pkg "${_list_net_connect[*]}")
-           wait
            clear
-           [[ ${_clist_list_net[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_clist_list_net[*]} 2>/tmp/.errlog
+           [[ ${_list_net[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_net[*]} 2>/tmp/.errlog
            dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_s_tnc_ttl" --yesno "$_yesno_tnc_body" 0 0
            if [[ $? -eq 0 ]]; then
                dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_s_tnc_ttl" --yesno "$_yn_s_tnc_bd" 0 0
                if [[ $? -eq 0 ]]; then
                     _nm_tc_menu=""
-                    for k in ${_clist_list_net_conn[*]}; do
+                    for k in ${_list_net_connect[*]}; do
                         _nm_tc_menu="${_nm_tc_menu} $k - on"
                     done
                     dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yesno_shara_title" --checklist "$_chl_xpkg_bd" 0 0 16 ${_nm_tc_menu} 2>${ANSWER}
@@ -1628,7 +1207,7 @@ install_nm() {
                     [[ ${_check_nm_tc[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_check_nm_tc[*]} 2>/tmp/.errlog
                     wait
                else
-                    pacstrap ${MOUNTPOINT} ${_clist_list_net_conn[*]} 2>/tmp/.errlog
+                    pacstrap ${MOUNTPOINT} ${_list_net_connect[*]} 2>/tmp/.errlog
                     wait
                fi
            fi
@@ -1636,7 +1215,7 @@ install_nm() {
            install_shara_components
            arch_chroot "systemctl enable NetworkManager.service && systemctl enable NetworkManager-dispatcher.service" 2>>/tmp/.errlog
            ;;
-      "${_network_menu[3]}") # WICD
+      "$_nm_pkg_5") # WICD
            clear
            info_search_pkg
            _list_wicd_pkg=$(check_s_lst_pkg "${_wicd_pkg[*]}")
@@ -1654,6 +1233,8 @@ install_nm() {
       dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstNMDoneTitle" --msgbox "$_InstNMDoneBody" 0 0
       NM_INSTALLED=1
       NM_COMPONENT_INSTALLED=1
+      wait
+      _NM_INSTALLED=1
    else
       if [[ $NM_COMPONENT_INSTALLED -eq 0 ]]; then
            NM_COMPONENT_INSTALLED=1
@@ -1663,13 +1244,11 @@ install_nm() {
                info_search_pkg
                _list_net_connect=$(check_s_lst_pkg "${_net_connect_var[*]}")
                wait
-               _clist_list_net_conn=$(check_q_lst_pkg "${_list_net_connect[*]}")
-               wait
                clear
                dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_s_tnc_ttl" --yesno "$_yn_s_tnc_bd" 0 0
                if [[ $? -eq 0 ]]; then
                     _nm_tc_menu=""
-                    for k in ${_clist_list_net_conn[*]}; do
+                    for k in ${_list_net_connect[*]}; do
                         _nm_tc_menu="${_nm_tc_menu} $k - on"
                     done
                     dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yesno_shara_title" --checklist "$_chl_xpkg_bd" 0 0 16 ${_nm_tc_menu} 2>${ANSWER}
@@ -1677,7 +1256,7 @@ install_nm() {
                     [[ ${_check_nm_tc[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_check_nm_tc[*]} 2>/tmp/.errlog
                     wait
                else
-                    pacstrap ${MOUNTPOINT} ${_clist_list_net_conn[*]} 2>/tmp/.errlog
+                    pacstrap ${MOUNTPOINT} ${_list_net_connect[*]} 2>/tmp/.errlog
                     wait
                fi
                check_for_error

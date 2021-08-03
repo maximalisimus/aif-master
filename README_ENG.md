@@ -8,8 +8,8 @@ Date: 20.08.2019
 
 The starting point of the project: Architect Linux installer
 
-This script is a installation of the ArchLinux system in pseudographic mode, using the dialog package.
-The script can be used with any archlunux distribution. This wizard supports UEFI installation mode when you start the ArchLinux system in UEFI mode.
+This script consists of installing the ArchLinux system in pseudo-graphical mode using the dialog package.
+The script can be used with any Archlinux distribution except bootstrap and arm versions. This wizard supports UEFI installation mode when starting the ArchLinux system in UEFI mode.
 
 How to use this wizard?
 2 important conditions must be observed:

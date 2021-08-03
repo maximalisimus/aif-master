@@ -552,13 +552,11 @@ _yesno_tnc_body="\nEen set van verschillende verbindingen instellen voor netwerk
 _yn_s_tnc_ttl="Netwerkbeheerverbindingen opzetten"
 _yn_s_tnc_bd="\nWilt u extra verbindingstypes selecteren voor netwerkbeheer?\n"
 
-# Programs to TimeShoft and Github-Desktop
+# Programs to TimeShift
 _yesno_timeshift_title="Timeshift Installeren"
 _yesno_timeshift_body="\nTimeshift Installeren?\n"
-_yesno_github_desktop_title="GitHub-Desktop Installeren"
-_yesno_github_desktop_body="\nGitHub-Desktop Installeren?\n"
 
-# Config Disk Devaces
+# Config Disk Devices
 _sh_dev_title="Apparaatselectie"
 _sh_dev_body="\nSelecteer het gewenste apparaat\n"
 _rsvd_nfo1="Apparaat"
@@ -584,9 +582,7 @@ _info_tmpfs_body="\n$_info_tmpfs_bd1\n$_info_tmpfs_bd2\n$_info_tmpfs_bd3\n$_info
 _input_size_tmpfs_title="Voer de grootte van de tmp-map in"
 _input_size_tmpfs_body="\nVoer het gewenste volume in. Bijvoorbeeld: 1G\n"
 
-# Shell and Windows Fonts
-_yn_win_fnts_ttl="Windows-lettertypen installeren"
-_yn_win_fnts_bd="\nWindows lettertypen installeren?\n"
+# Shell
 _shell_friendly_menu="SHELL selectie en installatie"
 _select_shell_menu_ttl="Selecteren van de SHELL om te installeren"
 _select_shell_menu_bd="\nSelecteer SHELL voor gebruiker"
@@ -596,19 +592,6 @@ _scrn_strp_ttl="Screenfetch-welkom instellen"
 _scrn_strp_bd="\nScreenfetch-begroeting toevoegen bij opstarten?\n"
 _menu_ch_usr_ttl="Gebruikerskeuze"
 _menu_ch_usr_bd="\nSelecteer de gebruikers voor wie u de SHELL wilt wijzigen\n"
-
-# General Menu Package
-_InstGeMenuGE="Gemeenschappelijke pakketten en programma ' s installeren"
-_menu_gen_title="Gemeenschappelijke pakketten en programma ' s installeren"
-_menu_gen_body="\nInstalleer gemeenschappelijke pakketten en programma ' s voor alle desktopomgevingen.\n"
-_menu_gengen="Gedeelde pakketten installeren"
-_menu_archivers="Installatie van archiefondersteuning"
-_menu_ttf_theme="Lettertypen en thema ' s installeren"
-_menu_add_pkg="Installeer het minimum softwarepakket"
-_menu_extra_pkg="Installatie van extra programma ' s (kicad,V-box, wijn)."
-_menu_pkg_meneger="Installeer een grafische pakketmanager, pacman"
-_ch_mn_bd="\nSelecteer de benodigde pakketten om te installeren.\n"
-_pm_menu_body="\nSelecteer de te installeren pakketmanager.\n"
 
 # Information to search and installation on packages your system
 _nfo_search_pkg_title="Geduld"
@@ -632,23 +615,9 @@ _CloseInstBody="Installer Afsluiten?"
 _yesno_order_ttl="Meerdere menu ' s doorgeven"
 _yesno_order_bd="\nHeb je een LTS kernel geïnstalleerd?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installeren van de PlayStation-3 emulator"
-_yesno_rpcs3_bd="\nPlayStation-3 emulator installeren?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Instellen Van Bluetooth"
 _yesno_bluetooth_bd="\nOm drivers en de apparaatbeheerder de bluetooth te installeren?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Pakketten van AUR installeren"
-_aur_pkg_bd="\nSelecteer de pakketten die u moet installeren!\n"
-_aur_dbl_pkg_ttl="De versie van het pakket"
-_aur_dbl_pkg_bd="\nDit pakket heeft verschillende versies.\nKies alsjeblieft degene die je nodig hebt!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installeer emulators"
-_eml_pkg_bd="\nSelecteer de emulators die u moet installeren!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Het logbestand verwijderen?"
@@ -742,14 +711,6 @@ _yn_netctl_bd="\nWilt u een template en bewerk het ?\n"
 _ntctl_tmpmn_bd="\nSelecteer de gewenste sjabloon voor een netwerk Manager netctl.\n"
 _inntctl_ttl="Voer de naam van de sjabloon netctl"
 _inntctl_bd="\nVoer een nieuwe naam voor de sjabloon.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Draadloos netwerk."
-_msg_wt_bd="\nU hebt gekozen voor een sjabloon voor uw draadloze netwerk. Dit sjabloon moet u de SSID van het draadloze netwerk en het wachtwoord. De instelling zal worden ingevoerd om de nieuwe sjabloon. Als deze instelling is niet nodig, maar laat leeg.\n"
-_ib_ssid_ttl="Voer de SSID van uw draadloze netwerk"
-_ib_ssid_bd="\nVoer de naam van uw draadloze netwerk.\n"
-_ib_pass_ttl="Voer het wachtwoord draadloos netwerk"
-_ib_pass_bd="\nVoer het wachtwoord van uw draadloze netwerk\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Tijd synchronisatie"

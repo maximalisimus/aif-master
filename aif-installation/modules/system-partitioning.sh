@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 ######################################################################
 ##                                                                  ##
 ##            System and Partitioning Functions                     ##
@@ -250,7 +248,7 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
              ;;            
         "5") FILESYSTEM="mkfs.ext4 -F"
              CHK_NUM=8
-             fs_opts="data=journal data=writeback dealloc discard noacl noatime nobarrier nodelalloc"
+             fs_opts="data=journal data=writeback dealloc discard noacl noatime relatime nobarrier nodelalloc"
              ;;
         "6") FILESYSTEM="mkfs.f2fs"
              modprobe f2fs

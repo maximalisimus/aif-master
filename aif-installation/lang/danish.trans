@@ -563,13 +563,11 @@ _yesno_tnc_body="\nSæt et sæt forskellige forbindelser for Netværksmanager?\n
 _yn_s_tnc_ttl="Opsætning af Netværksmanager-forbindelser"
 _yn_s_tnc_bd="\nVil du vælge yderligere forbindelsestyper til Netværksmanager?\n"
 
-# Programs to TimeShoft and Github-Desktop
+# Programs to TimeShift
 _yesno_timeshift_title="Install Timeshift"
 _yesno_timeshift_body="\nInstallere Timeshift?\n"
-_yesno_github_desktop_title="Install Github-Desktop"
-_yesno_github_desktop_body="\nInstallere Github-Desktoppen?\n"
 
-# Config Disk Devaces
+# Config Disk Devices
 _sh_dev_title="Valg af enhed"
 _sh_dev_body="\nVælg den ønskede enhed\n"
 _rsvd_nfo1="Enhed"
@@ -595,9 +593,7 @@ _info_tmpfs_body="\n$_info_tmpfs_bd1\n$_info_tmpfs_bd2\n$_info_tmpfs_bd3\n$_info
 _input_size_tmpfs_title="Indtast tmp-mappens størrelse"
 _input_size_tmpfs_body="\nIndtast den ønskede mængde. F. eks.: 1G\n"
 
-# Shell and Windows Fonts
-_yn_win_fnts_ttl="Installerer Vinduesskrifttyper"
-_yn_win_fnts_bd="\nInstallere vinduesskrifttyper?\n"
+# Shell
 _shell_friendly_menu="SKALMARKERING og installation"
 _select_shell_menu_ttl="Valg af skallen der skal installeres"
 _select_shell_menu_bd="\nVælg venligst Skal for bruger"
@@ -607,19 +603,6 @@ _scrn_strp_ttl="Opsætning af skærmterminal velkomst"
 _scrn_strp_bd="\nTilføj filmmanuskription ved opstart?\n"
 _menu_ch_usr_ttl="Brugervalg"
 _menu_ch_usr_bd="\nVælg de brugere for hvem du ønsker at ændre skallen\n"
-
-# General Menu Package
-_InstGeMenuGE="Install fælles pakker og programmer"
-_menu_gen_title="Install fælles pakker og programmer"
-_menu_gen_body="\nInstall fælles pakker og programmer for alle skrivebordsmiljøer.\n"
-_menu_gengen="Installerer delte pakker"
-_menu_archivers="Installation af arkivstøtte"
-_menu_ttf_theme="Install skrifttyper og temaer"
-_menu_add_pkg="Installation af minimumsprogrammelpakken"
-_menu_extra_pkg="Installation af supplerende programmer (kicad,v-kasse, vin)."
-_menu_pkg_meneger="Installerer en grafisk pakkehåndtering, pacman"
-_ch_mn_bd="\nVælg de nødvendige pakker der skal installeres.\n"
-_pm_menu_body="\nVælg pakkehåndteringen der skal installeres.\n"
 
 # Information to search and installation on packages your system
 _nfo_search_pkg_title="Vent venligst"
@@ -643,23 +626,9 @@ _CloseInstBody="Luk Installationen?"
 _yesno_order_ttl="Pass flere menuer"
 _yesno_order_bd="\nHar du en LTS-kerne installeret?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installerer PlayStation-3-emulatoren"
-_yesno_rpcs3_bd="\nInstallere PlayStation-3 emulator?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Indstilling Af Bluetooth"
 _yesno_bluetooth_bd="\nAt installere drivere og enhedshåndteringen bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Installerer pakker fra AUR"
-_aur_pkg_bd="\nVælg venligst de pakker du skal installere!\n"
-_aur_dbl_pkg_ttl="Pakningsstørrelse"
-_aur_dbl_pkg_bd="\nDenne pakke har flere versioner.\nVælg den, du har brug for!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installation af emulatorer"
-_eml_pkg_bd="\nVælg venligst de emulatorer du skal installere!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Slet logfilen?"
@@ -753,14 +722,6 @@ _yn_netctl_bd="\nØnsker at vælge en skabelon og redigere det ?\n"
 _ntctl_tmpmn_bd="\nVælg den ønskede skabelon for et netværk Manager netctl.\n"
 _inntctl_ttl="Indtast navnet på den skabelon, netctl"
 _inntctl_bd="\nIndtast venligst et nyt skabelon\navn.\n"
-#
-# Wifi template configuration
-_msg_wt_ttl="Trådløse netværk."
-_msg_wt_bd="\nDu har valgt en skabelon til dit trådløse netværk. Denne skabelon kræver, at du indtaster det trådløse netværks SSID og password. Indstillingen vil blive introduceret til dit nye skabelon. Hvis denne indstilling er ikke nødvendig, bare efterlade tomt.\n"
-_ib_ssid_ttl="Indtast SSID ' et for det trådløse netværk"
-_ib_ssid_bd="\nAngiv navnet på dit trådløse netværk.\n"
-_ib_pass_ttl="Indtast adgangskoden til det trådløse netværk"
-_ib_pass_bd="\nIndtast adgangskoden til det trådløse netværk\n"
 #
 # Network time protocol server language
 _mn_tmsnc_ttl="Synkronisering af tid"

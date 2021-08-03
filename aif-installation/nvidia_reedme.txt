@@ -1,0 +1,119 @@
+ 
+
+nvidia (lts)
+nvidia-dkms (lts)
+nvidia-340xx (lts)
+nvidia-340xx-dkms (lts)
+nvidia-390xx (lts)
+nvidia-390xx-dkms (lts)
+
+
+
+Pacman: /etc/pacman.conf
+
+IgnorePkg   = nvidia-settings nvidia-utils nvidia-dkms nvidia-lts nvidia-lts-dkms nvidia opencl-nvidia lib32-opencl-nvidia
+
+IgnorePkg   = nvidia-settings nvidia-utils nvidia-dkms nvidia-lts-dkms nvidia-lts nvidia opencl-nvidia lib32-opencl-nvidia lib32-nvidia-340xx-utils lib32-opencl-nvidia-340xx nvidia-340xx nvidia-340xx-dkms nvidia-340xx-lts nvidia-340xx-lts-dkms nvidia-340xx-utils opencl-nvidia-340xx
+
+IgnorePkg   = nvidia-settings nvidia-utils nvidia-dkms nvidia-lts nvidia-lts-dkms nvidia opencl-nvidia lib32-opencl-nvidia lib32-nvidia-390xx-utils lib32-opencl-nvidia-390xx libxnvctrl-390xx nvidia-390xx nvidia-390xx-dkms opencl-nvidia-390xx
+
+
+
+/etc/lightdm/lightdm-gtk-greeter.conf
+
+[greeter]
+theme-name = Adwaita
+icon-theme-name = Adwaita
+background = /usr/share/wallpapers/3D_Walpaper/looking-out.jpg
+default-user-image = #avatar-default-symbolic
+panel-position = bottom
+indicators = ~spacer;~separator;~session;~separator;~layout;~separator;~language;~separator;~a11y;~separator;~power;~separator;~spacer;~host;~spacer;~clock;~spacer
+
+
+GreetMessage=Welcome to %hostname%
+
+Autologin:
+# groupadd -r autologin
+# gpasswd -a username autologin
+
+/etc/lightdm/lightdm-gtk-greeter.conf
+[Seat:*]
+pam-service=lightdm
+pam-autologin-service=lightdm-autologin
+autologin-user=username
+autologin-user-timeout=0
+
+
+
+
+/etc/lxdm/lxdm.conf
+# bg=/usr/share/backgrounds/default.png
+
+Enabling Auto-Login
+/etc/lxdm/lxdm.conf
+[base]
+# autologin=carl
+
+Enable Timeout Auto-Login
+/etc/lxdm/lxdm.conf
+#timeout=10
+
+
+
+/etc/sddm.conf.d/autologin.conf
+[Autologin]
+User=ivan
+Session=plasma.desktop
+
+
+
+
+SLiM:
+ cp /path/to/new_background.jpg /usr/share/slim/themes/<theme_name>/background.jpg
+Enable Autologin:
+Edit /etc/slim.conf to uncomment the auto_login command and replace no with yes:
+/etc/slim.conf
+auto_login          yes
+
+
+
+
+/etc/gdm/custom.conf
+# Enable automatic login for user
+[daemon]
+AutomaticLogin=username
+AutomaticLoginEnable=True
+
+or for an automatic login with a delay:
+/etc/gdm/custom.conf
+[daemon]
+TimedLoginEnable=true
+TimedLogin=username
+TimedLoginDelay=1
+
+
+
+
+
+
+https://download.xnview.com/XnViewMP-linux.tgz
+https://download.xnview.com/XnViewMP-linux-x64.tgz
+
+xnview.sh
+
+dirname_start=$(readlink -e "$0")
+dirname=$(dirname "$dirname_start")
+
+XnView.desktop
+
+Terminal=false
+TryExec=./xnview.sh
+Exec=./xnview.sh %F
+Icon=./xnview.png
+
+
+
+
+
+
+
