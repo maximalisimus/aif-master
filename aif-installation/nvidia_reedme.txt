@@ -126,7 +126,17 @@ set mydesk (xdg-user-dir DESKTOP)
 echo "$mydesk"
 
 
+$ cat ~/.config/user-dirs.dirs | grep -Ei "^xdg*" | cut -d "=" -f1 | sed 's/XDG_//g' | sed 's/_DIR//g'
+DESKTOP
+DOWNLOAD
+TEMPLATES
+PUBLICSHARE
+DOCUMENTS
+MUSIC
+PICTURES
+VIDEOS
 
+$ xdg-user-dirs-update --set DOWNLOAD ~/Internet
 
 
 
