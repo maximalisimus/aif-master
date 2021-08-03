@@ -35,6 +35,12 @@ GreetMessage=Welcome to %hostname%
 Autologin:
 # groupadd -r autologin
 # gpasswd -a username autologin
+sudo groupadd test
+sudo usermod -G -a имя_группы имя_пользователя
+
+sudo usermod -R группа пользователь
+sudo delgroup имя_группы
+
 
 /etc/lightdm/lightdm-gtk-greeter.conf
 [Seat:*]
