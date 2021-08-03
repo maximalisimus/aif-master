@@ -117,3 +117,12 @@ Icon=./xnview.png
 xdg-user-dir DESKTOP
 xdg-user-dirs-update
 
+bash:
+mydesk=$(xdg-user-dir DESKTOP)
+echo "${mydesk}"
+
+fish:
+set mydesk (xdg-user-dir DESKTOP)
+echo "$mydesk"
+
+
