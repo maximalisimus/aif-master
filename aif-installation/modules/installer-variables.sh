@@ -38,8 +38,6 @@ NVIDIA_INST=0               # Indicates if NVIDIA proprietary driver has been in
 SHOW_ONCE=0                 # Show de_wm information only once
 _nvd_dep_once=0				# Nvidia dependensis once
 _nvd_dep_mn=""				# Nvidia dependensis menu
-_nvdthf_once=0				# Nvidia 340 download packages in repositories once
-_nvdthn_once=0				# Nvidia 390 download packages in repositories once
 _dm_menu_once=0             # Dm menu once forms to search dm
 _nm_once=0                  # Nm menu once forms to search nm
 _wifi_menu=""
@@ -228,13 +226,6 @@ _ntp_cl_str_1="restrict"
 _ntp_cl_str_2="mask"
 _ntp_cl_str_3="nomodify notrap"
 _ntp_client_str=""
-
-# Package manager init
-_pm_uniq=""
-_pm_n=""
-_pm_menu=""
-_required_packages=""
-_pm_once=0
 
 # Color dialog configurated
 _dlgrc_hm_sts=0
