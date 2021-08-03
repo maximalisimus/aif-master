@@ -1,0 +1,788 @@
+##
+##                          
+## File di traduzione Italiano      
+##                              
+##
+## Scritto da Frank G (20-Nov-2015)
+##
+##
+
+# Accessibilità
+_InstAccOpt="Pacchetti di accessibilità (opzionale)"
+_InstAccTitle=" Installare pacchetti di accessibilità "
+_InstAccBody="Selezionare i pacchetti di accessibilità desiderati."
+
+# btrfs
+_btrfsSVTitle=" Sottovolumi di btrfs "
+_btrfsSVBody="Creare dei sottovolumi di btrfs?\n\nUn sottovolume iniziale sarà creato e poi montato. Altri sottovolumi che si diramano da questo possono essere in seguito creati.\n\nAltrimenti è possibile passare direttamente alle opzioni di montaggio.\n"
+_btrfsSVTitle=" Nome del sottovolume btrfs "
+_btrfsMSubBody1="Inserire il nome del sottovolume iniziale da montare (per esempio ROOT). Possono poi essere selezionate le opzioni di montaggio. Una volta montato, tutti gli altri sottovolumi creati "
+_btrfsMSubBody2="si dirameranno da esso."
+_btrfsSVErrTitle=" Nome errato del sottovolume btrfs "
+_btrfsSVErrBody="Spazi vuoti non sono permessi. Per favore prova di nuovo.\n"
+_btrfsSVBody1="Inserire il nome del sottovolume"
+_btrfsSVBody2="da creare dentro"
+_btrfsSVBody3="\n\nQuesto processo sarà ripetuto fino a quando un asterisco (*) non sarà inserito come nome del sottovolume.\n\nSottovolumi creati:"
+_btrfsMntTitle=" Opzioni di montaggio btrfs "
+_btrfsMntBody="Usare [Spazio] per de/selezionare le opzioni di montaggio desiderate e leggere accuratamente. Non selezionare multiple versioni della stessa opzione."
+_btrfsMntConfBody="Confermare le seguenti opzioni di montaggio:\n\n"
+
+# Fatto!
+_DoneMsg="\nFatto!\n\n"
+
+# Partizionamento automatico
+_AutoPartBody1="Attenzione: TUTTI i dati contenuti"
+_AutoPartBIOSBody2="saranno distrutti.\n\nVerrà creata una singola partizione che utilizza tutto lo spazio disponibile. Se si intende utilizzare la SWAP, selezionare l'opzione 'File di Swap' durante il montaggio.\n\nVuoi continuare? "
+_AutoPartUEFIBody2="saranno distrutti.\n\nUna partizione di avvio UEFI di 512 MB sarà creata per prima, seguita da una seconda partizione di sistema utilizzante tutto lo spazio rimanente. Se si intende utilizzare la SWAP, selezionare l'opzione 'File di Swap' durante il montaggio.\n\nVuoi continuare?"
+
+# Attendere prego...
+_PlsWaitBody="\nAttendere prego...\n\n"
+
+# Messaggi d'errore. Tutti gli altri sono generati da BASH.
+_ErrTitle=" Errore "
+_ErrNoMount="\nLa/Le partizione/i deve/devono essere montata/e per prima/e.\n\n"
+_ErrNoBase="\nArch base deve essere istallata per prima.\n\n"
+
+# Installazioni su Vbox
+_VBoxInstTitle=" Installazione su VirtualBox "
+_VBoxInstBody="\nSe per qualche ragione i moduli Guest di Virtualbox non sono caricati dal sistema installato (per esempio, bassa risoluzione e barre di scorrimento dopo l'avvio), questa serie di comandi correggerà il problema:\n\n$ su\n# depmod -a\n# modprobe -a vboxvideo vboxguest vboxsf\n# reboot"
+
+# Selezionare il/i driver del Firmware Wireless
+_InstWirelessFirm="Installare il Firmware della periferica Wireless"
+_WirelssFirmTitle=" Selezionare il Firmware della periferica Wireless "
+_WirelssFirmBody="\nAlcune periferiche wireless richiedono un firmware addizionale da installare per funzionare.\n\nDove insicuri se un firmware addizionale è richiesto - o quale selezionare - tutti possono essere installati."
+_SeeWirelessDev="Visualizzare le periferiche Wireless (opzionale)"
+_WirelessShowTitle="Periferica Wireless "
+_WirelessErrBody="\nNessuna rilevata.\n"
+_All="Tutte"
+
+# Selezionare i file di configurazione
+_SeeConfOpt="Controllare i file di configurazione (opzionale)"
+_SeeConfOptTitle=" File di configurazione "
+_SeeConfOptBody="\nSelezionare ogni file elencato di seguito per essere controllato o modificato.\n"
+_SeeConfErrTitle=" Controllare errore "
+_SeeConfErrBody1="\nIl file non esiste.\n\n"
+_SeeConfErrBody2="\nIl sistema di Base deve essere installato per primo.\n\n"
+
+# Pacman
+_PrepPacKey="Aggiornare le chiavi di Pacman"
+
+# LUKS / DM-Crypt / Encryption
+_PrepLUKS="Crittografia LUKS (opzionale)"
+_LuksMenuBody="\nI dispositivi e volumi crittografati con dm_crypt non possono essere montati o visualizzati senza prima essere sbloccati da una chiave o password."
+_LuksMenuBody2="\n\nÈ necessaria una partizione di boot separata senza cifratura o Logical Volume Management (LVM - tranne GRUB su BIOS)."
+_LuksMenuBody3="\n\nL'opzione Automatica usa impostazioni crittografiche tipiche, ed è raccomandata per i principianti. Eventualmente, è possibile specificare algoritmo e grandezza chiave manualmente."
+_LuksOpen="Apri Partizione Crittografata"
+_LuksOpenBody="\nSpecificare un nome per il dispositivo a blocchi crittografato. Non è necessario sia preceduto da /dev/mapper. Viene mostrato un esempio."
+_LuksEncrypt="Crittografia LUKS Automatica"
+_LuksEncryptAdv="impostare lunghezza chiave e algoritmo di cifratura"
+_LuksEncryptBody="\nSelezionare una partizione da crittografare."
+_LuksEncruptSucc="\nFatto! Aerta e pronta per LVM (raccomandato) o montaggio diretto.\n"
+_LuksPartErrBody="\nDevono essere crittografate almeno due partizioni:\n\n1. Root (/) - ammesse partizioni standard o lvm.\n\n2. Boot (/boot or /boot/efi) - solo partizioni standard (o lvm con Grub su BIOS).\n"
+_SelLuksRootBody="\nSelezionare la partizione ROOT (/) da crittografare. Arch sarà installata qui.\n\n"
+_LuksPassBody="\nInserire una aprola chiave per de/crittare la partizione. Dovrebbe essere differente da quella usata per l'account Root o gli account utente.\n"
+_LuksWaitBody="\nCreazione partizione Root crittografata in corso:"
+_LuksWaitBody2="Volume o dispositivo in uso:"
+_LuksCipherKey="\nUna volte modificati i parametri, saranno automaticamente utilizzati per il comando 'cryptsetup -q luksFormat /dev/...' .\n\nNOTA: l'uso di key files non è supportato; potranno essere aggiunti manualmente al termine dell'installazione. Non specificare parametri addizionali come -v (--verbose) o -y (--verify-passphrase).\n"
+
+
+# Gestore logico dei volumi
+_PrepLVM="Gestore logico dei volumi (opzionale)"
+
+_LvmDetTitle=" LVM rilevato "
+_LvmDetBody1="\nÈ stato rilevato un gestore logico dei volumi (LVM). Le partizioni già utilizzate per LVM non possono essere selezionate. Vuoi disattivare LVM già esistente?\n\nSeleziona 'Sì' per rimuovere LVM esistente.\nSeleziona 'No' per mantenerlo.\n"
+_LvmRmTitle=" Disattivazione LVM "
+_LvmDetBody2="\n Rilevata la presenza di un gestore logico dei volumi (LVM) esistente. Attivazione in corso. Attendere prego...\n\n"
+_LvmRmBody="\nDisattivazione di tutti i Volumi Fisici (PV), Gruppi di Volumi (VG) e Volumi Logici (LV) in corso.\n\nAttendere prego...\n\n"
+
+_LvmPartErrTitle=" Errore di partizionamento LVM "
+_LvmPartErrBody="\nNon vi è alcuna partizione utilizzabile per il gestore logico dei volumi. Ne è necessaria almeno una.\n\n Se LVM è già in uso, la sua disattivazione permetterà di riutilizzarne le partizioni impiegate come Volumi Fisici.\n\n"
+
+_LvmNameVgTitle=" LVM - Assegna un nome al Gruppo di Volumi "
+_LvmNameVgBody="\nInserisci un nome per il nuovo Gruppo di Volumi (VG).\n\nIl VG è il nuovo 'dispositivo virtuale / hard-disk' che verrà utilizzato, successivamente, per la creazione delle partizioni.\n"
+
+_LvmNameVgErrTitle=" LVM - Errore del nome del VG "
+_LvmNameVgErr="\nIl nome inserito non è valido. Il nome del Gruppo di Volumi può essere alfanumerico ma non può contenere spazi, iniziare con il carattere '/' o essere già stato assegnato.\n\n"
+
+_LvmPvSelTitle=" LVM - Seleziona le partizioni "
+_LvmPvSelBody="\nSeleziona le partizioni da destinare al Volume Fisico (PV).\n"
+_LvmPvCreateTitle=" LVM - Partizione aggiunta "
+
+_LvmPvConfTitle=" LVM - Crea Gruppo di Volumi "
+_LvmPvConfBody1="\nConferma la creazione del Gruppo di Volumi "
+_LvmPvConfBody2="con le seguenti partizioni:\n\n"
+
+_LvmPvActTitle=" LVM - Creazione del VG "
+_LvmPvActBody1="\nCreazione ed attivazione del Gruppo di Volumi in corso "
+_LvmPvActBody2="\n\nAttendere prego...\n\n"
+
+_LvmPvDoneTitle=" LVM - Creato VG "
+_LvmPvDoneBody1="\nIl Gruppo di Volumi "
+_LvmPvDoneBody2="è stato creato"
+
+_LvmLvNumTitle=" LVM - Crea Volumi Logici "
+_LvmLvNumBody1="\nInserisci il numero di Volumi Logici (LVs) che vuoi creare "
+_LvmLvNumBody2="Il minimo è 1, il massimo è 9.\n\nI Volumi Logici sono essenzialmente delle partizioni. L'ultimo (o unico) Volume Logico utilizzerà automaticamente il 100% dello spazio rimanente nel Gruppo di Volumi."
+
+_LvmLvNumErrTitle=" LVM - Errore del numero di LV "
+_LvmLvNumErrBody="\nIl numero inserito non è valido. Il minimo è 1, il massimo è 9.\n\n"
+
+_LvmLvNameTitle=" LVM - Assegna un nome al LV " 
+_LvmLvNameBody1="\nInserisci un nome per il nuovo Volume Logico (LV).\n\nQuesta operazione equivale ad assegnare un nome / una etichetta ad una partizione.\n"
+_LvmLvNameBody2="\nATTENZIONE: Questo LV utilizzerà automaticamente tutto lo spazio rimanente nel Gruppo di Volumi"
+
+_LvmLvNameErrTitle=" LVM - Errore del nome del LV "
+_LvmLvNameErrBody="\nIl nome inserito non è valido. Il nome del Volume Logico (LV) può essere alfanumerico ma non può contenere spazi o iniziare con il carattere '/'.\n\n"
+
+_LvmLvSizeTitle=" LVM - Imposta la dimensione del LV "
+_LvmLvSizeBody1="rimanenti"
+_LvmLvSizeBody2="\n\nInserisci la dimensione del Volume Logico (LV) in Megabyte (M) o Gigabyte (G). Ad esempio, 100M creerà un Volume Logico con dimensione pari a 100 Megabyte. 10G creerà un Volume Logico con dimensione pari a 10 Gigabyte.\n"
+
+_LvmLvSizeErrTitle=" LVM - Errore d'impostazione della dimensione del LV "
+_LvmLvSizeErrBody="\nIl valore immesso non è valido. È necessario inserire un valore numerico che termini con una 'M' (Megabyte) o una 'G' (Gigabyte).\n\nAd esempio, 100M, 10G, o 250M. Il valore non deve inoltre essere maggiore o uguale dello spazio rimanente nel VG.\n\n"
+
+_LvmLvDoneTitle=" LVM - Volume Logico creato "
+
+_LvmCompTitle=" LVM - Operazione completata "
+_LvmCompBody="\nFatto! Sono stati creati tutti i Volumi Logici per il Gruppo di Volumi.\n\nVuoi visionare la nuova struttura del LVM?\n\n"
+
+
+# Mostra dispositivi e partizioni
+_DevShowTitle=" Dispositivi / Partizioni "
+_DevShowOpt="Elenca i dispositivi (opzionale)"
+
+# Verifica dei requisiti  e identifica tipo di sistema
+_ChkTitle=" Verifica dei requisiti "
+_ChkBody="\nVerifico che l'installer sia stato eseguito come Root e che vi sia una connessione ad internet attiva. Attendere prego...\n\n"
+
+_RtFailTitle=" Requisito di Root non soddisfatto "
+_RtFailBody="\nL'installer deve essere eseguito come Root. Procedura terminata.\n\n"
+
+_ConFailTitle=" Errore della connessione ad Internet "
+_ConFailBody="\nIl test della connessione ad Internet è fallito. Procedura terminata.\n\n"
+
+_ReqMetTitle=" Requisiti soddisfatti  "
+_ReqMetBody="\nTutti i controlli sono stati superati!\n\n"
+
+_UefiDet="Rilevato sistema UEFI"
+_BiosDet="Rilevato sistema BIOS"
+
+# Programma di installazione della lista dei Mirror
+_MirrorlistTitle=" Lista dei mirror "
+_MirrorlistBody="\nLa lista dei mirror contiene gli indirizzi dei server utilizzati da pacman per installare i pacchetti. Pacman contatta i server seguendo l'ordine configurato.\n\n"
+_MirrorbyCountry="Crea una lista per Nazione"
+_MirrorEdit="Modifica manualmente la lista dei mirror"
+_MirrorRank="Ordina la lista dei mirror per server più veloci"
+_MirrorRestore="Ripristina la lista dei mirror originale"
+_MirrorRankTitle=" Esegui RankMirrors "
+_MirrorRankBody="\nRicerca dei server più veloci dalla lista dei mirror. Attendere prego...\n\n"
+_MirrorRankDone="\nFatto! La lista dei mirror è stata ordinata per server più veloci.\n\n"
+_MirrorRestDone="\nFatto! La lista dei mirror originale è stata ripristinata.\n\n"
+_MirrorNoneTitle=" Errore della lista dei mirror "
+_MirrorNoneBody="\nUna copia della lista dei mirror originale non è stata trovata.\n\n"
+
+# Lista dei mirror generata per Nazione
+_MirrorCntryTitle=" Scegli una Nazione "
+_MirrorCntryBody="\nVerrà creata una lista dei mirror localizzati nella Nazione selezionata.\n\nDopo averla controllata, potrai decidere se utilizzarla o meno."
+_MirrorGenTitle=" Creazione della lista dei mirror "
+_MirrorGenBody="\nCreazione della lista dei mirror. Attendere prego...\n\n"
+_MirrorGenQ="Vuoi usare la lista creata per l'installazione?"
+_MirrorGenDone="\nFatto! La lista dei mirror originale è stata salvata come:\n\n/etc/pacman.d/mirrorlist.orig\n\n"
+_yesno_multilib_title="Connessioni del repository multilib"
+_yesno_multilib_body="\nCollegare il repository Multilib?\n"
+_yesno_mirrorlist_body="\nInstallare l'elenco mirror creato in precedenza?\n"
+
+# Impostazione tastiera (vconsole)
+_KeymapTitle=" Tastiera "
+_KeymapBody="\nScegli la disposizione dellla tastiera."
+
+# Impostazione Xkbmap (ambiente desktop)
+_XkbmapTitle=" Ambiente Desktop X11 "
+_XkbmapBody="\nSeleziona la disposizione della testiera."
+_xkb_menu_title="Configurare la tastiera per il server X (xkbmap)"
+_xkb_menu_body="\nUtilizzare i tasti 'UP' e 'DOWN' per navigare, 'Enter' per selezionare il menu.\n"
+_xkb_layout_menu="Lingua della tastiera"
+_xkb_model_menu="Modello di tastiera"
+_xkb_variant_menu="Disposizione dei tasti Di Prelievo"
+_xkb_options_menu="Opzioni aggiuntive"
+_xkb_indicate_title="Accensione / spegnimento dei LED"
+_xkb_indicate_body="\nUtilizzare i tasti 'UP' e 'DOWN' per navigare, 'Barra spaziatrice' per attivare o disattivare le opzioni.\n"
+_indicate_caps_lock="Indicatore Caps Lock"
+_indicate_num_lock="Indicatore Num Lock"
+_indicate_scroll_lock="Indicatore Scroll Lock"
+_xkb_switch_title="Selezione dei tasti per passare da un layout"
+_xkb_switch_body="\nUtilizzare i tasti 'UP' e 'DOWN' per navigare, 'Enter' per selezionare il menu.\n"
+_xkb_var_title="Posizioni dei tasti Di Prelievo"
+_xkb_var_body="\nUtilizzare i tasti 'UP' e 'DOWN' per navigare, 'Enter' per selezionare il menu.\n"
+_xkb_list_title="Selezione della lingua della tastiera"
+_xkb_list1_body="\nSi prega di scegliere la lingua del layout di tastiera di lavoro.\n"
+_xkb_list2_body="\nSi prega di scegliere la seconda lingua per cambiare il layout.\n"
+_xkb_mdl_title="Modello di tastiera"
+_xkb_mdl_body="\nUtilizzare i tasti 'UP' e 'DOWN' per navigare, 'Enter' per selezionare il menu.\n"
+_yesno_user_layout_title="Selezione della seconda lingua per cambiare il layout della tastiera"
+_yesno_user_layout_body="\nVuoi scegliere la seconda lingua per cambiare il layout della tastiera.\n"
+_yesno_xkb_model_title="Modifica del modello di tastiera"
+_yesno_xkb_model_body="\nIl modello di tastiera predefinito è pc-105. Vuoi cambiare?\n"
+_yesno_variant_title="Modifica della posizione dei tasti di layout della tastiera"
+_yesno_varinant_body="\nPer impostazione predefinita, la posizione dei tasti di scelta rapida è 'qwerty'. Vuoi cambiare?\n"
+_yesno_options_title="Modificare i tasti di commutazione del layout e attivare / disattivare gli indicatori"
+_yesno_options_body="\nPer impostazione predefinita, i tasti di commutazione del layout sono 'Control + Shift' e L'indicatore Num Lock è acceso. Vuoi cambiare?\n"
+_inf2="I seguenti parametri verranno impostati:"
+_inf_l="Lingua del layout della tastiera:"
+_inf_m="Modello di tastiera:"
+_inf_v="Disposizione dei tasti Di Prelievo:"
+_inf_o="Opzioni aggiuntive"
+_xkb_info_title="Alcune impostazioni della tastiera sono mancanti"
+_xkb_info_body=""
+
+# Impostazione Localizzazione
+_LocateTitle=" Seleziona una localizzazione del linguaggio "
+_localeBody="Seleziona una localizzazione"
+_LocaleConsoleTitle="Configurazione della console"
+_LocaleConsoleBody="Selezionare le impostazioni locali desiderate"
+
+# Impostazione fuso orario
+_TimeZTitle=" Seleziona il fuso orario "
+_TimeZBody="\nIl fuso orario è utilizzato per impostare correttamente l'ora del sistema."
+_TimeSubZTitle=" Seleziona la zona di fuso orario "
+_TimeSubZBody="\nSeleziona la città più vicina alla tua posizione."
+_TimeZQ="Imposta il fuso orario come"
+
+# Impostazione orologio hardware 
+_HwCTitle=" Configura l'orologio hardware "
+_HwCBody="\nUTC è il tempo universale standard ed è generalmente raccomandato eccetto in configurazioni di dual-boot con Windows."
+_HwCUTC="UTC"
+_HwLocal="Ora locale" 
+
+# Generare FSTAB
+_FstabTitle=" Genera FSTAB "
+_FstabBody="\nIl file FSTAB (File System TABle) permette di specificare quali dispositivi di archiviazione e partizioni dovranno essere caricati, e come saranno utilizzati.\n\nUUID/PARTUUID (Identificativo Univoco Universale) è il metodo raccomandato.\n\nSe non sono già state configurate precedentemente delle etichette per le partizioni, verranno utilizzati i nomi dei dispositivi per configurarle."
+_FstabDev="Dev (identificativo della partizione)"
+_FstabLabel="Etichetta (definita dall'utente)"
+_FstabUUID="UUID/PARTUUID (identificativo univoco)"
+
+# Verifica FSTAB - rimuovere
+#_FstabChkTitle=" Verifica FSTAB "
+#_FstabChkBody="\nSi prema di contrallare il file di configurazione di FSTAB, prima di chiuderlo per continuare.\n\n"
+
+# Impostazione Hostname
+_HostNameTitle=" Configura l'hostname "
+_HostNameBody="\nL'hostname è utilizzato per identificare il sistema all'interno di una rete.\n\nPuò essere composto di soli caratteri alfanumerici, può inoltre contenere un trattino (-) - ma non all'inizio o alla fine del nome - e non può essere più lungo di 63 caretteri.\n"
+
+# Impostare la password di Root
+_PassRtTitle=" Impostare la password di Root "
+_PassRtBody="\nImmetti la password di Root\n\n"
+_PassRtBody2="\nImmetti nuovamente la password di Root\n\n"
+
+# Errore della password di Root
+_PassRtErrTitle=" Errore di corrispondenza password "
+_PassRtErrBody="\nLe password di Root digitate non corrispondono. Provare nuovamente.\n\n"
+
+# Crea un nuovo utente
+_NUsrTitle=" Crea un nuovo utente "
+_NUsrBody="\nImmetti il nome utente. Le lettere che lo compongono DEVONO essere minuscole.\n"
+
+# Errore del username
+_NUsrErrTitle=" Errore del nome utente "
+_NUsrErrBody="\nE' stato scelto un nome utente non valido. Provare nuovamente.\n\n"
+
+# Impostare la password dell'utente
+_PassNUsrTitle=" Impostare la password dell'utente "
+_PassNUsrBody="\nImmetti la password per" 
+_PassNUsrBody2="\nImmetti nuovamente la password per"
+
+# Crea un nuovo utente
+_NUsrSetTitle=" Impostazioni Utente "
+_NUsrSetBody="\nCreazione utente ed impostazioni gruppi\n\n"
+
+# Errore della password dell'utente
+_PassNUsrErrTitle=" Errore di corrispondenza password "
+_PassNUsrErrBody="\nLe password dell'account utente digitate non corrispondono. Provare nuovamente.\n\n"
+
+# Montaggio (Partizioni)
+_MntStatusTitle=" Status del montaggio "
+_MntStatusSucc="\nMontaggio corretto!\n\n"
+_MntStatusFail="\nMontaggio fallito!\n\n"
+_Mnt_Status_Title="Stato di montaggio"
+_Mnt_Body="Utilizzare [Barra spaziatrice] per selezionare / deselezionare le opzioni di montaggio e l'ispezione dettagliata. Si prega di non selezionare più versioni delle stesse opzioni."
+_Mnt_Conf_Body="Confermare le seguenti opzioni di montaggio:\n\n"
+
+# Seleziona il Dispositivo (installazione)
+_DevSelTitle=" Seleziona il dispositivo "
+_DevSelBody="\nI dispositivi (/dev) sono gli hard disk ed i supporti di memorizzazione USB idonei all'installazione. Il primo è /sda, il secondo /sdb e così via.\n\nSe si utilizza un supporto USB per avviare Architect, prestare attenzione poichè quest'ultimo sarà anch'esso elencato!"
+
+# Seleziona il dispositivo (Grub) - un corpo di testo separato non è necessario (utilizza il testo standard del dispositivo )
+_DevSelGrubTitle=" Seleziona il dispositivo su cui installare Grub "
+
+# Strumento di partizionamento
+_PartToolTitle=" Strumento di partizionamento del disco "
+_PartToolBody="\nUna opzione di partizionamento automatico è disponibile per i principianti. CFDisk è consigliato per BIOS, Parted per UEFI.\n\nNON utilizzare uno strumento di partizionamento compatibile solo con UEFI/GPT per un sistema che supporta solo BIOS/MBR poichè ciò potrebbe causare gravi problemi all'installazione, ad esempio rendere il sistema operativo non avviabile"
+
+# Errore di partizionamento UEFI
+_UefiPartErrTitle=" Errore di partizionamento UEFI " 
+_UefiPartErrBody="\nI sistemi UEFI richiedono un minimo di due partizioni per completare correttamente l'installazione (ROOT e UEFI).\n\nConfigura nuovamente le tue partizioni.\n\n"
+
+# Errore di partizionamento BIOS
+_BiosPartErrTitle=" Errore di partizionamento BIOS "
+_BiosPartErrBody="\nI sistemi BIOS necessitano un minimo di una partizione per completare corretamente l'installazione (ROOT).\n\nConfigura nuovamente le tue partizioni."
+
+# File System
+_FSTitle=" Scegli il Filesystem "
+_FSBody="\nExt4 è la scelta consigliata. Non tutti i filesystem sono utilizzabili per la partizione di Root o quella di Boot. Ciascuno dispone di funzionalità e limitazioni differenti."
+_FSSkip="Salta / Nessuno" 
+
+# Select Root
+_SelRootTitle=" Seleziona la partizione di Root "
+_SelRootBody="\nQuesta è la partizione dove Arch sarà installato."
+
+# Select SWAP
+_SelSwpTitle=" Seleziona la partizione di Swap "
+_SelSwpBody="\nQualora si decidesse di utilizzare un file di Swap, questo sarà della stessa dimensione della RAM installata."
+_SelSwpNone="Nessuna"
+_SelSwpFile="File di Swap"
+
+# Select UEFI
+_SelUefiTitle=" Seleziona la partizione UEFI "
+_SelUefiBody="\nQuesta è una partizione speciale utilizzata per avviare i sistemi UEFI."
+
+# Format UEFI
+_FormUefiTitle=" Partizione UEFI "
+_FormUefiBody="La partizione UEFI"
+_FormUefiBody2="è già stata formattata.\n\nVuoi formattarla nuovamente? In caso affermativo verranno eliminati TUTTI i dati memorizzati su di essa.\n\n"
+
+# UEFI Options
+_OptUefiTitle=" Opzioni punto di montaggio UEFI "
+_OptUefiBody="\nI bootloader che possono essere installati successivamente dipenderanno dal punto di montaggio assegnato alla partizione UEFI.\n\n- Grub2 e systemd-boot non hanno preferenze del punto di montaggio di UEFI.\n- rEFInd richiede che il punto di montaggio sia /boot/efi.\n\nNOTA: rEFInd con LVM non è supportato e le installazioni dovranno essere aggiornate manualmente. Pertanto rEFInd è consigliato solo agli utenti esperti.\n"
+
+# Punto di montaggio UEFI
+_MntUefiTitle="  Seleziona il punto di montaggio UEFI "
+_MntUefiBody="\nrEFInd richiede /boot/efi. systemd-boot richiede /boot. Grub funzionerà in entrambi i casi."
+
+# Extra Partitions
+_ExtPartTitle=" Seleziona le partizioni addizionali "
+_ExtPartBody="\nSeleziona le partizioni addizionali in qualsiasi ordine, altrimenti scegli 'Fatto' per concludere."
+
+# Name Extra Partitions
+_ExtNameTitle=" Assegna un nome alle partizioni:"
+_ExtNameBodyUefi="\nAd esempio: /home o /var.\n\nAssicurati che il nome sia preceduto da una barra (/)."  # UEFI Systems
+_ExtNameBodyBios="\nAd esempio: /boot o /home.\n\nAssicurati che il nome sia preceduto da una barra (/)." # BIOS Systems
+
+# Extra Partition Naming Error
+_ExtErrTitle=" Nome della partizione non valido "
+_ExtErrBody="\nLa partizione non può essere montata. E' necessario specificare un nome dopo la barra (/).\n\n"
+
+# Install Base
+_InstBseTitle=" Installa sistema di base "
+_InstBseBody="\nIl kernel più aggiornato supporta l'hardware più recente. Il kernel LTS è più stabile ed è supportato per un lasso di tempo maggiore.\n\nPer utilizzare l'Arch User Repository (AUR) sarà necessario installare il gruppo di pacchetti base-devel."
+_InstBaseLK="Kernel più aggiornato"
+_InstBaseLKBD="Kernel più aggiornato e base-devel"
+_InstBaseLTS="Kernel LTS"
+_InstBaseLTSBD="Kernel LTS e base-devel"
+_yesno_ipv6_title="Configurazione del protocollo IPV6"
+_yesno_ipv6_body="Disabilitare il protocollo ipv6?"
+
+# Install Wireless Packages
+_InstWirTitle=" Individuata periferica Wi-Fi "
+_InstWirBody="\nInstallazione dei pacchetti supplementari per la connettività wireless...\n\n"
+
+# Install BIOS Bootloader
+_InstBiosBtTitle=" Installa il Bootloader per BIOS "
+_InstBiosBtBody="\nGrub2 è consigliato per i principianti. E' possibile specificare il dispositivo sul quale installarlo.\n\nSyslinux rappresenta un'alternativa più leggera e semplice che funzionerà solo con i filesystem ext/btrfs."
+
+# Grub Installation
+_InstGrubDevTitle=" Seleziona il dispositivo per Grub "
+_InstGrubDevBody="\n\nVuoi installare Grub sullo stesso dispositivo/hard-disk su cui si trova Root?"
+_InstGrubDevBody2="\n\nScegli 'Si' se vuoi installarlo su di un solo dispositivo."
+
+# Install UEFI Bootloader
+_InstUefiBtTitle=" Installa il Bootloader per UEFI "
+_InstUefiBtBody="\nrEFInd richiede /boot/efi. systemd-boot richiede /boot. Grub funzionerà in entrambi i casi.\n\nNOTA: rEFInd con LVM non è supportato."
+
+# Set UEFI Grub as default
+_SetGrubDefTitle=" Vuoi configurare Grub come Bootloader predefinito? "
+_SetGrubDefBody="\nAlcuni firmware UEFI potrebbero non rilevare Grub a meno che questo non sia impostato come bootloader predefinito; in caso negativo ciò comporterebbe che il sistema operativo non sarebbe in grado di avviarsi correttamente.\n\nDesideri impostare Grub come bootloader predefinito?\n\nLa risposta consigliata, specialmente per i principianti, è 'Si'. In questo modo lo stub avviabile grubx64.efi sarà copiato"
+_SetGrubDefBody2="e rinominato in bootx64.efi, come richiesto.\n\nAltrimenti seleziona 'No', in particolare se è già presente un bootloader predefinito, e/o qualora si decidesse di utilizzare più di un bootloader."
+
+# Set rEFInd as default
+_SetRefiDefTitle=" Vuoi impostare rEFInd come Bootloader predefinito? "
+_SetRefiDefBody="\nAlcuni firmware UEFI potrebbero non rilevare rEFInd a meno che questo non sia impostato come bootloader predefinito; in caso negativo ciò comporterebbe che il sistema operativo non sarebbe in grado di avviarsi correttamente.\n\nDesideri impostare rEFInd come bootloader predefinito?\n\nLa risposta consigliata, specialmente per i principianti, è 'Si'. In questo modo rEFInd sarà installato"
+_SetRefiDefBody2="con lo stub necessario (bootx64.efi).\n\nAltrimenti seleziona 'No', in particolare se è già presente un bootloader predefinito, e/o qualora si decidesse di utilizzare più di un bootloader."
+
+# efi file set for Grub or Refind
+_SetDefDoneTitle=" File UEFI copiato "
+_SetDefDoneBody="è stato impostato come bootloader predefinito.\n\n"
+
+# rEFInd Mountpoint error
+_RefiErrTitle=" Errore punto di montaggio rEFInd UEFI "
+_RefiErrBody="\n\nLo script d'installazione di rEFInd funzionerà solo se la partizione UEFI è stata montata in /boot/efi. Dunque seleziona o systemd-boot (consigliato) o Grub.\n\n"
+
+# ALSA, Xorg, Input
+_AXITitle=" ALSA, Xorg e periferiche di Input "
+_AXIBody="\nPrima d'installare i driver della scheda video o gli ambienti desktop, sono necessari altri pacchetti:\n\nalsa - Architettura Avanzata per il Suono su Linux\nxorg-* - driver a sorgente aperto per il gestore grafico X Window System\nxf86-input-* - driver a sorgente aperto per le periferiche di input\n\n"
+
+# Checklist Menu Alsa Xorg package
+_chl_xpkg_ttl="Installazione dei pacchetti del gruppo ALSA, x86-input-*"
+_chl_xpkg_bd="\nSi prega di selezionare i pacchetti necessari per l'installazione.\n"
+_chl_xp_ttl="Installazione dei pacchetti del gruppo xorg"
+
+# YES-NO Alsa Xorg package question
+_yn_alsa_pkg_ttl="Installazione dei pacchetti ALSA"
+_yn_alsa_pkg_bd="\nVuoi scegliere i pacchetti da installare?\n"
+_yn_x_pkg_ttl="Installazione di xorg"
+
+# Graphics Card Menu
+_GCtitle=" Menu della Scheda Video "
+_GCUnknOpt="Sconosciuta / Generica"
+
+# NVIDIA Configuration Check
+_NvidiaConfTitle=" Controllo configurazione NVIDIA "
+_NvidiaConfBody="\nE' stato creato un file base di configurazione NVIDIA. Prima di chiudere il file di configurazione NVIDIA si prega di controllarne la validità.\n"
+
+#  Install DE Info
+_DEInfoTitle=" Installazione Ambiente/i Desktop "
+_DEInfoBody="\nQuesta operazione può essere ripetuta più volte per installare molteplici ambienti desktop.\n\nGnome, KDE (completo) e LXDE dispongono di un display manager.\n\nCinnamon, Gnome e KDE dispongono di un gestore di rete.\n\n"
+
+# Install DE Menu
+_InstDETitle=" Installa Ambienti Desktop "
+_InstDEBody="\nGli ambienti desktop sono elencati per primi e potrebbero disporre di molteplici opzioni di download."
+
+# Install Common Packages
+_InstComTitle=" Installare pacchetti comuni? "
+_InstComBody="\nAlcuni ambienti necessitando dell'installazione di pacchetti comuni, particolarmente per amministrare i permessi di sistema, creare delle cartelle home ed arricchire le funzionalità del file manager.\n\nI pacchetti includono: xterm, xdg-user-dirs, gnome-keyring, polkit, gvfs, gnome-icon-theme, ntfs-3g, etc. Coloro che avessero installato il solo desktop completo di KDE non avranno bisogno d'installarli.\n\nVuoi installare questi pacchetti? Questa domanda verrà proposta una SOLA volta.\n\n"
+
+# DM Enabled
+_DmDoneTitle="Abilitato "
+_DMDoneBody="è stato abilitato.\n\n"
+
+# LXDM or LightDM
+_DmChTitle=" Scegli il Display Manager "
+_DmChBody="\nScegli il tuo display manager.\n"
+
+# DM Already Installed
+_DmInstTitle=" Display Manager installato "
+_DmInstBody="\nUn display manager è stato già installato e abilitato.\n\n"
+
+# Network Manager
+_InstNMTitle=" Scegli il gestore di rete "
+_InstNMBody="\nNetwork Manager è consigliato, specialmente per connessioni wireless e PPPoE/DSL.\n"
+
+# Network Manager Installed
+_InstNMDoneTitle=" Gestore di rete installato "
+_InstNMDoneBody="\nIl gestore delle connessioni di rete è stato installato ed abilitato."
+
+# Network Manager Already Installed (no need for seperate title)
+_InstNMErrBody="\nE' già stato installato ed abilitato un gestore delle connessioni di rete."
+
+# Welcome
+_WelTitle=" Benvenuto su"
+_WelBody="\nQuesto installer scaricherà i pacchetti più aggiornati dai repositories do Arch. Dato che le installazioni sono 'vanilla', solo la configurazione minima necessaria sarà intrapresa.\n\nEvidenzia le opzioni premendone il numero corrispondente o utilizzando i tasti con le frecce Su/Giù, infine premi [Invio] per confermarle.\n\nNaviga tra i pulsanti utilizzando il tasto [Tab] o le frecce sinistra/destra, infine premi [Invio] per confermarli.\n"
+
+# Preparation Menu
+_PrepTitle=" Preparazione dell'installazione "
+_PrepBody="\nLa disposizione della tastiera sarà adottata sia per l'installer sia per quella del sistema operativo.\n"
+_PrepKBLayout="Configura la disposizione della tastiera"
+_PrepMirror="Configura la lista dei mirror utilizzata dall'installer (opzionale)"
+_PrepPartDisk="Partizionamento Disco"
+_PrepMntPart="Montaggio partizioni"
+_Back="Indietro"
+
+# Install Base Menu
+_InstBsMenuTitle=" Installa il sistema di base "
+_InstBseMenuBody="\nNon sarà necessario installare un bootloader qualora si affiancasse l'installazione a quella di un'altra distribuzione Linux preesistente che utilizza Grub; è sufficiente aggiornare la configurazione Grub di quest'ultima."
+_InstBse="Installa il sistema di base"
+_InstBootldr="Installa il  Bootloader"
+
+# Configure Base Menu
+_ConfBseTitle=" Configura il sistema di base "
+_ConfBseBody="\nConfigurazione base del sistema di base."
+_ConfBseFstab="Genera FSTAB"
+_ConfBseHost="Imposta Hostname"
+_ConfBseTime="Imposta fuso orario"
+_ConfBseHWC="Imposta l'Orologio Hardware"
+_ConfBseSysLoc="Imposta il linguaggio del sistema"
+_ConfBseVirtCon="Imposta la tastiera"
+
+# User Menu
+_ConfUsrTitle=" Configura gli Utenti"
+_ConfUsrBody="\nRoot rappresenta l'account 'super-utente' o 'amministratore'. E' possibile impostare la stessa password sia per Root che per tutti gli utenti."
+_ConfUsrRoot="Imposta la password di Root"
+_ConfUsrNew="Aggiungi nuovo/i utente/i"
+
+# Menu Desktop
+_InstDEMenuTitle=" Installare Desktop "
+_InstDEMenuBody="\nPrima di installare un ambiente desktop, i driver video, input e audio DEVONO essere installati per primi. Ciò comprende l'installazione dei driver della scheda video."
+_InstDEMenuGISD="Installare Drivers Video, Input e Audio"
+_InstDEMenuDE="Installare Ambiente/i Desktop"
+_InstDEMenuNM="Installare gestore di connessione di rete"
+_InstDEMenuDM="Installare Display Manager / Schermata di accesso"
+
+# Swap - swappiness
+_swap_menu_title="Impostazione 'swappiness'"
+_swap_menu_body="\nImposta la frequenza di utilizzo dello spazio di swap.\n"
+_sw_menu_info="Visualizzazione della RAM"
+_sw_menu_temp_swpns="Installare swappiness Temporaneamente"
+_sw_menu_swpns="Installare swappiness costantemente"
+_free_info="Visualizzazione della RAM del computer"
+_msg_swps_title="Frequenza di utilizzo della partizione di swap"
+_swap_frequency_info="Frequenza di utilizzo del file di paging 'swap'"
+_sw_nfo1="Swappiness sysctl che rappresenta la frequenza\nutilizzare lo spazio di swap."
+_sw_nfo2="Swappiness può avere un valore compreso tra 0 e 100."
+_sw_nfo3="Il valore predefinito è 60."
+_sw_nfo4="Ciò significa che quando si raggiunge il consumo di RAM a 40%,\nil kernel Linux attiva l'applicazione swap."
+_sw_nfo5="Quando il valore è swappiness = 10 -\nil consumo di RAM raggiungerà il 90%."
+_sw_nfo6="E con swappiness = 90 -\nil consumo di RAM non sarà più del 10%."
+_sw_nfo7="Un valore basso fa sì che il kernel eviti il paging,\nun valore elevato consente al kernel di utilizzare il paging in anticipo."
+_sw_nfo8="Utilizzo di un valore basso su una quantità sufficiente di memoria,\nmigliora la reattività su molti sistemi."
+
+# Install Wireless Programm Qestion
+_yesno_iwp_title="Installazione di componenti di rete wireless"
+_yesno_iwp_body="\nInstallare i pacchetti: iw, wireless_tools, wpa_supplicant, wicd?\n"
+
+# Installl Shara Programm Qestion
+_yesno_shara_title="Installazione dei componenti di condivisione"
+_yesno_shara_body="\nInstallare i pacchetti: samba, smb4k ,smbclient, smbnetfs?\n"
+_yesno_tnc_body="\nImpostare una serie di connessioni diverse per NetworkManager?\n"
+
+# Shara and type of network connection
+_yn_s_tnc_ttl="Installazione delle connessioni NetworkManager"
+_yn_s_tnc_bd="\nVuoi scegliere i tipi di connessioni aggiuntive per NetworkManager?\n"
+
+# Programs to TimeShoft and Github-Desktop
+_yesno_timeshift_title="Installazione Di Timeshift"
+_yesno_timeshift_body="\nInstallare Timeshift?\n"
+_yesno_github_desktop_title="Installazione Di GitHub-Desktop"
+_yesno_github_desktop_body="\nInstallare GitHub-Desktop?\n"
+
+# Config Disk Devaces
+_sh_dev_title="Selezione del dispositivo"
+_sh_dev_body="\nSi prega di scegliere il dispositivo desiderato\n"
+_rsvd_nfo1="Dispositivo"
+_rsvd_nfo2=" dimensione "
+_rsvd_nfo3="Spazio riservato sezione in percentuale:"
+_reserved_info_title="Spazio riservato per superutente"
+_rsrvd_menu_title="Impostazioni del file system"
+_rsrvd_menu_body="\nConfigurare le impostazioni del file system. Configurazione di tmpfs per unità SSD\n"
+_rsrvd_menu1="Informazioni sul volume riservato"
+_rsrvd_menu2="Impostazione dello spazio riservato"
+_rsrvd_menu3="Informazioni sulla cartella tmp in fstab"
+_rsrvd_menu4="Configurazione di tmpfs"
+_yesno_tmpfs_body="\nVuoi configurare la cartella temp per le unità SSD?\n"
+_input_reserved_title="Immissione della quantità di spazio riservato"
+_input_reserved_body="\nSi prega di inserire la quantità desiderata di spazio riservato sezione in percentuale da 1 a 10\n"
+_info_tmpfs_title="Informazioni su tmpfs"
+_info_tmpfs_bd1="Questa opzione aumenta la durata del drive SSD."
+_info_tmpfs_bd2="Montare la cartella tmp nella RAM."
+_info_tmpfs_bd3="Successivamente, specificare la quantità desiderata della cartella tra 1 e 10 Gb"
+_info_tmpfs_bd4="Ma la metà della RAM."
+_info_tmpfs_bd5="Ad esempio: 1G"
+_info_tmpfs_body="\n$_info_tmpfs_bd1\n$_info_tmpfs_bd2\n$_info_tmpfs_bd3\n$_info_tmpfs_bd4\n$_info_tmpfs_bd5\n"
+_input_size_tmpfs_title="Immissione del volume della cartella tmp"
+_input_size_tmpfs_body="\nSi prega di inserire il volume desiderato. Ad esempio: 1G\n"
+
+# Shell and Windows Fonts
+_yn_win_fnts_ttl="Installazione dei font di Windows"
+_yn_win_fnts_bd="\nInstallare i font di Windows?\n"
+_shell_friendly_menu="Selezione e installazione di SHELL"
+_select_shell_menu_ttl="Scelta della SHELL da installare"
+_select_shell_menu_bd="\nSi prega di scegliere SHELL per l'utente"
+_yesno_scrfetch_ttl="Installazione screenfetch saluti"
+_yesno_scrfetch_bd="\nInstallare un saluto screenfetch?\n"
+_scrn_strp_ttl="Configurazione screenfetch saluti"
+_scrn_strp_bd="\nAggiungere un saluto screenfetch all'avvio?\n"
+_menu_ch_usr_ttl="Selezione degli utenti"
+_menu_ch_usr_bd="\nSi prega di selezionare gli utenti per i quali si desidera modificare la SHELL\n"
+
+# General Menu Package
+_InstGeMenuGE="Installazione di pacchetti e programmi condivisi"
+_menu_gen_title="Installazione di pacchetti e programmi condivisi"
+_menu_gen_body="\nInstallare pacchetti e programmi condivisi per tutti gli ambienti desktop.\n"
+_menu_gengen="Installazione di pacchetti condivisi"
+_menu_archivers="Installazione del supporto per gli archivi"
+_menu_ttf_theme="Installazione di font e temi"
+_menu_add_pkg="Installazione di un pacchetto minimo di programmi"
+_menu_extra_pkg="Installazione di programmi aggiuntivi (kicad, v-box, wine)."
+_menu_pkg_meneger="Installazione del gestore grafico dei pacchetti pacman"
+_ch_mn_bd="\nSi prega di scegliere i pacchetti necessari per l'installazione.\n"
+_pm_menu_body="\nSi prega di scegliere un gestore di pacchetti per l'installazione.\n"
+
+# Information to search and installation on packages your system
+_nfo_search_pkg_title="Si prega di attendere"
+_nfo_search_pkg_body="Ricerca e verifica dei pacchetti"
+
+# Menu Principale
+_MMTitle=" Menu Principale "
+_MMBody="\nOgni passaggio deve essere eseguito IN ORDINE. Una volta completati, selezionare 'Fatto' per finalizzare correttamente l'installazione.\n"
+_MMPrep="Preparare l'installazione"
+_MMInstBse="Installare la Base"
+_MMConfBse="Configurare la Base"
+_MMConfUsr="Configurare l'account utente(i)"
+_MMInstDE="Installare uno o più desktop"
+_MMRunMkinit="Eseguire Mkinitcpio"
+_Done="Fatto"
+
+# Chiudere il programma di istallazione
+_CloseInstBody="Chiudere il programma di installazione?"
+
+# Skip and resume installation
+_yesno_order_ttl="Saltare più menu"
+_yesno_order_bd="\nHai installato un kernel LTS?\n"
+
+# RPCS3
+_yesno_rpcs3_ttl="Installare L'emulatore PlayStation-3"
+_yesno_rpcs3_bd="\nInstallare L'emulatore PlayStation-3?\n"
+
+# Bluetooth
+_yesno_bluetooth_ttl="Installazione Bluetooth"
+_yesno_bluetooth_bd="\nInstallare driver e Gestione dispositivi bluetooth?\n"
+
+# Aur package menu
+_aur_pkg_ttl="Installazione di pacchetti da AUR"
+_aur_pkg_bd="\nSi prega di scegliere i pacchetti necessari per l'installazione!\n"
+_aur_dbl_pkg_ttl="Selezione della versione del pacchetto"
+_aur_dbl_pkg_bd="\nQuesto pacchetto ha diverse versioni.\nScelga prego quello che avete bisogno di!\n"
+
+# Emulator package menu
+_eml_pkg_ttl="Installazione di emulatori"
+_eml_pkg_bd="\nSi prega di scegliere gli emulatori necessari per l'installazione!\n"
+
+# Remove packages log
+_yesno_rmrf_ttl="Eliminare il file di log?"
+_yesno_rmrf_bd="\nÈ stato creato un file di log delle versioni precedenti dei pacchetti eliminati.\nCancellare questo file di log?\n"
+
+# Remote repository
+_rmt_rpstr_ttl="Aggiornamento dei pacchetti da un repository remoto"
+
+#
+# User groups
+_ug_select_ttl="Selezione dei gruppi utente"
+ug_select_bd="\nSelezionare i gruppi a cui si desidera aggiungere un nuovo utente\n"
+#
+# User Groups for user
+#
+_ugd_adm="Amministrazione"
+_ugd_ftp="Accesso ai file FTP"
+_ugd_games="Accesso ai programmi di gioco"
+_ugd_http="Accesso ai file HTTP"
+_ugd_log="Accesso ai file di log, syslog-ng"
+_ugd_rfkill="Gestione dell'alimentazione dei dispositivi wireless"
+_ugd_sys="Amministrazione delle stampanti CUPS"
+_ugd_systemd_journal="Accesso ai registri systemd"
+_ugd_users="Gruppo di utenti standard"
+_ugd_uucp="Accesso ai dispositivi RS-232"
+_ugd_wheel="Amministrazione tramite sudo e su"
+#
+# User Groups for system
+#
+_ugd_dbus="Utilizzato all'interno di dbus"
+_ugd_kmem="-"
+_ugd_locate="-"
+_ugd_lp="Accesso ai dispositivi della porta parallela"
+_ugd_mail="-"
+_ugd_nobody="Gruppo non privilegiato"
+_ugd_proc="Accesso alle informazioni sui processi"
+_ugd_smmsp="sendmail gruppo"
+_ugd_tty="-"
+_ugd_utmp="-"
+#
+# User Groups for Pre-Systemd
+#
+_ugd_audio="Accesso diretto alle apparecchiature audio"
+_ugd_disk="Accesso ai dispositivi a blocchi"
+_ugd_floppy="Accesso alle unità floppy"
+_ugd_input="Accesso ai dispositivi di input"
+_ugd_kvm="Accesso alle macchine virtuali KVM"
+_ugd_optical="Accesso a CD, DVD, ISO"
+_ugd_scanner="Accesso agli scanner"
+_ugd_storage="Accesso alle unità rimovibili"
+_ugd_video="Accesso ai dispositivi di acquisizione video"
+#
+# Base system and system utilites
+_yn_psinpkg_ttl="Selezione di pacchetti per l'installazione"
+_yn_psinpkg_bd="\nDesidera selezionare i pacchetti da installare?\n"
+_psinpkg_mn_bd="\nSi prega di selezionare i pacchetti necessari per l'installazione.\n"
+_yn_umprt_mn_ttl="Smontaggio dischi"
+_yn_umprt_mn_bd="\nSmontare i dischi?\n"
+#
+# Mirror string configuration translate text
+_Mirror_Conf_ttl="Filtrare l'elenco degli specchi di protocolli di"
+_Mirror_Conf_bd="\nVerrà generato un elenco di specchi per il protocollo.Si può decidere di utilizzare o meno.\n"
+_yn_mirror_conf_bd="\nDesidera selezionare i protocolli per il generatore elenco degli specchi? Altrimenti, per impostazione predefinita, verranno selezionati tutti i protocolli.\n"
+#
+# Server menu text
+_MMInstServer="Il server"
+_mn_srv_ttl="Installazione e configurazione di server di utilità"
+_mn_srv_bd="\nSi prega di selezionare la voce di menu\n"
+_mn_srv_1="Installazione e configurazione di ssh"
+_mn_srv_2="Il server di posta postfix"
+_mn_srv_3="nginx, Apache, MySQL, PHP"
+_mn_srv_4="FTP server"
+_mn_ssh_1="l'installazione di ssh"
+_mn_ssh_2="Configurazione di ssh"
+_mn_cnf_ssh_1="Cambiare la porta (22) per impostazione predefinita"
+_mn_cnf_ssh_2="Attivare/Disattivare l'ingresso sotto il root"
+_yn_ssh_stp_bd="\nImpostare il protocollo di rete per il controllo remoto ssh?\n"
+_nfo_ssh_bd="\nLa connessione ssh è ora disponibile per ip indirizzo\n"
+_nfo_ssh_prmr="Ad esempio"
+_msg_ssh_nfo_ttl="Informazioni su gestione remota tramite ssh"
+_sshcnf_port_bd="\nInserisci una nuova porta nella gamma da 1025 a 65536.\n"
+_nfo_ssh_port_ttl="Errore. Errata porta"
+_nfo_ssh_port_bd="\nErrore. Hai inserito la porta al di fuori dell'intervallo specificato da 1025 a 65536. Si prega di inserire la porta correttamente.\n"
+_nff_ptrtlg_bd_1="\nL'ingresso sotto il root abilitato.\n"
+_nff_ptrtlg_bd_2="\nL'ingresso sotto il root è disabilitato.\n"
+_yn_mlsrv_bd="\nVuoi installare un server di posta postfix?\n"
+_lmp_srv_bd="\nSi prega di selezionare le utility per l'installazione.\n"
+_ftpsrv_mn_bd="\nL'installazione di un server FTP. Si prega di selezionare il pacchetto desiderato.\n"
+_yn_netctl_ttl="L'installazione di un modello per il gestore di rete netctl"
+_yn_netctl_bd="\nDesidera scegliere un modello e modificare il suo ?\n"
+_ntctl_tmpmn_bd="\nPer favore, selezionare il modello desiderato per il gestore di rete netctl.\n"
+_inntctl_ttl="Immettere il nome del modello netctl"
+_inntctl_bd="\nSi prega di inserire il nuovo nome del modello.\n"
+#
+# Wifi template configuration
+_msg_wt_ttl="Rete wireless."
+_msg_wt_bd="\nSi è scelto un modello per la rete wireless. Questo modello richiede l'inserimento di una rete wireless SSID e la password. La configurazione sarà introdotto il nuovo modello. Se questa impostazione non è necessaria, basta lasciare righe vuote.\n"
+_ib_ssid_ttl="Immettere il nome SSID della rete wireless"
+_ib_ssid_bd="\nSi prega di inserire il nome della vostra rete wireless.\n"
+_ib_pass_ttl="Immettere la password di rete wireless"
+_ib_pass_bd="\nSi prega di inserire la password della rete wireless\n"
+#
+# Network time protocol server language
+_mn_tmsnc_ttl="Tempo di sincronizzazione"
+_mn_tmsnc_bd="\nSi prega di selezionare l'impostazione desiderata.\n"
+_mn_tmsnc_lev1_1="Installazione NTP"
+_mn_tmsnc_lev1_2="La scelta di un server per la sincronizzazione"
+_mn_tmsnc_lev1_3="Configurazione del protocollo NTP"
+_tmsnc_lev_bd="\nQuesta impostazione non è obbligatoria e può essere пропустиь.\n"
+_mn_tmsnc_lev1_4="Configurare il client SNTP"
+_mn_tmsnc_lev2_1="Semplice selezione mondiale di zona"
+_mn_tmsnc_lev2_2="La scelta della zona e субзоны"
+_mn_tmsnc_lev22_1="Selezione dell'area di"
+_mn_tmsnc_lev22_2="La scelta субзоны"
+_tmsnc_zsbzn_msg_fine="Hai selezionato la zona e субзона:"
+_mn_tmsnc_lev3_1="Registrare zona scelta(субзону)"
+_mn_tmsnc_lev3_2="Definizione delle regole di connessione dei clienti"
+_tmsnc_lev321_bd="\nSi prega di selezionare le regole per la configurazione додступа di connessione dei clienti.\n"
+_mn_tmsnc_lev3_3="Aggiunta clienti"
+_tmsnc_lev331_bd="\nInserisci ip è l'indirizzo di rete del cliente.Ad esempio: 192.168.0.0\n"
+_tmsnc_lev332_bd="\nInserisci, per favore, la maschera di rete del cliente.Ad esempio: 255.255.255.0\n"
+_tmsnc_yn331_bd="\nDesidera aggiungere un nuovo cliente?Sarà richiesto ip l'indirizzo e la subnet mask del cliente.\n"
+_mn_tmsnc_lev3_3_1="Aggiungi rete del cliente"
+_mn_tmsnc_lev3_3_2="Aggiungere una maschera del cliente"
+_mn_tmsnc_lev3_4="Aggiungere il file\buffer"
+_mn_tmsnc_lev3_5="Aggiungere il registro (log)"
+_mn_tmsnc_lev34_bd="\nIn un file\buffer è l'errore dell'orologio di sistema.\n"
+_mn_tmsnc_lev5_1="Registrare zona scelta (субзону)"
+_mn_tmsnc_lev5_2="Impostazione alla desincronizzazione"
+_tmsnc_yn_sntp_bd="\nAttivare/Disattivare la sincronizzazione quando desincronizzazione tempo?\n"
+_tmsnc_yn_stp_bd="\nInstallare il pacchetto NTP?\n"
+_tmsnc_err_ttl="Errore"
+_tmsnc_msg_stp="Errore NTP. Si prega di installare prima il pacchetto NTP."
+_tmsnc_msg_zsbz="Non hai scelto il server per configurare la sincronizzazione. Si prega di selezionare uno dei server."
+_restrinct_desc_1="Disattivare dal server"
+_restrinct_desc_2="Non accettare comandi di controllo"
+_restrinct_desc_3="Vietare modifiche"
+_restrinct_desc_4="Non è sincronizzato con l'host"
+_restrinct_desc_5="Non accettare le richieste"
+#
+
+
