@@ -114,6 +114,6 @@ Icon=./xnview.png
 
 
 
-
-
+xdg-user-dir DESKTOP
+xdg-user-dirs-update
 
