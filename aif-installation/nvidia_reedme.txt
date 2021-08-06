@@ -92,3 +92,7 @@ XDG_VIDEOS_DIR="$HOME/Videos"
 
 
 
+/usr/share/mime/packages/
+/usr/share/mime/model/
+
+

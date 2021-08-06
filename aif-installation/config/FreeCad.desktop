@@ -1,10 +1,11 @@
 [Desktop Entry]
 Name=FreeCad
 GenericName=3D modeler
-Comment=3D modeling
+Comment=General purpose 3D CAD modeler
 Keywords=3d;modeling;
-Exec=
-Icon=
+Exec=freecad
+Icon=freecad
 Terminal=false
 Type=Application
-Categories=Graphics;3DGraphics;
+Categories=Application;Graphics;3DGraphics;
+MimeType=application/x-extension-fcstd;model/stl;model/vrml;
