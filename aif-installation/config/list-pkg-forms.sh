@@ -361,8 +361,23 @@ if [[ "${_archi[*]}" = "x86_64" ]]; then
 	unset _fcad_ext
 	unset _fcad_durl
 	#
-	_fcad_name_logo="freecad-logo.png"
-	_fcad_logo="$filesdir/config/$_fcad_name_logo"
+	_fcad_icons_gz="freecad-icons.tar.gz"
+	# mkdir -p "${MOUNTPOINT}"/usr/share/
+	# tar -C "${MOUNTPOINT}/usr/share/" -xzf "${_fcad_icons_gz}"
+	_fcad_mime="freecad.xml"
+	_stl_mime="stl.xml"
+	_vrml_mime="vrml.xml"
+	_fcad_fmime="$filesdir/config/$_fcad_mime"
+	_stl_fmime="$filesdir/config/$_stl_mime"
+	_vrml_fmime="$filesdir/config/$_vrml_mime"
+	#
+	_fcad_mime_inst="${MOUNTPOINT}/usr/share/mime/packages/"
+	_stl_vrml_mime_inst="${MOUNTPOINT}/usr/share/mime/model/"
+	#
+	unset _fcad_mime
+	unset _stl_mime
+	unset _vrml_mime
+	#
 	_fcad_name_desktop="FreeCad.desktop"
 	_fcad_desktop="$filesdir/config/$_fcad_name_desktop"
 	#
