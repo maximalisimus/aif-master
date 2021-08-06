@@ -34,24 +34,6 @@ indicators = ~spacer;~separator;~session;~separator;~layout;~separator;~language
 
 
 
-https://download.xnview.com/XnViewMP-linux.tgz
-https://download.xnview.com/XnViewMP-linux-x64.tgz
-
-xnview.sh
-
-dirname_start=$(readlink -e "$0")
-dirname=$(dirname "$dirname_start")
-
-XnView.desktop
-
-Terminal=false
-TryExec=./xnview.sh
-Exec=./xnview.sh %F
-Icon=./xnview.png
-
-
-
-
 xdg-user-dir DESKTOP
 xdg-user-dirs-update
 

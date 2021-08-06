@@ -53,7 +53,7 @@ question_dialog_run
 us_dlgrc_conf
 id_system
 select_language
-if [[ "${_archi[*]}" = "x86_64" ]]; then
+if [[ "${_archi[*]}" == "x86_64" ]]; then
     multilib_question
     wait
     clear

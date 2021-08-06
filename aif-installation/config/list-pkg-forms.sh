@@ -282,7 +282,7 @@ _games_pkg=(steam teeworlds supertuxkart xonotic warsow aisleriot kpat kmines gn
 #
 _arduino_pkg=(arduino arduino-avr-core arduino-cli arduino-builder avr-gcc avrdude avr-binutils avr-libc arduino-ctags arduino-docs)
 #
-if [[ "${_archi[*]}" = "x86_64" ]]; then
+if [[ "${_archi[*]}" == "x86_64" ]]; then
 	#
 	## AppImageUpdate
 	_app_upd_durl="https://github.com/AppImage/AppImageUpdate/releases/download/continuous/"
@@ -338,6 +338,27 @@ if [[ "${_archi[*]}" = "x86_64" ]]; then
 	#
 	# wget -P "$filesdir/download-packages" "${_nvd39xx_download}${_nvd39xx_libu_pkg}"
 	# wait
+	#
+	## XnViewMP
+	#
+	_xnviemp_name="XnViewMP"
+	_xnviemp_sys="linux"
+	_xnviemp_arch="x64"
+	_xnviemp_ext="tgz"
+	_xnviemp_fname="${_xnviemp_name}-${_xnviemp_sys}-${_xnviemp_arch}.${_xnviemp_ext}"
+	#
+	unset _xnviemp_sys
+	unset _xnviemp_arch
+	unset _xnviemp_ext
+	#
+	_xnviemp_durl="https://download.xnview.com/${_xnviemp_fname}"
+	_xnviemp_desktop="XnView.desktop"
+	#
+	# mkdir -p "${MOUNTPOINT}/opt"
+	# tar -C "${MOUNTPOINT}/opt/" -xzf "${_xnviemp_fname}"
+	# cp -f "${MOUNTPOINT}/opt/XnView/${_xnviemp_desktop}" "${MOUNTPOINT}/usr/share/applications/"
+	# chmod ugo+x "${MOUNTPOINT}/usr/share/applications/${_xnviemp_desktop}"
+	#
 	#
 	## Library to Freecad and KiCad on incompatible. Please download on FreeCad to AppImage.
 	#
@@ -550,6 +571,20 @@ else
 	_app_upd_ftool="${_app_upd_name_tool}-${_app_upd_arch}.${_app_upd_ext}"	
 	unset _app_upd_arch
 	unset _app_upd_ext
+	#
+	## XnViewMP
+	#
+	_xnviemp_name="XnViewMP"
+	_xnviemp_sys="linux"
+	_xnviemp_ext="tgz"
+	_xnviemp_fname="${_xnviemp_name}-${_xnviemp_sys}.${_xnviemp_ext}"
+	#
+	unset _xnviemp_sys
+	unset _xnviemp_arch
+	unset _xnviemp_ext
+	#
+	_xnviemp_durl="https://download.xnview.com/${_xnviemp_fname}"
+	_xnviemp_desktop="XnView.desktop"
 	#
     #
     _wine_pkg=(keepassxc veracrypt)
