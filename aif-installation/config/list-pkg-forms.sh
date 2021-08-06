@@ -351,13 +351,21 @@ if [[ "${_archi[*]}" == "x86_64" ]]; then
 	unset _xnviemp_arch
 	unset _xnviemp_ext
 	#
-	_xnviemp_durl="https://download.xnview.com/${_xnviemp_fname}"
-	_xnviemp_desktop="XnView.desktop"
+	_xnviemp_furl="https://download.xnview.com/${_xnviemp_fname}"
 	#
+	# wget "${_xnviemp_furl}"
+	# unset _xnviemp_furl
 	# mkdir -p "${MOUNTPOINT}/opt"
 	# tar -C "${MOUNTPOINT}/opt/" -xzf "${_xnviemp_fname}"
-	# cp -f "${MOUNTPOINT}/opt/XnView/${_xnviemp_desktop}" "${MOUNTPOINT}/usr/share/applications/"
-	# chmod ugo+x "${MOUNTPOINT}/usr/share/applications/${_xnviemp_desktop}"
+	# _xnviemp_str_name=$(tar -tf "${_xnviemp_fname}" | cut -d '/' -f1 | uniq -d | xargs)
+	# _xnviemp_name="${_xnviemp_str_name[*]}"
+	# unset _xnviemp_str_name
+	# find "${MOUNTPOINT}/opt/${_xnviemp_name}/" -type f -iname "*.desktop" -exec chmod ugo+x {} \;
+	# mkdir -p "${MOUNTPOINT}/usr/share/applications/"
+	# find "${MOUNTPOINT}/opt/${_xnviemp_name}/" -type f -iname "*.desktop" -exec cp {} "${MOUNTPOINT}/usr/share/applications/" \;
+	# unset _xnviemp_name
+	# rm -rf "${_xnviemp_fname}"
+	# unset _xnviemp_fname
 	#
 	#
 	## Library to Freecad and KiCad on incompatible. Please download on FreeCad to AppImage.
@@ -583,8 +591,7 @@ else
 	unset _xnviemp_arch
 	unset _xnviemp_ext
 	#
-	_xnviemp_durl="https://download.xnview.com/${_xnviemp_fname}"
-	_xnviemp_desktop="XnView.desktop"
+	_xnviemp_furl="https://download.xnview.com/${_xnviemp_fname}"
 	#
     #
     _wine_pkg=(keepassxc veracrypt)
