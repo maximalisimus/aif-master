@@ -179,8 +179,10 @@ _netctl_mn_once=0
 _netctl_edit=""
 
 # Server variables
+_sshd_conf_name="sshd_config"
 _sshd_conf_dir="${MOUNTPOINT}/etc/ssh/"
-_sshd_conf_file="$filesdir/config/sshd_config"
+_sshd_conf_file="$filesdir/config/${_sshd_conf_name}"
+_sshd_conf_orig="$filesdir/config/sshd_config_original"
 _ssh_setup_once=0
 _ssh_run_once=0
 _docker_run_once=0

@@ -214,56 +214,52 @@ menu_sshd_config()
        SUB_MENU="sshd-config"
        HIGHLIGHT_SUB=1
     else
-       if [[ $HIGHLIGHT_SUB != 18 ]]; then
+       if [[ $HIGHLIGHT_SUB != 17 ]]; then
           HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
        fi
     fi
     
     dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_edit_sshd_hd2" \
 	--menu "$_edit_sshd_bd" 0 0 11 \
-	"1" "$_yn_ssh_qn" \
-	"2" "$_protocol_ssh_hd" \
- 	"3" "$_mn_cnf_ssh_1" \
- 	"4" "$_pass_auth_hd" \
- 	"5" "$_auth_publ_hd" \
- 	"6" "$_auth_keyf_hd" \
- 	"7" "$_client_session_hd_1" \
- 	"8" "$_client_session_hd_2" \
- 	"9" "$_rhosts_hd" \
- 	"10" "$_host_auth_hd" \
-	"11" "$_mn_cnf_ssh_2" \
-	"12" "$_empty_pass_hd" \
-	"13" "$_logs_ssh_hd" \
-	"14" "$_x11_ssh_hd" \
-	"15" "$_allow_users_hd" \
-	"16" "$_deny_users_hd" \
-	"17" "$_allow_group_hd" \
-	"18" "$_Back" 2>${ANSWER}
+	"1" "$_protocol_ssh_hd" \
+ 	"2" "$_mn_cnf_ssh_1" \
+ 	"3" "$_pass_auth_hd" \
+ 	"4" "$_auth_publ_hd" \
+ 	"5" "$_auth_keyf_hd" \
+ 	"6" "$_client_session_hd_1" \
+ 	"7" "$_client_session_hd_2" \
+ 	"8" "$_rhosts_hd" \
+ 	"9" "$_host_auth_hd" \
+	"10" "$_mn_cnf_ssh_2" \
+	"11" "$_empty_pass_hd" \
+	"12" "$_logs_ssh_hd" \
+	"13" "$_x11_ssh_hd" \
+	"14" "$_allow_users_hd" \
+	"15" "$_deny_users_hd" \
+	"16" "$_allow_group_hd" \
+	"17" "$_Back" 2>${ANSWER}
 	case $(cat ${ANSWER}) in
-		"1") dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_ssh_qn" --yesno "$_yn_ssh_qn_bd" 0 0
-			if [[ $? -eq 0 ]]; then
-				cp -f ${_sshd_conf_file} ${_sshd_conf_dir}
-			fi
+		"1") protocol_ssh
 			;;
-		"2") protocol_ssh
+		"2") port_ssh_conf
 			;;
-		"3") port_ssh_conf
+		"3") pass_auth_conf
 			;;
-		"4") pass_auth_conf
+		"4") pubkey_auth_conf
 			;;
-		"5") pubkey_auth_conf
+		"5") keyfile_config
 			;;
-		"6") keyfile_config
+		"6") alive_interval_config
 			;;
-		"7") alive_interval_config
+		"7") alive_count_config
 			;;
-		"8") alive_count_config
+		"8") rhosts_config
 			;;
-		"9") rhosts_config
+		"9") 
 			;;
-		"10") 
+		"10") onoff_prmrtlg
 			;;
-		"11") onoff_prmrtlg
+		"11") 
 			;;
 		"12") 
 			;;
@@ -274,8 +270,6 @@ menu_sshd_config()
 		"15") 
 			;;
 		"16") 
-			;;
-		"17") 
 			;;
 		*) menu_conf_ssh
 			;;
@@ -299,8 +293,10 @@ menu_conf_ssh()
 	"1" "$_msg_ssh_nfo_ttl" \
 	"2" "$_auto_sshd_nfo_hd" \
 	"3" "$_edit_sshd_hd" \
-	"4" "$_edit_sshd_hd2" \
-	"5" "$_Back" 2>${ANSWER}
+	"4" "$_yn_ssh_qn" \
+	"5" "$_yn_ssh_rec_hd"
+	"6" "$_edit_sshd_hd2" \
+	"7" "$_Back" 2>${ANSWER}
 	case $(cat ${ANSWER}) in
 		"1") info_ssh_connect
 			;;
@@ -308,7 +304,17 @@ menu_conf_ssh()
 			;;
 		"3") edit_file_sshd
 			;;
-		"4") menu_sshd_config
+		"4") dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_ssh_qn" --yesno "$_yn_ssh_qn_bd" 0 0
+			if [[ $? -eq 0 ]]; then
+				cp -f "${_sshd_conf_file}" "${_sshd_conf_dir}"
+			fi
+			;;
+		"5") dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_ssh_rec_hd" --yesno "$_yn_ssh_rec_bd" 0 0
+			if [[ $? -eq 0 ]]; then
+				cp -f "${_sshd_conf_orig}" "${_sshd_conf_dir}${_sshd_conf_name}"
+			fi
+			;;
+		"6") menu_sshd_config
 			;;
 		*) server_menu
 			;;

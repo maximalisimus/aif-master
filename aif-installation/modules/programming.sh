@@ -284,7 +284,8 @@ installing_programming()
     "9" "Java / Java IDE" \
     "10" "Perl" \
     "11" "Ruby" \
-    "12" "$_Back" 2>${ANSWER}
+    "12" "Node.js" \
+    "13" "$_Back" 2>${ANSWER}
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
     case $(cat ${ANSWER}) in
@@ -310,6 +311,8 @@ installing_programming()
          ;;
     "11") ruby_install
          ;;
+    "12") # Node.js menu to select node.js or node.js.lts. Node.js.lts to select to 14.X or 12.X version
+		;;
       *) install_apps_menu
          ;;
     esac
