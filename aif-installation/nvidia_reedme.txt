@@ -13,10 +13,6 @@ Pacman: /etc/pacman.conf
 
 IgnorePkg   = nvidia-settings nvidia-utils nvidia-dkms nvidia-lts nvidia-lts-dkms nvidia opencl-nvidia lib32-opencl-nvidia
 
-IgnorePkg   = nvidia-settings nvidia-utils nvidia-dkms nvidia-lts-dkms nvidia-lts nvidia opencl-nvidia lib32-opencl-nvidia lib32-nvidia-340xx-utils lib32-opencl-nvidia-340xx nvidia-340xx nvidia-340xx-dkms nvidia-340xx-lts nvidia-340xx-lts-dkms nvidia-340xx-utils opencl-nvidia-340xx
-
-IgnorePkg   = nvidia-settings nvidia-utils nvidia-dkms nvidia-lts nvidia-lts-dkms nvidia opencl-nvidia lib32-opencl-nvidia lib32-nvidia-390xx-utils lib32-opencl-nvidia-390xx libxnvctrl-390xx nvidia-390xx nvidia-390xx-dkms opencl-nvidia-390xx
-
 
 
 
