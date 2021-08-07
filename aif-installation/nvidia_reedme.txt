@@ -62,6 +62,31 @@ XDG_VIDEOS_DIR="$HOME/Videos"
 
 
 
+sudo pacman -S cups
+cups.service
+cups.socket
+systemctl enable org.cups.cupsd.service
+
+При активации cups.socket и выключении cups.service, CUPS запускается только тогда, когда программа хочет его использовать.
+
+Gutenprint.
+Canon, Epson, Lexmark, Sony, Olympus, PCL - Printer Drivers:
+sudo pacman -S gutenprint foomatic-db-gutenprint-ppds
+
+Foomatic.
+Чтобы использовать foomatic, установите foomatic-db-engine и по крайней мере один из пакетов:
+foomatic-db - коллекция файлов XML, используемая foomatic-db-engine для генерации файлов PPD.
+foomatic-db-ppds - прекомпилированные файлы PPD.
+foomatic-db-nonfree - коллекция файлов XML под несвободными лицензиями от производителей принтеров, используемая foomatic-db-engine для генерации файлов PPD.
+foomatic-db-nonfree-ppds - прекомпилированные файлы PPD под несвободными лицензиями.
+
+Инструмент для управления заданиями печати и принтерами (KDE):
+print-manager
+
+Инструмент настройки принтера GTK+ и апплет состояния (GNOME и другие):
+system-config-printer
+
+Настройки сервера CUPS находятся в /etc/cups/cupsd.conf и /etc/cups/cups-files.conf
 
 
 

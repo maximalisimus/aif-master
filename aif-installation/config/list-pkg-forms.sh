@@ -196,8 +196,8 @@ _zsh_sh=(zsh-completions)
 #
 ## Common for Desktop packages
 #
-_general_pkg=(gnome-keyring dconf dconf-editor python2-xdg xdg-user-dirs xdg-utils rp-pppoe polkit gvfs gvfs-afc print-manager system-config-printer acpid avahi cups cronie)
-# arch_chroot "systemctl enable acpid avahi-daemon cronie org.cups.cupsd.service" 2>/tmp/.errlog
+_general_pkg=(gnome-keyring dconf dconf-editor python2-xdg xdg-user-dirs xdg-utils rp-pppoe polkit gvfs gvfs-afc print-manager system-config-printer acpid avahi cronie)
+# arch_chroot "systemctl enable acpid avahi-daemon cronie" 2>/tmp/.errlog
 #
 ## User Package
 #
