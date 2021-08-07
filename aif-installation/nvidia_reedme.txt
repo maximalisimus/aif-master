@@ -62,18 +62,37 @@ XDG_VIDEOS_DIR="$HOME/Videos"
 
 
 
-sudo pacman -S cups
+
+
+sudo pacman -S cups cups-pdf
+
+По умолчанию файлы PDF хранятся в /var/spool/cups-pdf/имя_пользователя. 
+Местоположение можно изменить в /etc/cups/cups-pdf.conf.
+
+# Добавить локальный принтер - Cups-PDF
+$ mkdir ~/cups-pdf
+# Настраиваем конфиг
+$ sudo nano /etc/cups/cups-pdf.conf
+...
+Out /home/mikl/cups-pdf/
+...
+TitlePref 1
+...
+DecodeHexStrings 1
+...
+
+
+http://localhost:631/
+
 cups.service
 cups.socket
-systemctl enable org.cups.cupsd.service
 
 При активации cups.socket и выключении cups.service, CUPS запускается только тогда, когда программа хочет его использовать.
 
-Gutenprint.
-Canon, Epson, Lexmark, Sony, Olympus, PCL - Printer Drivers:
+Gutenprint Printer Drivers: Canon, Epson, Lexmark, Sony, Olympus, PCL.
 sudo pacman -S gutenprint foomatic-db-gutenprint-ppds
 
-Foomatic.
+Foomatic Printer Drivers.
 Чтобы использовать foomatic, установите foomatic-db-engine и по крайней мере один из пакетов:
 foomatic-db - коллекция файлов XML, используемая foomatic-db-engine для генерации файлов PPD.
 foomatic-db-ppds - прекомпилированные файлы PPD.
