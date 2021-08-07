@@ -907,12 +907,11 @@ _ipv46_fd_bd_7="net.ipv6.conf.default.forwarding=1"
 _ipv46_fd_bd_8="net.ipv6.conf.all.forwarding=1"
 _yn_ipv46_fd_fbd="\n${_ipv46_fd_bd_1}\n${_ipv46_fd_bd_2}\n${_ipv46_fd_bd_3}\n${_ipv46_fd_bd_4}\n\n${_ipv46_fd_bd_5}\n\n${_ipv46_fd_bd_6}\n${_ipv46_fd_bd_7}\n${_ipv46_fd_bd_8}\n\n"
 #
-## Image to LighDM and Wallpaper Full HD
+## Image to LighDM and Wallpapers Full HD
 #
 _ldm_greeter_qs_hd="Изменение внешнего вида LightDM"
-_ldm_greeter_qs_bd="\nЖелаете изменить внешний вид экрана входа, установленный по умолчанию ?\n Изображение будет изменено.\n\n"
-_wallp_yn_hd="Wallpaper Full-HD"
-_wallp_yn_bd="\nРаспаковать архив с изображениями размера Full-HD\n для рабочего стола и менеджеров дисплеев ?\n"
+_ldm_greeter_qs_bd="\nЖелаете изменить внешний вид экрана входа, установленный по умолчанию ?\n Изображение также будет изменено.\n\n"
+_wallp_yn_hd="Full-HD изображения для рабочего стола"
 _wallp_msg_hd="Распаковка Full HD изображений"
 _wallp_msg_bd="\nИзображения распакованы. Они находятся в папке:\n/usr/share/wallpapers/Carbon-Mesh/ \n/usr/share/wallpapers/Full-HD/."
 _img_sel_hd="Выбор изображения"

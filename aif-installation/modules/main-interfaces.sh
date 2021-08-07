@@ -204,7 +204,7 @@ install_desktop_menu() {
 		"1" "$_AXITitle" \
 		"2" "$_InstDEMenuDE" \
 		"3" "$_InstDEMenuDM" \
-		"4" "$_wallp_inst_hd" \
+		"4" "$_wallp_yn_hd" \
 		"5" "$_InstDEMenuNM" \
 		"6" "$_GCtitle" \
 		"7" "$_InstGeMenuGE" \

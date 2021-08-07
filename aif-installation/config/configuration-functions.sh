@@ -680,6 +680,25 @@ function out_greeter_conf()
 	echo "" >> "${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf"
 }
 
+function wallpaper_install()
+{
+	if [[ $_wallpaper_once -eq 0 ]]; then
+		_wallpaper_once=1		
+		tar -C "${MOUNTPOINT}/usr/share/" -xzf "$filesdir/config/wallpapers.tar.gz"
+		wait
+		sudo chown -R $USER:users "${MOUNTPOINT}/usr/share/wallpapers/Carbon-Mesh"
+		sudo chmod -R 755 "${MOUNTPOINT}/usr/share/wallpapers/Carbon-Mesh"
+		wait
+		sudo chown -R $USER:users "${MOUNTPOINT}/usr/share/wallpapers/Full-HD"
+		sudo chmod -R 755 "${MOUNTPOINT}/usr/share/wallpapers/Full-HD"
+		wait
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_wallp_msg_hd" --msgbox "$_wallp_msg_bd" 0 0
+		wait
+	else
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_wallp_msg_hd" --msgbox "$_wallp_msg_bd" 0 0
+	fi
+}
+
 function find_images()
 {
 	_img_files=$(find "${1}" -type f -iname "*.${2}" | rev | cut -d '/' -f1 | rev | xargs)
@@ -700,34 +719,12 @@ function find_images()
 	out_greeter_conf "${variables}"
 }
 
-function wallpaper_install()
-{
-	if [[ $_wallpaper_once -eq 0 ]]; then
-		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_wallp_yn_hd" --yesno "$_wallp_yn_bd" 0 0
-		if [[ $? -eq 0 ]]; then	
-			_wallpaper_once=1		
-			tar -C "${MOUNTPOINT}/usr/share/" -xzf "$filesdir/config/wallpapers.tar.gz"
-			wait
-			sudo chown -R $USER:users "${MOUNTPOINT}/usr/share/wallpapers/Carbon-Mesh"
-			sudo chmod -R 755 "${MOUNTPOINT}/usr/share/wallpapers/Carbon-Mesh"
-			wait
-			sudo chown -R $USER:users "${MOUNTPOINT}/usr/share/wallpapers/Full-HD"
-			sudo chmod -R 755 "${MOUNTPOINT}/usr/share/wallpapers/Full-HD"
-			wait
-			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_wallp_msg_hd" --msgbox "$_wallp_msg_bd" 0 0
-			wait
-		fi
-	else
-		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_wallp_msg_hd" --msgbox "$_wallp_msg_bd" 0 0
-	fi
-}
-
 function select_images()
 {
-	wallpaper_install
-	wait
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_img_sel_hd" --yesno "$_img_ctg_bd" 0 0
 	if [[ $? -eq 0 ]]; then	
+		wallpaper_install
+		wait
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_img_ctg_hd" --menu "$_img_ctg_mn" 0 0 11 \
 		"1" "Carbon-Mesh" \
 		"2" "Full-HD" 2>${ANSWER}
@@ -740,6 +737,8 @@ function select_images()
 				;;
 		esac
 	else
+		wallpaper_install
+		wait
 		out_greeter_conf
 	fi
 }
