@@ -19,18 +19,6 @@ IgnorePkg   = nvidia-settings nvidia-utils nvidia-dkms nvidia-lts nvidia-lts-dkm
 
 
 
-/etc/lightdm/lightdm-gtk-greeter.conf
-
-[greeter]
-theme-name = Adwaita
-icon-theme-name = Adwaita
-background = /usr/share/wallpapers/3D_Walpaper/looking-out.jpg
-default-user-image = #avatar-default-symbolic
-panel-position = bottom
-indicators = ~spacer;~separator;~session;~separator;~layout;~separator;~language;~separator;~a11y;~separator;~power;~separator;~spacer;~host;~spacer;~clock;~spacer
-
-
-
 
 
 

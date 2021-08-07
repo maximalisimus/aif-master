@@ -193,20 +193,28 @@ install_desktop_menu() {
     if [[ $SUB_MENU != "install_deskop_menu" ]]; then
        SUB_MENU="install_deskop_menu"
        HIGHLIGHT_SUB=1
-    else
-       if [[ $HIGHLIGHT_SUB != 7 ]]; then
-          HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
-       fi
     fi
-
-    dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstDEMenuTitle" --menu "$_InstDEMenuBody" 0 0 7 \
-    "1" "$_AXITitle" \
-    "2" "$_InstDEMenuDE" \
-    "3" "$_InstDEMenuDM" \
-    "4" "$_InstDEMenuNM" \
-    "5" "$_GCtitle" \
-    "6" "$_InstGeMenuGE" \
-    "7" "$_Back" 2>${ANSWER}
+	
+	if [[ $_LIGHTDM_INSTALLED -eq 0 ]]; then	
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstDEMenuTitle" --menu "$_InstDEMenuBody" 0 0 7 \
+		"1" "$_AXITitle" \
+		"2" "$_InstDEMenuDE" \
+		"3" "$_InstDEMenuDM" \
+		"5" "$_InstDEMenuNM" \
+		"6" "$_GCtitle" \
+		"7" "$_InstGeMenuGE" \
+		"8" "$_Back" 2>${ANSWER}    
+    else
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstDEMenuTitle" --menu "$_InstDEMenuBody" 0 0 8 \
+		"1" "$_AXITitle" \
+		"2" "$_InstDEMenuDE" \
+		"3" "$_InstDEMenuDM" \
+		"4" "$_ldm_greeter_qs_bd" \
+		"5" "$_InstDEMenuNM" \
+		"6" "$_GCtitle" \
+		"7" "$_InstGeMenuGE" \
+		"8" "$_Back" 2>${ANSWER}
+    fi
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
     case $(cat ${ANSWER}) in
@@ -221,14 +229,16 @@ install_desktop_menu() {
 			 check_de
 			 install_dm
              ;;
-        "4") install_nm
+        "4") ldm_form_edit
+			;;
+        "5") install_nm
              ;;
-        "5") check_xorg
+        "6") check_xorg
 			 check_de
 			 check_dm
 			 install_graphics_card
              ;;
-        "6") install_apps_menu
+        "7") install_apps_menu
              ;;
           *) main_menu_online
              ;;
@@ -250,7 +260,7 @@ edit_configs() {
        SUB_MENU="edit configs"
        HIGHLIGHT_SUB=1
     else
-       if [[ $HIGHLIGHT_SUB != 19 ]]; then
+       if [[ $HIGHLIGHT_SUB != 20 ]]; then
           HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
        fi
     fi
@@ -327,14 +337,15 @@ edit_configs() {
         "18") case $DM in
                    "LXDM") FILE="${MOUNTPOINT}/etc/lxdm/lxdm.conf" 
                            ;;
-                "LightDM") FILE="${MOUNTPOINT}/etc/lightdm/lightdm.conf" 
+                "LightDM") FILE="${MOUNTPOINT}/etc/lightdm/lightdm.conf"
+							FILE2="${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf"
                            ;;
                    "SDDM") FILE="${MOUNTPOINT}/etc/sddm.conf"
                            ;;
                    "SLiM") FILE="${MOUNTPOINT}/etc/slim.conf"
                            ;;
               esac
-            ;;       
+            ;;
          *) main_menu_online
             ;;
      esac

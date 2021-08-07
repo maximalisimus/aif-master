@@ -157,6 +157,7 @@ _sstmd_rslvd_once=0			   # Disable systemd-resolved
 _DE_INSTALLED=0					# Desktop environment installed (Deepin, Gnome, LXDE, Mate, XFCE4...)
 _DM_INSTALLED=0					# Display manager installed (GDM, LXDM, LighDM, SDDM, XDM)
 _NM_INSTALLED=0					# Network manager installed (Netctl, Connman, NetworkManager, WiCd, DHCPCD)
+_LIGHTDM_INSTALLED=0			# LightDM installed
 
 # Language Support
 CURR_LOCALE="en_US.UTF-8"      # Default Locale
@@ -279,6 +280,7 @@ _lmenu_golang=""
 # Packages
 _apps_desktop_once=0
 _youtube_dl_setup=0
+_wallpaper_once=0
 
 # General Menu Package
 

@@ -45,6 +45,23 @@ mirrorlist_question()
     fi
 }
 
+function out_greeter_conf()
+{
+	echo "# /etc/lightdm/lightdm-gtk-greeter.conf" > "${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf"
+	echo "[greeter]" >> "${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf"
+	echo "theme-name = Adwaita" >> "${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf"
+	echo "icon-theme-name = Adwaita" >> "${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf"
+	if [[ "$1" != "" ]]; then
+		echo "background = ${1}" >> "${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf"
+	else
+		echo "background = /usr/share/wallpapers/Carbon-Mesh/carbon_mesh_arch.png" >> "${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf"
+	fi
+	echo "default-user-image = #avatar-default-symbolic" >> "${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf"
+	echo "panel-position = bottom" >> "${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf"
+	echo "indicators = ~spacer;~separator;~session;~separator;~layout;~separator;~language;~separator;~a11y;~separator;~power;~separator;~spacer;~host;~spacer;~clock;~spacer" >> "${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf"
+	echo "" >> "${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf"
+}
+
 function find_images()
 {
 	_img_files=$(find "${1}" -type f -iname "*.${2}" | rev | cut -d '/' -f1 | rev | xargs)
@@ -62,15 +79,24 @@ function find_images()
 	wait
 	unset _img_mn
 	clear
-	echo ""
-	echo "${1}/${variables}"
-	echo ""
+	out_greeter_conf "${variables}"
 }
 
 function select_images()
 {
+	if [[ $_wallpaper_once -eq 0 ]]; then
+		_wallpaper_once=1
+		tar -C "${MOUNTPOINT}/usr/share/" -xzf "$filesdir/config/wallpapers.tar.gz"
+		wait
+		sudo chown -R $USER:users "${MOUNTPOINT}/usr/share/wallpapers/Carbon-Mesh"
+		sudo chmod -R 755 "${MOUNTPOINT}/usr/share/wallpapers/Carbon-Mesh"
+		wait
+		sudo chown -R $USER:users "${MOUNTPOINT}/usr/share/wallpapers/Full-HD"
+		sudo chmod -R 755 "${MOUNTPOINT}/usr/share/wallpapers/Full-HD"
+	fi
+	wait
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_img_sel_bd" --yesno "$_img_ctg_hd" 0 0
-	if [[ $? -eq 0 ]]; then		
+	if [[ $? -eq 0 ]]; then	
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_img_ctg_bd" --menu "$_img_ctg_mn" 0 0 11 \
 		"1" "Carbon-Mesh" \
 		"2" "Full-HD" 2>${ANSWER}
@@ -83,6 +109,14 @@ function select_images()
 				;;
 		esac
 	else
-		echo ""
+		out_greeter_conf
+	fi
+}
+
+function ldm_form_edit()
+{
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_ldm_greeter_qs_bd" --yesno "$_ldm_greeter_qs_hd" 0 0
+	if [[ $? -eq 0 ]]; then
+		select_images
 	fi
 }

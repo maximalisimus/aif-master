@@ -986,6 +986,7 @@ dm_menu(){
                    pacstrap ${MOUNTPOINT} ${_list_lightdm_pkg[*]} 2>/tmp/.errlog
                    arch_chroot "systemctl enable lightdm.service" >/dev/null 2>>/tmp/.errlog
                    DM="LightDM"
+                   _LIGHTDM_INSTALLED=1
                    ;;
               "3") # SDDM
                    clear
@@ -1064,6 +1065,8 @@ dm_menu(){
             arch_chroot "systemctl enable lightdm.service" >/dev/null 2>>/tmp/.errlog
             DM="LightDM"
             sed -i '/^\[Seat:\*\]/a \greeter-session=lightdm-deepin-greeter' "${MOUNTPOINT}/etc/lightdm/lightdm.conf"
+            wait
+            _LIGHTDM_INSTALLED
          # Otherwise, select a DM      
          else 
            dm_menu      
