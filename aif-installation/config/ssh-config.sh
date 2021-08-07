@@ -154,9 +154,11 @@ function keyfile_config()
 		new_ssh_keyfile=$(cat ${ANSWER})
 		if [ -e "${new_ssh_keyfile}" ]; then
 			sed -i "/^AuthorizedKeysFile/c AuthorizedKeysFile ${new_ssh_keyfile}" "${MOUNTPOINT}"/etc/ssh/sshd_config
+			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_auth_keyf_edit_hd" --msgbox "${_auth_keyf_new}\n${new_ssh_keyfile}\n" 0 0
 		else
 			touch "${new_ssh_keyfile}" || echo "" > "${new_ssh_keyfile}"
 			sed -i "/^AuthorizedKeysFile/c AuthorizedKeysFile ${new_ssh_keyfile}" "${MOUNTPOINT}"/etc/ssh/sshd_config
+			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_auth_keyf_edit_hd" --msgbox "${_auth_keyf_new}\n${new_ssh_keyfile}\n" 0 0
 		fi
 	fi
 }
@@ -170,6 +172,7 @@ function alive_interval_config()
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_client_session_hd_1" --inputbox "$_client_session_bd_1" 0 0 "" 2>${ANSWER}
 	time_session=$(cat ${ANSWER})
 	sed -i "/^ClientAliveInterval/c ClientAliveInterval ${time_session}" "${MOUNTPOINT}"/etc/ssh/sshd_config
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_client_session_hd_1" --msgbox "\n${time_session}\n" 0 0
 }
 
 function alive_count_config()
@@ -181,6 +184,7 @@ function alive_count_config()
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_client_session_hd_2" --inputbox "$_client_session_bd_2" 0 0 "" 2>${ANSWER}
 	count_session=$(cat ${ANSWER})
 	sed -i "/^ClientAliveCountMax/c ClientAliveCountMax ${count_session}" "${MOUNTPOINT}"/etc/ssh/sshd_config
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_client_session_hd_2" --msgbox "\n${count_session}\n" 0 0
 }
 
 menu_sshd_config()
