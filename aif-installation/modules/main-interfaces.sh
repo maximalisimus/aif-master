@@ -272,7 +272,7 @@ edit_configs() {
        SUB_MENU="edit configs"
        HIGHLIGHT_SUB=1
     else
-       if [[ $HIGHLIGHT_SUB != 20 ]]; then
+       if [[ $HIGHLIGHT_SUB != 19 ]]; then
           HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
        fi
     fi

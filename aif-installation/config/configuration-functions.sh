@@ -730,10 +730,8 @@ function select_images()
 		"2" "Full-HD" 2>${ANSWER}
 		case $(cat ${ANSWER}) in
 			"1") find_images "${MOUNTPOINT}/usr/share/wallpapers/Carbon-Mesh" "png"
-				
 				;;
 			"2") find_images "${MOUNTPOINT}/usr/share/wallpapers/Full-HD" "jpg"
-				
 				;;
 		esac
 	else
