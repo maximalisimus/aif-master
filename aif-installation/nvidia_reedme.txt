@@ -112,6 +112,11 @@ system-config-printer
 
 
 
+dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_Title" --textbox ./mount-config2.txt 0 0
+
+
+
+
 
 Отключаем аутентификацию на базе хоста, которая позволяет пользователю с определённого хоста подключаться к серверу:
 HostbasedAuthentication no
