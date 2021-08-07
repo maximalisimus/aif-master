@@ -208,6 +208,7 @@ _pubkey_once=0
 _keyfile_once=0
 _client_session_once=0
 client_count_once=0
+rhosts_once=0
 
 # Network time protocol server variables
 _tmsnc_init_once=0

@@ -109,7 +109,7 @@ function pass_auth_conf()
 		_pass_authentication_once=1
 	fi
 	wait
-	_pass_auth_state=$(cat "${MOUNTPOINT}"/etc/ssh/sshd_config | grep -Ei "^PasswordAuthentication" | cut -d ' ' -f2)
+	_pass_auth_state=$(cat "${MOUNTPOINT}"/etc/ssh/sshd_config | grep -Ei "^PasswordAuthentication" | awk '{print $2}')
 	if [[ "$_pass_auth_state" == *"yes"* ]]; then
 		sed -i "/^PasswordAuthentication/s/yes/no/g" "${MOUNTPOINT}"/etc/ssh/sshd_config
 		wait
@@ -126,9 +126,11 @@ function pubkey_auth_conf()
 	if [[ $_pubkey_once -eq 0 ]]; then
 		sed -i "/^\#PubkeyAuthentication/s/\#//g" "${MOUNTPOINT}"/etc/ssh/sshd_config
 		_pubkey_once=1
+		_pabkey_auth_state=$(cat "${MOUNTPOINT}"/etc/ssh/sshd_config | grep -Ei "^PubkeyAuthentication")
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_auth_publ_hd" --msgbox "\n${_pabkey_auth_state}\n" 0 0
 	else
 		wait
-		_pabkey_auth_state=$(cat "${MOUNTPOINT}"/etc/ssh/sshd_config | grep -Ei "^PubkeyAuthentication" | cut -d ' ' -f2)
+		_pabkey_auth_state=$(cat "${MOUNTPOINT}"/etc/ssh/sshd_config | grep -Ei "^PubkeyAuthentication" | awk '{print $2}')
 		if [[ "$_pabkey_auth_state" == *"yes"* ]]; then
 			sed -i "/^PubkeyAuthentication/s/yes/no/g" "${MOUNTPOINT}"/etc/ssh/sshd_config
 			wait
@@ -187,6 +189,25 @@ function alive_count_config()
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_client_session_hd_2" --msgbox "\n${count_session}\n" 0 0
 }
 
+function rhosts_config()
+{
+	if [[ $rhosts_once -eq 0 ]]; then
+		rhosts_once=1
+		sed -i "/^\#IgnoreRhosts/s/\#//g" "${MOUNTPOINT}"/etc/ssh/sshd_config
+		_rhosts_state=$(cat "${MOUNTPOINT}"/etc/ssh/sshd_config | grep -Ei "^IgnoreRhosts")
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_rhosts_hd" --msgbox "\n${_rhosts_state}\n" 0 0
+	else
+		_rhosts_state=$(cat "${MOUNTPOINT}"/etc/ssh/sshd_config | grep -Ei "^IgnoreRhosts" | awk '{print $2}')
+		if [[ "${_rhosts_state}" == *"yes"* ]]; then
+			sed -i "/^IgnoreRhosts/s/yes/no/g" "${MOUNTPOINT}"/etc/ssh/sshd_config
+			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_rhosts_hd" --msgbox "${_rhosts_st_bd_2}" 0 0
+		else
+			sed -i "/^IgnoreRhosts/s/no/yes/g" "${MOUNTPOINT}"/etc/ssh/sshd_config
+			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_rhosts_hd" --msgbox "${_rhosts_st_bd_1}" 0 0
+		fi
+	fi
+}
+
 menu_sshd_config()
 {
 	if [[ $SUB_MENU != "sshd-config" ]]; then
@@ -238,7 +259,7 @@ menu_sshd_config()
 			;;
 		"8") alive_count_config
 			;;
-		"9") 
+		"9") rhosts_config
 			;;
 		"10") 
 			;;
