@@ -447,8 +447,8 @@ if [[ "${_archi[*]}" == "x86_64" ]]; then
     ## Security
     #
     _bitwarden_name="bitwarden"
-    _bitwarden_rel="1"
-    _bitwarden_vers="1.24.6"
+    _bitwarden_rel="2"
+    _bitwarden_vers="1.27.1"
     _bitwarden_fvers="${_bitwarden_vers}-${_bitwarden_rel}"
     _bitwarden_arch="x86_64"
     _bitwarden_ext="pkg.tar.zst"
