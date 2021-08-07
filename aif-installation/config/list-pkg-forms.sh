@@ -267,7 +267,8 @@ _file_meneger_pkg=(ksysguard doublecmd-gtk2 krusader)
 _graphic_pkg=(blender inkscape gimp pinta krita krita-plugin-gmic gcolor3)
 _image_viewer=(viewnior gthumb gpicview)
 _media_pkg=(vlc smplayer kmplayer)
-_editor_pkg=(geany leafpad mousepad gedit)
+_editor_pkg=(vim geany leafpad mousepad gedit)
+_code_editor_pkg=(atom emacs geany)
 _office_pkg=(libreoffice-fresh okular evince djvulibre)
 #
 _system_pkg=(grub-customizer galculator)
@@ -567,6 +568,8 @@ if [[ "${_archi[*]}" == "x86_64" ]]; then
 	_java_ide=(intellij-idea-community-edition eclipse-ecj)
 	_perl_pkg=(perl)
 	_ruby_pkg=(ruby ruby-irb)
+	_nodejs_pkg=(nodejs)
+	_nodejs_lts_pkg=(nodejs-lts-fermium nodejs-lts-erbium) # nodejs-lts-fermium - For 14.X version. nodejs-lts-erbium - For 12.X version
 else
 	#
 	## AppImageUpdate
@@ -612,6 +615,8 @@ else
 	_java_ide=(intellij-idea-community-edition eclipse-ecj)
 	_perl_pkg=(perl)
 	_ruby_pkg=(ruby ruby-irb)
+	_nodejs_pkg=(nodejs)
+	_nodejs_lts_pkg=(nodejs-lts-fermium nodejs-lts-erbium) # nodejs-lts-fermium - For 14.X version. nodejs-lts-erbium - For 12.X version
 fi
 #
 ## My inserts
