@@ -717,6 +717,8 @@ function wallpaper_install()
 			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_wallp_msg_hd" --msgbox "$_wallp_msg_bd" 0 0
 			wait
 		fi
+	else
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_wallp_msg_hd" --msgbox "$_wallp_msg_bd" 0 0
 	fi
 }
 

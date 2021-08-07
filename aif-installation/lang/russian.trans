@@ -907,7 +907,7 @@ _ipv46_fd_bd_7="net.ipv6.conf.default.forwarding=1"
 _ipv46_fd_bd_8="net.ipv6.conf.all.forwarding=1"
 _yn_ipv46_fd_fbd="\n${_ipv46_fd_bd_1}\n${_ipv46_fd_bd_2}\n${_ipv46_fd_bd_3}\n${_ipv46_fd_bd_4}\n\n${_ipv46_fd_bd_5}\n\n${_ipv46_fd_bd_6}\n${_ipv46_fd_bd_7}\n${_ipv46_fd_bd_8}\n\n"
 #
-## Image to LighDM
+## Image to LighDM and Wallpaper Full HD
 #
 _ldm_greeter_qs_hd="Изменение внешнего вида LightDM"
 _ldm_greeter_qs_bd="\nЖелаете изменить внешний вид экрана входа, установленный по умолчанию ?\n Изображение будет изменено.\n\n"
