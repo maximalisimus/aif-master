@@ -203,6 +203,11 @@ _mn_clamav=""
 
 # SSH Variables
 _auto_sshd_nfo_once=0
+_pass_authentication_once=0
+_pubkey_once=0
+_keyfile_once=0
+_client_session_once=0
+client_count_once=0
 
 # Network time protocol server variables
 _tmsnc_init_once=0
