@@ -193,13 +193,18 @@ install_desktop_menu() {
     if [[ $SUB_MENU != "install_deskop_menu" ]]; then
        SUB_MENU="install_deskop_menu"
        HIGHLIGHT_SUB=1
+    else
+       if [[ $HIGHLIGHT_SUB != 8 ]]; then
+          HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
+       fi
     fi
 	
 	if [[ $_LIGHTDM_INSTALLED -eq 0 ]]; then	
-		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstDEMenuTitle" --menu "$_InstDEMenuBody" 0 0 7 \
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstDEMenuTitle" --menu "$_InstDEMenuBody" 0 0 8 \
 		"1" "$_AXITitle" \
 		"2" "$_InstDEMenuDE" \
 		"3" "$_InstDEMenuDM" \
+		"4" "$_wallp_inst_hd" \
 		"5" "$_InstDEMenuNM" \
 		"6" "$_GCtitle" \
 		"7" "$_InstGeMenuGE" \
@@ -209,7 +214,7 @@ install_desktop_menu() {
 		"1" "$_AXITitle" \
 		"2" "$_InstDEMenuDE" \
 		"3" "$_InstDEMenuDM" \
-		"4" "$_ldm_greeter_qs_bd" \
+		"4" "$_ldm_greeter_qs_hd" \
 		"5" "$_InstDEMenuNM" \
 		"6" "$_GCtitle" \
 		"7" "$_InstGeMenuGE" \
@@ -229,7 +234,14 @@ install_desktop_menu() {
 			 check_de
 			 install_dm
              ;;
-        "4") ldm_form_edit
+        "4") check_xorg
+			check_de
+			check_dm 
+			if [[ $_LIGHTDM_INSTALLED -eq 0 ]]; then
+				wallpaper_install
+			else
+				ldm_form_edit
+			fi
 			;;
         "5") install_nm
              ;;
