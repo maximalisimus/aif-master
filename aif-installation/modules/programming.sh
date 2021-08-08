@@ -261,13 +261,97 @@ function golang_install()
 		[[ ${_chlmn_golang[*]} != "" ]] && check_for_error
 	fi
 }
+function nodejs_install()
+{
+	if [[ $_nodejs_once -eq 0 ]]; then
+		_nodejs_once=1
+		clear
+		info_search_pkg
+		_list_njs_pkg=$(check_s_lst_pkg "${_nodejs_pkg[*]}")
+		wait
+	fi
+	if [[ ${_list_njs_pkg} != "" ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js" --yesno "${_progr_bd} ${_list_njs_pkg[*]]}" 0 0
+		if [[ $? -eq 0 ]]; then
+			pacstrap ${MOUNTPOINT} ${_list_njs_pkg[*]} 2>/tmp/.errlog
+			wait
+			check_for_error
+		else
+			nodejs_menu
+		fi
+	else
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js" --msgbox "\nNode.js - Package not found!\n${_nodejs_pkg[*]}\n\n" 0 0
+		wait
+		nodejs_menu
+	fi
+}
+function nodejs_lts_install()
+{
+	if [[ $_nodejs_lts_once -eq 0 ]]; then
+		_nodejs_lts_once=1
+		clear
+		info_search_pkg
+		_list_njs_lts_pkg=$(check_s_lst_pkg "${_nodejs_lts_pkg[*]}")
+		wait
+		clear
+		for j in ${_list_njs_lts_pkg[*]}; do
+			_lts_menu_nodejs="${_lts_menu_nodejs} $j -"
+		done
+	fi
+	if [[ ${_list_njs_lts_pkg} != "" ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_progr_hd" --menu "$_progr_bd_2" 0 0 5 \
+		"1" "${_nodejs_lts_pkg[0]}" \
+		"2" "${_nodejs_lts_pkg[1]}" \
+		"3" "$_Back" 2>${ANSWER}
+				
+		 case $(cat ${ANSWER}) in
+			"1") dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js LTS" --yesno "${_progr_bd} ${_nodejs_lts_pkg[0]}" 0 0
+				if [[ $? -eq 0 ]]; then
+					pacstrap ${MOUNTPOINT} ${_nodejs_lts_pkg[0]} 2>/tmp/.errlog
+					wait
+					check_for_error
+				fi
+				;;
+			"2") dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js LTS" --yesno "${_progr_bd} ${_nodejs_lts_pkg[1]}" 0 0
+				if [[ $? -eq 0 ]]; then
+					pacstrap ${MOUNTPOINT} ${_nodejs_lts_pkg[1]} 2>/tmp/.errlog
+					wait
+					check_for_error
+				fi
+				;;
+			*) nodejs_menu
+				;;
+		 esac
+	else
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js LTS" --msgbox "\nNode.js LTS - Package not found!\n${_nodejs_lts_pkg[*]}\n\n" 0 0
+		wait
+		nodejs_menu
+	fi
+}
+function nodejs_menu()
+{
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js" --menu "$_progr_bd_2" 0 0 5 \
+	"1" "Node.js" \
+	"2" "Node.js LTS" \
+	"3" "$_Back" 2>${ANSWER}
+				
+	 case $(cat ${ANSWER}) in
+		"1") nodejs_install
+			;;
+		"2") nodejs_lts_install
+			;;
+		*) installing_programming
+			;;
+	esac
+	nodejs_menu
+}
 installing_programming()
 {
     if [[ $SUB_MENU != "programming_package" ]]; then
        SUB_MENU="programming_package"
        HIGHLIGHT_SUB=1
     else
-       if [[ $HIGHLIGHT_SUB != 12 ]]; then
+       if [[ $HIGHLIGHT_SUB != 13 ]]; then
           HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
        fi
     fi

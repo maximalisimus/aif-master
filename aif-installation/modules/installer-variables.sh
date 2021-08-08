@@ -283,7 +283,11 @@ _lmenu_ruby=""
 _golang_once=0
 _list_golang_pkg=""
 _lmenu_golang=""
-
+_nodejs_once=0
+_list_njs_pkg=""
+_nodejs_lts_once=0
+_list_njs_lts_pkg=""
+_lts_menu_nodejs=""
 
 # Packages
 _apps_desktop_once=0
