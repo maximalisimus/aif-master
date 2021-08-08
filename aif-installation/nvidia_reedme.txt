@@ -108,6 +108,33 @@ system-config-printer
 
 
 
+cp -vf /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+
+sudo pacman -S reflector
+reflector --help
+reflector —list-countries
+
+sudo vim /etc/xdg/reflector/reflector.conf
+--country 'YOUR COUNTRY','OR COUNTRIES'
+
+sudo systemctl enable reflector.service reflector.timer
+sudo systemctl start reflector.service reflector.timer
+
+Следующая команда отфильтрует пять зеркал с поддержкой https, отсортирует их по скорости и обновит файл mirrorlist:
+reflector --verbose -l 5 -p https --sort rate --save /etc/pacman.d/mirrorlist
+
+Эта команда подробно выведет список 200 наиболее недавно обновленных HTTPS-зеркал, отсортирует их по скорости загрузки и обновит mirrorlist:
+# reflector --verbose -l 200 -p https --sort rate --save /etc/pacman.d/mirrorlist
+
+То же, что и в предыдущем примере, но будут взяты только зеркала, расположенные в Соединенных Штатах:
+reflector --verbose --country 'United States' -l 200 -p https --sort rate --save /etc/pacman.d/mirrorlist
+
+
+
+
+
+
+
 dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_Title" --textbox ./mount-config2.txt 0 0
 
 
