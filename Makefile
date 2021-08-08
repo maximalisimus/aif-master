@@ -1,5 +1,6 @@
 DESTDIR=./
 SETUPDIR=$(DESTDIR)usr/share
+DESKTOPEXEC=/usr/share
 TARGET=aif
 LABEL_NAME=$(TARGET)-master
 LABEL_DESKTOP=$(LABEL_NAME).desktop
@@ -29,7 +30,7 @@ icon:
 desktop:
 	touch $(LABEL_DESKTOP)
 	echo "[Desktop Entry]" > $(LABEL_DESKTOP)
-	echo "Exec=sudo $(SETUPDIR)/$(LABEL_NAME)/$(TARGET)" >> $(LABEL_DESKTOP)
+	echo "Exec=sudo $(DESKTOPEXEC)/$(LABEL_NAME)/$(TARGET)" >> $(LABEL_DESKTOP)
 	echo "Type=Application" >> $(LABEL_DESKTOP)
 	echo "Name=$(LABEL_NAME)" >> $(LABEL_DESKTOP)
 	echo "Name[en]=$(LABEL_NAME)" >> $(LABEL_DESKTOP)
