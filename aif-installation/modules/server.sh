@@ -246,18 +246,17 @@ function file2ban_install()
 	server_menu
 }
 server_menu()
-{
-	# Depending on the answer, first check whether partition(s) are mounted and whether base has been installed
-    if [[ $(cat ${ANSWER}) -eq 2 ]]; then
-       check_mount
-    fi
-
-    if [[ $(cat ${ANSWER}) -ge 3 ]] && [[ $(cat ${ANSWER}) -le 7 ]]; then
-       check_mount
-       check_base
+{    
+    if [[ $SUB_MENU != "server_package" ]]; then
+       SUB_MENU="server_package"
+       HIGHLIGHT_SUB=1
+    else
+       if [[ $HIGHLIGHT_SUB != 8 ]]; then
+          HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
+       fi
     fi
 	
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_srv_ttl" \
+	dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_mn_srv_ttl" \
 	--menu "$_mn_srv_bd" 0 0 8 \
  	"1" "$_mn_srv_1" \
  	"2" "docker docker-compose" \

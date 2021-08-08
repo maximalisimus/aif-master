@@ -17,7 +17,7 @@ function makecmake_install()
 			_lmenu_makecmake="${_lmenu_makecmake} $j - on"
 		done
 	fi
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Arduino" --yesno "${_progr_bd} ${_list_makecmake_pkg[*]]}" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Arduino" --yesno "${_progr_bd} ${_list_makecmake_pkg[*]}" 0 0
 	if [[ $? -eq 0 ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Arduino" --checklist "$_lmp_srv_bd" 0 0 7 ${_lmenu_makecmake} 2>${ANSWER}
 		_chlmn_makecmake=$(cat ${ANSWER})
@@ -40,7 +40,7 @@ function arduino_install()
 			_lmenu_arduino="${_lmenu_arduino} $j - on"
 		done
 	fi
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Arduino" --yesno "${_progr_bd} ${_list_arduino_pkg[*]]}" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Arduino" --yesno "${_progr_bd} ${_list_arduino_pkg[*]}" 0 0
 	if [[ $? -eq 0 ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Arduino" --checklist "$_lmp_srv_bd" 0 0 7 ${_lmenu_arduino} 2>${ANSWER}
 		_chlmn_arduino=$(cat ${ANSWER})
@@ -62,7 +62,7 @@ function c_cpp_install()
 			_lmenu_ccpp="${_lmenu_ccpp} $j - on"
 		done
 	fi
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "C / C++" --yesno "${_progr_bd} ${_list_ccpp_pkg[*]]}" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "C / C++" --yesno "${_progr_bd} ${_list_ccpp_pkg[*]}" 0 0
 	if [[ $? -eq 0 ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "C / C++" --checklist "$_lmp_srv_bd" 0 0 7 ${_lmenu_ccpp} 2>${ANSWER}
 		_chlmn_ccpp=$(cat ${ANSWER})
@@ -84,7 +84,7 @@ function mingww64_install()
 			_lmenu_mingww64="${_lmenu_mingww64} $j - on"
 		done
 	fi
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "MingW-W64" --yesno "${_progr_bd} ${_list_mingww64_pkg[*]]}" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "MingW-W64" --yesno "${_progr_bd} ${_list_mingww64_pkg[*]}" 0 0
 	if [[ $? -eq 0 ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "MingW-W64" --checklist "$_lmp_srv_bd" 0 0 7 ${_lmenu_mingww64} 2>${ANSWER}
 		_chlmn_mingww64=$(cat ${ANSWER})
@@ -106,7 +106,7 @@ function python3_install()
 			_lmenu_py3="${_lmenu_py3} $j - on"
 		done
 	fi
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Python 3" --yesno "${_progr_bd} ${_list_py3_pkg[*]]}" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Python 3" --yesno "${_progr_bd} ${_list_py3_pkg[*]}" 0 0
 	if [[ $? -eq 0 ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Python 3" --checklist "$_lmp_srv_bd" 0 0 7 ${_lmenu_py3} 2>${ANSWER}
 		_chlmn_py3=$(cat ${ANSWER})
@@ -128,7 +128,7 @@ function python2_install()
 			_lmenu_py2="${_lmenu_py2} $j - on"
 		done
 	fi
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Python 2" --yesno "${_progr_bd} ${_list_py2_pkg[*]]}" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Python 2" --yesno "${_progr_bd} ${_list_py2_pkg[*]}" 0 0
 	if [[ $? -eq 0 ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Python 2" --checklist "$_lmp_srv_bd" 0 0 7 ${_lmenu_py2} 2>${ANSWER}
 		_chlmn_py3=$(cat ${ANSWER})
@@ -150,7 +150,7 @@ function qtcreator_install()
 			_lmenu_qtcreator="${_lmenu_qtcreator} $j - on"
 		done
 	fi
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "QT Creator" --yesno "${_progr_bd} ${_list_qtcreator_pkg[*]]}" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "QT Creator" --yesno "${_progr_bd} ${_list_qtcreator_pkg[*]}" 0 0
 	if [[ $? -eq 0 ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "QT Creator" --checklist "$_lmp_srv_bd" 0 0 7 ${_lmenu_qtcreator} 2>${ANSWER}
 		_chlmn_qtcreator=$(cat ${ANSWER})
@@ -177,7 +177,7 @@ function java_install()
 			_lmenu_java_ide="${_lmenu_java_ide} $i - off"
 		done
 	fi
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Java" --yesno "${_progr_bd} ${_list_java_pkg[*]]}" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Java" --yesno "${_progr_bd} ${_list_java_pkg[*]}" 0 0
 	if [[ $? -eq 0 ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Java" --checklist "$_lmp_srv_bd" 0 0 7 ${_lmenu_java} 2>${ANSWER}
 		_chlmn_java=$(cat ${ANSWER})
@@ -186,7 +186,7 @@ function java_install()
 		[[ ${_chlmn_java[*]} != "" ]] && check_for_error
 	fi
 	wait
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Java IDE" --yesno "${_progr_bd} ${_list_java_ide_pkg[*]]}" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Java IDE" --yesno "${_progr_bd} ${_list_java_ide_pkg[*]}" 0 0
 	if [[ $? -eq 0 ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Java IDE" --checklist "$_lmp_srv_bd" 0 0 7 ${_lmenu_java_ide} 2>${ANSWER}
 		_chlmn_java_ide=$(cat ${ANSWER})
@@ -208,7 +208,7 @@ function perl_install()
 			_lmenu_perl="${_lmenu_perl} $j - on"
 		done
 	fi
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Perl" --yesno "${_progr_bd} ${_list_perl_pkg[*]]}" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Perl" --yesno "${_progr_bd} ${_list_perl_pkg[*]}" 0 0
 	if [[ $? -eq 0 ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Perl" --checklist "$_lmp_srv_bd" 0 0 7 ${_lmenu_perl} 2>${ANSWER}
 		_chlmn_perl=$(cat ${ANSWER})
@@ -230,7 +230,7 @@ function ruby_install()
 			_lmenu_ruby="${_lmenu_ruby} $j - on"
 		done
 	fi
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Ruby" --yesno "${_progr_bd} ${_list_ruby_pkg[*]]}" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Ruby" --yesno "${_progr_bd} ${_list_ruby_pkg[*]}" 0 0
 	if [[ $? -eq 0 ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Ruby" --checklist "$_lmp_srv_bd" 0 0 7 ${_lmenu_ruby} 2>${ANSWER}
 		_chlmn_ruby=$(cat ${ANSWER})
@@ -252,7 +252,7 @@ function golang_install()
 			_lmenu_golang="${_lmenu_golang} $j - on"
 		done
 	fi
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "GoLang" --yesno "${_progr_bd} ${_list_golang_pkg[*]]}" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "GoLang" --yesno "${_progr_bd} ${_list_golang_pkg[*]}" 0 0
 	if [[ $? -eq 0 ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "GoLang" --checklist "$_lmp_srv_bd" 0 0 7 ${_lmenu_golang} 2>${ANSWER}
 		_chlmn_golang=$(cat ${ANSWER})
@@ -271,7 +271,7 @@ function nodejs_install()
 		wait
 	fi
 	if [[ ${_list_njs_pkg} != "" ]]; then
-		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js" --yesno "${_progr_bd} ${_list_njs_pkg[*]]}" 0 0
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js" --yesno "${_progr_bd} ${_list_njs_pkg[*]}" 0 0
 		if [[ $? -eq 0 ]]; then
 			pacstrap ${MOUNTPOINT} ${_list_njs_pkg[*]} 2>/tmp/.errlog
 			wait
@@ -300,8 +300,8 @@ function nodejs_lts_install()
 	fi
 	if [[ ${_list_njs_lts_pkg} != "" ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_progr_hd" --menu "$_progr_bd_2" 0 0 5 \
-		"1" "${_nodejs_lts_pkg[0]}" \
-		"2" "${_nodejs_lts_pkg[1]}" \
+		"1" "${_nodejs_lts_pkg[0]} (14.X version)" \
+		"2" "${_nodejs_lts_pkg[1]} (12.X version)" \
 		"3" "$_Back" 2>${ANSWER}
 				
 		 case $(cat ${ANSWER}) in
@@ -395,7 +395,7 @@ installing_programming()
          ;;
     "11") ruby_install
          ;;
-    "12") # Node.js menu to select node.js or node.js.lts. Node.js.lts to select to 14.X or 12.X version
+    "12") nodejs_menu
 		;;
       *) install_apps_menu
          ;;

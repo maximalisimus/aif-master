@@ -622,6 +622,40 @@ run_mkinitcpio() {
  
 }
 
+function mainmenu_finishexit()
+{
+	echo -n  -e "\e[1;31mPlease wait ...\e[0m"\\r
+	[[ $DEEPIN_INSTALLED -eq 1 ]] && fixed_deepin_desktop
+	wait
+	echo -n  -e "\e[1;32mPlease wait ...\e[0m"\\r
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_umprt_mn_ttl" --yesno "$_yn_umprt_mn_bd" 0 0
+	if [[ $? -eq 0 ]]; then
+		umount_partitions
+	fi
+	wait
+	echo -n  -e "\e[1;31mPlease wait ...\e[0m"\\r
+	clear
+	echo -n  -e "\e[1;32mPlease wait ...\e[0m"\\r
+	if [[ -f "$filesdir/remove_pkg.log" ]]; then
+		dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yesno_rmrf_ttl" --yesno "$_yesno_rmrf_bd" 0 0
+		if [[ $? -eq 0 ]]; then
+			clear
+			echo ""
+			cat "$filesdir/remove_pkg.log"
+			echo ""
+			rm -rf "$filesdir/remove_pkg.log"
+		else
+			clear
+			echo ""
+			cat "$filesdir/remove_pkg.log"
+			echo ""
+		fi
+	fi
+	wait
+	un_us_dlgrc_conf
+	exit 0
+}
+
 pc_conf_prcss()
 {
     echo "#" > "$2"
