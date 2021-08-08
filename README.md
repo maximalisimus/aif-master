@@ -1,3 +1,13 @@
+# aif-master
+
+****************************
+
+aif-master - Bash скрипт для установки системы Archlinux на компьютер.
+
+aif-master - Bash script for installing the Archlinux system on a computer.
+
+<img src="https://raw.githubusercontent.com/maximalisimus/aif-master/master/image/aif-image.jpg"  height="400">
+
 # Aif-master script instalation
 # Online to Dialog mode on ArchLinux
 
