@@ -26,7 +26,7 @@ aif-master - Bash script for installing the Archlinux system on a computer.
 
 Данный мастер поддерживает **UEFI** режим установки при запуске системы *ArchLinux* в режиме *UEFI*.
 
-Данному установщику не нужен ни **XORG**, ни рабочее окружение ( **Desktop environment** ), ни дисплейный менеджер 
+Данному установщику **не нужен** ни **XORG**, ни рабочее окружение ( **Desktop environment** ), ни дисплейный менеджер 
 ( **Display Manager** ). Данный скрипт работает полностью в консольном режиме. Достаточно только 
 наличия подключения к интернету и пакета **dialog**.
 
@@ -48,7 +48,7 @@ The script can be used with absolutely any *Archlinux* distribution, except for
 
 This wizard supports **UEFI** installation mode when starting the *ArchLinux* system in *UEFI* mode.
 
-This installer does not need either **XORG**, nor a working environment 
+This installer **does not need** either **XORG**, nor a working environment 
 ( **Desktop environment** ), nor a display manager ( **Display Manager** ). 
 This script works completely in console mode. Just enough availability of an 
 internet connection and the **dialog** package.
