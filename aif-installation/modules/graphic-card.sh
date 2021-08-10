@@ -425,10 +425,10 @@ function nvd_select_dep()
 }
 function modificate_nvidia_update()
 {
-	if [[ $OLD_NVIDIA_ONCE -eq 0 ]]; then
+	if [[ $OLD_NVIDIA_PACMAN_ONCE -eq 0 ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_nvd_upd_hd" --yesno "$_yn_nvd_upd_bd" 0 0
 		if [[ $? -eq 0 ]]; then
-			OLD_NVIDIA_ONCE=1
+			OLD_NVIDIA_PACMAN_ONCE=1
 			sed -Ei '/^\#IgnorePkg/s/\#//' "${MOUNTPOINT}"/etc/pacman.conf
 			wait
 			sed -Ei '/^IgnorePkg/c IgnorePKG = nvidia-settings nvidia-utils nvidia-dkms nvidia-lts nvidia-lts-dkms nvidia opencl-nvidia lib32-opencl-nvidia' "${MOUNTPOINT}"/etc/pacman.conf
@@ -439,16 +439,16 @@ function modificate_nvidia_update()
 
 function nvd39xx_setup()
 {
-	if [[ $_nvdthn_once -eq 0 ]]; then
-		_nvdthn_once=1
+	if [[ $_390xx_once -eq 0 ]]; then
+		_390xx_once=1
 		
 	fi
 }
 
 function nvd39xx_dkms_setup()
 {
-	if [[ $_nvdthn_once -eq 0 ]]; then
-		_nvdthn_once=1
+	if [[ $_390xx_dkms_once -eq 0 ]]; then
+		_390xx_dkms_once=1
 		
 	fi
 }
