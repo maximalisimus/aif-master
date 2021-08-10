@@ -231,6 +231,16 @@ install_ati(){
 				modificate_xorg
              ;;
         "10") # Nvidia-390xx
+				nvd39xx_setup
+				wait
+				check_for_error
+				wait
+				nvd_select_dep
+				wait
+				modificate_nvidia_update
+				wait
+				NVIDIA_INST=1
+				wait
 			;;
 		"11") # Nvidia-390xx (+ $INTEGRATED_GC)
 			if [[ $INTEGRATED_GC == "ATI" ]]; then
@@ -238,14 +248,28 @@ install_ati(){
 			else
 				install_intel
 			fi
+				nvd39xx_setup
+				wait
+				check_for_error
+				wait
+				nvd_select_dep
+				wait
 				modificate_nvidia_update
 				wait
 				NVIDIA_INST=1
-				clear
-				info_search_pkg
-				
+				wait
 			;;
 		"12") # Nvidia-390xx-dkms
+				nvd39xx_dkms_setup
+				wait
+				check_for_error
+				wait
+				nvd_select_dep
+				wait
+				modificate_nvidia_update
+				wait
+				NVIDIA_INST=1
+				wait
 			;;
 		"13") # Nvidia-390xx-dkms (+ $INTEGRATED_GC)
 			if [[ $INTEGRATED_GC == "ATI" ]]; then
@@ -253,11 +277,16 @@ install_ati(){
 			else
 				install_intel
 			fi
+				nvd39xx_dkms_setup
+				wait
+				check_for_error
+				wait
+				nvd_select_dep
+				wait
 				modificate_nvidia_update
 				wait
 				NVIDIA_INST=1
-				clear
-				info_search_pkg
+				wait
 			;;
         "14") # Via
             clear
@@ -407,6 +436,7 @@ function modificate_nvidia_update()
 		fi
 	fi
 }
+
 function nvd39xx_setup()
 {
 	if [[ $_nvdthn_once -eq 0 ]]; then
@@ -414,6 +444,7 @@ function nvd39xx_setup()
 		
 	fi
 }
+
 function nvd39xx_dkms_setup()
 {
 	if [[ $_nvdthn_once -eq 0 ]]; then
