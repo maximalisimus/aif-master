@@ -1,17 +1,5 @@
  
 
-nvidia (lts)
-nvidia-dkms (lts)
-nvidia-340xx (lts)
-nvidia-340xx-dkms (lts)
-nvidia-390xx (lts)
-nvidia-390xx-dkms (lts)
-
-
-
-
-
-
 
 
 xdg-user-dir DESKTOP
