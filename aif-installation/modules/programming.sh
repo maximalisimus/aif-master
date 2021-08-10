@@ -305,18 +305,28 @@ function nodejs_lts_install()
 		"3" "$_Back" 2>${ANSWER}
 				
 		 case $(cat ${ANSWER}) in
-			"1") dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js LTS" --yesno "${_progr_bd} ${_nodejs_lts_pkg[0]}" 0 0
-				if [[ $? -eq 0 ]]; then
-					pacstrap ${MOUNTPOINT} ${_nodejs_lts_pkg[0]} 2>/tmp/.errlog
+			"1") if [[ "${_list_njs_lts_pkg[*]}" == *"${_nodejs_lts_pkg[0]}"* ]]; then
+					dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js" --yesno "${_progr_bd} ${_nodejs_lts_pkg[0]}" 0 0
+					if [[ $? -eq 0 ]]; then
+						pacstrap ${MOUNTPOINT} ${_nodejs_lts_pkg[0]} 2>/tmp/.errlog
+						wait
+						check_for_error
+					fi
+				else
+					dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js LTS" --msgbox "\nNode.js LTS - Package not found!\n${_nodejs_lts_pkg[0]}\n\n" 0 0
 					wait
-					check_for_error
 				fi
 				;;
-			"2") dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js LTS" --yesno "${_progr_bd} ${_nodejs_lts_pkg[1]}" 0 0
-				if [[ $? -eq 0 ]]; then
-					pacstrap ${MOUNTPOINT} ${_nodejs_lts_pkg[1]} 2>/tmp/.errlog
+			"2") if [[ "${_list_njs_lts_pkg[*]}" == *"${_nodejs_lts_pkg[1]}"* ]]; then
+					dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js" --yesno "${_progr_bd} ${_nodejs_lts_pkg[1]}" 0 0
+					if [[ $? -eq 0 ]]; then
+						pacstrap ${MOUNTPOINT} ${_nodejs_lts_pkg[1]} 2>/tmp/.errlog
+						wait
+						check_for_error
+					fi
+				else
+					dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Node.js LTS" --msgbox "\nNode.js LTS - Package not found!\n${_nodejs_lts_pkg[1]}\n\n" 0 0
 					wait
-					check_for_error
 				fi
 				;;
 			*) nodejs_menu
