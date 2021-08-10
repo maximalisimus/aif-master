@@ -8,8 +8,6 @@ nvidia-390xx (lts)
 nvidia-390xx-dkms (lts)
 
 
-sed -Ei '/^\#IgnorePkg/s/\#//' "${MOUNTPOINT}"/etc/pacman.conf
-sed -Ei '/^IgnorePkg/c IgnorePKG = nvidia-settings nvidia-utils nvidia-dkms nvidia-lts nvidia-lts-dkms nvidia opencl-nvidia lib32-opencl-nvidia' "${MOUNTPOINT}"/etc/pacman.conf
 
 
 

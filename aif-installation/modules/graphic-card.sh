@@ -238,10 +238,12 @@ install_ati(){
 			else
 				install_intel
 			fi
+				modificate_nvidia_update
 				wait
 				NVIDIA_INST=1
 				clear
 				info_search_pkg
+				
 			;;
 		"12") # Nvidia-390xx-dkms
 			;;
@@ -251,6 +253,7 @@ install_ati(){
 			else
 				install_intel
 			fi
+				modificate_nvidia_update
 				wait
 				NVIDIA_INST=1
 				clear
@@ -339,7 +342,7 @@ function xorg_modif()
 #
 function modificate_xorg()
 {
-	dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_ynq_nvd_xm_ttl" --yesno "$_ynq_nvd_xm_bd" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_ynq_nvd_xm_ttl" --yesno "$_ynq_nvd_xm_bd" 0 0
 
 	if [[ $? -eq 0 ]]; then
 		xorg_modif
@@ -358,7 +361,7 @@ function nvd_select_dep()
 		for j in ${_list_nvd_dep[*]}; do
 			if [[ $counter -eq 0 ]]; then
 				_nvd_dep_mn="$j - on"
-			elif [[ "$j" == "${_nvd_dep[1]}" ]]; then
+			elif [[ "$j" == *"${_nvd_dep[1]}"* ]]; then
 				_nvd_dep_mn="${_nvd_dep_mn} $j - off"
 			else
 				_nvd_dep_mn="${_nvd_dep_mn} $j - on"
@@ -378,7 +381,7 @@ function nvd_select_dep()
 		declare -i _ch_chl_nvd
 		_ch_chl_nvd=$(echo "${_chl_nvd[*]}" | grep -oi "${_nvd_dep[1]}" | wc -l)
 		if [[ $_ch_chl_nvd -eq 1 ]]; then
-			dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_ynq_bmblb_ttl" --yesno "$_ynq_bmblb_bd" 0 0
+			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_ynq_bmblb_ttl" --yesno "$_ynq_bmblb_bd" 0 0
 			if [[ $? -eq 0 ]]; then
 				arch_chroot "systemctl enable bumblebeed.service" 2>/tmp/.errlog
 				check_for_error
@@ -389,6 +392,16 @@ function nvd_select_dep()
 				dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_msg_bmblb_ttl" --msgbox "$_msg_bmblb_bd" 0 0
 			fi
 		fi
+	fi
+}
+function modificate_nvidia_update()
+{
+	if [[ $OLD_NVIDIA_ONCE -eq 0 ]]; then
+		OLD_NVIDIA_ONCE=1
+		sed -Ei '/^\#IgnorePkg/s/\#//' "${MOUNTPOINT}"/etc/pacman.conf
+		wait
+		sed -Ei '/^IgnorePkg/c IgnorePKG = nvidia-settings nvidia-utils nvidia-dkms nvidia-lts nvidia-lts-dkms nvidia opencl-nvidia lib32-opencl-nvidia' "${MOUNTPOINT}"/etc/pacman.conf
+		wait
 	fi
 }
 function nvd39xx_setup()

@@ -905,6 +905,24 @@ _ErrNoDE="\nСначала необходимо установить любое 
 _ErrNoDM="\nСначала необходимо установить любой менеджер дисплея \n (GDM, LXDM, LighDM, SDDM, XDM, SliM).\n\n"
 _ErrNoNM="\nСначала необходимо установить любой менеджер сетевых соединений \n (Netctl, Connman, NetworkManager, WiCd, DHCPCD).\n\n"
 #
+#
+## Nvidia 390XX Video Card
+#
+# Modificate Xorg
+_ynq_nvd_xm_ttl="Модификация Xorg."
+_ynq_nvd_xm_bd="\nДобавить в запуск XORG секцию дополнительных модулей для более гибкого управления дискретной видеокартой ?\n\n"
+# nvd_select_dep
+_nvidia_dep_mn_ttl="Установка зависимостей для Nvidia"
+_nvidia_dep_mn_bd="\nПожалуйста, выберите зависимые пакеты и библиотеки для корректной работы драйвера видеокарты ?\n\n"
+_ynq_bmblb_ttl="Настройка пакета bumblebee"
+_ynq_bmblb_bd="\nВключить настройки bumblebee для возможности переключения между встроеной и дискретной видеокартой ?\n"
+_msg_bmblb_ttl="Запуск приложений через bumblebee"
+_msg_bmblb_bd="\nВ значок запуска настройки nvidia-settings в меню приложений уже внесены соответствующие настройки.\nДля запуска любого приложения через дискретную видеокарту необходимо ввести команду:\noptirun /full/path/apps -c :8\n\n"
+#
+_yn_nvd_upd_hd="Настройки обновления Nvidia-390xx"
+_yn_nvd_upd_bd="\nВнести изменения настроек в конфигурацию пакетного менеджера для корректного обновления устаревших драйверов nvidia-390xx ?\n Настройки будут внесены в файл:\n/etc/pacman.conf\nВ строку: IgnorePkg.\n\n"
+#
+#
 ## IP Forwarding
 #
 _yn_ipv46_forward_hd="Перенаправление портов."
@@ -919,6 +937,7 @@ _ipv46_fd_bd_7="net.ipv6.conf.default.forwarding=1"
 _ipv46_fd_bd_8="net.ipv6.conf.all.forwarding=1"
 _yn_ipv46_fd_fbd="\n${_ipv46_fd_bd_1}\n${_ipv46_fd_bd_2}\n${_ipv46_fd_bd_3}\n${_ipv46_fd_bd_4}\n\n${_ipv46_fd_bd_5}\n\n${_ipv46_fd_bd_6}\n${_ipv46_fd_bd_7}\n${_ipv46_fd_bd_8}\n\n"
 #
+#
 ## Configuration to LighDM on lightdm-gtk-greeter and Wallpapers Full HD
 #
 _ldm_greeter_qs_hd="Изменение внешнего вида LightDM"
@@ -931,6 +950,7 @@ _img_sel_bd="\nПожалуйста, выберите понравившееся
 _img_ctg_hd="Выбор категории изображения"
 _img_ctg_bd="\nЖелаете выбрать изображение для LightDM ?\n\n Иначе, будет установлено изображение по умолчанию.\n\n"
 _img_ctg_mn="\nПожалуйста, выберите категорию изображения.\n"
+#
 #
 ## General Menu Package
 #

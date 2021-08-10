@@ -35,6 +35,7 @@ LTS=0                       # Has the LTS Kernel been installed?
 GRAPHIC_CARD=""             # graphics card
 INTEGRATED_GC=""            # Integrated graphics card for NVIDIA
 NVIDIA_INST=0               # Indicates if NVIDIA proprietary driver has been installed
+OLD_NVIDIA_ONCE=0			# Indicates for Nvidia-390xx old proprietary driver installed
 SHOW_ONCE=0                 # Show de_wm information only once
 _nvd_dep_once=0				# Nvidia dependensis once
 _nvd_dep_mn=""				# Nvidia dependensis menu
