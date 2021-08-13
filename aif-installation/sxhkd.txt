@@ -1,0 +1,63 @@
+# ~/.config/autostart/sxhkd.desktop
+[Desktop Entry]
+Name=sxhkd
+Comment=Simple X hotkey daemon
+Icon=parcellite
+Exec=/usr/bin/sxhkd
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true
+
+
+# etc/xdg/autostart/
+[Desktop Entry]
+_Name=Parcellite
+_Comment=Clipboard Manager
+Icon=parcellite
+Exec=parcellite
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true
+
+
+usr/share/pixmaps/
+usr/share/pixmaps/parcellite.png
+usr/share/pixmaps/parcellite.svg
+usr/share/pixmaps/parcellite.xpm
+
+
+Example
+$XDG_CONFIG_HOME/sxhkd/sxhkdrc
+
+The valid modifier names are: super, hyper, meta, alt, control, ctrl,
+       shift, mode_switch, lock, mod1, mod2, mod3, mod4, mod5 and any.
+
+mkdir -p $HOME/.config/sxhkd/
+touch $HOME/.config/sxhkd/sxhkdrc
+geany $HOME/.config/sxhkd/sxhkdrc
+
+
+# Увеличить громкость звука
+pactl set-sink-volume @DEFAULT_SINK@ +1000
+
+# Уменьшить громкость звука
+pactl set-sink-volume @DEFAULT_SINK@ -1000
+
+# Отключить звук
+pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+
+
+ctrl + m
+	bash -c "/home/mikl/programs/umount-usb.sh"
+
+ctrl + m
+	xfce4-terminal
+
+alt + m
+	thunar
+
+
+
+
+
