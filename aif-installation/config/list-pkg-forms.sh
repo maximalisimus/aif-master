@@ -243,6 +243,7 @@ unset _manpg_ru_ext
 _terminal_pkg=(xterm gnome-terminal lxterminal)
 _cddvdiso_pkg=(brasero acetoneiso2 fuseiso)
 _browser_pkg=(firefox chromium opera tor torbrowser-launcher lynx links)
+_messangers_pkg=(discord)
 #
 ## SearX
 #
