@@ -285,6 +285,7 @@ _games_pkg=(steam teeworlds supertuxkart xonotic warsow aisleriot kpat kmines gn
 _arduino_pkg=(arduino arduino-avr-core arduino-cli arduino-builder avr-gcc avrdude avr-binutils avr-libc arduino-ctags arduino-docs)
 #
 if [[ "${_archi[*]}" == "x86_64" ]]; then
+	_mirrorlist_url="https://www.archlinux.org/mirrorlist/?country="
 	#
 	## AppImageUpdate
 	_app_upd_durl="https://github.com/AppImage/AppImageUpdate/releases/download/continuous/"
@@ -572,6 +573,7 @@ if [[ "${_archi[*]}" == "x86_64" ]]; then
 	_nodejs_pkg=(nodejs)
 	_nodejs_lts_pkg=(nodejs-lts-fermium nodejs-lts-erbium) # nodejs-lts-fermium - For 14.X version. nodejs-lts-erbium - For 12.X version
 else
+	_mirrorlist_url="https://archlinux32.org/mirrorlist/?country="
 	#
 	## AppImageUpdate
 	_app_upd_durl="https://github.com/AppImage/AppImageUpdate/releases/download/continuous/"

@@ -69,7 +69,7 @@ mirror_by_country() {
     wait
     COUNTRY_CODE=$(cat ${ANSWER} | sed 's/_.*//')
     wait
-    URL="https://www.archlinux.org/mirrorlist/?country=${COUNTRY_CODE}${_mirror_conf_str}"
+    URL="${_mirrorlist_url}${COUNTRY_CODE}${_mirror_conf_str}"
  else
     countries_list=("BY_Belarus FR_France DE_Germany IN_India JP_Japan RU_Russia SG_Singapore CH_Switzerland US_United_States")
     wait
@@ -81,7 +81,7 @@ mirror_by_country() {
     wait
     COUNTRY_CODE=$(cat ${ANSWER} | sed 's/_.*//' | tr '[:upper:]' '[:lower:]')
     wait
-    URL="https://archlinux32.org/mirrorlist/?country=${COUNTRY_CODE}${_mirror_conf_str}" 
+    URL="${_mirrorlist_url}${COUNTRY_CODE}${_mirror_conf_str}" 
  fi
  wait
  MIRROR_TEMP=$(mktemp --suffix=-mirrorlist)
