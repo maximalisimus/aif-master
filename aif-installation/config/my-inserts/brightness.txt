@@ -1,0 +1,13 @@
+nano /etc/udev/rules.d/30-brightness.rules
+
+KERNEL=="intel_backlight", SUBSYSTEM=="backlight", RUN+="/usr/bin/find /sys/class/backlight/intel_backlight/ -type f -name brightness -exec chown bob:bob {} ; -exec chmod 666 {} ;"
+
+
+
+KERNEL=="backlight", SUBSYSTEM=="class", RUN+="/usr/bin/find /sys/class/backlight/ -type d -iname intel_backlight -exec chown -R root:root {} ; -exec chmod -R 755 {} ;"
+# KERNEL=="backlight", SUBSYSTEM=="class", RUN+="/usr/bin/find /sys/class/backlight/ -type d -iname acpi_video0 -exec chown -R root:root {} ; -exec chmod -R 755 {} ;"
+KERNEL=="intel_backlight", SUBSYSTEM=="backlight", RUN+="/usr/bin/find /sys/class/backlight/intel_backlight/ -type f -name brightness -exec chown root:sys {} ; -exec chmod 775 {} ;"
+# KERNEL=="acpi_video0", SUBSYSTEM=="backlight", RUN+="/usr/bin/find /sys/class/backlight/acpi_video0/ -type f -name brightness -exec chown root:sys {} ; -exec chmod 775 {} ;"
+
+
+
