@@ -53,10 +53,12 @@ confirm_mount_btrfs() {
 select_device() {
     
     DEVICE=""
-    devices_list=$(lsblk -d | awk '{print "/dev/" $1}' | grep 'sd\|hd\|vd\|nvme\|mmc');
+    # devices_list=$(lsblk -d | awk '{print "/dev/" $1}' | grep 'sd\|hd\|vd\|nvme\|mmc');
+    device_list=$(lsblk -o NAME,MODEL,SIZE | grep -Evi "loop|rom|sr|arch_airootfs" | grep -Ei '^sd.*|^hd.*|^vd.*|^nvme.*|^mmc.*' | tr -s ' ' | tr ' ' '_' | sed 's/_/ /' | awk '{print "/dev/"$1,$2}')
     
     for i in ${devices_list[@]}; do
-        DEVICE="${DEVICE} ${i} -"
+        # DEVICE="${DEVICE} ${i} -"
+        DEVICE="${DEVICE} ${i}"
     done
     
     dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_DevSelTitle" --menu "$_DevSelBody" 0 0 4 ${DEVICE} 2>${ANSWER} || prep_menu
@@ -68,10 +70,12 @@ select_device() {
 select_grub_device() {
     
     GRUB_DEVICE=""
-    grub_devices_list=$(lsblk -d | awk '{print "/dev/" $1}' | grep 'sd\|hd\|vd');
+    # grub_devices_list=$(lsblk -d | awk '{print "/dev/" $1}' | grep 'sd\|hd\|vd');
+    grub_devices_list=$(lsblk -o NAME,MODEL,SIZE | grep -Evi "loop|rom|sr|arch_airootfs" | grep -Ei '^sd.*|^hd.*|^vd.*' | tr -s ' ' | tr ' ' '_' | sed 's/_/ /' | awk '{print "/dev/"$1,$2}')
     
     for i in ${grub_devices_list[@]}; do
-        GRUB_DEVICE="${GRUB_DEVICE} ${i} -"
+        # GRUB_DEVICE="${GRUB_DEVICE} ${i} -"
+        GRUB_DEVICE="${GRUB_DEVICE} ${i}"
     done
     
     dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_DevSelGrubTitle" --menu "$_DevSelBody" 0 0 4 ${GRUB_DEVICE} 2>${ANSWER} || install_base_menu
