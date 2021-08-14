@@ -11,7 +11,8 @@ if [ -d /sys/class/backlight/intel_backlight ]; then
 elif [ -d /sys/class/blacklight/acpi_video0 ]; then
 	brightness_directory="/sys/class/backlight/acpi_video0"
 else
-	die "Can't determine backlight controller"
+	echo "Can't determine backlight controller !"
+	exit 0
 fi
 _max_bright="${brightness_directory}/max_brightness"
 _bright="${brightness_directory}/brightness"
