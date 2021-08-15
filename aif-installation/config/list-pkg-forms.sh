@@ -54,7 +54,7 @@ _bluetooth=(blueman bluez bluez-libs bluez-plugins bluez-utils bluez-tools)
 _grub_pkg=(grub os-prober)
 _syslinux_pkg=(syslinux)
 _grub_uefi_pkg=(grub os-prober efibootmgr dosfstools)
-_reefind_pkg=(refind-efi efibootmgr dosfstools)
+_reefind_pkg=(refind efibootmgr dosfstools)
 _systemd_boot_pkg=(efibootmgr dosfstools)
 #
 # Alsa xorg packages
