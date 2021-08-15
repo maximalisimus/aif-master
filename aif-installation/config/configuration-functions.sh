@@ -47,67 +47,70 @@ function mirror_config()
 	fi
 		
 }
-# mirror_config
-# echo "${_mirror_conf_str}"
-#
-# Adapted from AIS. Added option to allow users to edit the mirrorlist.
-configure_mirrorlist() {
+
+# Select one Country
+select_one_country()
+{
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorCntryTitle" --msgbox "$_MirrorCntryBody" 0 0
+	wait
+	COUNTRY_LIST=""
+	for i in ${countries_list}; do
+		COUNTRY_LIST="${COUNTRY_LIST} ${i} -"
+	done
+	wait
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorCntryTitle" --menu "$_MirrorCntryBody" 0 0 16 ${COUNTRY_LIST} 2>${ANSWER} || prep_menu
+	wait
+	if [[ ${_archi[*]} == "x86_64" ]]; then
+		COUNTRY_CODE=$(cat ${ANSWER} | sed 's/_.*//')
+	else
+		COUNTRY_CODE=$(cat ${ANSWER} | sed 's/_.*//' | tr '[:upper:]' '[:lower:]')
+	fi
+    wait
+}
+
+# Select by Country
+select_by_country()
+{
+	mirror_config
+	wait
+	select_one_country
+    wait
+    URL="${_mirrorlist_url}${COUNTRY_CODE}${_mirror_conf_str}" 
+	wait
+}
 
 # Generate a mirrorlist based on the country chosen.    
 mirror_by_country() {
 
- COUNTRY_LIST=""
- mirror_config    
- if [[ ${_archi[*]} == "x86_64" ]]; then
-    countries_list=("AU_Australia AT_Austria BY_Belarus BE_Belgium BR_Brazil BG_Bulgaria CA_Canada CL_Chile CN_China CO_Colombia CZ_Czech_Republic DK_Denmark EE_Estonia FI_Finland FR_France DE_Germany GB_United_Kingdom GR_Greece HU_Hungary IN_India IE_Ireland IL_Israel IT_Italy JP_Japan KZ_Kazakhstan KR_Korea LV_Latvia LU_Luxembourg MK_Macedonia NL_Netherlands NC_New_Caledonia NZ_New_Zealand NO_Norway PL_Poland PT_Portugal RO_Romania RU_Russia RS_Serbia SG_Singapore SK_Slovakia ZA_South_Africa ES_Spain LK_Sri_Lanka SE_Sweden CH_Switzerland TW_Taiwan TR_Turkey UA_Ukraine US_United_States UZ_Uzbekistan VN_Vietnam")
-    wait
-    for i in ${countries_list}; do
-        COUNTRY_LIST="${COUNTRY_LIST} ${i} -"
-    done
-    wait
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorCntryTitle" --menu "$_MirrorCntryBody" 0 0 16 ${COUNTRY_LIST} 2>${ANSWER} || prep_menu
-    wait
-    COUNTRY_CODE=$(cat ${ANSWER} | sed 's/_.*//')
-    wait
-    URL="${_mirrorlist_url}${COUNTRY_CODE}${_mirror_conf_str}"
- else
-    countries_list=("BY_Belarus FR_France DE_Germany IN_India JP_Japan RU_Russia SG_Singapore CH_Switzerland US_United_States")
-    wait
-    for i in ${countries_list}; do
-        COUNTRY_LIST="${COUNTRY_LIST} ${i} -"
-    done
-    wait
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorCntryTitle" --menu "$_MirrorCntryBody" 0 0 16 ${COUNTRY_LIST} 2>${ANSWER} || prep_menu
-    wait
-    COUNTRY_CODE=$(cat ${ANSWER} | sed 's/_.*//' | tr '[:upper:]' '[:lower:]')
-    wait
-    URL="${_mirrorlist_url}${COUNTRY_CODE}${_mirror_conf_str}" 
- fi
- wait
- MIRROR_TEMP=$(mktemp --suffix=-mirrorlist)
+	select_by_country
+	wait
+	MIRROR_TEMP=$(mktemp --suffix=-mirrorlist)
 
- # Get latest mirror list and save to tmpfile
- dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorGenTitle" --infobox "$_MirrorGenBody" 0 0
-  
- curl -so "${MIRROR_TEMP}" "${URL}" 2>/tmp/.errlog
- check_for_error
- sed -i 's/^#Server/Server/g' "${MIRROR_TEMP}"
- nano "${MIRROR_TEMP}"
+	# Get latest mirror list and save to tmpfile
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorGenTitle" --infobox "$_MirrorGenBody" 0 0
 
- dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --yesno "$_MirrorGenQ" 0 0
+	curl -so "${MIRROR_TEMP}" "${URL}" 2>/tmp/.errlog
+	check_for_error
+	sed -i 's/^#Server/Server/g' "${MIRROR_TEMP}"
+	nano "${MIRROR_TEMP}"
 
- if [[ $? -eq 0 ]];then
-    mv -f "/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig"
-    mv -f "${MIRROR_TEMP}" "/etc/pacman.d/mirrorlist"
-    chmod +r "/etc/pacman.d/mirrorlist"
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --infobox "$_DoneMsg" 0 0
-    sleep 2
- else
-    prep_menu
- fi
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --yesno "$_MirrorGenQ" 0 0
+
+	if [[ $? -eq 0 ]];then
+		mv -f "/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig"
+		mv -f "${MIRROR_TEMP}" "/etc/pacman.d/mirrorlist"
+		chmod +r "/etc/pacman.d/mirrorlist"
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorGenTitle" --msgbox "$_MirrorGenDone" 0 0
+		sleep 2
+	else
+		prep_menu
+	fi
 }
 
-dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorlistTitle" \
+# Adapted from AIS. Added option to allow users to edit the mirrorlist.
+configure_mirrorlist() {
+
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorlistTitle" \
     --menu "$_MirrorlistBody" 0 0 5 \
     "1" "$_MirrorbyCountry" \
     "2" "$_MirrorEdit" \
@@ -133,15 +136,35 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorlistTitle" \
                 fi
                 wait
                 clear
-            fi  
-             cp -f "/etc/pacman.d/mirrorlist" "/etc/pacman.d/mirrorlist.backup"
-             rankmirrors -n 10 "/etc/pacman.d/mirrorlist.backup" > "/etc/pacman.d/mirrorlist" 2>/tmp/.errlog
+            fi
+             select_one_country
+             wait
+             _full_mirror_url="${_mirrorlist_url}${COUNTRY_CODE}&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on"
+             wait
+             touch "/etc/pacman.d/mirrorlist.backup"
+             wait
+             curl -s "${_full_mirror_url}" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 10 - > "/etc/pacman.d/mirrorlist.backup" 2>/tmp/.errlog
+             # rankmirrors -n 10 "/etc/pacman.d/mirrorlist.backup" > "/etc/pacman.d/mirrorlist" 2>/tmp/.errlog
              check_for_error
+             wait
+             dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --yesno "$_MirrorGenQ" 0 0
+			 if [[ $? -eq 0 ]];then
+				cp -f "/etc/pacman.d/mirrorlist" "/etc/pacman.d/mirrorlist.orig"
+				wait
+				mv -f "/etc/pacman.d/mirrorlist.backup" "/etc/pacman.d/mirrorlist"
+				wait
+				chmod +r "/etc/pacman.d/mirrorlist"
+				wait
+				dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorGenTitle" --msgbox "$_MirrorGenDone" 0 0
+				sleep 2
+             fi
+             wait
              dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --infobox "$_DoneMsg" 0 0
              sleep 2
              ;;
          "4") if [[ -e "/etc/pacman.d/mirrorlist.orig" ]]; then       
                  mv -f "/etc/pacman.d/mirrorlist.orig" "/etc/pacman.d/mirrorlist"
+                 wait
                  dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --msgbox "$_MirrorRestDone" 0 0
               else
                  dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorNoneTitle" --msgbox "$_MirrorNoneBody" 0 0

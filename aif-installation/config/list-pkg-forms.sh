@@ -286,7 +286,8 @@ _arduino_pkg=(arduino arduino-avr-core arduino-cli arduino-builder avr-gcc avrdu
 #
 if [[ "${_archi[*]}" == "x86_64" ]]; then
 	_mirrorlist_url="https://www.archlinux.org/mirrorlist/?country="
-	#
+	countries_list=("AU_Australia AT_Austria BY_Belarus BE_Belgium BR_Brazil BG_Bulgaria CA_Canada CL_Chile CN_China CO_Colombia CZ_Czech_Republic DK_Denmark EE_Estonia FI_Finland FR_France DE_Germany GB_United_Kingdom GR_Greece HU_Hungary IN_India IE_Ireland IL_Israel IT_Italy JP_Japan KZ_Kazakhstan KR_Korea LV_Latvia LU_Luxembourg MK_Macedonia NL_Netherlands NC_New_Caledonia NZ_New_Zealand NO_Norway PL_Poland PT_Portugal RO_Romania RU_Russia RS_Serbia SG_Singapore SK_Slovakia ZA_South_Africa ES_Spain LK_Sri_Lanka SE_Sweden CH_Switzerland TW_Taiwan TR_Turkey UA_Ukraine US_United_States UZ_Uzbekistan VN_Vietnam")
+    #
 	## AppImageUpdate
 	_app_upd_durl="https://github.com/AppImage/AppImageUpdate/releases/download/continuous/"
 	_app_upd_arch="${x86_64}"
@@ -574,7 +575,8 @@ if [[ "${_archi[*]}" == "x86_64" ]]; then
 	_nodejs_lts_pkg=(nodejs-lts-fermium nodejs-lts-erbium) # nodejs-lts-fermium - For 14.X version. nodejs-lts-erbium - For 12.X version
 else
 	_mirrorlist_url="https://archlinux32.org/mirrorlist/?country="
-	#
+	countries_list=("BY_Belarus FR_France DE_Germany IN_India JP_Japan RU_Russia SG_Singapore CH_Switzerland US_United_States")
+    #
 	## AppImageUpdate
 	_app_upd_durl="https://github.com/AppImage/AppImageUpdate/releases/download/continuous/"
 	_app_upd_arch="${i386}"
