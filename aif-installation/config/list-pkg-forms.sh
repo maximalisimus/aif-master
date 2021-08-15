@@ -272,7 +272,10 @@ _editor_pkg=(vim geany leafpad mousepad gedit)
 _code_editor_pkg=(atom emacs geany)
 _office_pkg=(libreoffice-fresh okular evince djvulibre)
 #
-_system_pkg=(grub-customizer galculator)
+_system_pkg=(grub-customizer galculator dmidecode)
+# The type memory and full parameters information
+# sudo dmidecode --type 17
+#
 _clipboard_pkg=(parcellite xclip clipmenu gpaste)
 _cad_pkg=(kicad kicad-library kicad-library-3d)
 #
