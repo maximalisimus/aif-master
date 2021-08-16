@@ -241,7 +241,12 @@ unset _manpg_ru_ext
 # _manpg_ru_furl="${_aur_pkgs_x64_durl}${_manpg_ru_fname}"
 #
 _terminal_pkg=(xterm gnome-terminal lxterminal)
-_cddvdiso_pkg=(brasero acetoneiso2 fuseiso)
+_cddvdiso_pkg=(brasero acetoneiso2 fuseiso cdrtools)
+# mkisofs -l -o iso_name /path/to/folder
+# genisoimage -o iso_name /path/to/folder
+# genisoimage -v -J -r -V MY_DISK_LABEL -o /home/user/file.iso /home/user/input_dir
+# https://webhamster.ru/mytetrashare/index/mtb0/1788
+#
 _browser_pkg=(firefox chromium opera tor torbrowser-launcher lynx links)
 _messangers_pkg=(discord)
 #
