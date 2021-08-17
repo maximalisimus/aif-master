@@ -273,7 +273,7 @@ _file_meneger_pkg=(ksysguard doublecmd-gtk2 krusader)
 _graphic_pkg=(blender inkscape gimp pinta krita krita-plugin-gmic gcolor3)
 _image_viewer=(viewnior gthumb gpicview)
 _media_pkg=(vlc smplayer kmplayer)
-_editor_pkg=(vim geany leafpad mousepad gedit)
+_editor_pkg=(vim geany leafpad mousepad gedit micro)
 _code_editor_pkg=(atom emacs geany)
 _office_pkg=(libreoffice-fresh okular evince djvulibre)
 #

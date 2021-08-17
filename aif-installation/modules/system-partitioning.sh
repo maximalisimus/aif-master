@@ -71,7 +71,7 @@ select_grub_device() {
     
     GRUB_DEVICE=""
     # grub_devices_list=$(lsblk -d | awk '{print "/dev/" $1}' | grep 'sd\|hd\|vd');
-    grub_devices_list=$(lsblk -o NAME,MODEL,SIZE | grep -Evi "loop|rom|sr|arch_airootfs" | grep -Ei '^sd.*|^hd.*|^vd.*' | tr -s ' ' | tr ' ' '_' | sed 's/_/ /' | awk '{print "/dev/"$1,$2}')
+    grub_devices_list=$(lsblk -o NAME,MODEL,SIZE | grep -Evi "loop|rom|sr|arch_airootfs" | grep -Ei '^sd.*|^hd.*|^vd.*|^nvme.*|^mmc.*' | tr -s ' ' | tr ' ' '_' | sed 's/_/ /' | awk '{print "/dev/"$1,$2}')
     
     for i in ${grub_devices_list[@]}; do
         # GRUB_DEVICE="${GRUB_DEVICE} ${i} -"
