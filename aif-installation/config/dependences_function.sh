@@ -51,12 +51,6 @@ dependences_result()
             echo ""
             sudo pacman -Syy --noconfirm
             wait
-            sudo pacman-key --init
-            wait
-            sudo pacman-key --populate archlinux
-            wait
-            sudo pacman -Syy --noconfirm
-            wait
             sudo pacman -S dialog --noconfirm
             wait
             ;;
@@ -74,12 +68,6 @@ dependences_result()
           echo ""
           sudo pacman -Syy --noconfirm
           wait
-          sudo pacman-key --init
-          wait
-          sudo pacman-key --populate archlinux
-          wait
-          sudo pacman -Syy --noconfirm
-          wait
           sudo pacman -S dialog --noconfirm
           wait
             ;;
@@ -94,12 +82,6 @@ dependences_git()
             echo -e -n "\e[1;32mThe «git» package is installed...\e[0m"
             outin_success
             echo ""
-            sudo pacman -Syy --noconfirm
-            wait
-            sudo pacman-key --init
-            wait
-            sudo pacman-key --populate archlinux
-            wait
             sudo pacman -Syy --noconfirm
             wait
             sudo pacman -S git --noconfirm
@@ -119,25 +101,25 @@ dependences_git()
           echo ""
           sudo pacman -Syy --noconfirm
           wait
-          sudo pacman-key --init
-          wait
-          sudo pacman-key --populate archlinux
-          wait
-          sudo pacman -Syy --noconfirm
-          wait
           sudo pacman -S git --noconfirm
           wait
             ;;
     esac
 }
-question_dialog_run()
+question_run()
 {
-	script_dependences_question
+	pacman -Qs dialog 1>/dev/null
+	if [[ $? -eq 1 ]]; then
+		script_dependences_question
+		wait
+		dependences_result
+	fi
 	wait
-	dependences_result
-	wait
-	git_dependences_question
-	wait
-	dependences_git
+	pacman -Qs git 1>/dev/null
+	if [[ $? -eq 1 ]]; then
+		git_dependences_question
+		wait
+		dependences_git
+	fi
 	wait
 }

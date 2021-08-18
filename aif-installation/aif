@@ -49,7 +49,7 @@ for i in "$filesdir"/modules/*.sh; do source "$i"; done ;
 ######################################################################
 
 setcolor
-question_dialog_run
+question_run
 us_dlgrc_conf
 id_system
 select_language
