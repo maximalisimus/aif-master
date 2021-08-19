@@ -1,6 +1,10 @@
  
 
-setxkbmap -layout «us,ru(winkeys)» -option «grp:caps_toggle,grp_led:caps»
+os-prober to enable:
+
+$ nano /etc/default/grub
+GRUB_DISABLE_OS_PROBER=false
+
 
 
 
