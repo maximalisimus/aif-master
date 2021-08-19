@@ -6,6 +6,19 @@ $ nano /etc/default/grub
 GRUB_DISABLE_OS_PROBER=false
 
 
+/etc/pacman.d/hooks/refind.hook
+[Trigger]
+Operation=Upgrade
+Type=Package
+Target=refind
+
+[Action]
+Description = Updating rEFInd on ESP
+When=PostTransaction
+Exec=/usr/bin/refind-install
+
+
+
 
 
 
