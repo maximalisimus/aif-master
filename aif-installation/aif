@@ -43,7 +43,7 @@ unset _src_fls
 ######################################################################
 
 setcolor
-question_dialog_run
+# question_dialog_run
 us_dlgrc_conf
 id_system
 select_language
