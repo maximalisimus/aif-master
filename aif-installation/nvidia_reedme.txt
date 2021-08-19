@@ -18,6 +18,18 @@ When=PostTransaction
 Exec=/usr/bin/refind-install
 
 
+/etc/pacman.d/hooks/systemd-boot.hook
+[Trigger]
+Type = Package
+Operation = Upgrade
+Target = systemd
+
+[Action]
+Description = Updating systemd-boot...
+When = PostTransaction
+Exec = /usr/bin/bootctl update
+
+
 
 
 
