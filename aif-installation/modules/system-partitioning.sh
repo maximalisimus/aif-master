@@ -193,8 +193,8 @@ find_partitions() {
     NUMBER_PARTITIONS=0
     partition_list=$(lsblk -l | grep 'part\|lvm' | sed 's/[\t ].*//' | sort -u)
     # lsblk -l | grep 'part\|lvm' | awk '{print $1}' | sort -u
-    # lsblk -l -o NAME,TYPE,FSTYPE,SIZE | grep 'part\|lvm' | sed 's/part //g' | tr -s ' ' | tr ' ' '_' | sed 's/_/ /' | awk '{print "/dev/"$1,$2}' # | sed -e 's/_$//g' | sed -e 's/^_//g'
-    # lsblk -l -o NAME,TYPE,FSTYPE,SIZE | grep 'part\|lvm' | sed 's/part //g' | tr -s ' ' | tr ' ' '_' | sed 's/_/ /' | awk '{print $1,$2}' # | sed -e 's/_$//g' | sed -e 's/^_//g'
+    ## lsblk -l -o NAME,TYPE,FSTYPE,SIZE | grep 'part\|lvm' | sed 's/part //g' | tr -s ' ' | tr ' ' '_' | sed 's/_/ /' | awk '{print "/dev/"$1,$2}' ## | sed -e 's/_$//g' | sed -e 's/^_//g'
+    # lsblk -l -o NAME,TYPE,FSTYPE,SIZE | grep 'part\|lvm' | sed 's/part //g' | tr -s ' ' | tr ' ' '_' | sed 's/_/ /' | awk '{print $1,$2}' ## | sed -e 's/_$//g' | sed -e 's/^_//g'
     
     for i in ${partition_list[@]}; do
         PARTITIONS="${PARTITIONS} ${i} -"
