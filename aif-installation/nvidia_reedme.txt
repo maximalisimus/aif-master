@@ -1,3 +1,6 @@
+
+[archlinuxcn]
+Server = https://repo.archlinuxcn.org/$arch
  
 
 os-prober to enable:
