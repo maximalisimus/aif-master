@@ -330,9 +330,9 @@ uefi_bootloader() {
               
               # Now generate config file to pass kernel parameters. Default read only (ro) changed to read-write (rw),
               # and amend where using btfs subvol root       
-              arch_chroot "refind-mkrlconf" 2>/tmp/.errlog
+              # arch_chroot "refind-mkrlconf" 2>/tmp/.errlog
               check_for_error
-              sed -i 's/ro /rw /g' ${MOUNTPOINT}/boot/refind_linux.conf
+              sed -i 's/ro /rw /g' ${MOUNTPOINT}/boot/refind_linux.conf # ${MOUNTPOINT}/boot/efi/EFI/Boot/refind.conf
               [[ $BTRFS_MNT != "" ]] && sed -i "s/rw/rw $BTRFS_MNT/g" ${MOUNTPOINT}/boot/refind_linux.conf
               
               BOOTLOADER="rEFInd"
