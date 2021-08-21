@@ -1,4 +1,8 @@
 
+/dev/sdXX - Find to /boot mounted: 
+lsblk -l -o NAME,TYPE,FSTYPE,SIZE,MOUNTPOINT | grep 'part\|lvm' | grep "boot" | awk '{print $1,$2,$3,$4}' | sed 's/\/.*//g' | sed 's/part //g' | tr -s ' ' | sed 's/ *$//' | tr ' ' '_' | sed 's/_/ /' | awk '{print "/dev/"$1,$2}'
+
+
 [archlinuxcn]
 Server = https://repo.archlinuxcn.org/$arch
  
