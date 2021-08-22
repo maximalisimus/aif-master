@@ -78,6 +78,8 @@ _bluetooth=(blueman bluez bluez-libs bluez-plugins bluez-utils bluez-tools)
 ## Package for grub and uefi menu
 #
 _grub_pkg=(grub os-prober)
+_grub_theme_pkg=(breeze-grub grub-theme-vimix)
+_grub_btrfs_pkg=(grub-btrfs)
 _syslinux_pkg=(syslinux)
 _grub_uefi_pkg=(grub os-prober efibootmgr dosfstools)
 _reefind_pkg=(refind efibootmgr dosfstools)
