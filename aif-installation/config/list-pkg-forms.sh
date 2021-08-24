@@ -572,6 +572,7 @@ if [[ "${_archi[*]}" == "x86_64" ]]; then
 	#
 	## Programing
 	#
+	_bash=(shellcheck)
 	_make_cmake_pkg=(make cmake)
 	_gcc_cpp_pkg=(gcc gcc-libs lib32-gcc-libs binutils)
 	_mingw_w64_pkg=(mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads)
@@ -621,6 +622,7 @@ else
     #
 	## Programing
 	#
+	_bash=(shellcheck)
 	_make_cmake_pkg=(make cmake)
 	_gcc_cpp_pkg=(gcc gcc-libs binutils)
 	_mingw_w64_pkg=(mingw-w64-binutils mingw-w64-headers)
