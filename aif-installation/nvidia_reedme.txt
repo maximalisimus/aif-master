@@ -12,6 +12,15 @@ sed -i '/^#\s*\[multilib\]$/{N;s/^#\s*//gm}' /etc/pacman.conf
 
 
 
+Редактируем /etc/mkinitcpio.conf, и в HOOKS добавляем lvm2 — перед filesystems:
+# nano /etc/mkinitcpio.conf
+MODULES=(dm-mod nbd ...)
+...
+HOOKS=(... lvm2 filesystems ...)
+
+
+
+
 /dev/sdXX - Find to /boot mounted: 
 lsblk -l -o NAME,TYPE,FSTYPE,SIZE,MOUNTPOINT | grep 'part\|lvm' | grep "boot" | awk '{print $1,$2,$3,$4}' | sed 's/\/.*//g' | sed 's/part //g' | tr -s ' ' | sed 's/ *$//' | tr ' ' '_' | sed 's/_/ /' | awk '{print "/dev/"$1,$2}'
 
@@ -299,4 +308,49 @@ $: systemctl restart fail2ban
 ignoreip = 192.168.0.0/24 95.95.95.95
 
 * в данном примере под фильтры не будут попадать адреса с 192.168.0.1 по 192.168.0.255 и адрес 95.95.95.95.
+
+
+
+
+
+
+Wayland:
+package: wayland deepin-wayland kwayland lib32-wayland sddm swappy waybar wayland-protocols waylock weston wlc wl-clipboard wlroots xorg-xwayland
+Compositor: sway 
+
+XWayland - /etc/environment
+GDK_BACKEND=x11
+
+qt5-wayland - package and - /etc/environment
+qt6-wayland
+QT_QPA_PLATFORM=wayland
+or XWayland
+QT_QPA_PLATFORM=xcb
+
+SDL2
+SDL_VIDEODRIVER=wayland
+or XWayland
+SDL_VIDEODRIVER=x11
+
+glfw-wayland
+
+WINIT_UNIX_BACKEND=x11
+
+
+
+
+
+
+
+PKGBUILD
+
+depends=(dialog zenity parted arch-install-scripts nano bash leafpad coreutils base-devel findutils)
+makedepends=(git imagemagick)
+optdepends=(pacman-contrib e2fsprogs lvm2 btrfs-progs cryptsetup device-mapper util-linux gptfdisk)
+# util-linux - cfdisk, fdisk
+# gptfdisk - cgdisk, gdisk, sgdisk
+replaces=($pkgname)
+
+
+
 
