@@ -1,4 +1,7 @@
 
+
+sed -i '/^#\s*\[multilib\]$/{N;s/^#\s*//gm}' /etc/pacman.conf
+
 /dev/sdXX - Find to /boot mounted: 
 lsblk -l -o NAME,TYPE,FSTYPE,SIZE,MOUNTPOINT | grep 'part\|lvm' | grep "boot" | awk '{print $1,$2,$3,$4}' | sed 's/\/.*//g' | sed 's/part //g' | tr -s ' ' | sed 's/ *$//' | tr ' ' '_' | sed 's/_/ /' | awk '{print "/dev/"$1,$2}'
 
