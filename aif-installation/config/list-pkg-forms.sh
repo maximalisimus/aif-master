@@ -51,7 +51,7 @@ _wicd_pkg=(wicd "$_nm_pkg_5")
 _ssh_pkg=(openssh)
 _docker_pkg=(docker docker-compose)
 _mail_srv_pkg=(postfix)
-_namp_srv_pkg=(nginx apache mysql++ mariadb mariadb-clients php phpmyadmin php-fpm php-apache)
+_namp_srv_pkg=(nginx apache mysql++ mariadb mariadb-clients php phpmyadmin php-fpm php-apache uwsgi)
 _ftp_srv_pkg=(atftp bftpd curlftpfs filezilla gftp lftp tnftp vsftpd)
 _firewall=(ufw gufw)
 _fail2ban=(fail2ban)
@@ -84,11 +84,6 @@ _syslinux_pkg=(syslinux)
 _grub_uefi_pkg=(grub os-prober efibootmgr dosfstools)
 _reefind_pkg=(refind efibootmgr dosfstools)
 _systemd_boot_pkg=(efibootmgr dosfstools)
-#
-## Alsa xorg packages
-#
-_x_pkg=(alsa-utils alsa-plugins volumeicon pavucontrol pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulseeffects pulsemixer pasystray pamixer pulseview rhythmbox audacious audacity xf86-input-synaptics xf86-input-keyboard xf86-input-mouse)
-#
 ## Aur packages download URL
 #
 _aur_pkgs_x64_durl="https://github.com/maximalisimus/repo/blob/master/aur-packages/x86_64/"
@@ -196,9 +191,18 @@ _shells_sh=(bash fish zsh dash ksh tcsh)
 _bash_sh=(bash-completion)
 _zsh_sh=(zsh-completions)
 #
+## Alsa PulseAudio and xf86-input packages
+#
+_xf86_input_pkg=(xf86-input-synaptics xf86-input-keyboard xf86-input-mouse)
+_alsa_pkg=(alsa-utils alsa-plugins volumeicon lib32-alsa-plugins)
+_pulseaudio_pkg=(pavucontrol pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulseeffects pulsemixer pasystray pamixer pulseview lib32-libpulse)
+#
+#
 ## Common for Desktop packages
 #
-_general_pkg=(gnome-keyring dconf dconf-editor python2-xdg xdg-user-dirs xdg-utils rp-pppoe polkit gvfs gvfs-afc print-manager system-config-printer acpid avahi cronie)
+_gnome_keyring_pkg=(gnome-keyring)
+_xdg_utils_pkg=(python2-xdg xdg-user-dirs xdg-utils)
+_general_pkg=(polkit gvfs gvfs-afc acpid avahi cronie)
 # arch_chroot "systemctl enable acpid avahi-daemon cronie" 2>/tmp/.errlog
 #
 ## User Package
@@ -249,8 +253,8 @@ _cddvdiso_pkg=(brasero acetoneiso2 fuseiso cdrtools)
 # genisoimage -v -J -r -V MY_DISK_LABEL -o /home/user/file.iso /home/user/input_dir
 # https://webhamster.ru/mytetrashare/index/mtb0/1788
 #
-_browser_pkg=(firefox chromium opera tor torbrowser-launcher lynx links)
-_messangers_pkg=(discord)
+_browser_pkg=(firefox chromium opera vivaldi tor torbrowser-launcher lynx links)
+_messangers_pkg=(discord pidgin)
 #
 ## SearX
 #
@@ -271,20 +275,26 @@ unset _searx_ext
 _torrent_pkg=(transmission-gtk ktorrent qbittorrent)
 _download_xpkg=(gwget kget uget)
 _download_pkg=(curl git wget youtube-dl)
-_file_meneger_pkg=(ksysguard doublecmd-gtk2 krusader)
+_internet_pkg=(openvpn)
+_file_meneger_pkg=(doublecmd-gtk2 krusader)
 _graphic_pkg=(blender inkscape gimp pinta krita krita-plugin-gmic gcolor3)
 _image_viewer=(viewnior gthumb gpicview)
 _media_pkg=(vlc smplayer kmplayer)
+_audio_players_pkg=(rhythmbox audacious)
+_audio_editors_pkg=(audacity lmms)
+_video_converters_pkg=(ffmpeg handbrake ciano)
+_video_editors_pkg=(shotcut pitivi openshot avidemux-qt)
 _editor_pkg=(vim geany leafpad mousepad gedit micro)
 _code_editor_pkg=(atom emacs geany)
 _office_pkg=(libreoffice-fresh okular evince djvulibre)
 #
-_system_pkg=(grub-customizer galculator dmidecode)
+_system_pkg=(ksysguard grub-customizer galculator dmidecode dconf dconf-editor)
 # The type memory and full parameters information
 # sudo dmidecode --type 17
+_science_pkg=(bc calc galculator kcalc octave genius stellarium celestia)
 #
 _clipboard_pkg=(parcellite xclip clipmenu gpaste)
-_cad_pkg=(kicad kicad-library kicad-library-3d)
+_cad_pkg=(kicad kicad-library kicad-library-3d geda-gaf)
 #
 _virtualization=(virtualbox qemu)
 _vbox_pkg=(virtualbox virtualbox-guest-iso virtualbox-guest-utils virtualbox-host-dkms virtualbox-host-modules-arch)
@@ -591,6 +601,9 @@ if [[ "${_archi[*]}" == "x86_64" ]]; then
 	_ruby_pkg=(ruby ruby-irb)
 	_nodejs_pkg=(nodejs)
 	_nodejs_lts_pkg=(nodejs-lts-fermium nodejs-lts-erbium) # nodejs-lts-fermium - For 14.X version. nodejs-lts-erbium - For 12.X version
+	_ide_editors_pkg=(codeblocks kdevelop)
+	_pascal_pkg=(fpc fpc-src lazarus)
+	_html_pkg=(bluegriffon htmldoc xchm)
 else
 	_mirrorlist_url="https://archlinux32.org/mirrorlist/?country="
 	countries_list=("BY_Belarus FR_France DE_Germany IN_India JP_Japan RU_Russia SG_Singapore CH_Switzerland US_United_States")
@@ -646,6 +659,9 @@ else
 	_ruby_pkg=(ruby ruby-irb)
 	_nodejs_pkg=(nodejs)
 	_nodejs_lts_pkg=(nodejs-lts-fermium nodejs-lts-erbium) # nodejs-lts-fermium - For 14.X version. nodejs-lts-erbium - For 12.X version
+	_ide_editors_pkg=(codeblocks kdevelop)
+	_pascal_pkg=(fpc fpc-src lazarus)
+	_html_pkg=(bluegriffon htmldoc xchm)
 fi
 #
 ## My inserts
