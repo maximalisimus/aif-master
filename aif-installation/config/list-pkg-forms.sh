@@ -486,6 +486,23 @@ if [[ "${_archi[*]}" == "x86_64" ]]; then
     unset _bitwarden_arch
     unset _bitwarden_ext
     #
+    ## Smath studio
+    #
+    _smath_name="smath"
+    _smath_rel="1"
+    _smath_vers="0_99_7822"
+    _smath_fvers="${_smath_vers}-${_smath_rel}"
+    _smath_arh="x86_64"
+    _smath_ext="pkg.tar.zst"
+    _smath_fname="${_smath_name}-${_smath_fvers}-${_smath_arh}.${_smath_ext}"
+    # _smath_furl="${_aur_pkgs_x64_durl}${_smath_fname}"
+    #
+    unset _smath_rel
+    unset _smath_vers
+    unset _smath_fvers
+    unset _smath_arh
+    unset _smath_ext
+    #
     _wine_pkg=(wine wine-mono wine_gecko winetricks)
     _security_pkg=(keepassxc veracrypt) # truecrypt
     #
