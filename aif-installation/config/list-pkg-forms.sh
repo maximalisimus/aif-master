@@ -202,7 +202,7 @@ _pulseaudio_pkg=(pavucontrol pulseaudio pulseaudio-alsa pulseaudio-bluetooth pul
 #
 _gnome_keyring_pkg=(gnome-keyring)
 _xdg_utils_pkg=(python2-xdg xdg-user-dirs xdg-utils)
-_general_pkg=(polkit gvfs gvfs-afc acpid avahi cronie)
+_general_pkg=(polkit gvfs gvfs-afc gvfs-mtp gvfs-smb acpid avahi cronie)
 # arch_chroot "systemctl enable acpid avahi-daemon cronie" 2>/tmp/.errlog
 #
 ## User Package
