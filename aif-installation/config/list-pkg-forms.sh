@@ -254,7 +254,7 @@ _cddvdiso_pkg=(brasero acetoneiso2 fuseiso cdrtools)
 # https://webhamster.ru/mytetrashare/index/mtb0/1788
 #
 _browser_pkg=(firefox chromium opera vivaldi tor torbrowser-launcher lynx links)
-_messangers_pkg=(discord pidgin)
+_messangers_pkg=(telegram-desktop discord pidgin)
 #
 ## SearX
 #
