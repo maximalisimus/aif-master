@@ -291,6 +291,7 @@ _code_editor_pkg=(atom emacs geany)
 _office_pkg=(libreoffice-fresh okular evince djvulibre)
 #
 _system_pkg=(ksysguard grub-customizer galculator dmidecode dconf dconf-editor)
+_gpg_pkg=(gpa kgpg kleopatra)
 # The type memory and full parameters information
 # sudo dmidecode --type 17
 _science_pkg=(bc calc galculator kcalc octave genius stellarium celestia)
