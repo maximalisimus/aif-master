@@ -257,6 +257,9 @@ _browser_pkg=(firefox chromium opera vivaldi tor torbrowser-launcher lynx links)
 _telegramm_pkg=(telegram-desktop)
 _telegramm_dep_pkg=(protobuf)
 _messangers_pkg=("$_telegramm_pkg" discord pidgin)
+_evolution_pkg=(evolution evolution-bogofilter evolution-ews evolution-on)
+_thunderbird_pkg=(thunderbird thunderbird-extension-enigmail)
+_mail_clients_pkg=("${_evolution_pkg[0]}" "${_thunderbird_pkg[0]}")
 #
 ## SearX
 #
