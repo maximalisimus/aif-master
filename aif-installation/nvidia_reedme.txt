@@ -366,6 +366,14 @@ WINIT_UNIX_BACKEND=x11
 
 
 
+ls /usr/share/xsessions/ | sed 's/.desktop//g' | tr '[:upper:]' '[:lower:]'
+
+echo $XDG_CURRENT_DESKTOP | tr '[:upper:]' '[:lower:]'
+
+test $DISPLAY
+echo $?
+fish: echo $status
+
 
 
 PKGBUILD
