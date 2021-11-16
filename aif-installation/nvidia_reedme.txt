@@ -1,5 +1,52 @@
 
 
+/etc/bumblebee/xorg.conf.nvidia
+
+Section "ServerLayout"
+    Identifier  "Layout0"
+    Option      "AutoAddDevices" "false"
+    Option      "AutoAddGPU" "false"
+EndSection
+
+Section "ServerFlags"
+    Option      "IgnoreABI" "true"
+EndSection
+
+Section "Device"
+    Identifier  "DiscreteNvidia"
+    Driver      "nvidia"
+    VendorName  "NVIDIA Corporation"
+    BusID       "PCI:01:00:0"
+
+    Option "ProbeAllGpus" "false"
+
+    Option "NoLogo" "true"
+    Option "UseEDID" "false"
+    Option "UseDisplayDevice" "none"
+EndSection
+
+
+$ sudo touch /etc/modprobe.d/disable-nouveau.conf
+$ sudo nano /etc/modprobe.d/disable-nouveau.conf
+blacklist nouveau
+options nouveau modeset=0
+
+$ nano /etc/X11/xorg.conf
+Section "Device"
+	Identifier  "Card0"
+	Driver      "intel"
+	BusID       "PCI:0:2:0"
+EndSection
+
+Section "Device"
+	Identifier  "Card1"
+	Driver      "nvidia"
+	BusID       "PCI:1:0:0"
+EndSection
+
+
+
+
 ~/.gnupg/gpg.conf
 
 keyid-format 0xlong
