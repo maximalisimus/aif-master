@@ -48,16 +48,17 @@ EndSection
 
 
 
-Not Load:
-$ sudo touch /etc/modprobe.d/modules-nbd.conf
-$ sudo nano /etc/modprobe.d/modules-nbd.conf
+Not AutoLoad:
+$ sudo touch /etc/modprobe.d/disable-nbd.conf
+$ sudo nano /etc/modprobe.d/disable-nbd.conf
 blacklist nbd
 options nbd modeset=0
 
 
 
 
-Auto Load modules:
+AutoLoad modules:
+/etc/modules-load.d/<program>.conf
 /etc/modules.load.d/modules.conf
 
 
