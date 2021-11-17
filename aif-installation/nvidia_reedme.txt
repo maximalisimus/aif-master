@@ -26,8 +26,8 @@ Section "Device"
 EndSection
 
 
-$ sudo touch /etc/modprobe.d/disable-nouveau.conf
-$ sudo nano /etc/modprobe.d/disable-nouveau.conf
+$ sudo touch /etc/modprobe.d/modules-nouveau.conf
+$ sudo nano /etc/modprobe.d/modules-nouveau.conf
 blacklist nouveau
 options nouveau modeset=0
 
@@ -43,6 +43,17 @@ Section "Device"
 	Driver      "nvidia"
 	BusID       "PCI:1:0:0"
 EndSection
+
+
+
+
+
+??? 
+$ sudo touch /etc/modprobe.d/modules-nbd.conf
+$ sudo nano /etc/modprobe.d/modules-nbd.conf
+blacklist nbd
+options nbd modeset=0
+# options nbd modeset=1
 
 
 
