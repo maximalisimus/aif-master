@@ -34,7 +34,12 @@ ctrl+Down
 
 
 
-xdg-open ./sxhkd.desktop
+$ xdg-open ./sxhkd.desktop
+$ pgrep sxhkd
+# 25166
+Stop: $ kill -TERM 25166
+Reload-config: $ kill -SIGUSR1 25166
+
 
 ps aux | grep sxhkd
 pgrep sxhkd
