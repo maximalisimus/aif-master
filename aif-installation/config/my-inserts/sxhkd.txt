@@ -1,4 +1,14 @@
 
+_pkgname=sxhkd
+pkgname=${_pkgname}-git
+depends=('libxcb' 'xcb-util-keysyms')
+makedepends=('git' 'xcb-util')
+
+pkgname=sxhkd
+depends=(xcb-util-keysyms)
+makedepends=(git xcb-util)
+
+
 Example
 $XDG_CONFIG_HOME/sxhkd/sxhkdrc
 
