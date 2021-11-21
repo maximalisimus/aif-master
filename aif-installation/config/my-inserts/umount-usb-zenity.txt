@@ -44,17 +44,25 @@ for i in ${name_usb[*]}; do
 		menu_usb_dev="${menu_usb_dev} ${dev_usb[*]} $usb_info"
 	fi
 done
-if [[ ${menu_usb_dev} != "" ]]; then
-	#Xdialog --backtitle "$SYSTEM $VERSION $ARCHI" --title "Извлечение флешек" --menu "\nМеню выбора флешки для извлечения\n" 0 0 10 ${menu_usb_dev} 2>${ANSWER} 
-	#variables=$(cat ${ANSWER})
-	variables=$(Xdialog --stdout --backtitle "$SYSTEM $VERSION $ARCHI" --title "Извлечение флешек" --menu "\nМеню выбора флешки для извлечения\n" 0 0 10 ${menu_usb_dev})
-	if [[ ${variables} != "" ]]; then
-		# umount -l /dev/"${variables}" # Umount requires user rights. For udiskctl are not needed.
-		# wait
-		# _devices = $(echo "/dev/${variables}" | tr -d [:digit:])
+wait
+declare -a dev_menu_usb
+wait
+dev_menu_usb=( $menu_usb_dev )
+wait
+unset menu_usb_dev
+wait
+if [[ "${dev_menu_usb[*]}" != "" ]]; then
+# if [[ "${menu_usb_dev[*]}" != "" ]]; then # For Xdialog
+	# Xdialog --backtitle "$SYSTEM $VERSION $ARCHI" --title "Извлечение флешек" --menu "\nМеню выбора флешки для извлечения\n" 0 0 10 ${menu_usb_dev} 2>${ANSWER} 
+	# variables=$(cat ${ANSWER}) # For Xdialog
+	# variables=$(Xdialog --stdout --backtitle "$SYSTEM $VERSION $ARCHI" --title "Извлечение флешек" --menu "\nМеню выбора флешки для извлечения\n" 0 0 10 ${menu_usb_dev})
+	variables=$(zenity --title="звлечение флешек" --text="\nМеню выбора флешки для извлечения\n" --width=256 --height=256 --list --column="Device" --column="Info"  "${dev_menu_usb[@]}")
+	# echo "${variables}" # Debug for variables
+	if [[ "${variables[*]}" != "" ]]; then
+		# umount -l /dev/"${variables[*]}" # Umount requires user rights. For udiskctl are not needed.
 		udisksctl unmount --block-device /dev/"${variables[*]}"
 		wait
-		udisksctl power-off --block-device /dev/"${variables}"
+		udisksctl power-off --block-device /dev/"${variables[*]}"
 		wait
 		notify-send --urgency normal --expire-time=10000 -i "$_the_icon" "Извлечение USB устройства." "Ваше USB устройство <b>/dev/${variables}</b> может быть извлечено!"
 	fi
