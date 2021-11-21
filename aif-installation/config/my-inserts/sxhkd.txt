@@ -48,14 +48,20 @@ pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 
 
-ctrl + m
+mod4+z
 	bash -c "/home/mikl/programs/umount-usb.sh"
-
-ctrl + m
+ctrl+slash
 	xfce4-terminal
-
-alt + m
+ctrl+period
 	thunar
+ctrl+Right
+	pactl set-sink-volume @DEFAULT_SINK@ +1000
+ctrl+Left
+	pactl set-sink-volume @DEFAULT_SINK@ -1000
+ctrl+Up
+	bash -c "/home/mikl/programs/bright.sh +10"
+ctrl+Down
+	bash -c "/home/mikl/programs/bright.sh -10"
 
 
 
