@@ -1,0 +1,40 @@
+
+
+MTP Android
+
+$ sudo pacman -S mtpfs libmtp gvfs-mtp fuse2
+Далее найдем все mtp устройства. Для этого выполним команду, чтобы утилита libmtp автоматически создала новые udev правила по пути /lib/udev/rules.d/69-libmtp.rules:
+$ mtp-detect
+Далее разрешим всем пользователям подключать подобные устройства. Раскоментим строку «user_allow_other».
+$ sudo nano /etc/fuse.conf
+Если вы отключили автоматическое монтирование устройств на уровне системы, то вы можете настроить автоматическое монтирования телефона с помощью правил udev. Или в случае, когда авто-монтирование подобных устройств по каким-либо причинам не работает выполняем следующее.
+Находим idVendor и idProduct и записываем новое udev правило.
+$ mtp-detect | grep idVendor
+$ mtp-detect | grep idProduct
+К примеру мои данные:
+idVendor: 04e8
+idProduct: 6860
+Обращаю внимание что это новое правило. т.е. такого файла не должно существовать. Для того, чтобы в этом убедиться выполним команду:
+$ [ -e /etc/udev/rules.d/51-android.rules ] && echo "Придумайте для правила другое имя!" || echo "Можете продолжать!"
+$ sudo nano /etc/udev/rules.d/51-android.rules
+SUBSYSTEM=="usb", ATTR{idVendor}=="сюда_впишите_idVendor", ATTR{idProduct}=="сюда_впишите_idProduct", MODE="0666»
+У меня эта строка получаль такой
+SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", ATTR{idProduct}=="6860", MODE="0666»
+Поссле вышеуказанных операций перезагрузим udev без перезагрузки системы:
+$ sudo udevadm control --reload-rules && udevadm trigger
+
+Проверка:
+lsusb | grep -Ei "*MTP*" | awk -F 'ID' '{print $2}' | xargs | awk '{print $1}'
+04e8:6860
+lsusb | grep -Ei "*MTP*" | awk -F 'ID' '{print $2}' | xargs | awk '{print $1}' | cut -d ':' -f1
+OR:
+mtp-detect | grep idVendor | awk '{print $2}'
+04e8
+lsusb | grep -Ei "*MTP*" | awk -F 'ID' '{print $2}' | xargs | awk '{print $1}' | cut -d ':' -f2
+OR
+mtp-detect | grep idProduct | awk '{print $2}'
+6860
+
+$ cat /etc/udev/rules.d/51-android.rules
+SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", ATTR{idProduct}=="6860", MODE="0666"
+
