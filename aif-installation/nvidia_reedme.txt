@@ -193,6 +193,54 @@ XDG_PICTURES_DIR="$HOME/Pictures"
 XDG_VIDEOS_DIR="$HOME/Videos"
 
 
+/etc/xdg/autostart/
+
+[Desktop Entry]
+Name=Parcellite
+Icon=parcellite
+Exec=parcellite
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true
+
+[Desktop Entry]
+Name=Print Queue Applet
+Name[en_GB]=Print Queue Applet
+Exec=system-config-printer-applet
+Terminal=false
+Type=Application
+Icon=printer
+NotShowIn=KDE;GNOME;Cinnamon;
+StartupNotify=false
+X-GNOME-Autostart-Delay=30
+X-Desktop-File-Install-Version=0.26
+Categories=System;Monitor;GTK;
+Comment=System tray icon for managing print jobs
+Comment[en_GB]=System tray icon for managing print jobs
+
+[Desktop Entry]
+Name[en_GB]=Network
+Name[ru]=Сеть
+Name=Network
+Comment[en_GB]=Manage your network connections
+Comment[ru]=Управление сетевыми соединениями
+Comment=Manage your network connections
+Icon=nm-device-wireless
+Exec=nm-applet
+Terminal=false
+Type=Application
+NoDisplay=true
+NotShowIn=KDE;GNOME;
+X-GNOME-Bugzilla-Bugzilla=GNOME
+X-GNOME-Bugzilla-Product=NetworkManager
+X-GNOME-Bugzilla-Component=nm-applet
+X-GNOME-UsesNotifications=true
+
+
+
+
+/usr/share/icons
+/usr/share/themes/
 
 
 
