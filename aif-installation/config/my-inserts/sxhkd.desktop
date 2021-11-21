@@ -1,0 +1,11 @@
+# ~/.config/autostart/sxhkd.desktop
+# /etc/xdg/autostart/
+[Desktop Entry]
+Name=sxhkd
+Comment=Simple X hotkey daemon
+Icon=/home/mikl/programs/sxhkd-256.png
+Exec=/usr/bin/sxhkd
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true
+NoDisplay=true
