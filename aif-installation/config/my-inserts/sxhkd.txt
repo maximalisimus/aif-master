@@ -66,4 +66,14 @@ ctrl+Down
 
 
 
+xdg-open ./sxhkd.desktop
+
+ps aux | grep sxhkd
+pgrep sxhkd
+
+pkill -TERM sxhkd
+killall sxhkd
+pkill sxhkd
+
+
 
