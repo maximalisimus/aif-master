@@ -1,0 +1,182 @@
+#!/usr/bin/env bash
+SETCOLOR_SUCCESS="echo -en \\033[1;32m"
+SETCOLOR_FAILURE="echo -en \\033[1;31m"
+SETCOLOR_ERROR="echo -en \\033[1;33m"
+SETCOLOR_NORMAL="echo -en \\033[0;39m"
+sms()
+{
+	case "$1" in
+		1) $SETCOLOR_SUCCESS
+			echo -e -n "Process to Complete"
+			$SETCOLOR_NORMAL;; 
+		2) $SETCOLOR_FAILURE
+			echo -e -n "Process to Failure"
+			$SETCOLOR_NORMAL;;
+	esac
+}
+checkprocess()
+{
+	if [ $1 -eq 0 ]; then
+		$SETCOLOR_SUCCESS
+		# echo -e -n "\n"
+		echo -e -n "$(tput hpa $(tput cols))$(tput cub 6)[OK]"
+		$SETCOLOR_NORMAL
+		 echo -e -n "\n"
+	else
+		$SETCOLOR_FAILURE
+		# echo -e -n "\n"
+		echo -e -n "$(tput hpa $(tput cols))$(tput cub 6)[Fail]"
+		$SETCOLOR_NORMAL
+		 echo -e -n "\n"
+	fi
+}
+_help()
+{
+	echo -e -n "${0}: [-start & | -stop | -reload | -show | -h|--h|--help]"
+	echo -e -n "\nThe parameter is:"
+	echo -e -n "\n\t-start &\tStart sxhkd service."
+	echo -e -n "\n\t-stop\t\tStop sxhkd service."
+	echo -e -n "\n\t-reload\t\tReload configuration sxhkd."
+	echo -e -n "\n\t-show\t\tShow the PID sxhkd."
+	echo -e -n "\n\t-h\t\tHelp."
+	echo -e -n "\n\t--h\t\tHelp."
+	echo -e -n "\n\t--help\t\tHelp."
+}
+pid_file="$HOME/.config/sxhkd/sxhkd_PID.PID"
+pid_count=0
+function start_sxhkd()
+{
+	if [[ -e "$pid_file" ]]; then
+		$SETCOLOR_ERROR
+		echo "SXHKD is not started. The PID: ${pid_count}"
+		$SETCOLOR_NORMAL
+		sms "2"
+		checkprocess "1"
+		exit 1
+	else
+		touch "$pid_file"
+		wait
+		/usr/bin/sxhkd &
+		pidof sxhkd > "$pid_file"
+		pid_count=$(pidof sxhkd)
+		wait
+		echo "SXHKD is started. The PID: ${pid_count}"
+		sms "1"
+		checkprocess "0"
+		exit 0
+	fi
+}
+function stop_sxhkd()
+{
+	if [[ -e "$pid_file" ]]; then
+		pid_int=$(cat "$pid_file" | xargs)
+		wait
+		pid_count="${pid_int[*]}"
+		wait
+		unset pid_int
+		wait
+		kill -SIGTERM "$pid_count"
+		wait
+		rm -rf "$pid_file"
+		wait
+		$SETCOLOR_SUCCESS
+		echo "SXHKD service to stoped."
+		echo "PID ${pid_count} to destroyed."
+		$SETCOLOR_NORMAL
+		sms "1"
+		checkprocess "0"
+		exit 0
+	else
+		$SETCOLOR_ERROR
+		echo "SXHKD is not the stoped! The PID is not found and sxhkd service is not started!"
+		echo "Please, the start sxhkd service!"
+		$SETCOLOR_NORMAL
+		sms "2"
+		checkprocess "1"
+		exit 2
+	fi
+}
+function reload_sxhkd()
+{
+	if [[ -e "$pid_file" ]]; then
+		pid_int=$(cat "$pid_file" | xargs)
+		wait
+		pid_count="${pid_int[*]}"
+		wait
+		unset pid_int
+		wait
+		kill -SIGUSR1 "$pid_count"
+		wait
+		$SETCOLOR_SUCCESS
+		echo "SXHKD service to reloaded."
+		echo "PID ${pid_count}"
+		$SETCOLOR_NORMAL
+		sms "1"
+		checkprocess "0"
+		exit 0
+	else
+		$SETCOLOR_ERROR
+		echo "SXHKD is not the reloaded! The PID is not found and sxhkd service is not started!"
+		echo "Please, the start sxhkd service!"
+		$SETCOLOR_NORMAL
+		sms "2"
+		checkprocess "1"
+		exit 3
+	fi
+}
+function show_pid()
+{
+	if [[ -e "$pid_file" ]]; then
+		pid_int=$(cat "$pid_file" | xargs)
+		wait
+		pid_count="${pid_int[*]}"
+		wait
+		unset pid_int
+		wait
+		$SETCOLOR_SUCCESS
+		echo "SXHKD PID: ${pid_count}"
+		$SETCOLOR_NORMAL
+		sms "1"
+		checkprocess "0"
+		exit 0
+	else
+		$SETCOLOR_ERROR
+		echo "SXHKD is not started! The PID is not found!"
+		echo "Please, the start sxhkd service!"
+		$SETCOLOR_NORMAL
+		sms "2"
+		checkprocess "1"
+		exit 4
+	fi
+}
+if [[ -z "$1" ]]; then
+	$SETCOLOR_FAILURE
+	echo -e -n "You have not entered the option. "
+	$SETCOLOR_ERROR
+	echo -e -n "Please enter one of the suggested parameters.\n"
+	$SETCOLOR_NORMAL
+	_help
+	exit 0
+fi
+while [ -n "$1" ]; do
+	case "$1" in
+		-start) start_sxhkd
+			;;
+		-stop) stop_sxhkd
+			;;
+		-reload) reload_sxhkd
+			;;
+		-show) show_pid
+			;;
+		-[h?] | --help) _help;;
+		*) $SETCOLOR_FAILURE
+			echo -e -n "Invalid option. "
+			$SETCOLOR_ERROR
+			echo -e -n "Please enter the correct one.\n"
+			$SETCOLOR_NORMAL
+			_help
+			;;
+	esac
+	shift
+done
+exit 0
