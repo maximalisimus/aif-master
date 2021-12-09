@@ -1,8 +1,24 @@
 #!/usr/bin/env bash
+
 SETCOLOR_SUCCESS="echo -en \\033[1;32m"
 SETCOLOR_FAILURE="echo -en \\033[1;31m"
 SETCOLOR_ERROR="echo -en \\033[1;33m"
 SETCOLOR_NORMAL="echo -en \\033[0;39m"
+#
+ARCHI=$(uname -m)
+SYSTEM=$(uname -o)
+VERSION=$(uname -r)
+ANSWER="$HOME/.answer"
+DIALOG="NULL"
+#
+pid_count=0
+sxhkd_config="$HOME/.config/sxhkd/sxhkdrc"
+sxhkd_txt_config="$HOME/.config/sxhkd/sxhkd_conf.conf"
+text_editor="NULL"
+run_config="NULL"
+sxhkd_tmp=$(dirname "${sxhkd_config}")
+sxhkd_dir="${sxhkd_tmp[*]}"
+unset sxhkd_tmp
 sms()
 {
 	case "$1" in
@@ -32,21 +48,36 @@ checkprocess()
 }
 _help()
 {
-	echo -e -n "${0}: [-start & | -stop | -reload | -show | -h|--h|--help]"
-	echo -e -n "\nThe parameter is:"
-	echo -e -n "\n\t-start &\tStart sxhkd service."
-	echo -e -n "\n\t-stop\t\tStop sxhkd service."
-	echo -e -n "\n\t-reload\t\tReload configuration sxhkd."
-	echo -e -n "\n\t-show\t\tShow the PID sxhkd."
-	echo -e -n "\n\t-h\t\tHelp."
+	clear
+	echo -e -n "${0} USAGE: [ -start | -stop | -reload | -show-pid "
+	echo -e -n "| -create-config | -edit-config "
+	echo -e -n "| -set-editor text-editor "
+	echo -e -n "| -set-mode "
+	echo -e -n "| -reset-sxhkd | -reset-config "
+	echo -e -n "| -h|--h|--help ]"
+	echo -e -n "\n\nThe parameter is:"
+	echo -e -n "\n\t-start\t\tStart sxhkd-service."
+	echo -e -n "\n\t-stop\t\tStop sxhkd-service."
+	echo -e -n "\n\t-reload\t\tReload configuration SXHKD."
+	echo -e -n "\n\t-show-pid\tShow the PID sxhkd-services."
+	echo -e -n "\n\n\t-create-config\tCreate empty SXHKD config (sxhkdrc)."
+	echo -e -n "\n\t-edit-config\tEdit config on default text editor."
+	echo -e -n "\n\t-set-editor\tSet default text editor."
+	echo -e -n "\n\t-set-mode\tThe mode for launching the settings dialogs."
+	echo -e -n "\n\t\t\t(GUI, CLI)."
+	echo -e -n "\n\n\t-reset-sxhkd\tResetting the sxhkdrc settings."
+	echo -e -n "\n\t-reset-config\tResetting the sxhkd-service settings."
+	echo -e -n "\n\n\t-h\t\tHelp."
 	echo -e -n "\n\t--h\t\tHelp."
-	echo -e -n "\n\t--help\t\tHelp."
+	echo -e -n "\n\t--help\t\tHelp.\n"
 }
-pid_file="$HOME/.config/sxhkd/sxhkd_PID.PID"
-pid_count=0
 function start_sxhkd()
 {
-	if [[ -e "$pid_file" ]]; then
+	pid_int=$(pidof sxhkd | xargs)
+	wait
+	pid_count="${pid_int[*]}"
+	unset pid_int
+	if [[ "$pid_count" != "" ]]; then
 		$SETCOLOR_ERROR
 		echo "SXHKD is not started. The PID: ${pid_count}"
 		$SETCOLOR_NORMAL
@@ -54,13 +85,9 @@ function start_sxhkd()
 		checkprocess "1"
 		exit 1
 	else
-		touch "$pid_file"
-		wait
-		/usr/bin/sxhkd &
-		pidof sxhkd > "$pid_file"
-		pid_count=$(pidof sxhkd)
-		wait
-		echo "SXHKD is started. The PID: ${pid_count}"
+		exec /usr/bin/sxhkd &
+		pid_count=$(pidof sxhkd | xargs)
+		echo "SXHKD is started. The PID: ${pid_count[*]}"
 		sms "1"
 		checkprocess "0"
 		exit 0
@@ -68,20 +95,15 @@ function start_sxhkd()
 }
 function stop_sxhkd()
 {
-	if [[ -e "$pid_file" ]]; then
-		pid_int=$(cat "$pid_file" | xargs)
-		wait
-		pid_count="${pid_int[*]}"
-		wait
-		unset pid_int
-		wait
+	pid_int=$(pidof sxhkd | xargs)
+	wait
+	pid_count="${pid_int[*]}"
+	unset pid_int
+	if [[ "$pid_count" != "" ]]; then
 		kill -SIGTERM "$pid_count"
 		wait
-		rm -rf "$pid_file"
-		wait
 		$SETCOLOR_SUCCESS
-		echo "SXHKD service to stoped."
-		echo "PID ${pid_count} to destroyed."
+		echo "SXHKD the service is stoped."
 		$SETCOLOR_NORMAL
 		sms "1"
 		checkprocess "0"
@@ -98,17 +120,15 @@ function stop_sxhkd()
 }
 function reload_sxhkd()
 {
-	if [[ -e "$pid_file" ]]; then
-		pid_int=$(cat "$pid_file" | xargs)
-		wait
-		pid_count="${pid_int[*]}"
-		wait
-		unset pid_int
-		wait
+	pid_int=$(pidof sxhkd | xargs)
+	wait
+	pid_count="${pid_int[*]}"
+	unset pid_int
+	if [[ "$pid_count" != "" ]]; then
 		kill -SIGUSR1 "$pid_count"
 		wait
 		$SETCOLOR_SUCCESS
-		echo "SXHKD service to reloaded."
+		echo "SXHKD the service is rebooted."
 		echo "PID ${pid_count}"
 		$SETCOLOR_NORMAL
 		sms "1"
@@ -116,8 +136,8 @@ function reload_sxhkd()
 		exit 0
 	else
 		$SETCOLOR_ERROR
-		echo "SXHKD is not the reloaded! The PID is not found and sxhkd service is not started!"
-		echo "Please, the start sxhkd service!"
+		echo "SXHKD is not reload! The PID process is not found and sxhkd service is not started!"
+		echo "Please, the start sxhkd-service!"
 		$SETCOLOR_NORMAL
 		sms "2"
 		checkprocess "1"
@@ -126,13 +146,11 @@ function reload_sxhkd()
 }
 function show_pid()
 {
-	if [[ -e "$pid_file" ]]; then
-		pid_int=$(cat "$pid_file" | xargs)
-		wait
-		pid_count="${pid_int[*]}"
-		wait
-		unset pid_int
-		wait
+	pid_int=$(pidof sxhkd | xargs)
+	wait
+	pid_count="${pid_int[*]}"
+	unset pid_int
+	if [[ "$pid_count" != "" ]]; then
 		$SETCOLOR_SUCCESS
 		echo "SXHKD PID: ${pid_count}"
 		$SETCOLOR_NORMAL
@@ -148,6 +166,140 @@ function show_pid()
 		checkprocess "1"
 		exit 4
 	fi
+}
+function create_config()
+{
+	if [[ -e "$sxhkd_config" ]]; then
+		$SETCOLOR_SUCCESS
+		echo "SXHKD config detected."
+		$SETCOLOR_NORMAL
+		sms "1"
+		checkprocess "0"
+		sxhkd_conf_tmp=$(cat "$sxhkd_config")
+		if [[ "${sxhkd_conf_tmp[*]}" != "" ]]; then
+			$SETCOLOR_SUCCESS
+			echo "sxhkdrc has hotkey entries."
+			$SETCOLOR_NORMAL
+			sms "1"
+			checkprocess "0"
+		else
+			$SETCOLOR_ERROR
+			echo "The contents of the sxhkdrc config are empty."
+			$SETCOLOR_NORMAL
+			sms "2"
+			checkprocess "1"
+		fi
+		unset sxhkd_conf_tmp
+	else
+		mkdir -p "$sxhkd_dir"
+		touch "$sxhkd_config"
+		sms "1"
+		checkprocess "0"
+	fi
+}
+function get_service_config()
+{
+	if [[ -e "$sxhkd_txt_config" ]]; then
+		txt_tmp=$(cat "$sxhkd_txt_config" | sed -n "1p" | sed '/editor=/s/editor=//g' | xargs)
+		text_editor="${txt_tmp[*]}"
+		unset txt_tmp
+		wait
+		run_tmp=$(cat "$sxhkd_txt_config" | sed -n "2p" | sed '/config_run=/s/config_run=//g' | xargs)
+		run_config="${run_tmp[*]}"
+		unset run_tmp
+	else
+		echo "editor=empty" > "$sxhkd_txt_config"
+		wait
+		echo "config_run=cli" >> "$sxhkd_txt_config"
+		wait
+		txt_tmp=$(cat "$sxhkd_txt_config" | sed -n "1p" | sed '/editor=/s/editor=//g' | xargs)
+		text_editor="${txt_tmp[*]}"
+		unset txt_tmp
+		wait
+		run_tmp=$(cat "$sxhkd_txt_config" | sed -n "2p" | sed '/config_run=/s/config_run=//g' | xargs)
+		run_config="${run_tmp[*]}"
+		unset run_tmp
+	fi
+	if [[ "$run_config" == "cli" ]]; then
+		DIALOG=dialog
+	else
+		DIALOG=Xdialog
+	fi
+}
+function edit_config()
+{
+	get_service_config
+	if [[ "$text_editor" == "empty" ]]; then
+		exec xdg-open "$sxhkd_config" &
+		sms "1"
+		checkprocess "0"
+		exit 0
+	else
+		$text_editor "$sxhkd_config" &
+		wait
+		sms "1"
+		checkprocess "0"
+		exit 0
+	fi
+}
+function set_editor()
+{
+	get_service_config
+	$DIALOG --backtitle "$SYSTEM $VERSION ($ARCHI)" --title "Input default text-editor." --inputbox "Please, input name the text editor." 0 0 "" 2>${ANSWER}
+	data=$(cat ${ANSWER})
+	clear
+	wait
+	editor_data=$(cat ${ANSWER})
+	wait
+	text_editor="${editor_data[*]}"
+	wait
+	unset editor_data
+	wait
+	sed -i "/editor/c editor=$text_editor" "$sxhkd_txt_config"
+	wait
+	rm -rf "$ANSWER"
+	sms "1"
+	checkprocess "0"
+	exit 0
+}
+function set_mode_dialog()
+{
+	get_service_config
+	$DIALOG --backtitle "$SYSTEM $VERSION ($ARCHI)" --title "The dialog box mode selection menu." \
+	--menu "Please select one of the modes." 0 0 3 \
+	"1" "GUI" \
+	"2" "CLI" \
+	"3" "Do not change. Exit." 2>${ANSWER}
+
+	case $(cat ${ANSWER}) in
+		"1") sed -i "/config/c config_run=gui" "$sxhkd_txt_config"
+			;;
+		"2") sed -i "/config/c config_run=cli" "$sxhkd_txt_config"
+			;;
+		*) rm -rf "$ANSWER"
+			sms "1"
+			checkprocess "0"
+			exit 0
+			;;
+	esac
+	rm -rf "$ANSWER"
+	sms "1"
+	checkprocess "0"
+	exit 0
+}
+function reset_sxhkd()
+{
+	echo "" > "$sxhkd_config"
+}
+function reset_config()
+{
+	echo "editor=empty" > "$sxhkd_txt_config"
+	wait
+	echo "config_run=cli" >> "$sxhkd_txt_config"
+	wait
+	sms "1"
+	checkprocess "0"
+	exit 0
 }
 if [[ -z "$1" ]]; then
 	$SETCOLOR_FAILURE
@@ -166,7 +318,19 @@ while [ -n "$1" ]; do
 			;;
 		-reload) reload_sxhkd
 			;;
-		-show) show_pid
+		-show-pid) show_pid
+			;;
+		-create-config) create_config
+			;;
+		-edit-config) edit_config
+			;;
+		-set-editor) set_editor
+			;;
+		-set-mode) set_mode_dialog
+			;;
+		-reset-sxhkd) reset_sxhkd
+			;;
+		-reset-config) reset_config
 			;;
 		-[h?] | --help) _help;;
 		*) $SETCOLOR_FAILURE
