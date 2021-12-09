@@ -19,6 +19,29 @@ run_config="NULL"
 sxhkd_tmp=$(dirname "${sxhkd_config}")
 sxhkd_dir="${sxhkd_tmp[*]}"
 unset sxhkd_tmp
+function complete_exit()
+{
+	rm -rf "$ANSWER"
+	$SETCOLOR_NORMAL
+	unset SETCOLOR_SUCCESS
+	unset SETCOLOR_FAILURE
+	unset SETCOLOR_ERROR
+	unset SETCOLOR_NORMAL
+	
+	unset ARCHI
+	unset SYSTEM
+	unset VERSION
+	unset ANSWER
+	unset DIALOG
+	unset pid_count
+	
+	unset sxhkd_config
+	unset sxhkd_txt_config
+	unset text_editor
+	unset run_config
+	unset sxhkd_dir
+	exit "$1"
+}
 sms()
 {
 	case "$1" in
@@ -83,14 +106,14 @@ function start_sxhkd()
 		$SETCOLOR_NORMAL
 		sms "2"
 		checkprocess "1"
-		exit 1
+		complete_exit "1"
 	else
 		exec /usr/bin/sxhkd &
 		pid_count=$(pidof sxhkd | xargs)
 		echo "SXHKD is started. The PID: ${pid_count[*]}"
 		sms "1"
 		checkprocess "0"
-		exit 0
+		complete_exit "0"
 	fi
 }
 function stop_sxhkd()
@@ -107,7 +130,7 @@ function stop_sxhkd()
 		$SETCOLOR_NORMAL
 		sms "1"
 		checkprocess "0"
-		exit 0
+		complete_exit "0"
 	else
 		$SETCOLOR_ERROR
 		echo "SXHKD is not the stoped! The PID is not found and sxhkd service is not started!"
@@ -115,7 +138,7 @@ function stop_sxhkd()
 		$SETCOLOR_NORMAL
 		sms "2"
 		checkprocess "1"
-		exit 2
+		complete_exit "2"
 	fi
 }
 function reload_sxhkd()
@@ -133,7 +156,7 @@ function reload_sxhkd()
 		$SETCOLOR_NORMAL
 		sms "1"
 		checkprocess "0"
-		exit 0
+		complete_exit "0"
 	else
 		$SETCOLOR_ERROR
 		echo "SXHKD is not reload! The PID process is not found and sxhkd service is not started!"
@@ -141,7 +164,7 @@ function reload_sxhkd()
 		$SETCOLOR_NORMAL
 		sms "2"
 		checkprocess "1"
-		exit 3
+		complete_exit "3"
 	fi
 }
 function show_pid()
@@ -156,7 +179,7 @@ function show_pid()
 		$SETCOLOR_NORMAL
 		sms "1"
 		checkprocess "0"
-		exit 0
+		complete_exit "0"
 	else
 		$SETCOLOR_ERROR
 		echo "SXHKD is not started! The PID is not found!"
@@ -164,7 +187,7 @@ function show_pid()
 		$SETCOLOR_NORMAL
 		sms "2"
 		checkprocess "1"
-		exit 4
+		complete_exit "4"
 	fi
 }
 function create_config()
@@ -182,19 +205,26 @@ function create_config()
 			$SETCOLOR_NORMAL
 			sms "1"
 			checkprocess "0"
+			unset sxhkd_conf_tmp
+			wait
+			complete_exit "0"
 		else
 			$SETCOLOR_ERROR
 			echo "The contents of the sxhkdrc config are empty."
 			$SETCOLOR_NORMAL
 			sms "2"
 			checkprocess "1"
+			unset sxhkd_conf_tmp
+			wait
+			complete_exit "0"
 		fi
-		unset sxhkd_conf_tmp
 	else
 		mkdir -p "$sxhkd_dir"
 		touch "$sxhkd_config"
 		sms "1"
 		checkprocess "0"
+		wait
+		complete_exit "0"
 	fi
 }
 function get_service_config()
@@ -233,13 +263,13 @@ function edit_config()
 		exec xdg-open "$sxhkd_config" &
 		sms "1"
 		checkprocess "0"
-		exit 0
+		complete_exit "0"
 	else
 		$text_editor "$sxhkd_config" &
 		wait
 		sms "1"
 		checkprocess "0"
-		exit 0
+		complete_exit "0"
 	fi
 }
 function set_editor()
@@ -260,7 +290,8 @@ function set_editor()
 	rm -rf "$ANSWER"
 	sms "1"
 	checkprocess "0"
-	exit 0
+	wait
+	complete_exit "0"
 }
 function set_mode_dialog()
 {
@@ -279,13 +310,14 @@ function set_mode_dialog()
 		*) rm -rf "$ANSWER"
 			sms "1"
 			checkprocess "0"
-			exit 0
+			wait
+			complete_exit "0"
 			;;
 	esac
 	rm -rf "$ANSWER"
 	sms "1"
 	checkprocess "0"
-	exit 0
+	complete_exit "0"
 }
 function reset_sxhkd()
 {
@@ -299,7 +331,8 @@ function reset_config()
 	wait
 	sms "1"
 	checkprocess "0"
-	exit 0
+	wait
+	complete_exit "0"
 }
 if [[ -z "$1" ]]; then
 	$SETCOLOR_FAILURE
@@ -308,7 +341,7 @@ if [[ -z "$1" ]]; then
 	echo -e -n "Please enter one of the suggested parameters.\n"
 	$SETCOLOR_NORMAL
 	_help
-	exit 0
+	complete_exit "0"
 fi
 while [ -n "$1" ]; do
 	case "$1" in
@@ -343,4 +376,4 @@ while [ -n "$1" ]; do
 	esac
 	shift
 done
-exit 0
+complete_exit "0"
