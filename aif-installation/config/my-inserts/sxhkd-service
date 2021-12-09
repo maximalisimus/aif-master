@@ -265,7 +265,7 @@ function edit_config()
 		checkprocess "0"
 		complete_exit "0"
 	else
-		$text_editor "$sxhkd_config" &
+		"$text_editor" "$sxhkd_config" &
 		wait
 		sms "1"
 		checkprocess "0"
