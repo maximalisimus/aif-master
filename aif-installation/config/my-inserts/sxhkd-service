@@ -19,6 +19,9 @@ run_config="NULL"
 sxhkd_tmp=$(dirname "${sxhkd_config}")
 sxhkd_dir="${sxhkd_tmp[*]}"
 unset sxhkd_tmp
+sxhkd_run=""
+kill_run=""
+pidof_run=""
 function complete_exit()
 {
 	rm -rf "$ANSWER"
@@ -76,6 +79,9 @@ _help()
 	echo -e -n "| -create-config | -edit-config "
 	echo -e -n "| -set-editor text-editor "
 	echo -e -n "| -set-mode "
+	echo -e -n "| -set-kill kill"
+	echo -e -n "| -set-pidof pidof"
+	echo -e -n "| -set-sxhkd sxhkd"
 	echo -e -n "| -reset-sxhkd | -reset-config "
 	echo -e -n "| -h|--h|--help ]"
 	echo -e -n "\n\nThe parameter is:"
@@ -86,8 +92,9 @@ _help()
 	echo -e -n "\n\n\t-create-config\tCreate empty SXHKD config (sxhkdrc)."
 	echo -e -n "\n\t-edit-config\tEdit config on default text editor."
 	echo -e -n "\n\t-set-editor\tSet default text editor."
-	echo -e -n "\n\t-set-mode\tThe mode for launching the settings dialogs."
-	echo -e -n "\n\t\t\t(GUI, CLI)."
+	echo -e -n "\n\t-set-kill\tSet the full path of the kill utility."
+	echo -e -n "\n\t-set-pidof\tSet the full path of the pidof utility."
+	echo -e -n "\n\t-set-sxhkd\tSet the full path of sxhkd."
 	echo -e -n "\n\n\t-reset-sxhkd\tResetting the sxhkdrc settings."
 	echo -e -n "\n\t-reset-config\tResetting the sxhkd-service settings."
 	echo -e -n "\n\n\t-h\t\tHelp."
@@ -96,7 +103,7 @@ _help()
 }
 function start_sxhkd()
 {
-	pid_int=$(pidof sxhkd | xargs)
+	pid_int=$("$pidof_run" sxhkd | xargs)
 	wait
 	pid_count="${pid_int[*]}"
 	unset pid_int
@@ -108,8 +115,8 @@ function start_sxhkd()
 		checkprocess "1"
 		complete_exit "1"
 	else
-		exec /usr/bin/sxhkd &
-		pid_count=$(pidof sxhkd | xargs)
+		exec "$sxhkd_run" &
+		pid_count=$("$pidof_run" sxhkd | xargs)
 		echo "SXHKD is started. The PID: ${pid_count[*]}"
 		sms "1"
 		checkprocess "0"
@@ -118,12 +125,12 @@ function start_sxhkd()
 }
 function stop_sxhkd()
 {
-	pid_int=$(pidof sxhkd | xargs)
+	pid_int=$("$pidof_run" sxhkd | xargs)
 	wait
 	pid_count="${pid_int[*]}"
 	unset pid_int
 	if [[ "$pid_count" != "" ]]; then
-		kill -SIGTERM "$pid_count"
+		"$kill_run" -SIGTERM "$pid_count"
 		wait
 		$SETCOLOR_SUCCESS
 		echo "SXHKD the service is stoped."
@@ -143,12 +150,12 @@ function stop_sxhkd()
 }
 function reload_sxhkd()
 {
-	pid_int=$(pidof sxhkd | xargs)
+	pid_int=$("$pidof_run" sxhkd | xargs)
 	wait
 	pid_count="${pid_int[*]}"
 	unset pid_int
 	if [[ "$pid_count" != "" ]]; then
-		kill -SIGUSR1 "$pid_count"
+		"$kill_run" -SIGUSR1 "$pid_count"
 		wait
 		$SETCOLOR_SUCCESS
 		echo "SXHKD the service is rebooted."
@@ -169,7 +176,7 @@ function reload_sxhkd()
 }
 function show_pid()
 {
-	pid_int=$(pidof sxhkd | xargs)
+	pid_int=$("$pidof_run" sxhkd | xargs)
 	wait
 	pid_count="${pid_int[*]}"
 	unset pid_int
@@ -237,10 +244,25 @@ function get_service_config()
 		run_tmp=$(cat "$sxhkd_txt_config" | sed -n "2p" | sed '/config_run=/s/config_run=//g' | xargs)
 		run_config="${run_tmp[*]}"
 		unset run_tmp
+		kill_tmp=$(cat "$sxhkd_txt_config" | sed -n "3p" | sed '/kill_run=/s/kill_run=//g' | xargs)
+		pidof_tmp=$(cat "$sxhkd_txt_config" | sed -n "4p" | sed '/pidof_run=/s/pidof_run=//g' | xargs)
+		kill_run="${kill_tmp[*]}"
+		pidof_run="${pidof_tmp[*]}"
+		unset pidof_tmp
+		unset kill_tmp
+		sxhkd_tmp=$(cat "$sxhkd_txt_config" | sed -n "5p" | sed '/sxhkd_run=/s/sxhkd_run=//g' | xargs)
+		sxhkd_run="${sxhkd_tmp[*]}"
+		unset sxhkd_tmp
 	else
 		echo "editor=empty" > "$sxhkd_txt_config"
 		wait
 		echo "config_run=cli" >> "$sxhkd_txt_config"
+		wait
+		echo "kill_run=kill" >> "$sxhkd_txt_config"
+		wait
+		echo "pidof_run=pidof" >> "$sxhkd_txt_config"
+		wait
+		echo "sxhkd_run=/usr/bin/sxhkd" >> "$sxhkd_txt_config"
 		wait
 		txt_tmp=$(cat "$sxhkd_txt_config" | sed -n "1p" | sed '/editor=/s/editor=//g' | xargs)
 		text_editor="${txt_tmp[*]}"
@@ -249,6 +271,15 @@ function get_service_config()
 		run_tmp=$(cat "$sxhkd_txt_config" | sed -n "2p" | sed '/config_run=/s/config_run=//g' | xargs)
 		run_config="${run_tmp[*]}"
 		unset run_tmp
+		kill_tmp=$(cat "$sxhkd_txt_config" | sed -n "3p" | sed '/kill_run=/s/kill_run=//g' | xargs)
+		pidof_tmp=$(cat "$sxhkd_txt_config" | sed -n "4p" | sed '/pidof_run=/s/pidof_run=//g' | xargs)
+		kill_run="${kill_tmp[*]}"
+		pidof_run="${pidof_tmp[*]}"
+		unset pidof_tmp
+		unset kill_tmp
+		sxhkd_tmp=$(cat "$sxhkd_txt_config" | sed -n "5p" | sed '/sxhkd_run=/s/sxhkd_run=//g' | xargs)
+		sxhkd_run="${sxhkd_tmp[*]}"
+		unset sxhkd_tmp
 	fi
 	if [[ "$run_config" == "cli" ]]; then
 		DIALOG=dialog
@@ -275,8 +306,7 @@ function edit_config()
 function set_editor()
 {
 	get_service_config
-	$DIALOG --backtitle "$SYSTEM $VERSION ($ARCHI)" --title "Input default text-editor." --inputbox "Please, input name the text editor." 0 0 "" 2>${ANSWER}
-	data=$(cat ${ANSWER})
+	$DIALOG --backtitle "$SYSTEM $VERSION ($ARCHI)" --title "Input default text-editor." --inputbox "Please, input name the text editor." 0 0 "$text_editor" 2>${ANSWER}
 	clear
 	wait
 	editor_data=$(cat ${ANSWER})
@@ -293,30 +323,55 @@ function set_editor()
 	wait
 	complete_exit "0"
 }
-function set_mode_dialog()
+function set_kill()
 {
 	get_service_config
-	$DIALOG --backtitle "$SYSTEM $VERSION ($ARCHI)" --title "The dialog box mode selection menu." \
-	--menu "Please select one of the modes." 0 0 3 \
-	"1" "GUI" \
-	"2" "CLI" \
-	"3" "Do not change. Exit." 2>${ANSWER}
-
-	case $(cat ${ANSWER}) in
-		"1") sed -i "/config/c config_run=gui" "$sxhkd_txt_config"
-			;;
-		"2") sed -i "/config/c config_run=cli" "$sxhkd_txt_config"
-			;;
-		*) rm -rf "$ANSWER"
-			sms "1"
-			checkprocess "0"
-			wait
-			complete_exit "0"
-			;;
-	esac
+	$DIALOG --backtitle "$SYSTEM $VERSION ($ARCHI)" --title "Entering the full path." --inputbox "Please enter the full path to the kill utility." 0 0 "$kill_run" 2>${ANSWER}
+	clear
+	wait
+	kill_data=$(cat ${ANSWER})
+	kill_run="${kill_data[*]}"
+	unset kill_data
+	sed -i "/kill_run/c kill_run=$kill_run" "$sxhkd_txt_config"
+	wait
 	rm -rf "$ANSWER"
 	sms "1"
 	checkprocess "0"
+	wait
+	complete_exit "0"
+}
+function set_pidof()
+{
+	get_service_config
+	$DIALOG --backtitle "$SYSTEM $VERSION ($ARCHI)" --title "Entering the full path." --inputbox "Please enter the full path to the pidof utility." 0 0 "$pidof_run" 2>${ANSWER}
+	clear
+	wait
+	pidof_data=$(cat ${ANSWER})
+	pidof_run="${pidof_data[*]}"
+	unset pidof_data
+	sed -i "/pidof_run/c pidof_run=$pidof_run" "$sxhkd_txt_config"
+	wait
+	rm -rf "$ANSWER"
+	sms "1"
+	checkprocess "0"
+	wait
+	complete_exit "0"
+}
+function set_sxhkd()
+{
+	get_service_config
+	$DIALOG --backtitle "$SYSTEM $VERSION ($ARCHI)" --title "Entering the full path." --inputbox "Please enter the full path to the sxhkd itself." 0 0 "$sxhkd_run" 2>${ANSWER}
+	clear
+	wait
+	sxhkd_data=$(cat ${ANSWER})
+	sxhkd_run="${sxhkd_data[*]}"
+	unset sxhkd_data
+	sed -i "/sxhkd_run/c sxhkd_run=$sxhkd_run" "$sxhkd_txt_config"
+	wait
+	rm -rf "$ANSWER"
+	sms "1"
+	checkprocess "0"
+	wait
 	complete_exit "0"
 }
 function reset_sxhkd()
@@ -329,6 +384,12 @@ function reset_config()
 	wait
 	echo "config_run=cli" >> "$sxhkd_txt_config"
 	wait
+	echo "kill_run=kill" >> "$sxhkd_txt_config"
+	wait
+	echo "pidof_run=pidof" >> "$sxhkd_txt_config"
+	wait
+	echo "sxhkd_run=/usr/bin/sxhkd" >> "$sxhkd_txt_config"
+	wait	
 	sms "1"
 	checkprocess "0"
 	wait
@@ -359,7 +420,11 @@ while [ -n "$1" ]; do
 			;;
 		-set-editor) set_editor
 			;;
-		-set-mode) set_mode_dialog
+		-set-kill) set_kill
+			;;
+		-set-pidof) set_pidof
+			;;
+		-set-sxhkd) set_sxhkd
 			;;
 		-reset-sxhkd) reset_sxhkd
 			;;
