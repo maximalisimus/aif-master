@@ -42,7 +42,7 @@ _connman_pkg=("$_nm_pkg_2")
 _nm_applet_pkg="network-manager-applet"
 _networkmanager_pkg=("$_nm_pkg_4" "$_nm_applet_pkg")
 _rp_pppoe_pkg="rp-pppoe"
-_p_pppoe_pkg="p-pppoe"
+_p_pppoe_pkg="ppp"
 _net_connect_var=("$_rp_pppoe_pkg" "$_p_pppoe_pkg" networkmanager-openconnect networkmanager-openvpn networkmanager-pptp networkmanager-vpnc)
 _wicd_pkg=(wicd "$_nm_pkg_5")
 #
