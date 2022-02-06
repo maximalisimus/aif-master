@@ -95,6 +95,9 @@ To use this wizard, you must comply with 2 important conditions:
 
 1. Start from under the superuser **root**.
 2. the presence of a configured Internet connection in your distribution
+3. Install several dependencies in the Live distribution for the script to work correctly. Without the utilities listed below, the script simply won't run.
+
+$ sudo pacman -Syy ncurses git bash dialog --noconfirm
 
 **This script can be run from anywhere**.
 
