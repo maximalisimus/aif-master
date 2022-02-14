@@ -50,6 +50,8 @@ _wicd_pkg=(wicd "$_nm_pkg_5")
 #
 _ssh_pkg=(openssh)
 _docker_pkg=(docker docker-compose)
+_podman_pkd=(podman podman-compose podman-docker)
+_buildah_pkg=(buildah)
 _mail_srv_pkg=(postfix)
 _namp_srv_pkg=(nginx apache mysql++ mariadb mariadb-clients php phpmyadmin php-fpm php-apache uwsgi)
 _ftp_srv_pkg=(atftp bftpd curlftpfs filezilla gftp lftp tnftp vsftpd)
