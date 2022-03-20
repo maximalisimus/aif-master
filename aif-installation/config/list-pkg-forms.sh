@@ -93,7 +93,7 @@ _aur_pkgs_x86_durl="https://github.com/maximalisimus/repo/blob/master/aur-packag
 ## Graphic Card packages
 #
 _intel_pkg=(xf86-video-intel libva-intel-driver intel-ucode)
-_ati_pkg=(xf86-video-ati)
+_ati_pkg=(xf86-video-ati amd-ucode)
 _nvd_pkg=(nvidia nvidia-settings nvidia-utils lib32-nvidia-utils pangox-compat)
 _nvd_lts_pkg=(nvidia-lts nvidia-settings nvidia-utils lib32-nvidia-utils pangox-compat)
 _nvd_dkms_pkg=(nvidia-dkms nvidia-settings nvidia-utils lib32-nvidia-utils pangox-compat)
