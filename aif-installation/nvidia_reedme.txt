@@ -1,5 +1,11 @@
 
 
+LC_ALL=en_US.UTF-8 fdisk -l /dev/sda | grep -Ei "^Disklabel" | awk '{print $3}'
+dos
+gpt
+
+
+
 /etc/bumblebee/xorg.conf.nvidia
 
 Section "ServerLayout"
