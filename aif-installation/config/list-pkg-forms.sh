@@ -195,8 +195,8 @@ _zsh_sh=(zsh-completions)
 ## Alsa PulseAudio and xf86-input packages
 #
 _xf86_input_pkg=(xf86-input-synaptics xf86-input-keyboard xf86-input-mouse)
-_alsa_pkg=(alsa-utils alsa-plugins volumeicon lib32-alsa-plugins)
-_pulseaudio_pkg=(pavucontrol pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulseeffects pulsemixer pasystray pamixer pulseview lib32-libpulse)
+_alsa_pkg=(alsa-tools alsa-lib alsa-utils alsa-plugins volumeicon lib32-alsa-plugins alsa-card-profiles)
+_pulseaudio_pkg=(pavucontrol pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulsemixer pasystray pamixer pulseview lib32-libpulse libpulse pipewire)
 #
 #
 ## Common for Desktop packages
