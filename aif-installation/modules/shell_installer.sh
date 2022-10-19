@@ -73,7 +73,6 @@ shell_friendly_setup()
             _usr_lst_menu="${_usr_lst_menu} $i - on"
             echo "alias ls='ls --color=auto'" >> ${MOUNTPOINT}/home/$i/.bashrc
         done
-        _usr_lst_menu="${_usr_lst_menu} root - off"
         screenfetch_dialog
     fi
     # Checklist dialog user
