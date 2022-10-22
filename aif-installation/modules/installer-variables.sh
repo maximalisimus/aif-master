@@ -126,6 +126,9 @@ _wallpapers_once=0
 _truetype_once=0
 _greeter_once=0
 
+# Create a temporary file to store menu selections
+ANSWER="/tmp/.abif"
+
 # Architecture
 ARCHI=$(uname -m)            # Display whether 32 or 64 bit system
 _archi=$(uname -m)
