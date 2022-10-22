@@ -20,21 +20,15 @@ ANSWER="/tmp/.aif"
 ABSOLUT_FILENAME=$(readlink -e "$0")
 filesdir=$(dirname "$ABSOLUT_FILENAME")
 # Save retyping
-VERSION="MAXIMALISIMUS Installation Framework 2.6"
+VERSION="MAXIMALISIMUS Installation Framework 2.7"
+# Constant to 32 or 64 bit system
+_archi=$(uname -m)
 
-_src_fls=$(find "$filesdir/config" -maxdepth 1 -type f -iname "*.sh")
-wait
-for i in ${_src_fls[*]}; do
-    source "$i"
-    wait
-done
-_src_fls=$(find "$filesdir/modules" -maxdepth 1 -type f -iname "*.sh")
-wait
-for i in ${_src_fls[*]}; do
-    source "$i"
-    wait
-done
-unset _src_fls
+for i in "$filesdir"/config/*.sh; do source "$i" ; done ;
+
+
+for i in "$filesdir"/modules/*.sh; do source "$i"; done ;
+
 
 ######################################################################
 ##                                                                  ##
@@ -43,14 +37,14 @@ unset _src_fls
 ######################################################################
 
 setcolor
-# question_dialog_run
 us_dlgrc_conf
 id_system
 select_language
-if [[ "${_archi[*]}" = "x86_64" ]]; then
+if [[ "${_archi[*]}" == "x86_64" ]]; then
     multilib_question
+    wait
     clear
-fi    
+fi
 check_requirements
 greeting
     while true; do

@@ -547,12 +547,6 @@ _yesno_tnc_body="\nInstaller un ensemble de connexions différentes pour Network
 _yn_s_tnc_ttl="Installation des connexions NetworkManager"
 _yn_s_tnc_bd="\nVoulez-vous choisir les types de connexions supplémentaires pour NetworkManager?\n"
 
-# Programs to TimeShoft and Github-Desktop
-_yesno_timeshift_title="Installation Timeshift"
-_yesno_timeshift_body="\nDéfinir Timeshift?\n"
-_yesno_github_desktop_title="Installation Github-Desktop"
-_yesno_github_desktop_body="\nInstaller Github-Desktop?\n"
-
 # Config Disk Devaces
 _sh_dev_title="Sélection de l'appareil"
 _sh_dev_body="\nVeuillez sélectionner l'appareil dont vous avez besoin\n"
@@ -580,8 +574,6 @@ _input_size_tmpfs_title="Entrée du volume du dossier tmp"
 _input_size_tmpfs_body="\nVeuillez entrer le volume désiré. Par exemple: 1G\n"
 
 # Shell and Windows Fonts
-_yn_win_fnts_ttl="Installation des polices Windows"
-_yn_win_fnts_bd="\nInstaller les polices Windows?\n"
 _shell_friendly_menu="Sélection et installation de SHELL"
 _select_shell_menu_ttl="Choisir un SHELL à installer"
 _select_shell_menu_bd="\nS'il vous plaît choisir SHELL pour l'utilisateur"
@@ -627,23 +619,9 @@ _CloseInstBody="Fermer l'installateur ?"
 _yesno_order_ttl="Sauter plusieurs menus"
 _yesno_order_bd="\nAvez-vous installé le noyau LTS?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installation de l'émulateur PlayStation-3"
-_yesno_rpcs3_bd="\nInstaller un émulateur PlayStation-3?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Installation Bluetooth"
 _yesno_bluetooth_bd="\nInstaller le pilote et le gestionnaire de périphériques bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Installation de paquets depuis AUR"
-_aur_pkg_bd="\nVeuillez sélectionner les paquets dont vous avez besoin pour l'installation!\n"
-_aur_dbl_pkg_ttl="Sélection de la version du package"
-_aur_dbl_pkg_bd="\nCe paquet a plusieurs versions.\nVeuillez choisir ce dont vous avez besoin!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installation des émulateurs"
-_eml_pkg_bd="\nVeuillez sélectionner les émulateurs dont vous avez besoin pour l'installation!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Supprimer le fichier Journal?"
@@ -707,36 +685,6 @@ _yn_umprt_mn_bd="\nDémonter les disques?\n"
 _Mirror_Conf_ttl="Filtrage de la liste des miroirs sur les protocoles"
 _Mirror_Conf_bd="\nSera généré la liste des miroirs sélectionné le protocole.Vous pouvez décider de l'utiliser ou non.\n"
 _yn_mirror_conf_bd="\nVous voulez choisir les protocoles pour le générateur de la liste des miroirs? Sinon, par défaut, sont sélectionnés tous les protocoles.\n"
-#
-# Server menu text
-_MMInstServer="Le serveur"
-_mn_srv_ttl="Installation et configuration d'un serveur des utilitaires"
-_mn_srv_bd="\nS'il vous plaît sélectionnez l'option de menu\n"
-_mn_srv_1="Installation et configuration de ssh"
-_mn_srv_2="Le serveur de messagerie postfix"
-_mn_srv_3="nginx, Apache, MySQL, PHP"
-_mn_srv_4="Le serveur FTP"
-_mn_ssh_1="installation de ssh"
-_mn_ssh_2="Configuration de ssh"
-_mn_cnf_ssh_1="Changer le port (22) par défaut"
-_mn_cnf_ssh_2="Activer/Désactiver l'entrée sous root"
-_yn_ssh_stp_bd="\nÉtablir un protocole de gestion à distance ssh?\n"
-_nfo_ssh_bd="\nLa connexion ssh est maintenant disponible à l' ip adresse\n"
-_nfo_ssh_prmr="Par exemple"
-_msg_ssh_nfo_ttl="Informations sur la gestion à distance par ssh"
-_sshcnf_port_bd="\nSaisissez le nouveau port entre 1025 et 65536.\n"
-_nfo_ssh_port_ttl="Erreur. Entré dans le mauvais port"
-_nfo_ssh_port_bd="\nErreur. Vous avez entré le port en dehors de la plage spécifiée à partir de 1025 à 65536. S'il vous plaît entrez le port correct.\n"
-_nff_ptrtlg_bd_1="\nEntrée sous root est activé.\n"
-_nff_ptrtlg_bd_2="\nEntrée sous root est désactivé.\n"
-_yn_mlsrv_bd="\nVous souhaitez installer un serveur de messagerie postfix?\n"
-_lmp_srv_bd="\nS'il vous plaît sélectionnez outils nécessaires pour l'installation.\n"
-_ftpsrv_mn_bd="\nInstallation d'un serveur FTP. S'il vous plaît, sélectionnez le package de votre choix.\n"
-_yn_netctl_ttl="Installation du modèle pour le gestionnaire de réseau netctl"
-_yn_netctl_bd="\nVous voulez choisir le modèle et le modifier son ?\n"
-_ntctl_tmpmn_bd="\nS'il vous plaît, sélectionnez le modèle de votre choix pour le gestionnaire de réseau netctl.\n"
-_inntctl_ttl="Entrer le nom du modèle de netctl"
-_inntctl_bd="\nS'il vous plaît, entrez le nouveau nom du modèle.\n"
 #
 # Wifi template configuration
 _msg_wt_ttl="Le réseau sans fil."

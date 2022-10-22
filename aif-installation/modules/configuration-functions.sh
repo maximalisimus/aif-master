@@ -13,55 +13,42 @@ configure_mirrorlist() {
 # Generate a mirrorlist based on the country chosen.    
 mirror_by_country() {
 
- COUNTRY_LIST=""
- mirror_config    
- if [[ ${_archi[*]} == "x86_64" ]]; then
-    countries_list=("AU_Australia AT_Austria BY_Belarus BE_Belgium BR_Brazil BG_Bulgaria CA_Canada CL_Chile CN_China CO_Colombia CZ_Czech_Republic DK_Denmark EE_Estonia FI_Finland FR_France DE_Germany GB_United_Kingdom GR_Greece HU_Hungary IN_India IE_Ireland IL_Israel IT_Italy JP_Japan KZ_Kazakhstan KR_Korea LV_Latvia LU_Luxembourg MK_Macedonia NL_Netherlands NC_New_Caledonia NZ_New_Zealand NO_Norway PL_Poland PT_Portugal RO_Romania RU_Russia RS_Serbia SG_Singapore SK_Slovakia ZA_South_Africa ES_Spain LK_Sri_Lanka SE_Sweden CH_Switzerland TW_Taiwan TR_Turkey UA_Ukraine US_United_States UZ_Uzbekistan VN_Vietnam")
-    wait
-    for i in ${countries_list}; do
-        COUNTRY_LIST="${COUNTRY_LIST} ${i} -"
-    done
-    wait
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorCntryTitle" --menu "$_MirrorCntryBody" 0 0 16 ${COUNTRY_LIST} 2>${ANSWER} || prep_menu
-    wait
-    COUNTRY_CODE=$(cat ${ANSWER} | sed 's/_.*//')
-    wait
-    URL="https://archlinux.org/mirrorlist/?country=${COUNTRY_CODE}${_mirror_conf_str}"
- else
-    countries_list=("BY_Belarus FR_France DE_Germany IN_India JP_Japan RU_Russia SG_Singapore CH_Switzerland US_United_States")
-    wait
-    for i in ${countries_list}; do
-        COUNTRY_LIST="${COUNTRY_LIST} ${i} -"
-    done
-    wait
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorCntryTitle" --menu "$_MirrorCntryBody" 0 0 16 ${COUNTRY_LIST} 2>${ANSWER} || prep_menu
-    wait
-    COUNTRY_CODE=$(cat ${ANSWER} | sed 's/_.*//' | tr '[:upper:]' '[:lower:]')
-    wait
-    URL="https://archlinux32.org/mirrorlist/?country=${COUNTRY_CODE}${_mirror_conf_str}" 
- fi
- wait
- MIRROR_TEMP=$(mktemp --suffix=-mirrorlist)
+	COUNTRY_LIST=""
+	mirror_config
+	for i in ${countries_list}; do
+		COUNTRY_LIST="${COUNTRY_LIST} ${i} -"
+	done
+	wait
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorCntryTitle" --menu "$_MirrorCntryBody" 0 0 16 ${COUNTRY_LIST} 2>${ANSWER} || prep_menu
+	wait 
+	if [[ ${_archi[*]} == "x86_64" ]]; then
+		COUNTRY_CODE=$(cat ${ANSWER} | sed 's/_.*//')
+	else
+		COUNTRY_CODE=$(cat ${ANSWER} | sed 's/_.*//' | tr '[:upper:]' '[:lower:]')
+	fi
+	URL="${_mirrorlist_url[*]}${COUNTRY_CODE}${_mirror_conf_str}"
+	wait
+	MIRROR_TEMP=$(mktemp --suffix=-mirrorlist)
 
- # Get latest mirror list and save to tmpfile
- dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorGenTitle" --infobox "$_MirrorGenBody" 0 0
+	# Get latest mirror list and save to tmpfile
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorGenTitle" --infobox "$_MirrorGenBody" 0 0
   
- curl -so "${MIRROR_TEMP}" "${URL}" 2>/tmp/.errlog
- check_for_error
- sed -i 's/^#Server/Server/g' "${MIRROR_TEMP}"
- nano "${MIRROR_TEMP}"
+	curl -so "${MIRROR_TEMP}" "${URL}" 2>/tmp/.errlog
+	check_for_error
+	sed -i 's/^#Server/Server/g' "${MIRROR_TEMP}"
+	nano "${MIRROR_TEMP}"
 
- dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --yesno "$_MirrorGenQ" 0 0
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --yesno "$_MirrorGenQ" 0 0
 
- if [[ $? -eq 0 ]];then
-    mv -f "/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig"
-    mv -f "${MIRROR_TEMP}" "/etc/pacman.d/mirrorlist"
-    chmod +r "/etc/pacman.d/mirrorlist"
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --infobox "$_DoneMsg" 0 0
-    sleep 2
- else
-    prep_menu
- fi
+	if [[ $? -eq 0 ]];then
+		mv -f "/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig"
+		mv -f "${MIRROR_TEMP}" "/etc/pacman.d/mirrorlist"
+		chmod +r "/etc/pacman.d/mirrorlist"
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --infobox "$_DoneMsg" 0 0
+		sleep 2
+	else
+		prep_menu
+	fi
 }
 
 dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorlistTitle" \
@@ -164,22 +151,6 @@ set_keymap() {
         dialog --default-item 1 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_xkb_mdl_title" --menu "$_xkb_mdl_body" 0 0 11 ${_xkb_mdl} 2>${ANSWER} || set_xkbmap
         xkb_model=$(cat ${ANSWER})
     }
-   # xkblayout()
-   # {
-   #     _xkb_w=""
-   #     _xkb_u=""
-   #     #dialog --default-item 1 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_xkb_list_title" --menu "$_xkb_list1_body" 0 0 11 ${_xkb_list} 2>${ANSWER} || set_xkbmap
-   #     #_xkb_w=$(cat ${ANSWER} |sed 's/_.*//')
-   #     _xkb_w="${KEYMAP[*]}"
-   #     dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yesno_user_layout_title" --yesno "$_yesno_user_layout_body" 0 0
-   #     if [[ $? -eq 0 ]]; then
-   #         dialog --default-item 1 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_xkb_list_title" --menu "$_xkb_list2_body" 0 0 11 ${_xkb_list} 2>${ANSWER} || set_xkbmap
-   #         _xkb_u=$(cat ${ANSWER} |sed 's/_.*//')
-   #         [[ $_xkb_w == $_xkb_u ]] && xkb_layout="$_xkb_w" || xkb_layout="$_xkb_u, $_xkb_w"
-   #     else
-   #         xkb_layout="$_xkb_w"
-   #     fi
-   # }
     xkbvariant()
     {
         dialog --default-item 1 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_xkb_var_title" --menu "$_xkb_var_body" 0 0 11 ${_xkb_var} 2>${ANSWER} || set_xkbmap
@@ -257,12 +228,6 @@ set_keymap() {
        fi
     fi
     
-   # dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_xkb_menu_title" --menu "$_xkb_menu_body" 0 0 5 \
-   # "1" "* $_xkb_layout_menu" \
-   # "2" "$_xkb_model_menu" \
-   # "3" "$_xkb_variant_menu" \
-   # "4" "$_xkb_options_menu" \
-   # "5" "$_Back" 2>${ANSWER}
    dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_xkb_menu_title" --menu "$_xkb_menu_body" 0 0 5 \
     "1" "$_xkb_model_menu" \
     "2" "$_xkb_variant_menu" \

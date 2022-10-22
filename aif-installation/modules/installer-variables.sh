@@ -22,6 +22,7 @@ AXI_INSTALLED=0             # Have the ALSA, Xorg, and xf86-input packages been 
 _x_pkg_menu_cl=""
 _xorg_pkg_menu=""
 _ugch=""
+_current_pkgs=""
 BOOTLOADER="n/a"            # Which bootloader has been installed?
 EVOBOXFM=""                 # Which file manager has been selected for EvoBox?
 EVOBOXIB=""                 # Which Internet Browser has been selected for EvoBox?
@@ -120,6 +121,10 @@ _list_shells_sh=""
 _list_bash_sh=""
 _list_zsh_sh=""
 _mn_shll_sh=""
+_icontheme_once=0
+_wallpapers_once=0
+_truetype_once=0
+_greeter_once=0
 
 # Architecture
 ARCHI=$(uname -m)            # Display whether 32 or 64 bit system
@@ -184,17 +189,6 @@ _netctl_menu=""
 _netctl_mn_once=0
 _netctl_edit=""
 
-# Server variables
-_ssh_setup_once=0
-_ssh_run_once=0
-_prmtrtlg_once=0
-_prmtrtlg_clck=0
-_mail_srv_once=0
-_lmp_srv_once=0
-_lmenu_nmpsrv=""
-_ftp_srv_once=0
-_menu_list_ftp=""
-
 # Network time protocol server variables
 _tmsnc_init_once=0
 _tmsnc_stp_once=0
@@ -219,32 +213,6 @@ _ntp_cl_str_2="mask"
 _ntp_cl_str_3="nomodify notrap"
 _ntp_client_str=""
 
-# Emulator packages Init
-_eml_pkg_once=0
-else_eml_package_list=""
-eml_check_dbl_list=""
-eml_dbl_name=""
-eml_dbl_list=""
-eml_all_name=""
-eml_full_name=""
-full_eml_menu=""
-
-# Aur packages init
-dbl_name=""
-dbl_list=""
-check_dbl_list=""
-all_name=""
-full_name=""
-full_menu=""
-aur_pkg_once=0
-
-# Package manager init
-_pm_uniq=""
-_pm_n=""
-_pm_menu=""
-_required_packages=""
-_pm_once=0
-
 # Color dialog configurated
 _dlgrc_hm_sts=0
 _dlgrc_rs_sts=0
@@ -260,22 +228,17 @@ _dlg_rt_rt_bp="$filesdir/dlg-rt-rt.bp"
 # /modules/installer-variables.sh				# list of variables
 # /config/list-pkg-forms.sh						# list of packages for uses the script
 # /config/setup_function.sh						# Function to setup on local package, p.c. build package in aur
-# /config/package-manager_function.sh			# Setup function to package manager - pamac
-# /config/package_function.sh					# Setup local package on build in aur
-# /config/emulators_function.sh					# Setup packages on emulators
 # /config/remove_old_v_pkg_function.sh			# Remove duble package on old version
 # /config/dependences_function.sh				# Dependences for script
 # /config/verify_package_folder.sh				# Check required folder and required files
 # /modules/core-functions.sh					# language, checks
 # /modules/configuration-functions.sh			# Keyboard, locale, time zone, FSTAB, mkinitcpio, user controls
 # /modules/system-partitioning.sh				# managing partitions, installing the boot
-# /modules/encryption-functions.sh				# Encryption
-# /modules/logical-volume.sh					# LVM control
-# /modules/installation-functions.sh			# system installation functions
+# /modules/luks.sh								# Encryption
+# /modules/lvmunctions.sh						# system installation functions
 # /modules/swappiness-config.sh					# SWAPPINESS
 # /modules/devices-config.sh					# tune2fs
 # /modules/shell_installer.sh					# SHELL installer functions
 # /modules/main-interfaces.sh					# main menu interface
-# /modules/server.sh							# Server menu, Server utilites installation
 # /modules/network.sh							# Network Function
 # /modules/ntp_configuration.sh					# Network Time Synchronized protocol configuration

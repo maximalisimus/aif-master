@@ -582,12 +582,6 @@ _yesno_tnc_body="\nУстановить набор различных соеди
 _nfo_search_pkg_title="Пожалуйста подождите"
 _nfo_search_pkg_body="Поиск и проверка пакетов для установки"
 
-# Programs to TimeShoft and Github-Desktop
-_yesno_timeshift_title="Установка TimeShift"
-_yesno_timeshift_body="\nУстановить TimeShift?\n"
-_yesno_github_desktop_title="Установка Github-Desktop"
-_yesno_github_desktop_body="\nУстановить Github-Desktop?\n"
-
 # Config Disk Devaces
 _sh_dev_title="Выбор устройства"
 _sh_dev_body="\nПожалуйста, выберите необходимое устройство\n"
@@ -615,8 +609,6 @@ _input_size_tmpfs_title="Ввод объема папки tmp"
 _input_size_tmpfs_body="\nПожалуйста введите желаемый объем. Например: 1G\n"
 
 # Shell and Windows Fonts
-_yn_win_fnts_ttl="Установка шрифтов Windows"
-_yn_win_fnts_bd="\nУстановить шрифты Windows?\n"
 _shell_friendly_menu="Выбор и установка SHELL"
 _select_shell_menu_ttl="Выбор SHELL для установки"
 _select_shell_menu_bd="\nПожалуйста, выберите SHELL для пользователя"
@@ -658,23 +650,9 @@ _CloseInstBody="Закрыть установщик?"
 _yesno_order_ttl="Пропуск нескольких меню"
 _yesno_order_bd="\nУстановлено ли у вас ядро LTS?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Установка эмулятора PlayStation-3"
-_yesno_rpcs3_bd="\nУстановить эмулятор PlayStation-3?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Установка Bluetooth"
 _yesno_bluetooth_bd="\nУстановить драйвера и менеджер устройств bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Установка пакетов из AUR"
-_aur_pkg_bd="\nПожалуйста, выберите необходимые вам пакеты для установки!\n"
-_aur_dbl_pkg_ttl="Выбор версии пакета"
-_aur_dbl_pkg_bd="\nДанный пакет имеет несколько версий.\nПожалуйста выберите необходимую вам!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Установка эмуляторов"
-_eml_pkg_bd="\nПожалуйста, выберите необходимые вам эмуляторы для установки!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Удалить Лог файл?"
@@ -738,36 +716,6 @@ _yn_umprt_mn_bd="\nРазмонтировать диски?\n"
 _Mirror_Conf_ttl="Фильтрация списка зеркал по протоколам"
 _Mirror_Conf_bd="\nБудет сгенерирован список зеркал для выбранного протокола.\nВы можете решить, использовать его или нет.\n"
 _yn_mirror_conf_bd="\nЖелаете выбрать протоколы для генератора списка зеркал? Иначе, по умолчанию будут выбраны все протоколы.\n"
-#
-# Server menu text
-_MMInstServer="Сервер"
-_mn_srv_ttl="Установка и настройка серверных утилит"
-_mn_srv_bd="\nПожалуйста, выберите необходимый пункт меню\n"
-_mn_srv_1="Установка и настройка ssh"
-_mn_srv_2="Почтовый сервер postfix"
-_mn_srv_3="nginx, Apache, MySQL, PHP"
-_mn_srv_4="FTP сервер"
-_mn_ssh_1="установка ssh"
-_mn_ssh_2="Настройка ssh"
-_mn_cnf_ssh_1="Изменить порт (22) по умолчанию"
-_mn_cnf_ssh_2="Включить/Отключить вход под root"
-_yn_ssh_stp_bd="\nУстановить сетевой протокол удалённого управления ssh?\n"
-_nfo_ssh_bd="\nСоединение по ssh теперь доступно по ip адресу"
-_nfo_ssh_prmr="Например"
-_msg_ssh_nfo_ttl="Информация об удаленном управлении по ssh"
-_sshcnf_port_bd="\nВведите новый порт в диапазоне от 1025 до 65536.\n"
-_nfo_ssh_port_ttl="Ошибка. Введен неверный порт"
-_nfo_ssh_port_bd="\nОшибка. Вы ввели порт вне указанного диапазона от 1025 до 65536. Пожалуйста введите порт правильно.\n"
-_nff_ptrtlg_bd_1="\nВход под root включен.\n"
-_nff_ptrtlg_bd_2="\nВход под root отключен.\n"
-_yn_mlsrv_bd="\nЖелаете установить почтовый сервер postfix?\n"
-_lmp_srv_bd="\nПожалуйста, выберите необходимые утилиты для установки.\n"
-_ftpsrv_mn_bd="\nУстановка FTP сервера. Пожалуйста, выберите необходимый пакет.\n"
-_yn_netctl_ttl="Установка шаблона для сетевого менеджера netctl"
-_yn_netctl_bd="\nЖелаете выбрать шаблон и отредактировать его ?\n"
-_ntctl_tmpmn_bd="\nПожалуйста, выберите необходимый шаблон для сетевого менеджера netctl.\n"
-_inntctl_ttl="Ввод имени шаблона netctl"
-_inntctl_bd="\nПожалуйста, введите новое имя шаблона.\n"
 #
 # Wifi template configuration
 _msg_wt_ttl="Беспроводная сеть."

@@ -557,12 +557,6 @@ _yesno_tnc_body="\nInstalar o conjunto de conexões diferentes para o NetworkMan
 _yn_s_tnc_ttl="A instalação de conexões do NetworkManager"
 _yn_s_tnc_bd="\nDeseja selecionar os tipos de conexões adicionais para o NetworkManager?\n"
 
-# Programs to TimeShoft and Github-Desktop
-_yesno_timeshift_title="A Instalação De Timeshift"
-_yesno_timeshift_body="\nInstalar Timeshift?\n"
-_yesno_github_desktop_title="A Instalação Do Github-Desktop"
-_yesno_github_desktop_body="\nInstalar O Github-Desktop?\n"
-
 # Config Disk Devaces
 _sh_dev_title="Seleção do dispositivo de"
 _sh_dev_body="\nPor favor, selecione o dispositivo desejado\n"
@@ -590,8 +584,6 @@ _input_size_tmpfs_title="Volume de entrada de pasta tmp"
 _input_size_tmpfs_body="\nPor favor, digite a quantidade desejada. Por exemplo: 1G\n"
 
 # Shell and Windows Fonts
-_yn_win_fnts_ttl="Instalar fontes no Windows"
-_yn_win_fnts_bd="\nPara instalar fontes no Windows?\n"
 _shell_friendly_menu="A escolha e a SHELL"
 _select_shell_menu_ttl="A escolha do SHELL para instalar"
 _select_shell_menu_bd="\nPor favor, escolha um SHELL para o usuário"
@@ -637,23 +629,10 @@ _CloseInstBody="Fechar instalador ?"
 _yesno_order_ttl="A passagem de vários menus"
 _yesno_order_bd="\nSe você tem um kernel LTS?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Instalar um emulador de PlayStation-3 "
-_yesno_rpcs3_bd="\nInstalar um emulador de PlayStation-3?\n"
 
 # Bluetooth
 _yesno_bluetooth_ttl="Configuração Do Bluetooth"
 _yesno_bluetooth_bd="\nInstalar o controlador e o gerenciador de dispositivos bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Instalação de pacotes do AUR"
-_aur_pkg_bd="\nPor favor, selecione os pacotes para a instalação!\n"
-_aur_dbl_pkg_ttl="Escolha a versão do pacote"
-_aur_dbl_pkg_bd="\nEste pacote tem várias versões.\nPor favor, selecione a você!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Instalação do emulador"
-_eml_pkg_bd="\nPor favor, seleccione as emuladores para instalar!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Remover o arquivo de Log?"
@@ -717,36 +696,6 @@ _yn_umprt_mn_bd="\nDesmontar os discos?\n"
 _Mirror_Conf_ttl="Filtrar a sua lista de espelhos de protocolos"
 _Mirror_Conf_bd="\nSerá gerada uma lista de espelhos para o candidato do protocolo.Você pode decidir usá\lo ou não.\n"
 _yn_mirror_conf_bd="\nQuer escolher protocolos para o gerador de lista de espelhos? De outra forma, por padrão, serão selecionados todos os protocolos.\n"
-#
-# Server menu text
-_MMInstServer="Servidor"
-_mn_srv_ttl="Instalação e configuração do servidor de utilitários"
-_mn_srv_bd="\nPor favor, selecione o item de menu\n"
-_mn_srv_1="Instalação e configuração do ssh"
-_mn_srv_2="O servidor de email postfix"
-_mn_srv_3="nginx, Apache, MySQL, PHP"
-_mn_srv_4="Servidor FTP"
-_mn_ssh_1="a instalação do ssh"
-_mn_ssh_2="Configurar o ssh"
-_mn_cnf_ssh_1="Alterar a porta (22) padrão"
-_mn_cnf_ssh_2="Ativar/Desativar o login de root"
-_yn_ssh_stp_bd="\nInstalar o protocolo de rede de gerenciamento remoto do ssh?\n"
-_nfo_ssh_bd="\nUma conexão ssh com suporte está disponível agora por ip endereço\n"
-_nfo_ssh_prmr="Por exemplo,"
-_msg_ssh_nfo_ttl="Informações sobre o gerenciamento remoto por ssh"
-_sshcnf_port_bd="\nDigite a nova porta no intervalo de 1025 a 65536.\n"
-_nfo_ssh_port_ttl="Erro. Está incorreta a porta"
-_nfo_ssh_port_bd="\nErro. Você entrou em uma porta fora do intervalo especificado de 1025 a 65536. Por favor, digite a porta corretamente.\n"
-_nff_ptrtlg_bd_1="\nO login de root ativado.\n"
-_nff_ptrtlg_bd_2="\nO login de root desabilitada.\n"
-_yn_mlsrv_bd="\nDeseja instalar o servidor de email postfix?\n"
-_lmp_srv_bd="\nPor favor, selecione o utilitário necessário para a instalação.\n"
-_ftpsrv_mn_bd="\nA instalação de um servidor FTP. Por favor, selecione o pacote desejado.\n"
-_yn_netctl_ttl="Como instalar o modelo para o gerente de rede netctl"
-_yn_netctl_bd="\nQuer escolher o modelo e editar \ lo ?\n"
-_ntctl_tmpmn_bd="\nPor favor, selecione o modelo desejado para o gerente de rede netctl.\n"
-_inntctl_ttl="Escrever o nome do modelo netctl"
-_inntctl_bd="\nPor favor, digite o novo nome para o modelo.\n"
 #
 # Wifi template configuration
 _msg_wt_ttl="A rede sem fio."

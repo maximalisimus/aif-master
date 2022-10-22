@@ -547,12 +547,6 @@ _yesno_tnc_body="\nImpostare una serie di connessioni diverse per NetworkManager
 _yn_s_tnc_ttl="Installazione delle connessioni NetworkManager"
 _yn_s_tnc_bd="\nVuoi scegliere i tipi di connessioni aggiuntive per NetworkManager?\n"
 
-# Programs to TimeShoft and Github-Desktop
-_yesno_timeshift_title="Installazione Di Timeshift"
-_yesno_timeshift_body="\nInstallare Timeshift?\n"
-_yesno_github_desktop_title="Installazione Di GitHub-Desktop"
-_yesno_github_desktop_body="\nInstallare GitHub-Desktop?\n"
-
 # Config Disk Devaces
 _sh_dev_title="Selezione del dispositivo"
 _sh_dev_body="\nSi prega di scegliere il dispositivo desiderato\n"
@@ -580,8 +574,6 @@ _input_size_tmpfs_title="Immissione del volume della cartella tmp"
 _input_size_tmpfs_body="\nSi prega di inserire il volume desiderato. Ad esempio: 1G\n"
 
 # Shell and Windows Fonts
-_yn_win_fnts_ttl="Installazione dei font di Windows"
-_yn_win_fnts_bd="\nInstallare i font di Windows?\n"
 _shell_friendly_menu="Selezione e installazione di SHELL"
 _select_shell_menu_ttl="Scelta della SHELL da installare"
 _select_shell_menu_bd="\nSi prega di scegliere SHELL per l'utente"
@@ -627,23 +619,9 @@ _CloseInstBody="Chiudere il programma di installazione?"
 _yesno_order_ttl="Saltare più menu"
 _yesno_order_bd="\nHai installato un kernel LTS?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installare L'emulatore PlayStation-3"
-_yesno_rpcs3_bd="\nInstallare L'emulatore PlayStation-3?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Installazione Bluetooth"
 _yesno_bluetooth_bd="\nInstallare driver e Gestione dispositivi bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Installazione di pacchetti da AUR"
-_aur_pkg_bd="\nSi prega di scegliere i pacchetti necessari per l'installazione!\n"
-_aur_dbl_pkg_ttl="Selezione della versione del pacchetto"
-_aur_dbl_pkg_bd="\nQuesto pacchetto ha diverse versioni.\nScelga prego quello che avete bisogno di!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installazione di emulatori"
-_eml_pkg_bd="\nSi prega di scegliere gli emulatori necessari per l'installazione!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Eliminare il file di log?"
@@ -707,36 +685,6 @@ _yn_umprt_mn_bd="\nSmontare i dischi?\n"
 _Mirror_Conf_ttl="Filtrare l'elenco degli specchi di protocolli di"
 _Mirror_Conf_bd="\nVerrà generato un elenco di specchi per il protocollo.Si può decidere di utilizzare o meno.\n"
 _yn_mirror_conf_bd="\nDesidera selezionare i protocolli per il generatore elenco degli specchi? Altrimenti, per impostazione predefinita, verranno selezionati tutti i protocolli.\n"
-#
-# Server menu text
-_MMInstServer="Il server"
-_mn_srv_ttl="Installazione e configurazione di server di utilità"
-_mn_srv_bd="\nSi prega di selezionare la voce di menu\n"
-_mn_srv_1="Installazione e configurazione di ssh"
-_mn_srv_2="Il server di posta postfix"
-_mn_srv_3="nginx, Apache, MySQL, PHP"
-_mn_srv_4="FTP server"
-_mn_ssh_1="l'installazione di ssh"
-_mn_ssh_2="Configurazione di ssh"
-_mn_cnf_ssh_1="Cambiare la porta (22) per impostazione predefinita"
-_mn_cnf_ssh_2="Attivare/Disattivare l'ingresso sotto il root"
-_yn_ssh_stp_bd="\nImpostare il protocollo di rete per il controllo remoto ssh?\n"
-_nfo_ssh_bd="\nLa connessione ssh è ora disponibile per ip indirizzo\n"
-_nfo_ssh_prmr="Ad esempio"
-_msg_ssh_nfo_ttl="Informazioni su gestione remota tramite ssh"
-_sshcnf_port_bd="\nInserisci una nuova porta nella gamma da 1025 a 65536.\n"
-_nfo_ssh_port_ttl="Errore. Errata porta"
-_nfo_ssh_port_bd="\nErrore. Hai inserito la porta al di fuori dell'intervallo specificato da 1025 a 65536. Si prega di inserire la porta correttamente.\n"
-_nff_ptrtlg_bd_1="\nL'ingresso sotto il root abilitato.\n"
-_nff_ptrtlg_bd_2="\nL'ingresso sotto il root è disabilitato.\n"
-_yn_mlsrv_bd="\nVuoi installare un server di posta postfix?\n"
-_lmp_srv_bd="\nSi prega di selezionare le utility per l'installazione.\n"
-_ftpsrv_mn_bd="\nL'installazione di un server FTP. Si prega di selezionare il pacchetto desiderato.\n"
-_yn_netctl_ttl="L'installazione di un modello per il gestore di rete netctl"
-_yn_netctl_bd="\nDesidera scegliere un modello e modificare il suo ?\n"
-_ntctl_tmpmn_bd="\nPer favore, selezionare il modello desiderato per il gestore di rete netctl.\n"
-_inntctl_ttl="Immettere il nome del modello netctl"
-_inntctl_bd="\nSi prega di inserire il nuovo nome del modello.\n"
 #
 # Wifi template configuration
 _msg_wt_ttl="Rete wireless."

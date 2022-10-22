@@ -6,32 +6,12 @@
 ##                                                                  ##
 ######################################################################  
 
-pc_conf_prcss()
-{
-    echo "#" > "$2"
-    while read line; do
-        if [[ $line == "#[multilib]" ]]; then
-            _next=1
-            echo "[multilib]" >> "$2"
-            echo "Include = /etc/pacman.d/mirrorlist" >> "$2"
-        else
-            if [[ $_next == "1" ]]; then
-                _next=0
-                continue
-            else
-                echo "$line" >> "$2"
-            fi
-        fi
-    done < "$1"
-    cp -f "$2" "$1"
-}
-
 multilib_question()
 {
     dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yesno_multilib_title" --yesno "$_yesno_multilib_body" 0 0
 
     if [[ $? -eq 0 ]]; then
-       pc_conf_prcss "$_pcm_conff" "$_pcm_tempf"
+       sed -i '/^#\s*\[multilib\]$/{N;s/^#\s*//gm}' ${MOUNTPOINT}/etc/pacman.conf
        _multilib=1
     else
         _multilib=0
@@ -123,6 +103,9 @@ install_gengen()
     [[ ${_ch_gengen[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_ch_gengen[*]} 2>/tmp/.errlog
     arch_chroot "systemctl enable acpid avahi-daemon cronie org.cups.cupsd.service systemd-timesyncd.service" 2>/tmp/.errlog
     check_for_error
+    wait
+    xdg_configuration
+    wait
 }
 install_archivers()
 {
@@ -167,7 +150,13 @@ install_ttftheme()
     clear
     [[ ${_ch_ttf[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_ch_ttf[*]} 2>/tmp/.errlog
     check_for_error
+    wait
+    icontheme_configuration
+    wait
+    # fonts_configuration
+    # wait
 }
+
 install_standartpkg()
 {
     if [[ $_stpkg_once == "0" ]]; then
@@ -236,12 +225,14 @@ install_base() {
             echo "net.ipv6.conf.all.disable_ipv6=1" >> ${MOUNTPOINT}/etc/sysctl.d/40-ipv6.conf
         fi  
     }
+
     dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstBseTitle" \
     --menu "$_InstBseBody" 0 0 4 \
     "1" "$_InstBaseLK" \
     "2" "$_InstBaseLKBD" \
     "3" "$_InstBaseLTS" \
-    "4" "$_InstBaseLTSBD" 2>${ANSWER}   
+    "4" "$_InstBaseLTSBD" \
+    "5" "$_Back" 2>${ANSWER}   
 
     case $(cat ${ANSWER}) in
         "1") # Latest Kernel
@@ -317,18 +308,10 @@ install_base() {
     fi
     mirrorlist_question 
     
-# if [[ $_sstmd_rslvd_once -eq 0 ]]; then
-#		arch_chroot "systemctl stop systemd-resolved.service" 2>/tmp/.errlog
-#		arch_chroot "systemctl disable systemd-resolved.service" 2>/tmp/.errlog
-#		_sstmd_rslvd_once=1
-# fi
-    
     outline_dhcpcd
     
     sed -i 's/\# include \"\/usr\/share\/nano\/\*.nanorc\"/include \"\/usr\/share\/nano\/\*.nanorc\"/' ${MOUNTPOINT}/etc/nanorc 2>>/tmp/.errlog
-        
-    # If the virtual console has been set, then copy config file to installation
-   # [[ -e /tmp/vconsole.conf ]] && cp /tmp/vconsole.conf ${MOUNTPOINT}/etc/vconsole.conf 2>>/tmp/.errlog
+    
     check_for_error
 
   #check for a wireless device
@@ -352,7 +335,8 @@ bios_bootloader() {
     --menu "$_InstBiosBtBody" 0 0 3 \
     "1" $"Grub2" \
     "2" $"Syslinux [MBR]" \
-    "3" $"Syslinux [/]" 2>${ANSWER}
+    "3" $"Syslinux [/]" \
+    "4" "$_Back" 2>${ANSWER}
     
     clear
     
@@ -389,7 +373,9 @@ bios_bootloader() {
              if ( [[ $LVM_ROOT -eq 1 ]] && [[ $LVM_SEP_BOOT -eq 0 ]] ) || [[ $LVM_SEP_BOOT -eq 2 ]]; then
                 sed -i '/### BEGIN \/etc\/grub.d\/00_header ###/a insmod lvm' ${MOUNTPOINT}/boot/grub/grub.cfg
              fi
-         
+			wait
+			osprober_configuration
+			wait
              BOOTLOADER="Grub"
              ;;          
     "2"|"3") # Syslinux
@@ -432,7 +418,8 @@ uefi_bootloader() {
     --menu "$_InstUefiBtBody" 0 0 3 \
     "1" $"Grub2" \
     "2" $"rEFInd" \
-    "3" $"systemd-boot" 2>${ANSWER}
+    "3" $"systemd-boot" \
+    "4" "$_Back" 2>${ANSWER}
 
      case $(cat ${ANSWER}) in
      "1") # Grub2
@@ -459,7 +446,9 @@ uefi_bootloader() {
              dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SetDefDoneTitle" --infobox "\nGrub $_SetDefDoneBody" 0 0
              sleep 2
           fi
-          
+          wait
+          osprober_configuration
+          wait
           BOOTLOADER="Grub"
           ;;
  
@@ -498,6 +487,9 @@ uefi_bootloader() {
               dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_RefiErrTitle" --msgbox "$_RefiErrBody" 0 0
               uefi_bootloader
            fi
+           wait
+           refind_configuration
+           wait
            ;;
          
      "3") # systemd-boot
@@ -533,6 +525,9 @@ uefi_bootloader() {
           # Set the loader file  
           echo -e "default  arch\ntimeout  5" > ${MOUNTPOINT}${UEFI_MOUNT}/loader/loader.conf 2>/tmp/.errlog
           check_for_error
+          wait
+          systemd_configuration
+          wait
           ;;
           
       *) install_base_menu
@@ -784,12 +779,41 @@ install_ati(){
     sed -i 's/MODULES=""/MODULES="radeon"/' ${MOUNTPOINT}/etc/mkinitcpio.conf
 }
 
-# Search Vedo Driver to nvidia-390xx in template 'nvidia-[0-9]{3}'
-_nvidia_name=""
-nvidia_search()
-{
-    nvsearch=$(pacman -Ss | grep -Ei "core|extra|community|multilib" | sed 's/extra\///' | sed 's/core\///' | sed 's/community\///' | sed 's/multilib\///' | grep -E "nvidia-[0-9]{3}xx" | awk '{print $1}' | awk '/^nvidia-[0-9]{3}xx$/')
-    _nvidia_name=${nvsearch[*]}
+bumblebee_configuration(){
+	_nvidia_detect=$(lspci | grep -Ei "nvidia")
+	if [[ "${_nvidia_detect[*]}" != "" ]]; then
+		_nvidia_pci=$(echo "${_nvidia_detect[*]}" | awk '{print $1}' | sed 's/^/PCI:/' | tr '.' ':')
+		echo -e -n "Section \"ServerLayout\"\n" > ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "\tIdentifier  \"Layout0\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "\tOption      \"AutoAddDevices\" \"false\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "\tOption      \"AutoAddGPU\" \"false\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "EndSection" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "Section \"ServerFlags\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "\tOption      \"IgnoreABI\" \"true\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "EndSection" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "Section \"Device\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "\tIdentifier  \"DiscreteNvidia\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "\tDriver      \"nvidia\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "\tVendorName  \"NVIDIA Corporation\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "\tBusID       \"${_nvidia_pci[*]}\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "\tOption \"ProbeAllGpus\" \"false\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "\tOption \"NoLogo\" \"true\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "\tOption \"UseEDID\" \"false\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "\tOption \"UseDisplayDevice\" \"none\"\n" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "EndSection" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+		echo -e -n "" >> ${MOUNTPOINT}/etc/bumblebee/xorg.conf.nvidia
+	fi
+}
+
+nouveau_configuration(){
+	mkdir -p ${MOUNTPOINT}/etc/modprobe.d/
+	touch ${MOUNTPOINT}/etc/modprobe.d/modules-nouveau.conf
+	echo "blacklist nouveau" > ${MOUNTPOINT}/etc/modprobe.d/modules-nouveau.conf
+	echo "options nouveau modeset=0" >> ${MOUNTPOINT}/etc/modprobe.d/modules-nouveau.conf
 }
 
 # Main menu. Correct option for graphics card should be automatically highlighted.
@@ -800,17 +824,19 @@ nvidia_search()
     GRAPHIC_CARD_Integrated=$(lscpu | grep -Ei "intel|lenovo" | sed 's/.*://' | sed 's/(.*//' | sed 's/^[ \t]*//' | grep -vi "genuine")
     # Highlight menu entry depending on GC detected. Extra work is needed for NVIDIA
     if  [[ $(echo "$GRAPHIC_CARD" | grep -Ei "nvidia" | awk '/NVIDIA/' RS=" ") != "" ]]; then 
-        HIGHLIGHT_SUB_GC=7
+        HIGHLIGHT_SUB_GC=6
         # If NVIDIA, first need to know the integrated GC
         [[ $(echo "$GRAPHIC_CARD_Integrated") != "" ]] && INTEGRATED_GC="Intel" || INTEGRATED_GC="ATI"
+        [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'ati|amd' | awk '/ATI|AMD/' RS=" ") != "" ]] && HIGHLIGHT_SUB_GC=7 || HIGHLIGHT_SUB_GC=6
+        [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'intel|lenovo' | awk '/Intel|Lenovo/' RS=" ") != "" ]] && HIGHLIGHT_SUB_GC=7 || HIGHLIGHT_SUB_GC=6
       
     # All non-NVIDIA cards / virtualisation
     elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'ati|amd' | awk '/ATI|AMD/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=2
     elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'intel|lenovo' | awk '/Intel|Lenovo/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=3
-    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'via' | awk '/VIA/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=10
-    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'virtualbox' | awk '/VirtualBox/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=11
-    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'vmware' | awk '/VMware/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=12
-    else HIGHLIGHT_SUB_GC=13
+    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'via' | awk '/VIA/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=8
+    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'virtualbox' | awk '/VirtualBox/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=9
+    elif [[ $(echo "$GRAPHIC_CARD" | grep -Ei 'vmware' | awk '/VMware/' RS=" ") != "" ]]; then HIGHLIGHT_SUB_GC=10
+    else HIGHLIGHT_SUB_GC=11
     fi
     
     skip_orderers_resume
@@ -824,12 +850,11 @@ nvidia_search()
     "5" $"xf86-video-nouveau (+ $INTEGRATED_GC)" \
     "6" $"Nvidia" \
     "7" $"Nvidia (+ $INTEGRATED_GC)" \
-    "8" $"Nvidia-xxx(auto-search new-version)" \
-    "9" $"Nvidia-xxx(auto-search new-version) (+ $INTEGRATED_GC)" \
-    "10" $"xf86-video-openchrome" \
-    "11" $"virtualbox-guest-xxx" \
-    "12" $"xf86-video-vmware" \
-    "13" "$_GCUnknOpt / xf86-video-fbdev" 2>${ANSWER}
+    "8" $"xf86-video-openchrome" \
+    "9" $"virtualbox-guest-xxx" \
+    "10" $"xf86-video-vmware" \
+    "11" "$_GCUnknOpt / xf86-video-fbdev" \
+    "12" "$_Back" 2>${ANSWER}
 
    case $(cat ${ANSWER}) in
         "1") lspci -k | grep -Ei "3d|vga" > /tmp/.vga
@@ -870,10 +895,19 @@ nvidia_search()
             info_search_pkg
             [[ $LTS == 0 ]] && _list_nvidia_pkg=$(check_s_lst_pkg "${_nvidia_pkg[*]}") || _list_nvidia_lts_pkg=$(check_s_lst_pkg "${_nvidia_lts_pkg[*]}")
             wait
+            _list_nvd_dep=$(check_s_lst_pkg "${_nvd_dep[*]}")
+            wait
             clear
             # Now deal with kernel installed
             [[ $LTS == 0 ]] && ps_in_pkg "${_list_nvidia_pkg[*]}" \
             || ps_in_pkg "${_list_nvidia_lts_pkg[*]}"
+            wait
+            ps_in_pkg "${_list_nvd_dep[*]}"
+            wait
+            bumblebee_configuration
+            wait
+            nouveau_configuration
+            wait
             NVIDIA_INST=1
              ;;
         "7") # NVIDIA-GF
@@ -883,46 +917,21 @@ nvidia_search()
             info_search_pkg
             [[ $LTS == 0 ]] && _list_nvidia_pkg=$(check_s_lst_pkg "${_nvidia_pkg[*]}") || _list_nvidia_lts_pkg=$(check_s_lst_pkg "${_nvidia_lts_pkg[*]}")
             wait
+            _list_nvd_dep=$(check_s_lst_pkg "${_nvd_dep[*]}")
+            wait
             clear
             # Now deal with kernel installed
             [[ $LTS == 0 ]] && ps_in_pkg "${_list_nvidia_pkg[*]}" \
             || ps_in_pkg "${_list_nvidia_lts_pkg[*]}"
-            NVIDIA_INST=1
-             ;;
-        "8") # NVIDIA-xxx
-            arch_chroot "pacman -Rdds --noconfirm mesa"
-            # Now deal with kernel installed
-            clear
-            info_search_pkg
-            nvidia_search
+            ps_in_pkg "${_list_nvd_dep[*]}"
             wait
-            _nvidia_xxx=($_nvidia_name $_nvidia_name-utils $_nvidia_name-settings)
-            _nvidia_lts_xxx=($_nvidia_name-lts $_nvidia_name-utils $_nvidia_name-settings)
-            [[ $LTS == 0 ]] && _list_nvidia_xxx=$(check_s_lst_pkg "${_nvidia_xxx[*]}") || _list_nvidia_lts_xxx=$(check_s_lst_pkg "${_nvidia_lts_xxx[*]}")
+            bumblebee_configuration
             wait
-            clear
-            [[ $LTS == 0 ]] && ps_in_pkg "${_list_nvidia_xxx[*]}" \
-            || ps_in_pkg "${_list_nvidia_lts_xxx[*]}"
-            NVIDIA_INST=1
-             ;;          
-        "9") # NVIDIA-xxx
-            [[ $INTEGRATED_GC == "ATI" ]] &&  install_ati || install_intel
-            arch_chroot "pacman -Rdds --noconfirm mesa"
-            clear
-            # Now deal with kernel installed
-            info_search_pkg
-            nvidia_search
+            nouveau_configuration
             wait
-            _nvidia_xxx=($_nvidia_name $_nvidia_name-utils $_nvidia_name-settings)
-            _nvidia_lts_xxx=($_nvidia_name-lts $_nvidia_name-utils $_nvidia_name-settings)
-            [[ $LTS == 0 ]] && _list_nvidia_xxx=$(check_s_lst_pkg "${_nvidia_xxx[*]}") || _list_nvidia_lts_xxx=$(check_s_lst_pkg "${_nvidia_lts_xxx[*]}")
-            wait
-            clear
-            [[ $LTS == 0 ]] && ps_in_pkg "${_list_nvidia_xxx[*]}" \
-            || ps_in_pkg "${_list_nvidia_lts_xxx[*]}"
             NVIDIA_INST=1
              ;;            
-        "10") # Via
+        "8") # Via
             clear
             info_search_pkg
             _list_openchrome=$(check_s_lst_pkg "${_openchrome[*]}")
@@ -930,7 +939,7 @@ nvidia_search()
             clear
             [[ ${_list_openchrome[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_openchrome[*]} 2>/tmp/.errlog
              ;;            
-        "11") # VirtualBox
+        "9") # VirtualBox
             dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_VBoxInstTitle" --msgbox "$_VBoxInstBody" 0 0
             clear
             info_search_pkg
@@ -945,7 +954,7 @@ nvidia_search()
             arch_chroot "systemctl enable vboxservice"
             echo -e "vboxguest\nvboxsf\nvboxvideo" > ${MOUNTPOINT}/etc/modules-load.d/virtualbox.conf
              ;;
-        "12") # VMWare
+        "10") # VMWare
             clear
             info_search_pkg
             _list_vmware_pkg=$(check_s_lst_pkg "${_vmware_pkg[*]}")
@@ -955,7 +964,7 @@ nvidia_search()
             clear
             [[ ${_clist_vmware_pkg[*]} != "" ]] && ps_in_pkg "${_clist_vmware_pkg[*]}"
              ;;
-        "13") # Generic / Unknown
+        "11") # Generic / Unknown
             clear
             info_search_pkg
             _list_generic_pkg=$(check_s_lst_pkg "${_generic_pkg[*]}")
@@ -1117,6 +1126,9 @@ install_de_wm() {
                 NM_INSTALLED=1
                 NM_COMPONENT_INSTALLED=0
             fi
+            wait
+            greeter_configuration
+            wait
              ;;
         "${_desktop_menu[1]}") # Deepin+Deepin-Extra
              clear
@@ -1135,6 +1147,9 @@ install_de_wm() {
                 NM_INSTALLED=1
                 NM_COMPONENT_INSTALLED=0
             fi
+            wait
+            greeter_configuration
+            wait
              ;;
         "${_desktop_menu[2]}") # Cinnamon
              clear
@@ -1328,7 +1343,8 @@ dm_menu(){
                "1" $"LXDM" \
                "2" $"LightDM" \
                "3" $"SDDM" \
-               "4" $"SLiM" 2>${ANSWER}  
+               "4" $"SLiM" \
+               "5" "$_Back" 2>${ANSWER}  
     
               case $(cat ${ANSWER}) in
               "1") # LXDM
@@ -1438,68 +1454,23 @@ dm_menu(){
         dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $DM $_DmDoneTitle" --msgbox "\n$DM $_DMDoneBody" 0 0
         DM_INSTALLED=1
          
-  # if A display manager has already been installed and enabled (DM_INSTALLED=1), show a message instead.
-  else  
-         dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_DmInstTitle" --msgbox "$_DmInstBody" 0 0
-  fi       
+	# if A display manager has already been installed and enabled (DM_INSTALLED=1), show a message instead.
+	else  
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_DmInstTitle" --msgbox "$_DmInstBody" 0 0
+	fi       
 
+	# DM="LightDM"
+	if [[ $DM == "LightDM" ]]; then
+		greeter_configuration
+	fi
 }
 
 # General Menu Package
 
 # back - install_desktop_menu
-install_gep()
-{
-    if [[ $SUB_MENU != "general_package" ]]; then
-       SUB_MENU="general_package"
-       HIGHLIGHT_SUB=1
-    else
-       if [[ $HIGHLIGHT_SUB != 9 ]]; then
-          HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
-       fi
-    fi
-    
-    dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_menu_gen_title" --menu "$_menu_gen_body" 0 0 9 \
-    "1" "$_menu_gengen" \
-    "2" "$_menu_archivers" \
-    "3" "$_menu_ttf_theme" \
-    "4" "$_menu_add_pkg" \
-    "5" "$_menu_extra_pkg" \
-    "6" "$_menu_pkg_meneger" \
-    "7" "$_eml_pkg_ttl" \
-    "8" "$_aur_pkg_ttl" \
-    "9" "$_Back" 2>${ANSWER}
-    
-    HIGHLIGHT_SUB=$(cat ${ANSWER})
-    case $(cat ${ANSWER}) in
-    "1") install_gengen
-         ;;
-    "2") install_archivers
-         ;;
-    "3") install_ttftheme
-         ;;
-    "4") install_standartpkg
-         ;;
-    "5") install_otherpkg
-         ;;
-    "6") pkg_manager_install
-         ;;
-    "7") eml_ustanovka
-        ;;
-    "8") aur_pkginstall
-        ;;
-      *) # Back to NAME Menu
-        install_desktop_menu
-         ;;
-    esac
-    
-    check_for_error
-    
-    install_gep
-}
 
 # back - install_desktop_menu
-install_gep_old()
+install_gep()
 {
     if [[ $SUB_MENU != "general_package" ]]; then
        SUB_MENU="general_package"

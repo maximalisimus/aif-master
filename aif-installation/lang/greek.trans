@@ -564,12 +564,6 @@ _yesno_tnc_body="\nΝα ορίσετε ένα σύνολο διαφορετικ�
 _yn_s_tnc_ttl="Εγκατάσταση συνδέσεων Manager"
 _yn_s_tnc_bd="\nΘέλετε να επιλέξετε επιπλέον τύποι των ενώσεων για το Manager;\n"
 
-# Programs to TimeShoft and Github-Desktop
-_yesno_timeshift_title="Εγκατάσταση Timeshift"
-_yesno_timeshift_body="\nΕγκαταστήσετε Το Timeshift;\n"
-_yesno_github_desktop_title="Ρύθμιση Του Github-Desktop"
-_yesno_github_desktop_body="\nΟρισμός Github-Desktop;\n"
-
 # Config Disk Devaces
 _sh_dev_title="Επιλογή συσκευής"
 _sh_dev_body="\nΠαρακαλώ, επιλέξτε τη δική σας συσκευή\n"
@@ -597,8 +591,6 @@ _input_size_tmpfs_title="Τάση του όγκου φάκελο tmp"
 _input_size_tmpfs_body="\nΠαρακαλώ εισάγετε το επιθυμητό ποσό. Για παράδειγμα: 1G\n"
 
 # Shell and Windows Fonts
-_yn_win_fnts_ttl="Εγκατάσταση γραμματοσειρών των Windows"
-_yn_win_fnts_bd="\nΝα εγκαταστήσετε τις γραμματοσειρές των Windows;\n"
 _shell_friendly_menu="Επιλογή και εγκατάσταση SHELL"
 _select_shell_menu_ttl="Επιλογή SHELL για την εγκατάσταση"
 _select_shell_menu_bd="\nΠαρακαλώ επιλέξτε ένα ΚΈΛΥΦΟΣ για το χρήστη"
@@ -644,23 +636,9 @@ _CloseInstBody="Τερματισμός προγράμματος εγκατάστ
 _yesno_order_ttl="Το πέρασμα λίγων μενού"
 _yesno_order_bd="\nΈχει εγκατασταθεί αν έχετε πυρήνα LTS;\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Εγκατάσταση εξομοιωτών PlayStation-3 "
-_yesno_rpcs3_bd="\nΟρισμός εξομοιωτής PlayStation-3;\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Εγκατάσταση Bluetooth"
 _yesno_bluetooth_bd="\nΝα εγκαταστήσετε το πρόγραμμα οδήγησης και ο διευθυντής συσκευές bluetooth;\n"
-
-# Aur package menu
-_aur_pkg_ttl="Εγκατάσταση πακέτων από το AUR"
-_aur_pkg_bd="\nΠαρακαλώ επιλέξτε χρειάζεστε πακέτα για την εγκατάσταση!\n"
-_aur_dbl_pkg_ttl="Για να επιλέξετε την έκδοση του πακέτου"
-_aur_dbl_pkg_bd="\nΑυτό το πακέτο έχει πολλαπλές εκδόσεις.\nΠαρακαλώ επιλέξτε τις πληροφορίες που χρειάζεστε!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Εγκατάσταση emulators"
-_eml_pkg_bd="\nΠαρακαλώ επιλέξτε τις απαραίτητες σας εξομοιωτές για την εγκατάσταση!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Να διαγράψετε το αρχείο Καταγραφής;"
@@ -724,36 +702,6 @@ _yn_umprt_mn_bd="\nUnmount cd;\n"
 _Mirror_Conf_ttl="Φιλτράρισμα της λίστας καθρέφτες πρωτόκολλα"
 _Mirror_Conf_bd="\nΘα δημιουργηθεί μια λίστα με τους καθρέφτες για το επιλεγμένο πρωτόκολλο.Μπορείτε να αποφασίσετε να το χρησιμοποιήσετε ή όχι.\n"
 _yn_mirror_conf_bd="\nΘέλετε να επιλέξετε τα πρωτόκολλα για τη γεννήτρια λίστα καθρέπτες; Αλλιώς, από προεπιλογή, θα επιλεγούν όλα τα πρωτόκολλα.\n"
-#
-# Server menu text
-_MMInstServer="Ο διακομιστής"
-_mn_srv_ttl="Εγκατάσταση και ρύθμιση του διακομιστή υπηρεσιών κοινής ωφέλειας"
-_mn_srv_bd="\nΠαρακαλώ επιλέξτε το επιθυμητό στοιχείο του μενού\n"
-_mn_srv_1="Εγκατάσταση και ρύθμιση του ssh"
-_mn_srv_2="Ο mail server postfix"
-_mn_srv_3="nginx, Apache, MySQL, PHP"
-_mn_srv_4="FTP server"
-_mn_ssh_1="ρύθμιση ssh"
-_mn_ssh_2="Ρύθμιση ssh"
-_mn_cnf_ssh_1="Αλλάξετε τη θύρα (22) από προεπιλογή"
-_mn_cnf_ssh_2="Ενεργοποίηση/Απενεργοποίηση της εισόδου κάτω από το root"
-_yn_ssh_stp_bd="\nΕγκατάσταση δικτύου το πρωτόκολλο απομακρυσμένης διαχείρισης ssh;\n"
-_nfo_ssh_bd="\nΣύνδεση μέσω ssh είναι τώρα διαθέσιμη με ip διεύθυνση\n"
-_nfo_ssh_prmr="Για παράδειγμα"
-_msg_ssh_nfo_ttl="Πληροφορίες για την απομακρυσμένη διαχείριση μέσω ssh"
-_sshcnf_port_bd="\nΠληκτρολογήστε το νέο λιμάνι που κυμαίνονται από 1025 έως το 65536.\n"
-_nfo_ssh_port_ttl="Το σφάλμα. Έχετε εισέλθει σε λάθος θύρα"
-_nfo_ssh_port_bd="\nΤο σφάλμα. Έχετε εισάγει το λιμάνι έξω από τη συγκεκριμένη περιοχή από το 1025 έως το 65536. Παρακαλώ πληκτρολογήστε τη θύρα σωστά.\n"
-_nff_ptrtlg_bd_1="\nΗ είσοδος είναι κάτω από το root είναι ενεργοποιημένη.\n"
-_nff_ptrtlg_bd_2="\nΗ είσοδος είναι κάτω από το root είναι απενεργοποιημένος.\n"
-_yn_mlsrv_bd="\nΘέλετε να εγκαταστήσετε το διακομιστή αλληλογραφίας postfix;\n"
-_lmp_srv_bd="\nΠαρακαλώ, επιλέξτε τα απαραίτητα εργαλεία για την εγκατάσταση.\n"
-_ftpsrv_mn_bd="\nΕγκατάσταση του διακομιστή FTP. Παρακαλώ επιλέξτε το επιθυμητό πακέτο.\n"
-_yn_netctl_ttl="Εγκατάσταση του προτύπου για τον διευθυντή netctl"
-_yn_netctl_bd="\nΘέλετε να επιλέξετε ένα πρότυπο και να το επεξεργαστείτε αυτό;\n"
-_ntctl_tmpmn_bd="\nΠαρακαλώ επιλέξτε πρότυπο για τον διευθυντή netctl.\n"
-_inntctl_ttl="Πληκτρολογήστε το όνομα του προτύπου netctl"
-_inntctl_bd="\nΠαρακαλώ, πληκτρολογήστε ένα νέο όνομα για το πρότυπο.\n"
 #
 # Wifi template configuration
 _msg_wt_ttl="Το ασύρματο δίκτυο."

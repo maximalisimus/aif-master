@@ -1,11 +1,11 @@
 pkgname=aif-master
 _pkgrun="aif"
-pkgver=2.6
-pkgrel=1
+pkgver=2.7
+pkgrel=2
 arch=('any')
 url="https://github.com/maximalisimus/$pkgname/"
 license=('GPL')
-depends=(dialog parted arch-install-scripts git)
+depends=(dialog parted arch-install-scripts)
 makedepends=(git imagemagick)
 replaces=($pkgname)
 

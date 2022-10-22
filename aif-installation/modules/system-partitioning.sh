@@ -160,7 +160,8 @@ delete_partitions(){
     "3" $"CFDisk (BIOS/MBR)" \
     "4" $"CGDisk (UEFI/GPT)" \
     "5" $"FDisk  (BIOS & UEFI)" \
-    "6" $"GDisk  (UEFI/GPT)" 2>${ANSWER}    
+    "6" $"GDisk  (UEFI/GPT)" \
+    "7" "$_Back" 2>${ANSWER}    
 
     case $(cat ${ANSWER}) in
         "1") auto_partition
@@ -228,7 +229,8 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
     "9" $"ntfs" \
     "10" $"reiserfs" \
     "11" $"vfat" \
-    "12" $"xfs" 2>${ANSWER} 
+    "12" $"xfs" \
+    "13" "$_Back" 2>${ANSWER} 
 
     case $(cat ${ANSWER}) in
         "1") FILESYSTEM="skip"
@@ -242,15 +244,17 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
              else
                 BTRFS=1
              fi
-             
+             fs_opts="noatime nodiratime relatime nodev nosuid noexec ro sync usrquota grpqutoa"
              ;;
         "3") FILESYSTEM="mkfs.ext2 -F"
+			fs_opts="noatime nodiratime relatime nodev nosuid noexec ro sync usrquota grpquota user_xattr"
              ;;
         "4") FILESYSTEM="mkfs.ext3 -F"
+			fs_opts="noatime relatime nodev nosuid noexec ro sync usrquota grpquota user_xattr"
              ;;            
         "5") FILESYSTEM="mkfs.ext4 -F"
              CHK_NUM=8
-             fs_opts="data=journal data=writeback dealloc discard noacl noatime nobarrier nodelalloc"
+             fs_opts="data=journal data=writeback dealloc discard noacl noatime nobarrier nodelalloc nodiratime relatime nodev nosuid noexec ro sync usrquota grpquota user_xattr"
              ;;
         "6") FILESYSTEM="mkfs.f2fs"
              modprobe f2fs
@@ -259,7 +263,7 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
              ;;
         "7") FILESYSTEM="mkfs.jfs -q"
              CHK_NUM=4
-             fs_opts="discard errors=continue errors=panic nointegrity"
+             fs_opts="discard errors=continue errors=panic nointegrity noatime relatime nodev nosuid noexec ro sync"
              ;;
         "8") FILESYSTEM="mkfs.nilfs2 -f"
              CHK_NUM=7
@@ -272,10 +276,11 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
              fs_opts="acl nolog notail replayonly user_xattr"
              ;;  
        "11") FILESYSTEM="mkfs.vfat -F32"
+			fs_opts="noatime nodiratime relatime ro sync quiet discard"
              ;;  
        "12") FILESYSTEM="mkfs.xfs -f"
              CHK_NUM=9
-             fs_opts="discard filestreams ikeep largeio noalign nobarrier norecovery noquota wsync"
+             fs_opts="discard filestreams ikeep largeio noalign nobarrier norecovery noquota wsync noatime relatime nodev nosuid noexec ro sync usrquota grpquota"
              ;;      
           *) prep_menu
              ;;

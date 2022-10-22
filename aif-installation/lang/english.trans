@@ -553,12 +553,6 @@ _yesno_tnc_body="\nSet a set of different connections for NetworkManager?\n"
 _yn_s_tnc_ttl="Setting up NetworkManager connections"
 _yn_s_tnc_bd="\nWould you like to select additional connection types for NetworkManager?\n"
 
-# Programs to TimeShoft and Github-Desktop
-_yesno_timeshift_title="Install Timeshift"
-_yesno_timeshift_body="\nInstall Timeshift?\n"
-_yesno_github_desktop_title="Install Github-Desktop"
-_yesno_github_desktop_body="\nInstall Github-Desktop?\n"
-
 # Config Disk Devaces
 _sh_dev_title="Device selection"
 _sh_dev_body="\nPlease select the desired device\n"
@@ -586,8 +580,6 @@ _input_size_tmpfs_title="Enter the tmp folder size"
 _input_size_tmpfs_body="\nPlease enter the desired volume. For example: 1G\n"
 
 # Shell and Windows Fonts
-_yn_win_fnts_ttl="Installing Windows fonts"
-_yn_win_fnts_bd="\nInstall Windows fonts?\n"
 _shell_friendly_menu="SHELL selection and installation"
 _select_shell_menu_ttl="Selecting the SHELL to install"
 _select_shell_menu_bd="\nPlease select SHELL for user"
@@ -633,23 +625,9 @@ _CloseInstBody="Close installer?"
 _yesno_order_ttl="Pass multiple menus"
 _yesno_order_bd="\nDo you have an LTS kernel installed?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installing the PlayStation-3 emulator"
-_yesno_rpcs3_bd="\nInstall PlayStation-3 emulator?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Setting The Bluetooth"
 _yesno_bluetooth_bd="\nTo install drivers and the device Manager the bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Installing packages from AUR"
-_aur_pkg_bd="\nPlease select the packages you need to install!\n"
-_aur_dbl_pkg_ttl="The version of the package"
-_aur_dbl_pkg_bd="\nThis package has several versions.\nPlease choose the one you need!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installing emulators"
-_eml_pkg_bd="\nPlease select the emulators you need to install!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Delete the Log file?"
@@ -713,36 +691,6 @@ _yn_umprt_mn_bd="\nTo unmount the drives?\n"
 _Mirror_Conf_ttl="Filter the list of mirrors on the protocols"
 _Mirror_Conf_bd="\nIt will generate a list of mirrors for the selected Protocol.You can decide to use it or not.\n"
 _yn_mirror_conf_bd="\nWish to choose protocols for generator a list of mirrors? Otherwise, by default, selects all protocols.\n"
-#
-# Server menu text
-_MMInstServer="Server"
-_mn_srv_ttl="Installation and configuration utilities server"
-_mn_srv_bd="\nPlease select the desired menu item\n"
-_mn_srv_1="Installing and configuring ssh"
-_mn_srv_2="Mail server postfix"
-_mn_srv_3="nginx, Apache, MySQL, PHP"
-_mn_srv_4="FTP server"
-_mn_ssh_1="install ssh"
-_mn_ssh_2="Configuring ssh"
-_mn_cnf_ssh_1="To change the port (22) default"
-_mn_cnf_ssh_2="Enable/Disable login under root"
-_yn_ssh_stp_bd="\nTo install a network Protocol for remote management ssh?\n"
-_nfo_ssh_bd="\nConnection ssh is now available for the ip address\n"
-_nfo_ssh_prmr="For example"
-_msg_ssh_nfo_ttl="Information about remote management via ssh"
-_sshcnf_port_bd="\nEnter a new port range from 1025 to 65536.\n"
-_nfo_ssh_port_ttl="Error. Enter the wrong port"
-_nfo_ssh_port_bd="\nError. You entered a port outside of the specified range from 1025 to 65536. Please enter the port correctly.\n"
-_nff_ptrtlg_bd_1="\nLog in with root enabled.\n"
-_nff_ptrtlg_bd_2="\nSign in as root is disabled.\n"
-_yn_mlsrv_bd="\nWant to install mail server postfix?\n"
-_lmp_srv_bd="\nPlease select the necessary tools for installation.\n"
-_ftpsrv_mn_bd="\nInstallation of the FTP server. Please select the package you want.\n"
-_yn_netctl_ttl="Setting the template for a network Manager netctl"
-_yn_netctl_bd="\nWant to choose a template and edit it ?\n"
-_ntctl_tmpmn_bd="\nPlease select the required template for a network Manager netctl.\n"
-_inntctl_ttl="Enter the name of the template netctl"
-_inntctl_bd="\nPlease enter a new template name.\n"
 #
 # Wifi template configuration
 _msg_wt_ttl="Wireless network."

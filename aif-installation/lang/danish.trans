@@ -563,12 +563,6 @@ _yesno_tnc_body="\nSæt et sæt forskellige forbindelser for Netværksmanager?\n
 _yn_s_tnc_ttl="Opsætning af Netværksmanager-forbindelser"
 _yn_s_tnc_bd="\nVil du vælge yderligere forbindelsestyper til Netværksmanager?\n"
 
-# Programs to TimeShoft and Github-Desktop
-_yesno_timeshift_title="Install Timeshift"
-_yesno_timeshift_body="\nInstallere Timeshift?\n"
-_yesno_github_desktop_title="Install Github-Desktop"
-_yesno_github_desktop_body="\nInstallere Github-Desktoppen?\n"
-
 # Config Disk Devaces
 _sh_dev_title="Valg af enhed"
 _sh_dev_body="\nVælg den ønskede enhed\n"
@@ -596,8 +590,6 @@ _input_size_tmpfs_title="Indtast tmp-mappens størrelse"
 _input_size_tmpfs_body="\nIndtast den ønskede mængde. F. eks.: 1G\n"
 
 # Shell and Windows Fonts
-_yn_win_fnts_ttl="Installerer Vinduesskrifttyper"
-_yn_win_fnts_bd="\nInstallere vinduesskrifttyper?\n"
 _shell_friendly_menu="SKALMARKERING og installation"
 _select_shell_menu_ttl="Valg af skallen der skal installeres"
 _select_shell_menu_bd="\nVælg venligst Skal for bruger"
@@ -643,23 +635,9 @@ _CloseInstBody="Luk Installationen?"
 _yesno_order_ttl="Pass flere menuer"
 _yesno_order_bd="\nHar du en LTS-kerne installeret?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installerer PlayStation-3-emulatoren"
-_yesno_rpcs3_bd="\nInstallere PlayStation-3 emulator?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Indstilling Af Bluetooth"
 _yesno_bluetooth_bd="\nAt installere drivere og enhedshåndteringen bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Installerer pakker fra AUR"
-_aur_pkg_bd="\nVælg venligst de pakker du skal installere!\n"
-_aur_dbl_pkg_ttl="Pakningsstørrelse"
-_aur_dbl_pkg_bd="\nDenne pakke har flere versioner.\nVælg den, du har brug for!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installation af emulatorer"
-_eml_pkg_bd="\nVælg venligst de emulatorer du skal installere!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Slet logfilen?"
@@ -723,36 +701,6 @@ _yn_umprt_mn_bd="\nFor at afmontere drev?\n"
 _Mirror_Conf_ttl="Filtrere listen af spejle på protokoller"
 _Mirror_Conf_bd="\nDet vil generere en liste af spejle til den valgte Protokol.Du kan vælge at bruge det eller ej.\n"
 _yn_mirror_conf_bd="\nØnsker at vælge protokoller til generator en liste over filspejle? Andet er, som standard, vælger alle protokoller.\n"
-#
-# Server menu text
-_MMInstServer="Server"
-_mn_srv_ttl="Installation og konfiguration af server utilities"
-_mn_srv_bd="\nVælg det ønskede menupunkt\n"
-_mn_srv_1="Installation og konfiguration af ssh"
-_mn_srv_2="Mail server postfix"
-_mn_srv_3="nginx, Apache, MySQL, PHP"
-_mn_srv_4="FTP\server"
-_mn_ssh_1="installere ssh"
-_mn_ssh_2="Konfiguration af ssh"
-_mn_cnf_ssh_1="For at ændre porten (22) standard"
-_mn_cnf_ssh_2="Aktiver/Deaktiver under login rod"
-_yn_ssh_stp_bd="\nFor at installere et netværk Protokol til fjernadministration ssh?\n"
-_nfo_ssh_bd="\nForbindelse ssh er nu tilgængelig for ip \ adresse\n"
-_nfo_ssh_prmr="For eksempel"
-_msg_ssh_nfo_ttl="Oplysninger om fjernadministration via ssh"
-_sshcnf_port_bd="\nIndtast en ny port, der spænder fra 1025 til 65536.\n"
-_nfo_ssh_port_ttl="Fejl. Indtast den forkerte port"
-_nfo_ssh_port_bd="\nFejl. Du har indtastet en havn uden for det angivne interval fra 1025 til 65536. Indtast den port korrekt.\n"
-_nff_ptrtlg_bd_1="\nLog ind med root aktiveret.\n"
-_nff_ptrtlg_bd_2="\nLog ind som root er deaktiveret.\n"
-_yn_mlsrv_bd="\nØnsker at installere e\mail\server postfix?\n"
-_lmp_srv_bd="\nVælg de værktøjer, der er nødvendige til installationen.\n"
-_ftpsrv_mn_bd="\nInstallation af FTP\server. Vælg den pakke du ønsker.\n"
-_yn_netctl_ttl="Indstilling af skabelon til brug i et netværk Manager netctl"
-_yn_netctl_bd="\nØnsker at vælge en skabelon og redigere det ?\n"
-_ntctl_tmpmn_bd="\nVælg den ønskede skabelon for et netværk Manager netctl.\n"
-_inntctl_ttl="Indtast navnet på den skabelon, netctl"
-_inntctl_bd="\nIndtast venligst et nyt skabelon\navn.\n"
 #
 # Wifi template configuration
 _msg_wt_ttl="Trådløse netværk."

@@ -64,6 +64,16 @@ select_install_shell()
     wait
     check_for_error
 }
+gpg_conf(){
+	mkdir -p ${MOUNTPOINT}/home/${1}/.gnupg/
+	touch ${MOUNTPOINT}/home/${1}/.gnupg/gpg.conf
+	echo "keyid-format 0xshort" > ${MOUNTPOINT}/home/${1}/.gnupg/gpg.conf
+	echo "throw-keyids" >> ${MOUNTPOINT}/home/${1}/.gnupg/gpg.conf
+	echo "no-emit-version" >> ${MOUNTPOINT}/home/${1}/.gnupg/gpg.conf
+	echo "no-comments" >> ${MOUNTPOINT}/home/${1}/.gnupg/gpg.conf
+	
+}
+
 shell_friendly_setup()
 {
     if [[ $_once_conf_fscr == "0" ]]; then
@@ -75,7 +85,6 @@ shell_friendly_setup()
             _usr_lst_menu="${_usr_lst_menu} $i - on"
             echo "alias ls='ls --color=auto'" >> ${MOUNTPOINT}/home/$i/.bashrc
         done
-        _usr_lst_menu="${_usr_lst_menu} root - off"
         screenfetch_dialog
     fi
     # Checklist dialog user
@@ -84,6 +93,7 @@ shell_friendly_setup()
     if [[ ${_ch_usr[*]} != "" ]]; then
         for i in ${_ch_usr[*]}; do
             select_install_shell "$i"
+            gpg_conf "${i}"
         done
 	fi
 }

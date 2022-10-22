@@ -223,11 +223,7 @@ install_desktop_menu() {
              ;;
         "5") install_dm
              ;;
-        "6") if [[ ${_archi[*]} == "x86_64" ]]; then
-                install_gep
-            else
-                install_gep_old
-            fi
+        "6") install_gep
              ;;
           *) main_menu_online
              ;;
@@ -354,9 +350,6 @@ function mainmenu_finishexit()
 	wait
 	echo -n  -e "\e[1;31mPlease wait ...\e[0m"\\r
 	clear
-	pkg_manager_unset
-	eml_zavershenie
-	aur_pkg_finish
 	rm -rf "$_pcm_tempf"
 	echo -n  -e "\e[1;32mPlease wait ...\e[0m"\\r
 	if [[ -f "$filesdir/remove_pkg.log" ]]; then
@@ -391,12 +384,11 @@ main_menu_online() {
     "3" "$_MMConfBse" \
     "4" "$_MMConfUsr" \
     "5" "$_MMInstDE" \
-    "6" "$_MMInstServer" \
-    "7" "$_swap_menu_title" \
-    "8" "$_rsrvd_menu_title" \
-    "9" "$_MMRunMkinit" \
-    "10" "$_SeeConfOpt" \
-    "11" "$_Done" 2>${ANSWER}
+    "6" "$_swap_menu_title" \
+    "7" "$_rsrvd_menu_title" \
+    "8" "$_MMRunMkinit" \
+    "9" "$_SeeConfOpt" \
+    "10" "$_Done" 2>${ANSWER}
 
     HIGHLIGHT=$(cat ${ANSWER})
     
@@ -421,15 +413,13 @@ main_menu_online() {
              ;;            
         "5") install_desktop_menu
              ;;
-        "6") server_menu
-			;;
-        "7") swap_menu
+        "6") swap_menu
             ;;
-        "8") rsrvd_menu
+        "7") rsrvd_menu
             ;;
-        "9") run_mkinitcpio
+        "8") run_mkinitcpio
              ;;
-        "10") edit_configs
+        "9") edit_configs
              ;;            
           *) dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --yesno "$_CloseInstBody" 0 0
           

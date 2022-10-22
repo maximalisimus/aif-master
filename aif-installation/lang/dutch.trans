@@ -552,12 +552,6 @@ _yesno_tnc_body="\nEen set van verschillende verbindingen instellen voor netwerk
 _yn_s_tnc_ttl="Netwerkbeheerverbindingen opzetten"
 _yn_s_tnc_bd="\nWilt u extra verbindingstypes selecteren voor netwerkbeheer?\n"
 
-# Programs to TimeShoft and Github-Desktop
-_yesno_timeshift_title="Timeshift Installeren"
-_yesno_timeshift_body="\nTimeshift Installeren?\n"
-_yesno_github_desktop_title="GitHub-Desktop Installeren"
-_yesno_github_desktop_body="\nGitHub-Desktop Installeren?\n"
-
 # Config Disk Devaces
 _sh_dev_title="Apparaatselectie"
 _sh_dev_body="\nSelecteer het gewenste apparaat\n"
@@ -585,8 +579,6 @@ _input_size_tmpfs_title="Voer de grootte van de tmp-map in"
 _input_size_tmpfs_body="\nVoer het gewenste volume in. Bijvoorbeeld: 1G\n"
 
 # Shell and Windows Fonts
-_yn_win_fnts_ttl="Windows-lettertypen installeren"
-_yn_win_fnts_bd="\nWindows lettertypen installeren?\n"
 _shell_friendly_menu="SHELL selectie en installatie"
 _select_shell_menu_ttl="Selecteren van de SHELL om te installeren"
 _select_shell_menu_bd="\nSelecteer SHELL voor gebruiker"
@@ -632,23 +624,9 @@ _CloseInstBody="Installer Afsluiten?"
 _yesno_order_ttl="Meerdere menu ' s doorgeven"
 _yesno_order_bd="\nHeb je een LTS kernel geïnstalleerd?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installeren van de PlayStation-3 emulator"
-_yesno_rpcs3_bd="\nPlayStation-3 emulator installeren?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Instellen Van Bluetooth"
 _yesno_bluetooth_bd="\nOm drivers en de apparaatbeheerder de bluetooth te installeren?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Pakketten van AUR installeren"
-_aur_pkg_bd="\nSelecteer de pakketten die u moet installeren!\n"
-_aur_dbl_pkg_ttl="De versie van het pakket"
-_aur_dbl_pkg_bd="\nDit pakket heeft verschillende versies.\nKies alsjeblieft degene die je nodig hebt!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installeer emulators"
-_eml_pkg_bd="\nSelecteer de emulators die u moet installeren!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Het logbestand verwijderen?"
@@ -712,36 +690,6 @@ _yn_umprt_mn_bd="\nDoor het ontkoppelen van de schijven?\n"
 _Mirror_Conf_ttl="Filter de lijst van spiegels voor de protocollen"
 _Mirror_Conf_bd="\nHet genereren van een lijst van spiegels voor de geselecteerde Protocol.U kunt beslissen om het te gebruiken of niet.\n"
 _yn_mirror_conf_bd="\nWilt kiezen protocollen voor de generator een lijst van spiegels? Anders, standaard, selecteert alle protocollen.\n"
-#
-# Server menu text
-_MMInstServer="Server"
-_mn_srv_ttl="Installatie en configuratie van hulpprogramma ' s server"
-_mn_srv_bd="\nSelecteer het gewenste menu\item\n"
-_mn_srv_1="Het installeren en configureren van ssh"
-_mn_srv_2="Mail server postfix"
-_mn_srv_3="nginx, Apache, MySQL, PHP"
-_mn_srv_4="FTP\server"
-_mn_ssh_1="het installeren van ssh"
-_mn_ssh_2="Het configureren van ssh"
-_mn_cnf_ssh_1="Om de poort te wijzigen (22) standaard"
-_mn_cnf_ssh_2="Inschakelen/Uitschakelen inloggen onder root"
-_yn_ssh_stp_bd="\nOm te installeren van een netwerk Protocol voor beheer op afstand ssh?\n"
-_nfo_ssh_bd="\nVerbinding ssh is nu beschikbaar voor de ip \ adres\n"
-_nfo_ssh_prmr="Bijvoorbeeld"
-_msg_ssh_nfo_ttl="Informatie over beheer op afstand via ssh"
-_sshcnf_port_bd="\nVoer een nieuwe poort bereik van 1025 tot 65536.\n"
-_nfo_ssh_port_ttl="Fout. Voer de verkeerde poort"
-_nfo_ssh_port_bd="\nFout. U hebt een haven buiten het opgegeven bereik van 1025 tot 65536. Voer de poort correct.\n"
-_nff_ptrtlg_bd_1="\nLog in met root ingeschakeld.\n"
-_nff_ptrtlg_bd_2="\nLog in als root is uitgeschakeld.\n"
-_yn_mlsrv_bd="\nWilt installeren, mailserver postfix?\n"
-_lmp_srv_bd="\nSelecteer het benodigde gereedschap voor de installatie.\n"
-_ftpsrv_mn_bd="\nInstallatie van de FTP\server. Selecteer het pakket dat u wilt.\n"
-_yn_netctl_ttl="Het instellen van het sjabloon voor een netwerk Manager netctl"
-_yn_netctl_bd="\nWilt u een template en bewerk het ?\n"
-_ntctl_tmpmn_bd="\nSelecteer de gewenste sjabloon voor een netwerk Manager netctl.\n"
-_inntctl_ttl="Voer de naam van de sjabloon netctl"
-_inntctl_bd="\nVoer een nieuwe naam voor de sjabloon.\n"
 #
 # Wifi template configuration
 _msg_wt_ttl="Draadloos netwerk."

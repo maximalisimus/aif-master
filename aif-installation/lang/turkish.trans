@@ -582,12 +582,6 @@ _yesno_tnc_body="\nNetworkManager için bir dizi farklı bağlantı kurun?\n"
 _yn_s_tnc_ttl="Networkmanager bağlantılarını yükleme"
 _yn_s_tnc_bd="\nNetworkManager için ek bağlantı türleri seçmek ister misiniz?\n"
 
-# Programs to TimeShoft and Github-Desktop
-_yesno_timeshift_title="Yükleme Timeshift"
-_yesno_timeshift_body="\nTimeshift'i Yükleyin?\n"
-_yesno_github_desktop_title="Github-Desktop Kurulumu"
-_yesno_github_desktop_body="\nGithub-Desktop Yükleyin?\n"
-
 # Config Disk Devaces
 _sh_dev_title="Cihaz seçimi"
 _sh_dev_body="\nLütfen gerekli cihazı seçin\n"
@@ -615,8 +609,6 @@ _input_size_tmpfs_title="Tmp klasör hacmini girme"
 _input_size_tmpfs_body="\nLütfen istediğiniz hacmi girin. Örneğin: 1G\n"
 
 # Shell and Windows Fonts
-_yn_win_fnts_ttl="Windows yazı tiplerini yükleme"
-_yn_win_fnts_bd="\nWindows yazı tiplerini yükle?\n"
 _shell_friendly_menu="Kabuk seçimi ve kurulumu"
 _select_shell_menu_ttl="Yüklemek için kabuk seçimi"
 _select_shell_menu_bd="\nKullanıcı için kabuk seçiniz"
@@ -662,23 +654,10 @@ _CloseInstBody="Yükleyici kapatılsın mı?"
 _yesno_order_ttl="Birden fazla menü atlama"
 _yesno_order_bd="\nLTS çekirdeğiniz yüklü mü?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="PlayStation-3 emülatörünü yükleme"
-_yesno_rpcs3_bd="\nPlayStation-3 emülatörünü yükleyin?\n"
 
 # Bluetooth
 _yesno_bluetooth_ttl="Bluetooth Kurulumu"
 _yesno_bluetooth_bd="\nSürücüleri ve Bluetooth cihaz Yöneticisini yükleyin?\n"
-
-# Aur package menu
-_aur_pkg_ttl="AUR & # 39; dan paketleri yükleme"
-_aur_pkg_bd="\nLütfen yüklemek için ihtiyacınız olan paketleri seçin!\n"
-_aur_dbl_pkg_ttl="Paket sürümünü seçme"
-_aur_dbl_pkg_bd="\nBu paketin çeşitli sürümleri vardır.\nLütfen ihtiyacınız olanı seçin!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Emülatör kurulumu"
-_eml_pkg_bd="\nLütfen yüklemek için ihtiyacınız olan emülatörleri seçin!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Günlük dosyasını sil?"
@@ -742,36 +721,6 @@ _yn_umprt_mn_bd="\nUnmount sürücüleri?\n"
 _Mirror_Conf_ttl="Listeyi aynalar protokolleri"
 _Mirror_Conf_bd="\nOluşturulur listesini aynalar için seçilen protokol.Sen \ ebilmek çözmek, kullanmak ya da yok.\n"
 _yn_mirror_conf_bd="\nSeçmek istediğiniz protokoller için jeneratör listesini aynalar? Aksi takdirde, varsayılan olarak seçilmiş olacak tüm protokolleri.\n"
-#
-# Server menu text
-_MMInstServer="Sunucu"
-_mn_srv_ttl="Kurulum ve yapılandırma, sunucu programları"
-_mn_srv_bd="\nLütfen istediğiniz menü seçeneğini seçin\n"
-_mn_srv_1="Kurulum ve yapılandırma ssh"
-_mn_srv_2="Posta sunucusu, postfix"
-_mn_srv_3="nginx, Apache, MySQL, PHP"
-_mn_srv_4="FTP sunucusu"
-_mn_ssh_1="yükleme ssh"
-_mn_ssh_2="Kurulumu ssh"
-_mn_cnf_ssh_1="Bağlantı noktasını değiştirmek (22) varsayılan"
-_mn_cnf_ssh_2="Etkinleştirmek/Devre dışı bırakmak için oturum açma adı root"
-_yn_ssh_stp_bd="\nYüklemek için ağ uzaktan yönetim protokolü ssh?\n"
-_nfo_ssh_bd="\nBağlantı ssh şimdi kullanılabilir ıp adresi\n"
-_nfo_ssh_prmr="Örneğin"
-_msg_ssh_nfo_ttl="Bilgi hakkında uzaktan yönetim için ssh"
-_sshcnf_port_bd="\nYazın yeni bir bağlantı noktası aralığı 1025 65536.\n"
-_nfo_ssh_port_ttl="Hata. Yanlış bağlantı noktası"
-_nfo_ssh_port_bd="\nHata. Girdiğiniz bağlantı noktası belirtilen aralık dışındaki 1025 65536. Lütfen girin ve bağlantı noktası doğru.\n"
-_nff_ptrtlg_bd_1="\nGiriş altında root dahildir.\n"
-_nff_ptrtlg_bd_2="\nGiriş altında root devre dışı bırakılır.\n"
-_yn_mlsrv_bd="\nKurmak isteyen posta sunucusu, postfix?\n"
-_lmp_srv_bd="\nLütfen, seçin, gerekli programları yüklemek için.\n"
-_ftpsrv_mn_bd="\nKurulum FTP sunucusu. Lütfen seçin, ve bir paket.\n"
-_yn_netctl_ttl="Şablon kurulumu için bir ağ yöneticisi netctl"
-_yn_netctl_bd="\nArzu şablonu seçmek ve düzenlemek için mi ?\n"
-_ntctl_tmpmn_bd="\nLütfen, kullanmak istediğiniz şablonu seçin ağ yöneticisi netctl.\n"
-_inntctl_ttl="Giriş şablonu adı netctl"
-_inntctl_bd="\nLütfen yeni bir ad yazın şablonu.\n"
 #
 # Wifi template configuration
 _msg_wt_ttl="Kablosuz ağ."

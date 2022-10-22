@@ -555,12 +555,6 @@ _yesno_tnc_body="\nInstallieren Sie eine Reihe von verschiedenen verbindungen f�
 _yn_s_tnc_ttl="NetworkManager-verbindungen einrichten"
 _yn_s_tnc_bd="\nMöchten Sie zusätzliche Verbindungstypen für den NetworkManager auswählen?\n"
 
-# Programs to TimeShoft and Github-Desktop
-_yesno_timeshift_title="Installieren Von Timeshift"
-_yesno_timeshift_body="\nTimeshift Installieren?\n"
-_yesno_github_desktop_title="GitHub-Desktop Installieren"
-_yesno_github_desktop_body="\nGithub-Desktop Installieren?\n"
-
 # Config Disk Devaces
 _sh_dev_title="Gerät auswählen"
 _sh_dev_body="\nBitte wählen Sie das gewünschte Gerät\n"
@@ -588,8 +582,6 @@ _input_size_tmpfs_title="Geben Sie die Lautstärke des tmp-Ordners ein"
 _input_size_tmpfs_body="\nBitte geben Sie das gewünschte Volumen ein. Zum Beispiel: 1G\n"
 
 # Shell and Windows Fonts
-_yn_win_fnts_ttl="Installieren von Windows-Schriftarten"
-_yn_win_fnts_bd="\nWindows-Schriftarten installieren?\n"
 _shell_friendly_menu="SHELL auswählen und installieren"
 _select_shell_menu_ttl="SHELL für die Installation auswählen"
 _select_shell_menu_bd="\nBitte wählen Sie SHELL für Benutzer"
@@ -635,23 +627,9 @@ _CloseInstBody="Installer schliessen und neu starten?"
 _yesno_order_ttl="Überspringen mehrerer Menüs"
 _yesno_order_bd="\nHaben Sie den LTS-Kernel installiert?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="Installieren Des PlayStation-3-emulators"
-_yesno_rpcs3_bd="\nPlayStation-3-Emulator installieren?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="Bluetooth-Installation"
 _yesno_bluetooth_bd="\nTreiber und Bluetooth geratemanager installieren?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Installieren von Paketen von AUR"
-_aur_pkg_bd="\nBitte wählen Sie die Pakete, die Sie installieren möchten!\n"
-_aur_dbl_pkg_ttl="Auswählen der Paketversion"
-_aur_dbl_pkg_bd="\nDieses Paket hat mehrere Versionen.\nBitte wählen Sie die gewünschte!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Installieren von Emulatoren"
-_eml_pkg_bd="\nBitte wählen Sie die Emulatoren, die Sie installieren möchten!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Löschen Sie Die Protokolldatei?"
@@ -715,36 +693,6 @@ _yn_umprt_mn_bd="\nAushängen Laufwerke?\n"
 _Mirror_Conf_ttl="Filtern Sie die Liste der Spiegel\Protokollen"
 _Mirror_Conf_bd="\nGeneriert wird die Liste der Spiegelserver für das ausgewählte Protokoll.Sie können entscheiden, es zu benutzen oder nicht.\n"
 _yn_mirror_conf_bd="\nMöchten Sie die Protokolle auswählen, für generator Mirror\Liste? Ansonsten, standardmäßig werden alle Protokolle ausgewählt.\n"
-#
-# Server menu text
-_MMInstServer="Server"
-_mn_srv_ttl="Installation und Konfiguration von Server\Dienstprogramme"
-_mn_srv_bd="\nBitte wählen Sie den gewünschten Menüpunkt\n"
-_mn_srv_1="Installation und Konfiguration von ssh"
-_mn_srv_2="E\Mail\Server postfix"
-_mn_srv_3="nginx, Apache, MySQL, PHP"
-_mn_srv_4="FTP\Server"
-_mn_ssh_1="Installation von ssh"
-_mn_ssh_2="Konfigurieren von ssh"
-_mn_cnf_ssh_1="Ändern Sie den Port (22) standardmäßig"
-_mn_cnf_ssh_2="Aktivieren/Deaktivieren Sie den Eingang unter root"
-_yn_ssh_stp_bd="\nInstallieren Netzwerkprotokoll Remote\Management \ ssh?\n"
-_nfo_ssh_bd="\nVerbindung per ssh ist jetzt über die ip Adresse\n"
-_nfo_ssh_prmr="Zum Beispiel"
-_msg_ssh_nfo_ttl="Informationen zur Remote\Verwaltung per ssh"
-_sshcnf_port_bd="\nGeben Sie den neuen Port im Bereich von 1025 und 65536.\n"
-_nfo_ssh_port_ttl="Fehler. Ein Falsches Port"
-_nfo_ssh_port_bd="\nFehler. Sie stellten Port außerhalb des angegebenen Bereichs zwischen 1025 und 65536. Bitte geben Sie den Port richtig.\n"
-_nff_ptrtlg_bd_1="\nAnmelden unter root aktiviert ist.\n"
-_nff_ptrtlg_bd_2="\nAnmeldung unter root deaktiviert.\n"
-_yn_mlsrv_bd="\nWollt den Mailserver postfix?\n"
-_lmp_srv_bd="\nBitte wählen Sie die gewünschten Dienstprogramme zu installieren.\n"
-_ftpsrv_mn_bd="\nInstallation des FTP\Servers. Bitte wählen Sie das gewünschte Paket.\n"
-_yn_netctl_ttl="Installation der Vorlage für den Netzwerk\Manager netctl"
-_yn_netctl_bd="\nMöchten, wählen Sie eine Vorlage und Bearbeiten Sie es ?\n"
-_ntctl_tmpmn_bd="\nBitte wählen Sie die gewünschte Vorlage für den Netzwerk\Manager netctl.\n"
-_inntctl_ttl="Geben Sie einen Namen der Vorlage netctl"
-_inntctl_bd="\nBitte geben Sie einen neuen Namen für die Vorlage ein.\n"
 #
 # Wifi template configuration
 _msg_wt_ttl="Drahtloses Netzwerk."

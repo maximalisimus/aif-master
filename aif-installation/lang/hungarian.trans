@@ -574,12 +574,6 @@ _yesno_tnc_body="\nKülönböző kapcsolatok beállítása a NetworkManager-hez?
 _yn_s_tnc_ttl="A NetworkManager kapcsolatok beállítása"
 _yn_s_tnc_bd="\nSzeretne további kapcsolattípusokat választani a NetworkManager-hez?\n"
 
-# Programs to TimeShoft and Github-Desktop
-_yesno_timeshift_title="Timeshift Telepítése"
-_yesno_timeshift_body="\nTimeshift Telepítése?\n"
-_yesno_github_desktop_title="A Github-Asztal Telepítése"
-_yesno_github_desktop_body="\nTelepítse Github-Desktop?\n"
-
 # Config Disk Devaces
 _sh_dev_title="Eszközválasztás"
 _sh_dev_body="\nVálassza ki a kívánt eszközt\n"
@@ -607,8 +601,6 @@ _input_size_tmpfs_title="Adja meg a tmp mappa méretét"
 _input_size_tmpfs_body="\nAdja meg a kívánt hangerőt. Például: 1G\n"
 
 # Shell and Windows Fonts
-_yn_win_fnts_ttl="Windows betűtípusok telepítése"
-_yn_win_fnts_bd="\nWindows betűtípusok telepítése?\n"
 _shell_friendly_menu="SHELL kiválasztása és telepítése"
 _select_shell_menu_ttl="A telepítendő parancsértelmező kiválasztása"
 _select_shell_menu_bd="\nKérjük, válassza ki a SHELL a felhasználó számára"
@@ -654,23 +646,9 @@ _CloseInstBody="Bezárod a telepítőt?"
 _yesno_order_ttl="Több menük átadása"
 _yesno_order_bd="\nVan telepítve LTS kernel?\n"
 
-# RPCS3
-_yesno_rpcs3_ttl="A PlayStation-3 emulátor telepítése"
-_yesno_rpcs3_bd="\nTelepítse PlayStation-3 emulátort?\n"
-
 # Bluetooth
 _yesno_bluetooth_ttl="A Bluetooth Beállítása"
 _yesno_bluetooth_bd="\nAz illesztőprogramok, valamint az Eszközkezelő telepítéséhez a bluetooth?\n"
-
-# Aur package menu
-_aur_pkg_ttl="Csomagok telepítése az AUR-ból"
-_aur_pkg_bd="\nKérjük, válassza ki a csomagokat telepíteni kell!\n"
-_aur_dbl_pkg_ttl="A csomag verziója"
-_aur_dbl_pkg_bd="\nEnnek a csomagnak több változata is van.\nKérem, válassza ki azt, amire szüksége van!\n"
-
-# Emulator package menu
-_eml_pkg_ttl="Emulátorok telepítése"
-_eml_pkg_bd="\nKérjük, válassza ki a emulátorok telepíteni kell!\n"
 
 # Remove packages log
 _yesno_rmrf_ttl="Törölni a naplófájlt?"
@@ -734,36 +712,6 @@ _yn_umprt_mn_bd="\nLeválasztásához a vezet?\n"
 _Mirror_Conf_ttl="Szűrje a listát a tükrök a protokollok"
 _Mirror_Conf_bd="\nEz létrehoz egy listát a tükrök a kiválasztott Protokoll.Ön döntheti el, hogy használja vagy sem.\n"
 _yn_mirror_conf_bd="\nKívánom, hogy válasszon protokollok a generátor egy listát a tükrök? Egyébként alapértelmezés szerint kijelöli az összes protokollt.\n"
-#
-# Server menu text
-_MMInstServer="Szerver"
-_mn_srv_ttl="Telepítés konfigurációs segédprogramok szerver"
-_mn_srv_bd="\nKérjük, válassza ki a kívánt menüelemet\n"
-_mn_srv_1="Telepítése, konfigurálása ssh"
-_mn_srv_2="Mail szerver postfix"
-_mn_srv_3="a nginx, Apache, MySQL, PHP"
-_mn_srv_4="FTP szerver"
-_mn_ssh_1="telepítés ssh\n"
-_mn_ssh_2="Konfigurálása ssh"
-_mn_cnf_ssh_1="A port megváltoztatásához (22) default"
-_mn_cnf_ssh_2="Engedélyezése/Letiltása bejelentkezés alapján gyökér"
-_yn_ssh_stp_bd="\nHogy telepítse a hálózati Protokoll távoli menedzsment ssh?\n"
-_nfo_ssh_bd="\nKapcsolat ssh\n már elérhető az ip cím\n"
-_nfo_ssh_prmr="Például"
-_msg_ssh_nfo_ttl="Információ a távoli menedzsment keresztül ssh"
-_sshcnf_port_bd="\nÍrja be az új port tartomány 1025 hogy 65536.\n"
-_nfo_ssh_port_ttl="Hiba. Írja be a megfelelő portra"
-_nfo_ssh_port_bd="\nHiba. Belépett egy port kívül a megadott tartomány 1025 hogy 65536. Kérjük, adja meg a port megfelelően.\n"
-_nff_ptrtlg_bd_1="\nJelentkezzen be root engedélyezett.\n"
-_nff_ptrtlg_bd_2="\nJelentkezzen be, mint gyökér le van tiltva.\n"
-_yn_mlsrv_bd="\nA telepíteni kívánt mail szerver postfix?\n"
-_lmp_srv_bd="\nKérjük, válassza ki a szükséges eszközök telepítését.\n"
-_ftpsrv_mn_bd="\nTelepítés az FTP szerver. Kérjük, válassza ki a kívánt csomagot.\n"
-_yn_netctl_ttl="A beállítás a sablon egy hálózati Manager netctl"
-_yn_netctl_bd="\nAkarod, hogy válasszon ki egy sablont, majd szerkessze meg ?\n"
-_ntctl_tmpmn_bd="\nKérjük, válassza ki a kívánt sablont a hálózatkezelő netctl.\n"
-_inntctl_ttl="Adja meg a sablon neve netctl"
-_inntctl_bd="\nKérjük, írja be az új sablon nevét.\n"
 #
 # Wifi template configuration
 _msg_wt_ttl="Vezeték nélküli hálózat."
