@@ -49,6 +49,7 @@ _wicd_pkg=(wicd "$_nm_pkg_5")
 ## Server list of packages
 #
 _ssh_pkg=(openssh)
+_ansible_pkg=(ansible ansible-core)
 _docker_pkg=(docker docker-compose)
 _podman_pkd=(podman podman-compose podman-docker podman-dnsname buildah cockpit cockpit-podman)
 _mail_srv_pkg=(postfix)
