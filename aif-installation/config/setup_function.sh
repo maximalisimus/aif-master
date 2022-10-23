@@ -158,7 +158,7 @@ function check_q_lst_pkg(){
        temp=$(search_q_pkg "${i}")
        new_pkg=("${new_pkg[@]}" "${temp[*]}")
     done
-    out_pkg=$("$filesdir"/config/${check_q_py} "${temp_pkg[*]}" "${new_pkg[*]}")
+    out_pkg=$(python "$filesdir"/config/${check_q_py} "${temp_pkg[*]}" "${new_pkg[*]}")
     echo ${out_pkg[*]}
 }
 
