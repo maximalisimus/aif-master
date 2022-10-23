@@ -187,12 +187,6 @@ search_pkg()
     echo "${stp[*]}"
 }
 
-search_dm_pkg()
-{
-    stp=$(pacman -Ss | grep -Ei "core|extra|community|multilib|archlinuxcn" | sed 's/extra\///' | sed 's/core\///' | sed 's/community\///' | sed 's/multilib\///' | sed 's/archlinuxcn\///' | grep -E "^$1" | awk '{print $1}')
-    echo "${stp[*]}"
-}
-
 search_q_pkg()
 {
     stp=$(pacman --root ${MOUNTPOINT} --dbpath ${MOUNTPOINT}/var/lib/pacman -Qs | grep -Ei "local" | sed 's/local\///' | grep -E "^$1" | awk '{print $1}' | grep -E "$2$" | grep -Ei "${2}")
@@ -206,18 +200,6 @@ function check_s_lst_pkg(){
 	temp=""
 	for i in ${temp_pkg[*]}; do
 		temp=$(search_pkg "${i}")
-		new_pkg=("${new_pkg[*]}" "${temp[*]}")
-	done
-	echo ${new_pkg[*]}
-}
-
-function check_dm_lst_pkg(){
-	local temp_pkg
-	temp_pkg=("$@")
-	declare -a new_pkg
-	temp=""
-	for i in ${temp_pkg[*]}; do
-		temp=$(search_dm_pkg "${i}")
 		new_pkg=("${new_pkg[*]}" "${temp[*]}")
 	done
 	echo ${new_pkg[*]}

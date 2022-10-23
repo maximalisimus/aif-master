@@ -136,12 +136,12 @@ install_de_wm() {
    
    case $(cat ${ANSWER}) in
         "${_desktop_menu[0]}") # Deepin
-             clear
-             info_search_pkg
-            _list_deepin_pkg=$(check_dm_lst_pkg "${_deepin_pkg[*]}")
+            pacstrap ${MOUNTPOINT} ${_deepin_pkg[*]} 2>/tmp/.errlog
             wait
-            clear
-            [[ ${_list_deepin_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_deepin_pkg[*]} 2>/tmp/.errlog
+            _list_deepin_dep=$(check_s_lst_pkg "${_deepin_dep_pkg[*]}")
+            wait
+            [[ "${_list_deepin_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_deepin_dep[*]}" 2>>/tmp/.errlog
+            wait
             LIGHTDM_INSTALLED=1
             DEEPIN_INSTALLED=1
             arch_chroot "systemctl enable lightdm.service" >/dev/null 2>>/tmp/.errlog
@@ -157,12 +157,12 @@ install_de_wm() {
             wait
              ;;
         "${_desktop_menu[1]}") # Deepin+Deepin-Extra
-             clear
-             info_search_pkg
-            _list_deepine_pkg=$(check_dm_lst_pkg "${_deepin_extra_pkg[*]}")
+            pacstrap ${MOUNTPOINT} ${_deepin_extra_pkg[*]} 2>/tmp/.errlog
             wait
-            clear
-            [[ ${_list_deepine_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_deepine_pkg[*]} 2>/tmp/.errlog
+            _list_deepin_extra=$(check_s_lst_pkg "${_deepin_extra_dep_pkg[*]}")
+            wait
+            [[ "${_list_deepin_extra[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_deepin_extra[*]}" 2>>/tmp/.errlog
+            wait
             LIGHTDM_INSTALLED=1
             DEEPIN_INSTALLED=1
             arch_chroot "systemctl enable lightdm.service" >/dev/null 2>>/tmp/.errlog
@@ -178,66 +178,62 @@ install_de_wm() {
             wait
              ;;
         "${_desktop_menu[2]}") # Cinnamon
-             clear
-             info_search_pkg
-            _list_cinnamon_pkg=$(check_dm_lst_pkg "${_cinnamon_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_cinnamon_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_cinnamon_pkg[*]} 2>/tmp/.errlog
+             pacstrap ${MOUNTPOINT} ${_cinnamon_pkg[*]} 2>/tmp/.errlog
+             wait
              ;;
         "${_desktop_menu[3]}") # Enlightement
-             clear
-             info_search_pkg
-            _list_enlightenment_pkg=$(check_dm_lst_pkg "${_enlightenment_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_enlightenment_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_enlightenment_pkg[*]} 2>/tmp/.errlog
+             pacstrap ${MOUNTPOINT} ${_enlightenment_pkg[*]} 2>/tmp/.errlog
+             wait
+             _list_enlightenment_dep=$(check_s_lst_pkg "${_enlightenment_dep[*]}")
+             wait
+             [[ "${_list_enlightenment_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_enlightenment_dep[*]}" 2>>/tmp/.errlog
+             wait
              ;;
         "${_desktop_menu[4]}") # Gnome-Shell
-             clear
-             info_search_pkg
-             _list_gnome_shell_pkg=$(check_dm_lst_pkg "${_gnome_shell_pkg[*]}")
+             pacstrap ${MOUNTPOINT} ${_gnome_shell_pkg[*]} 2>/tmp/.errlog
              wait
-             clear
-             [[ ${_list_gnome_shell_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_gnome_shell_pkg[*]} 2>/tmp/.errlog
+             _list_gnome_shell_dep=$(check_s_lst_pkg "${_gnome_shell_dep[*]}")
+             wait
+             [[ "${_list_gnome_shell_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_gnome_shell_dep[*]}" 2>>/tmp/.errlog
+             wait
              GNOME_INSTALLED=1
+             wait
              ;;
         "${_desktop_menu[5]}") # Gnome
-             clear
-             info_search_pkg
-            _list_gnome_pkg=$(check_dm_lst_pkg "${_gnome_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_gnome_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_gnome_pkg[*]} 2>/tmp/.errlog
-           
+             pacstrap ${MOUNTPOINT} ${_gnome_pkg[*]} 2>/tmp/.errlog
+			 wait
+             _list_gnome_dep=$(check_s_lst_pkg "${_gnome_dep[*]}")
+             wait
+             [[ "${_list_gnome_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_gnome_dep[*]}" 2>>/tmp/.errlog
+             wait
              GNOME_INSTALLED=1
+             wait
              ;;            
         "${_desktop_menu[6]}") # Gnome + Extras
-             clear
-             info_search_pkg
-            _list_gnome_extras_pkg=$(check_dm_lst_pkg "${_gnome_extras_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_gnome_extras_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_gnome_extras_pkg[*]} 2>/tmp/.errlog
-           
+             pacstrap ${MOUNTPOINT} ${_gnome_extras_pkg[*]} 2>/tmp/.errlog
+             wait
+             _list_gnome_extras_dep=$(check_s_lst_pkg "${_gnome_extras_dep[*]}")
+             wait
+             [[ "${_list_gnome_extras_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_gnome_extras_dep[*]}" 2>>/tmp/.errlog
+             wait
              GNOME_INSTALLED=1
+             wait
              ;;
         "${_desktop_menu[7]}") # KDE5 BASE
-             clear
-            info_search_pkg
-            _list_kde5base_pkg=$(check_dm_lst_pkg "${_kde5base_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_kde5base_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_kde5base_pkg[*]} 2>/tmp/.errlog
+             pacstrap ${MOUNTPOINT} ${_kde5base_pkg[*]} 2>/tmp/.errlog
+             wait
+             _list_kde5base_dep=$(check_s_lst_pkg "${_kde5base_dep[*]}")
+             wait
+             [[ "${_list_kde5base_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_kde5base_dep[*]}" 2>>/tmp/.errlog
+             wait
              ;;
         "${_desktop_menu[8]}") # KDE5 
-             clear
-             info_search_pkg
-            _list_kde_pkg=$(check_dm_lst_pkg "${_kde_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_kde_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_kde_pkg[*]} 2>/tmp/.errlog
-
+             pacstrap ${MOUNTPOINT} ${_kde_pkg[*]} 2>/tmp/.errlog
+			 wait
+             _list_kde_dep=$(check_s_lst_pkg "${_kde_dep[*]}")
+             wait
+             [[ "${_list_kde_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_kde_dep[*]}" 2>>/tmp/.errlog
+             wait
              if [[ $NM_INSTALLED -eq 0 ]]; then          
                 arch_chroot "systemctl enable NetworkManager.service && systemctl enable NetworkManager-dispatcher.service" 2>>/tmp/.errlog
                 NM_INSTALLED=1
@@ -247,116 +243,105 @@ install_de_wm() {
              KDE_INSTALLED=1
              ;;
          "${_desktop_menu[9]}") # LXDE
-              clear
-              info_search_pkg
-              _list_lxde_pkg=$(check_dm_lst_pkg "${_lxde_pkg[*]}")
+              pacstrap ${MOUNTPOINT} ${_lxde_pkg[*]} 2>/tmp/.errlog
               wait
-              clear
-              [[ ${_list_lxde_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_lxde_pkg[*]} 2>/tmp/.errlog
               LXDE_INSTALLED=1
+              wait
              ;;
          "${_desktop_menu[10]}") # LXQT
-              clear
-              info_search_pkg
-            _list_lxqt_pkg=$(check_dm_lst_pkg "${_lxqt_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_lxqt_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_lxqt_pkg[*]} 2>/tmp/.errlog
+              pacstrap ${MOUNTPOINT} ${_lxqt_pkg[*]} 2>/tmp/.errlog
+              wait
+              _list_lxqt_dep=$(check_s_lst_pkg "${_lxqt_dep[*]}")
+              wait
+              [[ "${_list_lxqt_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_lxqt_dep[*]}" 2>>/tmp/.errlog
+              wait
               LXQT_INSTALLED=1
+              wait
               ;;
          "${_desktop_menu[11]}") # MATE
-              clear
-              info_search_pkg
-            _list_mate_pkg=$(check_dm_lst_pkg "${_mate_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_mate_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_mate_pkg[*]} 2>/tmp/.errlog
+              pacstrap ${MOUNTPOINT} ${_mate_pkg[*]} 2>/tmp/.errlog
+              wait
              ;;
         "${_desktop_menu[12]}") # MATE + Extras
-               clear
-              info_search_pkg
-            _list_mateextra_pkg=$(check_dm_lst_pkg "${_mateextra_pkg[*]}")
-            wait
-            [[ ${_list_mateextra_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_mateextra_pkg[*]} 2>/tmp/.errlog
+              pacstrap ${MOUNTPOINT} ${_mate_extra_pkg[*]} 2>/tmp/.errlog
+              wait
              ;;                 
         "${_desktop_menu[13]}") # Xfce
-              clear
-              info_search_pkg
-            _list_xfce4_pkg=$(check_dm_lst_pkg "${_xfce4_pkg[*]}")
+            pacstrap ${MOUNTPOINT} ${_xfce4_pkg[*]} 2>/tmp/.errlog
             wait
-            clear
-            [[ ${_list_xfce4_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_xfce4_pkg[*]} 2>/tmp/.errlog
+            _list_xfce4_dep=$(check_s_lst_pkg "${_xfce4_dep[*]}")
+            wait
+            [[ "${_list_xfce4_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_xfce4_dep[*]}" 2>>/tmp/.errlog
             wait
             fixed_xfce4_desktop
             wait
              ;;            
         "${_desktop_menu[14]}") # Xfce + Extras
-              clear
-              info_search_pkg
-            _list_xfce4_extra_pkg=$(check_dm_lst_pkg "${_xfce4_extra_pkg[*]}")
+            pacstrap ${MOUNTPOINT} ${_xfce4_extra_pkg[*]} 2>/tmp/.errlog
             wait
-            clear
-            [[ ${_list_xfce4_extra_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_xfce4_extra_pkg[*]} 2>/tmp/.errlog
+            _list_xfce4_extra_dep=$(check_s_lst_pkg "${_xfce4_extra_dep[*]}")
+            wait
+            [[ "${_list_xfce4_extra_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_xfce4_extra_dep[*]}" 2>>/tmp/.errlog
             wait
             fixed_xfce4_desktop
             wait
              ;;
         "${_desktop_menu[15]}") # Awesome
-              clear
-              info_search_pkg
-            _list_awesome_pkg=$(check_dm_lst_pkg "${_awesome_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_awesome_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_awesome_pkg[*]} 2>/tmp/.errlog
+             pacstrap ${MOUNTPOINT} ${_awesome_pkg[*]} 2>/tmp/.errlog
+             wait
+             _list_awesome_dep=$(check_s_lst_pkg "${_awesome_dep[*]}")
+             wait
+             [[ "${_list_awesome_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_awesome_dep[*]}" 2>>/tmp/.errlog
+             wait
              ;;
         "${_desktop_menu[16]}") #Fluxbox
-              clear
-              info_search_pkg
-            _list_fluxbox_pkg=$(check_dm_lst_pkg "${_fluxbox_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_fluxbox_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_fluxbox_pkg[*]} 2>/tmp/.errlog
+             pacstrap ${MOUNTPOINT} ${_fluxbox_pkg[*]} 2>/tmp/.errlog
+             wait
+             _list_fluxbox_dep=$(check_s_lst_pkg "${_fluxbox_dep[*]}")
+             wait
+             [[ "${_list_fluxbox_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_fluxbox_dep[*]}" 2>>/tmp/.errlog
+             wait
              ;; 
         "${_desktop_menu[17]}") #i3
-              clear
-              info_search_pkg
-            _list_i3wm_pkg=$(check_dm_lst_pkg "${_i3wm_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_i3wm_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_i3wm_pkg[*]} 2>/tmp/.errlog
+             pacstrap ${MOUNTPOINT} ${_i3wm_pkg[*]} 2>/tmp/.errlog
+             wait
+             _list_i3wm_dep=$(check_s_lst_pkg "${_i3wm_dep[*]}")
+             wait
+             [[ "${_list_i3wm_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_i3wm_dep[*]}" 2>>/tmp/.errlog
+             wait
              ;; 
         "${_desktop_menu[18]}") #IceWM
-              clear
-              info_search_pkg
-            _list_icewm_pkg=$(check_dm_lst_pkg "${_icewm_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_icewm_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_icewm_pkg[*]} 2>/tmp/.errlog
+             pacstrap ${MOUNTPOINT} ${_icewm_pkg[*]} 2>/tmp/.errlog
+             wait
+             _list_icewm_dep=$(check_s_lst_pkg "${_icewm_dep[*]}")
+             wait
+             [[ "${_list_icewm_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_icewm_dep[*]}" 2>>/tmp/.errlog
+             wait
              ;; 
         "${_desktop_menu[19]}") #Openbox
-              clear
-              info_search_pkg
-            _list_openbox_pkg=$(check_dm_lst_pkg "${_openbox_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_openbox_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_openbox_pkg[*]} 2>/tmp/.errlog
+             pacstrap ${MOUNTPOINT} ${_openbox_pkg[*]} 2>/tmp/.errlog
+             wait
+             _list_openbox_dep=$(check_s_lst_pkg "${_openbox_dep[*]}")
+             wait
+             [[ "${_list_openbox_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_openbox_dep[*]}" 2>>/tmp/.errlog
+             wait
              ;; 
         "${_desktop_menu[20]}") #PekWM
-              clear
-              info_search_pkg
-            _list_pekwm_pkg=$(check_dm_lst_pkg "${_pekwm_pkg[*]}")
-            wait
-            clear
-            [[ ${_list_pekwm_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_pekwm_pkg[*]} 2>/tmp/.errlog
+             pacstrap ${MOUNTPOINT} ${_pekwm_pkg[*]} 2>/tmp/.errlog
+             wait
+             _list_pekwm_dep=$(check_s_lst_pkg "${_pekwm_dep[*]}")
+             wait
+             [[ "${_list_pekwm_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_pekwm_dep[*]}" 2>>/tmp/.errlog
+             wait
              ;;
         "${_desktop_menu[21]}") #WindowMaker
-             clear
-             info_search_pkg
-            _list_windowmaker_pkg=$(check_dm_lst_pkg "${_windowmaker_pkg[*]}")
+            pacstrap ${MOUNTPOINT} ${_windowmaker_pkg[*]} 2>/tmp/.errlog
             wait
-            clear
-            [[ ${_list_windowmaker_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_windowmaker_pkg[*]} 2>/tmp/.errlog
-             ;;        
+             _list_windowmaker_dep=$(check_s_lst_pkg "${_windowmaker_dep[*]}")
+             wait
+             [[ "${_list_windowmaker_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_windowmaker_dep[*]}" 2>>/tmp/.errlog
+             wait
+             ;;
           *) install_desktop_menu
              ;;
     esac  
