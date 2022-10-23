@@ -154,9 +154,10 @@ multilib_question()
 
     if [[ $? -eq 0 ]]; then
        sed -i '/^#\s*\[multilib\]$/{N;s/^#\s*//gm}' ${MOUNTPOINT}/etc/pacman.conf
-       _multilib=1
-    else
-        _multilib=0
+       wait
+       sed -i '/Color/s/^#//' ${MOUNTPOINT}/etc/pacman.conf
+       wait
+       sed -i '/Color/a\ILoveCandy' ${MOUNTPOINT}/etc/pacman.conf
     fi
 }
 

@@ -91,11 +91,9 @@ install_base() {
           *) install_base_menu
              ;;
     esac    
-    
+
     if [[ ${_archi[*]} == "x86_64" ]]; then
-        if [[ $_multilib == "1" ]]; then
-            pc_conf_prcss "${MOUNTPOINT}/etc/pacman.conf" "$_pcm_tempf"
-        fi
+		multilib_question
     fi
     mirrorlist_question 
     

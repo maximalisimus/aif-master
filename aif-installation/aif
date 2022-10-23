@@ -40,11 +40,6 @@ setcolor
 us_dlgrc_conf
 id_system
 select_language
-if [[ "${_archi[*]}" == "x86_64" ]]; then
-    multilib_question
-    wait
-    clear
-fi
 check_requirements
 greeting
     while true; do

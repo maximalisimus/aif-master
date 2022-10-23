@@ -522,8 +522,8 @@ create_new_user() {
         # Set up basic configuration files and permissions for user
         arch_chroot "cp /etc/skel/.bashrc /home/${USER}"
         arch_chroot "chown -R ${USER}:users /home/${USER}"
-        sed -i '/%wheel ALL=(ALL) ALL/s/^#//' ${MOUNTPOINT}/etc/sudoers
-      
+        sed -i '/root ALL=(ALL:ALL) ALL/s/^#//' ${MOUNTPOINT}/etc/sudoers
+        sed -i '/%wheel ALL=(ALL:ALL) ALL/s/^#//' ${MOUNTPOINT}/etc/sudoers
 }
 
 run_mkinitcpio() {
