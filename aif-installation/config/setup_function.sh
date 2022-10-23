@@ -1,10 +1,47 @@
 #!/bin/bash
+#
+######################################################################
+##                                                                  ##
+##                       Setup Functions                            ##
+##                                                                  ##
+###################################################################### 
 
-test() {
+fixed_deepin_desktop()
+{
+    # /etc/systemd/system/resume@.service
+    echo "# /etc/systemd/system/resume@.service" >> "${MOUNTPOINT}/etc/systemd/system/resume@.service"
+    echo "[Unit]" >> "${MOUNTPOINT}/etc/systemd/system/resume@.service"
+    echo "Description=User resume actions" >> "${MOUNTPOINT}/etc/systemd/system/resume@.service"
+    echo "After=suspend.target" >> "${MOUNTPOINT}/etc/systemd/system/resume@.service"
+    echo "" >> "${MOUNTPOINT}/etc/systemd/system/resume@.service"
+    echo "[Service]" >> "${MOUNTPOINT}/etc/systemd/system/resume@.service"
+    echo "User=%I" >> "${MOUNTPOINT}/etc/systemd/system/resume@.service"
+    echo "Type=simple" >> "${MOUNTPOINT}/etc/systemd/system/resume@.service"
+    echo "ExecStart=/usr/bin/deepin-wm-restart.sh" >> "${MOUNTPOINT}/etc/systemd/system/resume@.service"
+    echo "" >> "${MOUNTPOINT}/etc/systemd/system/resume@.service"
+    echo "[Install]" >> "${MOUNTPOINT}/etc/systemd/system/resume@.service"
+    echo "WantedBy=suspend.target" >> "${MOUNTPOINT}/etc/systemd/system/resume@.service"
     
-    ping -c 3 google.com > /tmp/.outfile &
-    dialog --title "checking" --no-kill --tailboxbg /tmp/.outfile 20 60 
+    # /usr/bin/deepin-wm-restart.sh
+    echo "#!/bin/bash" >> "${MOUNTPOINT}/usr/bin/deepin-wm-restart.sh"
+    echo "#" >> "${MOUNTPOINT}/usr/bin/deepin-wm-restart.sh"
+    echo "# /usr/bin/deepin-wm-restart.sh" >> "${MOUNTPOINT}/usr/bin/deepin-wm-restart.sh"
+    echo "export DISPLAY=:0" >> "${MOUNTPOINT}/usr/bin/deepin-wm-restart.sh"
+    echo "deepin-wm --replace" >> "${MOUNTPOINT}/usr/bin/deepin-wm-restart.sh"
+    chmod +x "${MOUNTPOINT}/usr/bin/deepin-wm-restart.sh"
 
+    # systemctl enable resume@.service
+    _users_list=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
+    for k in ${_users_list[*]}; do
+        arch-chroot $MOUNTPOINT /bin/bash -c "systemctl enable resume@$k" 2>>/tmp/.errlog
+        _c_f_u=$(find "${MOUNTPOINT}/home/$k/" -maxdepth 1 -not -path '*/\.*' -type d | sed '1d' | wc -l)
+        if [[ ${_c_f_u[*]} == "0" ]]; then
+            mkdir -p "${MOUNTPOINT}/home/$k/Desktop"
+            mkdir -p "${MOUNTPOINT}/home/$k/Downloads"
+        fi
+    done
+    check_for_error
+    unset _users_list
 }
 
 function ps_in_pkg()

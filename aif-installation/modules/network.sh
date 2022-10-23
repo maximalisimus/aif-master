@@ -1,4 +1,10 @@
 ﻿#!/bin/bash
+#
+######################################################################
+##                                                                  ##
+##                     Network Functions                            ##
+##                                                                  ##
+###################################################################### 
 
 function outline_dhcpcd()
 {
@@ -87,4 +93,34 @@ function netctl_instalation()
 	wait
 	netctl_template_setup
 	wait
+}
+
+install_shara_components()
+{
+    if [[ $_shara_p == "0" ]]; then
+        dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yesno_shara_title" --yesno "$_yesno_shara_body" 0 0
+        if [[ $? -eq 0 ]]; then
+            _shara_p=1
+            clear
+            info_search_pkg
+            _list_network_pkg=$(check_s_lst_pkg "${_network_pkg[*]}")
+            wait
+            _clist_list_network_pkg=$(check_q_lst_pkg "${_list_network_pkg[*]}")
+            wait
+            clear
+            dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yesno_shara_title" --yesno "$_yn_alsa_pkg_bd" 0 0
+             if [[ $? -eq 0 ]]; then
+                _shara_pkg_mn_list=""
+                for k in ${_clist_list_network_pkg[*]}; do  
+                    _shara_pkg_mn_list="${_shara_pkg_mn_list} $k - on"
+                done
+                dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_chl_shara_ttl" --checklist "$_chl_xpkg_bd" 0 0 16 ${_shara_pkg_mn_list} 2>${ANSWER}
+                _check_shara_pkg=$(cat ${ANSWER})
+                [[ ${_check_shara_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_check_shara_pkg[*]} 2>/tmp/.errlog
+             else
+                pacstrap ${MOUNTPOINT} ${_clist_list_network_pkg[*]} 2>/tmp/.errlog
+             fi
+             check_for_error
+        fi
+    fi
 }

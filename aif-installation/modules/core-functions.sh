@@ -193,3 +193,9 @@ skip_orderers_resume()
     fi
 }
 
+test() {
+    
+    ping -c 3 google.com > /tmp/.outfile &
+    dialog --title "checking" --no-kill --tailboxbg /tmp/.outfile 20 60 
+
+}

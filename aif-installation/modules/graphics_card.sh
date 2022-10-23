@@ -6,6 +6,79 @@
 ##                                                                  ##
 ###################################################################### 
 
+# Install alsa, xorg and input drivers. Also copy the xkbmap configuration file created earlier to the installed system
+# This will run only once.
+install_alsa_xorg_input() {
+
+    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_AXITitle" --msgbox "$_AXIBody" 0 0
+    clear
+    info_search_pkg
+    _list_x_pkg=$(check_s_lst_pkg "${_x_pkg[*]}")
+    wait
+    _clist_x_pkg=$(check_q_lst_pkg "${_list_x_pkg[*]}")
+    wait
+    clear
+    if [[ ${_clist_x_pkg[*]} != "" ]]; then 
+        _x_pkg_menu_cl=""
+        for i in ${_clist_x_pkg[*]}; do
+            _x_pkg_menu_cl="${_x_pkg_menu_cl} $i - on"
+        done
+        dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_alsa_pkg_ttl" --yesno "$_yn_alsa_pkg_bd" 0 0
+        if [[ $? -eq 0 ]]; then
+            dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_chl_xpkg_ttl" --checklist "$_chl_xpkg_bd" 0 0 16 ${_x_pkg_menu_cl} 2>${ANSWER}
+            _chl_x_pkg=$(cat ${ANSWER})
+            [[ ${_chl_x_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_chl_x_pkg[*]} 2>/tmp/.errlog  
+        else
+            pacstrap ${MOUNTPOINT} ${_clist_x_pkg[*]} 2>/tmp/.errlog
+        fi
+    fi
+    check_for_error
+    wait
+    dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_x_pkg_ttl" --yesno "$_yn_alsa_pkg_bd" 0 0
+    if [[ $? -eq 0 ]]; then
+        _xorg_list=$(pacman -Sg xorg | sed 's/xorg //')
+        _xorg_pkg_menu=""
+        for j in ${_xorg_list[*]}; do
+            _xorg_pkg_menu="${_xorg_pkg_menu} $j - on"
+        done
+        dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_chl_xp_ttl" --checklist "$_chl_xpkg_bd" 0 0 16 ${_xorg_pkg_menu} 2>${ANSWER}
+        _chl_xorg_pkg=$(cat ${ANSWER})
+        [[ ${_chl_xorg_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_chl_xorg_pkg[*]} 2>/tmp/.errlog
+    else
+        pacstrap ${MOUNTPOINT} xorg 2>/tmp/.errlog
+    fi
+    check_for_error
+    wait
+    sleep 5
+    wait
+    arch-chroot $MOUNTPOINT /bin/bash -c "Xorg -configure" 2>>/tmp/.errlog
+    wait
+    sleep 3
+    wait
+    sudo find ${MOUNTPOINT}/root/ -maxdepth 1 -iname "xorg.*" -exec cp -f {} ${MOUNTPOINT}/etc/X11/xorg.conf \;
+    arch-chroot $MOUNTPOINT /bin/bash -c "sudo find /root/ -maxdepth 1 -iname \"xorg.*\" -exec cp -f {} /etc/X11/xorg.conf \;" 2>>/tmp/.errlog
+    sudo cp -f ${MOUNTPOINT}/root/xorg.conf.new ${MOUNTPOINT}/etc/X11/xorg.conf
+    arch_chroot "sudo cp -f /root/xorg.conf.new /etc/X11/xorg.conf" 2>>/tmp/.errlog
+    wait
+    sleep 3
+    check_for_error
+     
+     # copy the keyboard configuration file, if generated
+     if [ -e "/tmp/00-keyboard.conf" ]; then
+        cp -f "/tmp/00-keyboard.conf" "${MOUNTPOINT}/etc/X11/xorg.conf.d/00-keyboard.conf"
+        sed -i 's/^HOOKS=(base/HOOKS=(base consolefont keymap /' "${MOUNTPOINT}/etc/mkinitcpio.conf"
+     fi
+     # now copy across .xinitrc for all user accounts
+     user_list=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
+     for i in ${user_list[@]}; do
+         cp -f ${MOUNTPOINT}/etc/X11/xinit/xinitrc ${MOUNTPOINT}/home/$i
+         arch_chroot "chown -R ${i}:users /home/${i}"
+     done
+     
+     AXI_INSTALLED=1
+
+}
+
 setup_graphics_card() {
 
 # Save repetition
