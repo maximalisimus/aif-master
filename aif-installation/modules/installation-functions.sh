@@ -1485,7 +1485,7 @@ install_gep()
     
     check_for_error
     
-    install_gep_old
+    install_gep
 }
 
 install_shara_components()
