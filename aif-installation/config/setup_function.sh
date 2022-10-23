@@ -73,10 +73,72 @@ function mirror_config()
 	fi
 		
 }
+
+multilib_question()
+{
+    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yesno_multilib_title" --yesno "$_yesno_multilib_body" 0 0
+
+    if [[ $? -eq 0 ]]; then
+       sed -i '/^#\s*\[multilib\]$/{N;s/^#\s*//gm}' ${MOUNTPOINT}/etc/pacman.conf
+       _multilib=1
+    else
+        _multilib=0
+    fi
+}
+
+mirrorlist_question()
+{
+    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MirrorlistTitle" --yesno "$_yesno_mirrorlist_body" 0 0
+
+    if [[ $? -eq 0 ]]; then
+        sudo cp -f /etc/pacman.d/mirrorlist ${MOUNTPOINT}/etc/pacman.d/mirrorlist
+    fi
+}
+
+info_search_pkg()
+{
+    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_nfo_search_pkg_title" --infobox "$_nfo_search_pkg_body" 0 0
+}
+
+search_translit_pkg()
+{
+    stp=$(pacman -Ss | grep -Ei "core|extra|community|multilib" | sed 's/extra\///' | sed 's/core\///' | sed 's/community\///' | sed 's/multilib\///' | grep -E "^$1" | awk '{print $1}' | grep -E "$2$")
+    echo "${stp[*]}"
+}
+
+function check_s_lst_pkg {
+    local temp_pkg
+    temp_pkg=("$@")
+    declare -a new_pkg
+    temp=""
+    for i in ${temp_pkg[*]}; do
+        pacman -Ss $i 1>/dev/null 2>/dev/null
+        err=$?
+        if [[ $err -eq 0 ]]; then 
+            new_pkg=("${new_pkg[*]}" "$i")
+        fi
+    done
+    echo ${new_pkg[*]}
+}
+
+function check_q_lst_pkg {
+    local temp_pkg
+    temp_pkg=("$@")
+    declare -a new_pkg
+    temp=""
+    for i in ${temp_pkg[*]}; do
+        pacman --root ${MOUNTPOINT} --dbpath ${MOUNTPOINT}/var/lib/pacman -Qs $i 1>/dev/null 2>/dev/null
+        err=$?
+        [[ $err != "0" ]] && new_pkg=("${new_pkg[@]}" "$i")
+    done
+    echo ${new_pkg[*]}
+}
+
 osprober_configuration(){
 	prober_detect=$(echo "${_current_pkgs[*]}" | grep -oi "os-prober" | wc -l)
 	if [[ ${prober_detect[*]} == 1 ]]; then
 		mkdir -p ${MOUNTPOINT}/etc/default/
+		sed -i '/GRUB_DISABLE_OS_PROBER/s/#GRUB_DISABLE_OS_PROBER/GRUB_DISABLE_OS_PROBER/' ${MOUNTPOINT}/etc/default/grub
 		sed -i '/GRUB_DISABLE_OS_PROBER/s/true/false/' ${MOUNTPOINT}/etc/default/grub
 	fi
 }
