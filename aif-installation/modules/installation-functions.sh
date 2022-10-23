@@ -192,26 +192,6 @@ install_standartpkg()
     clear
     [[ ${_ch_standart_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_ch_standart_pkg[*]} 2>/tmp/.errlog
 }
-install_otherpkg()
-{
-    if [[ $_other_pkg_once == "0" ]]; then
-        _other_pkg_once=1
-        clear
-        info_search_pkg
-        _list_other_pkg=$(check_s_lst_pkg "${_other_pkg[*]}")
-        wait
-        _clist_other_pkg=$(check_q_lst_pkg "${_list_other_pkg[*]}")
-        wait
-        for i in ${_clist_other_pkg[*]}; do
-            _other_pkg_menu="${_other_pkg_menu} ${i} - on"
-        done
-        clear
-    fi
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_menu_extra_pkg" --checklist "$_ch_mn_bd" 0 0 16 ${_other_pkg_menu} 2>${ANSWER}
-    _ch_other_pkg=$(cat ${ANSWER})
-    clear
-    [[ ${_ch_other_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_ch_other_pkg[*]} 2>/tmp/.errlog
-}
 
 install_base() {
     ipv6_disable()
@@ -1486,8 +1466,7 @@ install_gep()
     "2" "$_menu_archivers" \
     "3" "$_menu_ttf_theme" \
     "4" "$_menu_add_pkg" \
-    "5" "$_menu_extra_pkg" \
-    "6" "$_Back" 2>${ANSWER}
+    "5" "$_Back" 2>${ANSWER}
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
     case $(cat ${ANSWER}) in
@@ -1498,8 +1477,6 @@ install_gep()
     "3") install_ttftheme
          ;;
     "4") install_standartpkg
-         ;;
-    "5") install_otherpkg
          ;;
       *) # Back to NAME Menu
         install_desktop_menu

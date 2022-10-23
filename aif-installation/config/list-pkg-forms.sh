@@ -136,16 +136,14 @@ _truetype_pkg="./MS-TrueType-Core-Fonts.tar.gz"
 _gr_editor=(gimp)
 _office=(libreoffice-fresh)
 # libreoffice-fresh libreoffice-fresh-ru
-_minimal_pkg=(grub-customizer xterm gnome-terminal lxterminal cmake brasero acetoneiso2 fuseiso chromium opera transmission-gtk curl git wget gwget ksysguard libksysguard doublecmd-gtk2 krusader blender vlc inkscape okular gedit geany leafpad parcellite gimp galculator)
+_minimal_pkg=(grub-customizer xterm cmake brasero acetoneiso2 fuseiso chromium transmission-gtk curl git wget gwget ksysguard libksysguard doublecmd-gtk2 krusader blender vlc inkscape okular gedit geany mousepad parcellite gimp galculator)
 _archi=$(uname -m)
 if [[ "${_archi[*]}" = "x86_64" ]]; then
 	_mirrorlist_url="https://archlinux.org/mirrorlist/?country="
 	# https://archlinux.org/mirrorlist/?country=RU&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on
 	countries_list=("all_ALL AU_Australia AT_Austria BD_Bangladesh BY_Belarus BE_Belgium BA_Bosnia BR_Brazil BG_Bulgaria KH_Cambodia CA_Canada CL_Chile CN_China CO_Colombia HR_Croatia CZ_Czechia DK_Denmark EC_Ecuador EE_Estonia FI_Finland FR_France GE_Georgia DE_Germany GR_Greece HK_Hong_Kong HU_Hungary IS_Iceland IN_India ID_Indonesia IR_Iran IE_Ireland IL_Israel IT_Italy JP_Japan KZ_Kazakhstan KE_Kenya LV_Latvia LT_Lithuania LU_Luxembourg MX_Mexico MD_Moldova MC_Monaco NL_Netherlands NC_New_Caledonia NZ_New_Zealand MK_North_Macedonia NO_Norway PK_Pakistan PY_Paraguay PL_Poland PT_Portugal RO_Romania RU_Russia RE_Reunion RS_Serbia SG_Singapore SK_Slovakia ZA_South_Africa KR_South_Korea ES_Spain SE_Sweden CH_Switzerland TW_Taiwan TH_Thailand TR_Turkey UA_Ukraine GB_United_Kingdom US_United_States UZ_Uzbekistan VN_Vietnam")
-	_other_pkg=(keepassxc veracrypt virtualbox kicad kicad-library kicad-library-3d smplayer wine wine-mono wine_gecko winetricks supertuxkart) # truecrypt
 else
 	_mirrorlist_url="https://archlinux32.org/mirrorlist/?country="
 	# https://archlinux32.org/mirrorlist/?country=ru&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on
 	countries_list=("ALL_ALL BY_Belarus FR_France DE_Germany GR_Greece PL_Poland RU_Russia CH_Switzerland US_United_States")
-	_other_pkg=(keepassxc veracrypt virtualbox kicad kicad-library kicad-library-3d smplayer wine-mono winetricks supertuxkart) # truecrypt
 fi
