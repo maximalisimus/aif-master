@@ -25,24 +25,30 @@ select_language() {
     case $(cat "${ANSWER}") in
         "1") source "$filesdir"/lang/english.trans
              CURR_LOCALE="en_US.UTF-8"
+             _lng="en"
              ;;
         "2") source "$filesdir"/lang/italian.trans
              CURR_LOCALE="it_IT.UTF-8"
+             _lng="it"
              ;; 
         "3") source "$filesdir"/lang/russian.trans
              CURR_LOCALE="ru_RU.UTF-8"
              FONT="LatKaCyrHeb-14.psfu"
+             _lng="ru"
              ;;
         "4") source "$filesdir"/lang/turkish.trans
              CURR_LOCALE="tr_TR.UTF-8"
              FONT="LatKaCyrHeb-14.psfu"
+             _lng="tr"
              ;;
         "5") source "$filesdir"/lang/dutch.trans
              CURR_LOCALE="nl_NL.UTF-8"
+             _lng="nl"
              ;;             
         "6") source "$filesdir"/lang/greek.trans
              CURR_LOCALE="el_GR.UTF-8"
-             FONT="iso07u-16.psfu"       
+             FONT="iso07u-16.psfu"   
+             _lng="el"    
              ;;
         "7") source "$filesdir"/lang/danish.trans
              CURR_LOCALE="da_DK.UTF-8"
@@ -50,15 +56,19 @@ select_language() {
         "8") source "$filesdir"/lang/hungarian.trans
              CURR_LOCALE="hu_HU.UTF-8"
              FONT="lat2-16.psfu"
+             _lng="hu"
              ;;
         "9") source "$filesdir"/lang/portuguese.trans
-             CURR_LOCALE="pt_BR.UTF-8"    
+             CURR_LOCALE="pt_BR.UTF-8"  
+             _lng="pt"  
              ;;      
        "10") source "$filesdir"/lang/german.trans
              CURR_LOCALE="de_DE.UTF-8"
+             _lng="de"
              ;;
        "11") source "$filesdir"/lang/french.trans
              CURR_LOCALE="fr_FR.UTF-8"
+             _lng="fr"
              ;;
           *) exit 0
              ;;

@@ -77,9 +77,8 @@ _generic_pkg=(xf86-video-fbdev)
 #
 # Desktop environment packages
 _desktop_menu=("Deepin" "Deepin_Deepin-Extra" "Cinnamon" "Enlightenment" "Gnome-Shell_minimal" "Gnome" "Gnome_Gnome-Extras" "KDE-5-Base_minimal" "KDE-5" "LXDE" "LXQT" "MATE" "MATE_MATE-Extras" "Xfce" "Xfce_Xfce-Extras" "Awesome-WM" "Fluxbox-WM" "i3-WM" "Ice-WM" "Openbox-WM" "Pek-WM") # WindowMaker-WM
-_d_menu=(deepin deepin-extra cinnamon enlightenment gnome-shell gnome gnome-extra plasma-desktop plasma lxde lxqt mate mate-extra xfce4 xfce4-goodies awesome fluxbox i3-wm icewm openbox pekwm) # windowmaker
 _deepin_pkg=(deepin lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ${_adwaita_dep[*]})
-_deepine_pkg=(deepin deepin-extra lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ${_adwaita_dep[*]})
+_deepin_extra_pkg=(deepin deepin-extra lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ${_adwaita_dep[*]})
 _cinnamon_pkg=(cinnamon)
 _enlightenment_pkg=(enlightenment terminology polkit-gnome)
 _gnome_shell_pkg=(gnome-shell gdm)

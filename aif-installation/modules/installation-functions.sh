@@ -593,71 +593,19 @@ install_de_wm() {
    if [[ $_d_menu_once == "0" ]]; then
         _d_menu_once=1
         clear
-        info_search_pkg
-        _list_d_menu=$(check_s_lst_pkg "${_d_menu[*]}")
-        wait
-        clear
-        for i in ${_list_d_menu[*]}; do
-            case $i in
-                "${_d_menu[0]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[0]}" # deepin
-                    ;;
-                "${_d_menu[1]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[1]}" # deepin+depping-extra
-                    ;;
-                "${_d_menu[2]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[2]}" # cinnamon
-                    ;;
-                "${_d_menu[3]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[3]}" # enlightenment
-                    ;;
-                "${_d_menu[4]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[4]}" # gnome-shell
-                    ;;
-                "${_d_menu[5]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[5]}" # gnome
-                    ;;
-                "${_d_menu[6]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[6]}" # gnome-extra
-                    ;;
-                "${_d_menu[7]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[7]}" # plasma-desktop
-                    ;;
-                "${_d_menu[8]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[8]}" # plasma
-                    ;;
-                "${_d_menu[9]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[9]}" # lxde
-                    ;;
-                "${_d_menu[10]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[10]}" # lxqt
-                    ;;
-                "${_d_menu[11]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[11]}" # mate
-                    ;;
-                "${_d_menu[12]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[12]}" # mate-extra
-                    ;;
-                "${_d_menu[13]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[13]}" # xfce4
-                    ;;
-                "${_d_menu[14]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[14]}" # xfce4-goodies
-                    ;;
-                "${_d_menu[15]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[15]}" # awesome
-                    ;;
-                "${_d_menu[16]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[16]}" # fluxbox
-                    ;;
-                "${_d_menu[17]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[17]}" # i3-wm
-                    ;;
-                "${_d_menu[18]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[18]}" # icewm
-                    ;;
-                "${_d_menu[19]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[19]}" # openbox
-                    ;;
-                "${_d_menu[20]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[20]}" # pekwm
-                    ;;
-                "${_d_menu[21]}") _dm_desktop_menu="${_dm_desktop_menu} ${_desktop_menu[21]}" # windowmaker
-                    ;;
-            esac
-        done
         _list_dm_menu=""
-        for i in ${_dm_desktop_menu[*]}; do
+        for i in ${_desktop_menu[*]}; do
             _list_dm_menu="${_list_dm_menu} $i -"
         done
     fi
    
    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstDETitle" --menu "$_InstDEBody" 0 0 16 ${_list_dm_menu} 2>${ANSWER}
-       
+   
    case $(cat ${ANSWER}) in
         "${_desktop_menu[0]}") # Deepin
              clear
              info_search_pkg
-            _list_deepin_pkg=$(check_s_lst_pkg "${_deepin_pkg[*]}")
+            _list_deepin_pkg=$(check_dm_lst_pkg "${_deepin_pkg[*]}")
             wait
             clear
             [[ ${_list_deepin_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_deepin_pkg[*]} 2>/tmp/.errlog
@@ -678,7 +626,7 @@ install_de_wm() {
         "${_desktop_menu[1]}") # Deepin+Deepin-Extra
              clear
              info_search_pkg
-            _list_deepine_pkg=$(check_s_lst_pkg "${_deepine_pkg[*]}")
+            _list_deepine_pkg=$(check_dm_lst_pkg "${_deepin_extra_pkg[*]}")
             wait
             clear
             [[ ${_list_deepine_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_deepine_pkg[*]} 2>/tmp/.errlog
@@ -699,7 +647,7 @@ install_de_wm() {
         "${_desktop_menu[2]}") # Cinnamon
              clear
              info_search_pkg
-            _list_cinnamon_pkg=$(check_s_lst_pkg "${_cinnamon_pkg[*]}")
+            _list_cinnamon_pkg=$(check_dm_lst_pkg "${_cinnamon_pkg[*]}")
             wait
             clear
             [[ ${_list_cinnamon_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_cinnamon_pkg[*]} 2>/tmp/.errlog
@@ -707,7 +655,7 @@ install_de_wm() {
         "${_desktop_menu[3]}") # Enlightement
              clear
              info_search_pkg
-            _list_enlightenment_pkg=$(check_s_lst_pkg "${_enlightenment_pkg[*]}")
+            _list_enlightenment_pkg=$(check_dm_lst_pkg "${_enlightenment_pkg[*]}")
             wait
             clear
             [[ ${_list_enlightenment_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_enlightenment_pkg[*]} 2>/tmp/.errlog
@@ -715,7 +663,7 @@ install_de_wm() {
         "${_desktop_menu[4]}") # Gnome-Shell
              clear
              info_search_pkg
-             _list_gnome_shell_pkg=$(check_s_lst_pkg "${_gnome_shell_pkg[*]}")
+             _list_gnome_shell_pkg=$(check_dm_lst_pkg "${_gnome_shell_pkg[*]}")
              wait
              clear
              [[ ${_list_gnome_shell_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_gnome_shell_pkg[*]} 2>/tmp/.errlog
@@ -724,7 +672,7 @@ install_de_wm() {
         "${_desktop_menu[5]}") # Gnome
              clear
              info_search_pkg
-            _list_gnome_pkg=$(check_s_lst_pkg "${_gnome_pkg[*]}")
+            _list_gnome_pkg=$(check_dm_lst_pkg "${_gnome_pkg[*]}")
             wait
             clear
             [[ ${_list_gnome_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_gnome_pkg[*]} 2>/tmp/.errlog
@@ -734,7 +682,7 @@ install_de_wm() {
         "${_desktop_menu[6]}") # Gnome + Extras
              clear
              info_search_pkg
-            _list_gnome_extras_pkg=$(check_s_lst_pkg "${_gnome_extras_pkg[*]}")
+            _list_gnome_extras_pkg=$(check_dm_lst_pkg "${_gnome_extras_pkg[*]}")
             wait
             clear
             [[ ${_list_gnome_extras_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_gnome_extras_pkg[*]} 2>/tmp/.errlog
@@ -744,7 +692,7 @@ install_de_wm() {
         "${_desktop_menu[7]}") # KDE5 BASE
              clear
             info_search_pkg
-            _list_kde5base_pkg=$(check_s_lst_pkg "${_kde5base_pkg[*]}")
+            _list_kde5base_pkg=$(check_dm_lst_pkg "${_kde5base_pkg[*]}")
             wait
             clear
             [[ ${_list_kde5base_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_kde5base_pkg[*]} 2>/tmp/.errlog
@@ -752,7 +700,7 @@ install_de_wm() {
         "${_desktop_menu[8]}") # KDE5 
              clear
              info_search_pkg
-            _list_kde_pkg=$(check_s_lst_pkg "${_kde_pkg[*]}")
+            _list_kde_pkg=$(check_dm_lst_pkg "${_kde_pkg[*]}")
             wait
             clear
             [[ ${_list_kde_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_kde_pkg[*]} 2>/tmp/.errlog
@@ -768,7 +716,7 @@ install_de_wm() {
          "${_desktop_menu[9]}") # LXDE
               clear
               info_search_pkg
-              _list_lxde_pkg=$(check_s_lst_pkg "${_lxde_pkg[*]}")
+              _list_lxde_pkg=$(check_dm_lst_pkg "${_lxde_pkg[*]}")
               wait
               clear
               [[ ${_list_lxde_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_lxde_pkg[*]} 2>/tmp/.errlog
@@ -777,7 +725,7 @@ install_de_wm() {
          "${_desktop_menu[10]}") # LXQT
               clear
               info_search_pkg
-            _list_lxqt_pkg=$(check_s_lst_pkg "${_lxqt_pkg[*]}")
+            _list_lxqt_pkg=$(check_dm_lst_pkg "${_lxqt_pkg[*]}")
             wait
             clear
             [[ ${_list_lxqt_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_lxqt_pkg[*]} 2>/tmp/.errlog
@@ -786,7 +734,7 @@ install_de_wm() {
          "${_desktop_menu[11]}") # MATE
               clear
               info_search_pkg
-            _list_mate_pkg=$(check_s_lst_pkg "${_mate_pkg[*]}")
+            _list_mate_pkg=$(check_dm_lst_pkg "${_mate_pkg[*]}")
             wait
             clear
             [[ ${_list_mate_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_mate_pkg[*]} 2>/tmp/.errlog
@@ -794,14 +742,14 @@ install_de_wm() {
         "${_desktop_menu[12]}") # MATE + Extras
                clear
               info_search_pkg
-            _list_mateextra_pkg=$(check_s_lst_pkg "${_mateextra_pkg[*]}")
+            _list_mateextra_pkg=$(check_dm_lst_pkg "${_mateextra_pkg[*]}")
             wait
             [[ ${_list_mateextra_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_mateextra_pkg[*]} 2>/tmp/.errlog
              ;;                 
         "${_desktop_menu[13]}") # Xfce
               clear
               info_search_pkg
-            _list_xfce4_pkg=$(check_s_lst_pkg "${_xfce4_pkg[*]}")
+            _list_xfce4_pkg=$(check_dm_lst_pkg "${_xfce4_pkg[*]}")
             wait
             clear
             [[ ${_list_xfce4_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_xfce4_pkg[*]} 2>/tmp/.errlog
@@ -809,7 +757,7 @@ install_de_wm() {
         "${_desktop_menu[14]}") # Xfce + Extras
               clear
               info_search_pkg
-            _list_xfce4_extra_pkg=$(check_s_lst_pkg "${_xfce4_extra_pkg[*]}")
+            _list_xfce4_extra_pkg=$(check_dm_lst_pkg "${_xfce4_extra_pkg[*]}")
             wait
             clear
             [[ ${_list_xfce4_extra_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_xfce4_extra_pkg[*]} 2>/tmp/.errlog
@@ -817,7 +765,7 @@ install_de_wm() {
         "${_desktop_menu[15]}") # Awesome
               clear
               info_search_pkg
-            _list_awesome_pkg=$(check_s_lst_pkg "${_awesome_pkg[*]}")
+            _list_awesome_pkg=$(check_dm_lst_pkg "${_awesome_pkg[*]}")
             wait
             clear
             [[ ${_list_awesome_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_awesome_pkg[*]} 2>/tmp/.errlog
@@ -825,7 +773,7 @@ install_de_wm() {
         "${_desktop_menu[16]}") #Fluxbox
               clear
               info_search_pkg
-            _list_fluxbox_pkg=$(check_s_lst_pkg "${_fluxbox_pkg[*]}")
+            _list_fluxbox_pkg=$(check_dm_lst_pkg "${_fluxbox_pkg[*]}")
             wait
             clear
             [[ ${_list_fluxbox_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_fluxbox_pkg[*]} 2>/tmp/.errlog
@@ -833,7 +781,7 @@ install_de_wm() {
         "${_desktop_menu[17]}") #i3
               clear
               info_search_pkg
-            _list_i3wm_pkg=$(check_s_lst_pkg "${_i3wm_pkg[*]}")
+            _list_i3wm_pkg=$(check_dm_lst_pkg "${_i3wm_pkg[*]}")
             wait
             clear
             [[ ${_list_i3wm_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_i3wm_pkg[*]} 2>/tmp/.errlog
@@ -841,7 +789,7 @@ install_de_wm() {
         "${_desktop_menu[18]}") #IceWM
               clear
               info_search_pkg
-            _list_icewm_pkg=$(check_s_lst_pkg "${_icewm_pkg[*]}")
+            _list_icewm_pkg=$(check_dm_lst_pkg "${_icewm_pkg[*]}")
             wait
             clear
             [[ ${_list_icewm_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_icewm_pkg[*]} 2>/tmp/.errlog
@@ -849,7 +797,7 @@ install_de_wm() {
         "${_desktop_menu[19]}") #Openbox
               clear
               info_search_pkg
-            _list_openbox_pkg=$(check_s_lst_pkg "${_openbox_pkg[*]}")
+            _list_openbox_pkg=$(check_dm_lst_pkg "${_openbox_pkg[*]}")
             wait
             clear
             [[ ${_list_openbox_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_openbox_pkg[*]} 2>/tmp/.errlog
@@ -857,7 +805,7 @@ install_de_wm() {
         "${_desktop_menu[20]}") #PekWM
               clear
               info_search_pkg
-            _list_pekwm_pkg=$(check_s_lst_pkg "${_pekwm_pkg[*]}")
+            _list_pekwm_pkg=$(check_dm_lst_pkg "${_pekwm_pkg[*]}")
             wait
             clear
             [[ ${_list_pekwm_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_pekwm_pkg[*]} 2>/tmp/.errlog
@@ -865,7 +813,7 @@ install_de_wm() {
         "${_desktop_menu[21]}") #WindowMaker
              clear
              info_search_pkg
-            _list_windowmaker_pkg=$(check_s_lst_pkg "${_windowmaker_pkg[*]}")
+            _list_windowmaker_pkg=$(check_dm_lst_pkg "${_windowmaker_pkg[*]}")
             wait
             clear
             [[ ${_list_windowmaker_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_windowmaker_pkg[*]} 2>/tmp/.errlog

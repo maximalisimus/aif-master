@@ -132,14 +132,15 @@ ANSWER="/tmp/.abif"
 # Architecture
 ARCHI=$(uname -m)            # Display whether 32 or 64 bit system
 _archi=$(uname -m)
-SYSTEM="Unknown"            # Display whether system is BIOS or UEFI. Default is "unknown"
-ROOT_PART=""                # ROOT partition
-UEFI_PART=""                # UEFI partition
-UEFI_MOUNT=""               # UEFI mountpoint
-INST_DEV=""                 # Device where system has been installed
-HIGHLIGHT=0                 # Highlight items for Main Menu
-HIGHLIGHT_SUB=0             # Highlight items for submenus
-SUB_MENU=""                 # Submenu to be highlighted
+SYSTEM="Unknown"            		# Display whether system is BIOS or UEFI. Default is "unknown"
+ROOT_PART=""                		# ROOT partition
+UEFI_PART=""                		# UEFI partition
+UEFI_MOUNT=""               		# UEFI mountpoint
+INST_DEV=""                 		# Device where system has been installed
+HIGHLIGHT=0                 		# Highlight items for Main Menu
+HIGHLIGHT_SUB=0             		# Highlight items for submenus
+SUB_MENU=""                 		# Submenu to be highlighted
+check_q_py="list_in_list.py"		# Check list in list
 
 # Logical Volume Management
 LVM=0                       # Logical Volume Management Detected?
@@ -226,22 +227,3 @@ _dlgrc_rt_rt="/root/.dialogrc"
 _dlgrc_hm_bp="$filesdir/dlg-home.bp"
 _dlgrc_rt_st_bp="$filesdir/dlg-rt-st.bp"
 _dlg_rt_rt_bp="$filesdir/dlg-rt-rt.bp"
-
-# /config/dialogrc-conf.sh						# Color dialog interface configured
-# /modules/installer-variables.sh				# list of variables
-# /config/list-pkg-forms.sh						# list of packages for uses the script
-# /config/setup_function.sh						# Function to setup on local package, p.c. build package in aur
-# /config/remove_old_v_pkg_function.sh			# Remove duble package on old version
-# /config/dependences_function.sh				# Dependences for script
-# /config/verify_package_folder.sh				# Check required folder and required files
-# /modules/core-functions.sh					# language, checks
-# /modules/configuration-functions.sh			# Keyboard, locale, time zone, FSTAB, mkinitcpio, user controls
-# /modules/system-partitioning.sh				# managing partitions, installing the boot
-# /modules/luks.sh								# Encryption
-# /modules/lvmunctions.sh						# system installation functions
-# /modules/swappiness-config.sh					# SWAPPINESS
-# /modules/devices-config.sh					# tune2fs
-# /modules/shell_installer.sh					# SHELL installer functions
-# /modules/main-interfaces.sh					# main menu interface
-# /modules/network.sh							# Network Function
-# /modules/ntp_configuration.sh					# Network Time Synchronized protocol configuration
