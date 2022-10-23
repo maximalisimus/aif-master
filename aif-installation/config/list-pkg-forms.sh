@@ -122,7 +122,7 @@ _zsh_sh=(zsh-completions)
 # User Package
 _archivers_pkg=(ark xarchiver unzip zip unrar p7zip file-roller)
 _ttf_pkg=(ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono terminus-font)
-_theme_pkg=(gnome-icon-theme breeze breeze-grub breeze-icons fontforge faenza-icon-theme ${_adwaita_dep[*]} alacarte hicolor-icon-theme)
+_theme_pkg=(gnome-icon-theme-extras breeze breeze-grub breeze-icons fontforge faenza-icon-theme ${_adwaita_dep[*]} alacarte hicolor-icon-theme)
 _ttf_theme_pkg=( ${_ttf_pkg[*]} ${_theme_pkg[*]} )
 #
 _icontheme_url="https://github.com/maximalisimus/LinuxLex-8-Icons-Theme/releases/download/v1.0/LinuxLex-8.tar.gz"
