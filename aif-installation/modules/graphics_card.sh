@@ -73,8 +73,10 @@ install_alsa_xorg_input() {
          arch_chroot "chown -R ${i}:users /home/${i}"
      done
      
+     mkdir -p ${MOUNTPOINT}/etc/modprobe.d/
+	 echo "blacklist    pcspkr" > ${MOUNTPOINT}/etc/modprobe.d/nobeep.conf
+     
      AXI_INSTALLED=1
-
 }
 
 setup_graphics_card() {
