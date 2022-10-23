@@ -288,6 +288,9 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_xfce4_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_xfce4_pkg[*]} 2>/tmp/.errlog
+            wait
+            fixed_xfce4_desktop
+            wait
              ;;            
         "${_desktop_menu[14]}") # Xfce + Extras
               clear
@@ -296,6 +299,9 @@ install_de_wm() {
             wait
             clear
             [[ ${_list_xfce4_extra_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_list_xfce4_extra_pkg[*]} 2>/tmp/.errlog
+            wait
+            fixed_xfce4_desktop
+            wait
              ;;
         "${_desktop_menu[15]}") # Awesome
               clear

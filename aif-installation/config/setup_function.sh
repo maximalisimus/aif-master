@@ -4,6 +4,38 @@
 ##                                                                  ##
 ###################################################################### 
 
+fixed_xfce4_desktop(){
+	_user_list=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
+	for i in ${_user_list[*]}; do
+		mkdir -p ${MOUNTPOINT}/home/${i}/.config/autostart/
+		echo "[Desktop Entry]" > ${MOUNTPOINT}/home/${i}/.config/autostart/xfwm4.desktop
+		echo "Encoding=UTF-8" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfwm4.desktop
+		echo "Version=0.9.4" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfwm4.desktop
+		echo "Type=Application" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfwm4.desktop
+		echo "Name=xfwm4" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfwm4.desktop
+		echo "Comment=" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfwm4.desktop
+		echo "Exec=xfwm4 --replace" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfwm4.desktop
+		echo "OnlyShowIn=XFCE;" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfwm4.desktop
+		echo "RunHook=0" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfwm4.desktop
+		echo "StartupNotify=false" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfwm4.desktop
+		echo "Terminal=false" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfwm4.desktop
+		echo "Hidden=false" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfwm4.desktop
+		echo "[Desktop Entry]" > ${MOUNTPOINT}/home/${i}/.config/autostart/xfdesktop.desktop
+		echo "Encoding=UTF-8" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfdesktop.desktop
+		echo "Version=0.9.4" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfdesktop.desktop
+		echo "Type=Application" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfdesktop.desktop
+		echo "Name=xfdesktop" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfdesktop.desktop
+		echo "Comment=" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfdesktop.desktop
+		echo "Exec=xfdesktop" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfdesktop.desktop
+		echo "OnlyShowIn=XFCE;" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfdesktop.desktop
+		echo "RunHook=0" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfdesktop.desktop
+		echo "StartupNotify=false" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfdesktop.desktop
+		echo "Terminal=false" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfdesktop.desktop
+		echo "Hidden=false" >> ${MOUNTPOINT}/home/${i}/.config/autostart/xfdesktop.desktop
+	done
+
+}
+
 fixed_deepin_desktop()
 {
     # /etc/systemd/system/resume@.service
