@@ -1,5 +1,12 @@
 #!/bin/bash
 
+test() {
+    
+    ping -c 3 google.com > /tmp/.outfile &
+    dialog --title "checking" --no-kill --tailboxbg /tmp/.outfile 20 60 
+
+}
+
 function ps_in_pkg()
 {
 	local _tmp_pkg
@@ -203,29 +210,6 @@ systemd_configuration(){
 	fi
 }
 
-xdg_configuration(){
-	xdg_detect=$(echo "${_current_pkgs[*]}" | grep -oi "xdg-user-dirs" | wc -l)
-	if [[ ${xdg_detect[*]} == 1 ]]; then
-		_user_list=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
-		declare -a _list_user
-		_list_user=( $_user_list )
-		unset _user_list
-		for i in ${_list_user[*]}; do
-			mkdir -p ${MOUNTPOINT}/home/"${i}"/.config/
-			touch ${MOUNTPOINT}/home/"${i}"/.config/user-dirs.dirs
-			echo "XDG_DESKTOP_DIR=\"\$HOME/Desktop\""  > ${MOUNTPOINT}/home/"${i}"/.config/user-dirs.dirs
-			echo "XDG_DOWNLOAD_DIR=\"\$HOME/Downloads\"" >> ${MOUNTPOINT}/home/"${i}"/.config/user-dirs.dirs
-			echo "XDG_TEMPLATES_DIR=\"\$HOME/Templates\"" >> ${MOUNTPOINT}/home/"${i}"/.config/user-dirs.dirs
-			echo "XDG_PUBLICSHARE_DIR=\"\$HOME/Public\"" >> ${MOUNTPOINT}/home/"${i}"/.config/user-dirs.dirs
-			echo "XDG_DOCUMENTS_DIR=\"\$HOME/Documents\"" >> ${MOUNTPOINT}/home/"${i}"/.config/user-dirs.dirs
-			echo "XDG_MUSIC_DIR=\"\$HOME/Music\"" >> ${MOUNTPOINT}/home/"${i}"/.config/user-dirs.dirs
-			echo "XDG_PICTURES_DIR=\"\$HOME/Images\"" >> ${MOUNTPOINT}/home/"${i}"/.config/user-dirs.dirs
-			echo "XDG_VIDEOS_DIR=\"\$HOME/Videos\"" >> ${MOUNTPOINT}/home/"${i}"/.config/user-dirs.dirs
-			arch_chroot "xdg-user-dirs-update"
-		done
-	fi
-}
-
 icontheme_configuration(){
 	if [[ $_icontheme_once == "0" ]]; then
 		_icontheme_once=1
@@ -252,7 +236,16 @@ wallpapers_configuration(){
 	wait
 	tar -C ${MOUNTPOINT}/usr/share/wallpapers/ --strip-components=1 -xvzf "${_wallpapers_pkg[*]}" wallpapers/Carbon-Mesh/
 	wait
-	rm -rf "${_wallpapers_pkg[*]}"
+	tar -xvzf "${_wallpapers_pkg[*]}"
+	wait
+	mkdir -p ${MOUNTPOINT}/usr/share/wallpapers/{Full-HD,Carbon-Mesh}
+	wait
+	cp -Rf ./wallpapers/Full-HD/* ${MOUNTPOINT}/usr/share/wallpapers/Full-HD/
+	wait
+	cp -Rf ./wallpapers/Carbon-Mesh/* ${MOUNTPOINT}/usr/share/wallpapers/Carbon-Mesh/
+	wait
+	rm -rf ./wallpapers/  "${_wallpapers_pkg[*]}"
+	wait
 }
 
 greeter_configuration(){

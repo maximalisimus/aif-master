@@ -1105,11 +1105,3 @@ install_nm() {
       dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstNMDoneTitle" --msgbox "$_InstNMErrBody" 0 0
    fi
 }
-
-
-test() {
-    
-    ping -c 3 google.com > /tmp/.outfile &
-    dialog --title "checking" --no-kill --tailboxbg /tmp/.outfile 20 60 
-
-}

@@ -29,8 +29,6 @@ install_gengen()
     arch_chroot "systemctl enable acpid avahi-daemon cronie org.cups.cupsd.service systemd-timesyncd.service" 2>/tmp/.errlog
     check_for_error
     wait
-    xdg_configuration
-    wait
 }
 
 install_archivers()
