@@ -72,10 +72,7 @@ install_alsa_xorg_input() {
          cp -f ${MOUNTPOINT}/etc/X11/xinit/xinitrc ${MOUNTPOINT}/home/$i
          arch_chroot "chown -R ${i}:users /home/${i}"
      done
-     
-     mkdir -p ${MOUNTPOINT}/etc/modprobe.d/
-	 echo "blacklist    pcspkr" > ${MOUNTPOINT}/etc/modprobe.d/nobeep.conf
-     
+          
      AXI_INSTALLED=1
 }
 

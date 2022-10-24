@@ -97,6 +97,9 @@ install_base() {
     fi
     mirrorlist_question 
     
+	mkdir -p ${MOUNTPOINT}/etc/modprobe.d/
+	echo "blacklist    pcspkr" > ${MOUNTPOINT}/etc/modprobe.d/nobeep.conf
+	
     outline_dhcpcd
     
     sed -i 's/\# include \"\/usr\/share\/nano\/\*.nanorc\"/include \"\/usr\/share\/nano\/\*.nanorc\"/' ${MOUNTPOINT}/etc/nanorc 2>>/tmp/.errlog
