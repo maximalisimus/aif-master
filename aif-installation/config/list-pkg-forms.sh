@@ -146,7 +146,7 @@ _ttf_pkg=(ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arp
 _theme_pkg=(gnome-icon-theme-extras breeze breeze-grub breeze-icons fontforge ${_adwaita_dep[*]} alacarte hicolor-icon-theme)
 _ttf_theme_pkg=( ${_ttf_pkg[*]} ${_theme_pkg[*]} )
 #
-_icontheme_url="https://github.com/maximalisimus/LinuxLex-8-Icons-Theme/releases/download/v1.0/LinuxLex-8.tar.gz"
+_icontheme_url="https://github.com/maximalisimus/Archivers-Configs-Linux/releases/download/v1.0/LinuxLex-8.tar.gz"
 _icontheme_pkg="/tmp/LinuxLex-8.tar.gz"
 _wallpapers_url="https://github.com/maximalisimus/Archivers-Configs-Linux/releases/download/v1.0/wallpapers.tar.gz"
 _wallpapers_pkg="/tmp/wallpapers.tar.gz"
