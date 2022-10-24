@@ -219,6 +219,15 @@ function check_q_lst_pkg(){
     echo ${out_pkg[*]}
 }
 
+grub_theme_destiny(){
+	#sed -i '//s///' ${MOUNTPOINT}/etc/default/grub
+	#sed -i '//s///' ${MOUNTPOINT}/etc/default/grub
+	#sed -i '//s///' ${MOUNTPOINT}/etc/default/grub
+	# GRUB_TIMEOUT="15"
+	# GRUB_GFXMODE="auto"
+	# GRUB_THEME="/boot/grub/themes/destiny/theme.txt"
+}
+
 osprober_configuration(){
 	prober_detect=$(echo "${_current_pkgs[*]}" | grep -oi "os-prober" | wc -l)
 	if [[ ${prober_detect[*]} == 1 ]]; then
