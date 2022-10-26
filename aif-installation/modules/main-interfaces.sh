@@ -29,10 +29,11 @@ prep_menu() {
     "2" "$_PrepMirror" \
     "3" "$_DevShowOpt" \
     "4" "$_PrepPartDisk" \
-    "5" "$_PrepLUKS" \
-    "6" "$_PrepLVM" \
-    "7" "$_PrepMntPart" \
-    "8" "$_Back" 2>${ANSWER}
+    "5" "$_InstMultipleTitle" \
+    "6" "$_PrepLUKS" \
+    "7" "$_PrepLVM" \
+    "8" "$_PrepMntPart" \
+    "9" "$_Back" 2>${ANSWER}
 
     HIGHLIGHT_SUB=$(cat ${ANSWER})
     case $(cat ${ANSWER}) in
@@ -46,14 +47,17 @@ prep_menu() {
              select_device
              create_partitions
              ;;
-        "5") luks_menu
+        "5") multiple_question
+			;;
+        "6") luks_menu
             ;;
-        "6") detect_lvm
+        "7") detect_lvm
              deactivate_lvm
              find_lvm_partitions
              create_lvm
              ;;
-        "7") mount_partitions
+        "8") multiple_question 
+			mount_partitions
              ;;        
           *) main_menu_online
              ;;

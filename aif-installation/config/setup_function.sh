@@ -253,7 +253,7 @@ refind_configuration(){
 	fi
 }
 
-systemd_configuration(){
+systemdboot_configuration(){
 	systemd_detect=$(echo "${_current_pkgs[*]}" | grep -oi "efibootmgr" | wc -l)
 	if [[ ${systemd_detect[*]} == 1 ]]; then
 		mkdir -p ${MOUNTPOINT}/etc/pacman.d/hooks/
@@ -349,4 +349,21 @@ fonts_configuration(){
 		wait
 		check_for_error
 	fi
+}
+
+multiple_question(){
+	dialog --default-item 2 --backtitle "VERSION - SYSTEM (ARCHI)" --title "$_InstMultipleTitle" \
+    --menu "$_InstMultipleBody" 0 0 3 \
+ 	"1" "${_InstMultiple_msg} Windows/Linux/MacOS" \
+	"2" "${_InstMultiple_one}" \
+	"3" "$_Back"	2>${ANSWER}	
+	variable=($(cat ${ANSWER}))
+    case $variable in
+        "1") _multiple_system=1
+             ;;
+        "2") _multiple_system=0
+             ;;
+        "3") prep_menu
+             ;;
+     esac
 }

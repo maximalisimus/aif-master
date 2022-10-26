@@ -543,19 +543,23 @@ btrfs_mount_opts() {
        fi
        check_for_error
        
-       # Inform users of the mountpoint options and consequences       
-       dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MntUefiTitle" --menu "$_MntUefiBody"  0 0 2 \
-       "1" $"/boot" \
-       "2" $"/boot/efi" 2>${ANSWER}
-       
-       case $(cat ${ANSWER}) in
-        "1") UEFI_MOUNT="/boot"
-             ;;
-        "2") UEFI_MOUNT="/boot/efi"
-             ;;
-          *) config_base_menu
-             ;;
-       esac
+       # Inform users of the mountpoint options and consequences
+       if [[ "${_multiple_system}" -eq "1" ]]; then
+			UEFI_MOUNT="/boot/efi"
+       else
+			dialog --default-item 2 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MntUefiTitle" --menu "$_MntUefiBody"  0 0 2 \
+			   "1" $"/boot" \
+			   "2" $"/boot/efi" 2>${ANSWER}
+			   
+			   case $(cat ${ANSWER}) in
+				"1") UEFI_MOUNT="/boot"
+					 ;;
+				"2") UEFI_MOUNT="/boot/efi"
+					 ;;
+				  *) config_base_menu
+					 ;;
+			   esac
+       fi
        
        mkdir -p ${MOUNTPOINT}${UEFI_MOUNT} 2>/tmp/.errlog
        # UEFI

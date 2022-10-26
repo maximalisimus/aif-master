@@ -763,3 +763,9 @@ _restrinct_desc_3="Запретить внесение изменений"
 _restrinct_desc_4="Не синхронизироваться с хостом"
 _restrinct_desc_5="Не принимать запросы"
 #
+# Multiple System
+#
+_InstMultipleTitle="Несколько ОС"
+_InstMultipleBody="\nУстановить рядос с другой ОС? \n"
+_InstMultiple_msg="Рядом с"
+_InstMultiple_one="Единственная"

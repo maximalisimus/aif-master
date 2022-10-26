@@ -49,6 +49,7 @@ archivers_menu=""           # Archivers save menu
 _ttf_menu=""                # TTF Theme save menu
 _standart_pkg_menu=""       # Standart package save menu
 _other_pkg_menu=""          # Additional package save menu
+check_q_py="list_in_list.py"		# Check list in list
 _wifi_menu=""
 _dm_desktop_menu=""
 _list_dm_menu=""
@@ -138,7 +139,6 @@ INST_DEV=""                 		# Device where system has been installed
 HIGHLIGHT=0                 		# Highlight items for Main Menu
 HIGHLIGHT_SUB=0             		# Highlight items for submenus
 SUB_MENU=""                 		# Submenu to be highlighted
-check_q_py="list_in_list.py"		# Check list in list
 
 # Logical Volume Management
 LVM=0                       # Logical Volume Management Detected?
@@ -171,6 +171,7 @@ FS_OPTS=""                     # FS mount options available
 CHK_NUM=16                     # Used for FS mount options checklist length
 _orders=0                      # Skip, resume installation
 _sstmd_rslvd_once=0			   # Disable systemd-resolved
+_multiple_system=0             # How to install system - multiple or one?
 
 # Language Support
 CURR_LOCALE="en_US.UTF-8"      # Default Locale
