@@ -183,9 +183,6 @@ systemd_boot_uefi_install(){
 	  wait
 }
 
-# Adapted from AIS. Integrated the configuration elements.
-install_bootloader() {
-
 bios_bootloader() { 
     
    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstBiosBtTitle" \
@@ -215,16 +212,13 @@ uefi_bootloader() {
     dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstUefiBtTitle" \
     --menu "$_InstUefiBtBody" 0 0 3 \
     "1" $"Grub2" \
-    "2" $"rEFInd" \
-    "3" $"systemd-boot" \
-    "4" "$_Back" 2>${ANSWER}
+    "2" $"systemd-boot" \
+    "3" "$_Back" 2>${ANSWER}
 
      case $(cat ${ANSWER}) in
      "1") grub_uefi_install
           ;;
-     "2") refind_uefi_install
-		;;
-     "3") systemd_boot_uefi_install
+     "2") systemd_boot_uefi_install
           ;;
           
       *) install_base_menu
@@ -232,6 +226,9 @@ uefi_bootloader() {
       esac 
 
 }
+
+# Adapted from AIS. Integrated the configuration elements.
+install_bootloader() {
 
     check_mount
     # Set the default PATH variable
@@ -253,8 +250,11 @@ uefi_bootloader() {
        else
 			grub_uefi_install
 			wait
-			refind_uefi_install
-			wait
+			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "$_refind_yn_body" 0 0
+			if [[ $? -eq 0 ]]; then
+				refind_uefi_install
+				wait
+			fi
        fi
     fi
 }
