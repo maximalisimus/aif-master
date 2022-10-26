@@ -172,6 +172,7 @@ CHK_NUM=16                     # Used for FS mount options checklist length
 _orders=0                      # Skip, resume installation
 _sstmd_rslvd_once=0			   # Disable systemd-resolved
 _multiple_system=0             # How to install system - multiple or one?
+_refind_question=0             # Search refind else system
 
 # Language Support
 CURR_LOCALE="en_US.UTF-8"      # Default Locale

@@ -114,16 +114,24 @@ refind_uefi_install(){
 	  wait
 	  clear
 	  [[ ${_list_reefind_pkg[*]} != "" ]] && ps_in_pkg "${_list_reefind_pkg[*]}"
-
-	  dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SetRefiDefTitle" --yesno "$_SetRefiDefBody ${UEFI_MOUNT}/EFI/boot $_SetRefiDefBody2" 0 0
+	  	  
+	  clear
 	  
-	  if [[ $? -eq 0 ]]; then
-		 clear
-		 arch_chroot "refind-install --usedefault ${UEFI_PART} --alldrivers" 2>/tmp/.errlog
-	  else   
-		 clear
-		 arch_chroot "refind-install" 2>/tmp/.errlog
-	  fi   
+	  if [[ "${_refind_question[*]}" -gt 0 ]]; then
+			arch_chroot "refind-install --usedefault ${UEFI_PART} --alldrivers" 2>/tmp/.errlog
+	  else
+			arch_chroot "refind-install" 2>/tmp/.errlog
+	  fi
+	  
+	  #dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SetRefiDefTitle" --yesno "$_SetRefiDefBody ${UEFI_MOUNT}/EFI/boot $_SetRefiDefBody2" 0 0
+	  
+	  # if [[ $? -eq 0 ]]; then
+		# clear
+		# arch_chroot "refind-install --usedefault ${UEFI_PART} --alldrivers" 2>/tmp/.errlog
+	  # else   
+		# clear
+		# arch_chroot "refind-install" 2>/tmp/.errlog
+	  # fi   
 	  
 	  check_for_error
 	  
@@ -234,7 +242,9 @@ install_bootloader() {
     # Set the default PATH variable
     arch_chroot "PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/core_perl" 2>/tmp/.errlog
     check_for_error
-
+	
+	_refind_question=$(find ${MOUNTPOINT}/boot/efi/ -type f -iname "refind*" | grep -Ei "conf" | wc -l)
+	
     if [[ $SYSTEM == "BIOS" ]]; then
        if [[ "${_multiple_system}" == "0" ]]; then
 			bios_bootloader
@@ -250,10 +260,14 @@ install_bootloader() {
        else
 			grub_uefi_install
 			wait
-			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "$_refind_yn_body" 0 0
-			if [[ $? -eq 0 ]]; then
+			if [[ "${_refind_question[*]}" -gt 0 ]]; then
 				refind_uefi_install
-				wait
+			else
+				 dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "$_refind_yn_body" 0 0
+				 
+				if [[ $? -eq 0 ]]; then
+					refind_uefi_install
+				fi   
 			fi
        fi
     fi
