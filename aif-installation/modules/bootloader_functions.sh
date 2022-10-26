@@ -85,16 +85,17 @@ grub_uefi_install(){
 	  arch_chroot "grub-install --target=x86_64-efi --efi-directory=${UEFI_MOUNT} --bootloader-id=arch_grub --recheck" 2>/tmp/.errlog
 	  arch_chroot "grub-mkconfig -o /boot/grub/grub.cfg" 2>>/tmp/.errlog
 	  check_for_error
-
-	  # Ask if user wishes to set Grub as the default bootloader and act accordingly
-	  dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SetGrubDefTitle" --yesno "$_SetGrubDefBody ${UEFI_MOUNT}/EFI/boot $_SetGrubDefBody2" 0 0
-	  
-	  if [[ $? -eq 0 ]]; then
-		 arch_chroot "mkdir ${UEFI_MOUNT}/EFI/boot" 2>/tmp/.errlog
-		 arch_chroot "cp -r ${UEFI_MOUNT}/EFI/arch_grub/grubx64.efi ${UEFI_MOUNT}/EFI/boot/bootx64.efi" 2>>/tmp/.errlog
-		 check_for_error
-		 dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SetDefDoneTitle" --infobox "\nGrub $_SetDefDoneBody" 0 0
-		 sleep 2
+	  if [[ "${_multiple_system}" == "0" ]]; then
+		  # Ask if user wishes to set Grub as the default bootloader and act accordingly
+		  dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SetGrubDefTitle" --yesno "$_SetGrubDefBody ${UEFI_MOUNT}/EFI/boot $_SetGrubDefBody2" 0 0
+		  
+		  if [[ $? -eq 0 ]]; then
+			 arch_chroot "mkdir -p ${UEFI_MOUNT}/EFI/boot" 2>/tmp/.errlog
+			 arch_chroot "cp -r ${UEFI_MOUNT}/EFI/arch_grub/grubx64.efi ${UEFI_MOUNT}/EFI/boot/bootx64.efi" 2>>/tmp/.errlog
+			 check_for_error
+			 dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SetDefDoneTitle" --infobox "\nGrub $_SetDefDoneBody" 0 0
+			 sleep 2
+		  fi
 	  fi
 	  wait
 	  osprober_configuration
@@ -235,7 +236,7 @@ uefi_bootloader() {
     check_for_error
 
     if [[ $SYSTEM == "BIOS" ]]; then
-       if [[ "${_multiple_system}" -eq "0" ]]; then
+       if [[ "${_multiple_system}" == "0" ]]; then
 			bios_bootloader
 			wait
        else
@@ -243,7 +244,7 @@ uefi_bootloader() {
 			wait
        fi
     else
-		if [[ "${_multiple_system}" -eq "0" ]]; then
+		if [[ "${_multiple_system}" == "0" ]]; then
 			uefi_bootloader
 			wait
        else

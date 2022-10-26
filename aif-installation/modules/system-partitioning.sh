@@ -544,7 +544,7 @@ btrfs_mount_opts() {
        check_for_error
        
        # Inform users of the mountpoint options and consequences
-       if [[ "${_multiple_system}" -eq "1" ]]; then
+       if [[ "${_multiple_system}" == "1" ]]; then
 			UEFI_MOUNT="/boot/efi"
        else
 			dialog --default-item 2 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MntUefiTitle" --menu "$_MntUefiBody"  0 0 2 \
