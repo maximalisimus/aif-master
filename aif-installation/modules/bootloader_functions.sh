@@ -243,7 +243,10 @@ install_bootloader() {
     arch_chroot "PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/core_perl" 2>/tmp/.errlog
     check_for_error
 	
-	_refind_question=$(find ${MOUNTPOINT}/boot/efi/ -type f -iname "refind*" | grep -Ei "conf" | wc -l)
+	if [[ "${_refind_setup_once}" == "0" ]]; then
+		_refind_setup_once=1
+		_refind_question=$(find ${MOUNTPOINT}/boot/efi/ -type f -iname "refind*" | grep -Ei "conf" | wc -l)
+	fi
 	
     if [[ $SYSTEM == "BIOS" ]]; then
        if [[ "${_multiple_system}" == "0" ]]; then
