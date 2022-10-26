@@ -114,7 +114,9 @@ refind_uefi_install(){
 	  wait
 	  clear
 	  [[ ${_list_reefind_pkg[*]} != "" ]] && ps_in_pkg "${_list_reefind_pkg[*]}"
-	  	  
+	  
+	  wait
+	  
 	  clear
 	  
 	  if [[ "${_refind_question[*]}" -gt 0 ]]; then
@@ -122,6 +124,8 @@ refind_uefi_install(){
 	  else
 			arch_chroot "refind-install" 2>/tmp/.errlog
 	  fi
+	  
+	  wait
 	  
 	  #dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SetRefiDefTitle" --yesno "$_SetRefiDefBody ${UEFI_MOUNT}/EFI/boot $_SetRefiDefBody2" 0 0
 	  
