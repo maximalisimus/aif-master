@@ -360,8 +360,10 @@ multiple_question(){
 	variable=($(cat ${ANSWER}))
     case $variable in
         "1") _multiple_system=1
+			_multiple_once=1
              ;;
         "2") _multiple_system=0
+			_multiple_once=1
              ;;
         "3") prep_menu
              ;;

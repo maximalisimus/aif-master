@@ -56,7 +56,9 @@ prep_menu() {
              find_lvm_partitions
              create_lvm
              ;;
-        "8") multiple_question 
+        "8") if [[ "${_multiple_once}" == "0" ]]; then
+				multiple_question
+			fi 
 			mount_partitions
              ;;        
           *) main_menu_online
