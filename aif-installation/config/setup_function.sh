@@ -299,11 +299,21 @@ wallpapers_configuration(){
 	wait
 	mkdir -p ${MOUNTPOINT}/usr/share/wallpapers/{Full-HD,Carbon-Mesh}
 	wait
-	cp -Rf ./wallpapers/Full-HD/* ${MOUNTPOINT}/usr/share/wallpapers/Full-HD/
+	cp -Rf /tmp/wallpapers/Full-HD/* ${MOUNTPOINT}/usr/share/wallpapers/Full-HD/
 	wait
-	cp -Rf ./wallpapers/Carbon-Mesh/* ${MOUNTPOINT}/usr/share/wallpapers/Carbon-Mesh/
+	cp -Rf /tmp/wallpapers/Carbon-Mesh/* ${MOUNTPOINT}/usr/share/wallpapers/Carbon-Mesh/
 	wait
-	rm -rf ./wallpapers/  "${_wallpapers_pkg[*]}"
+	_user_list=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
+	for i in ${_user_list[*]}; do
+		mkdir -p ${MOUNTPOINT}/home/"${i}"/wallpapers/{Full-HD,Carbon-Mesh}
+		wait
+		cp -Rf /tmp/wallpapers/Full-HD/* ${MOUNTPOINT}/home/"${i}"/wallpapers/Full-HD/
+		wait
+		cp -Rf /tmp/wallpapers/Carbon-Mesh/* ${MOUNTPOINT}/home/"${i}"/wallpapers/Carbon-Mesh/
+		wait
+	done
+	wait
+	rm -rf /tmp/wallpapers/  "${_wallpapers_pkg[*]}"
 	wait
 }
 
