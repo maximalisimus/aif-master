@@ -742,4 +742,12 @@ _InstMultiple_one="Sistema operativo singolo"
 _refind_yn_title="Installazione di rEFInd"
 _refind_yn_body="\nSe uno dei tuoi dischi ha già rEFInd installato, rifiuta questa installazione.\nVuoi comunque installare rEFInd su disco?\n"
 #
+# Icon-theme, Wallpapers, DM theme
+#
+_greeter_ttl="Personalizzazione dell'aspetto"
+_greeter_bd="\nOgni utente nella home directory ~ / ha una cartella sfondi con immagini HD per il desktop.\nNel percorso ${MOUNTPOINT} / usr/share/ wallpapers / ci sono le immagini per LightDM (copia della cartella precedente).\n"
+_icontheme_bd="\nOgni utente nella home directory ~/ ha una cartella .icons, che contiene un tema aggiuntivo con le icone Linux-Lex-8 per il desktop di ogni utente separatamente.\n"
+_multiple_bd_one="\nUtilizzare i parametri di installazione per l'avvio corretto di più sistemi operativi sullo stesso PC in modalità UEFI.\n"
+_multiple_bd_two="\nUtilizzare i parametri di installazione per l'avvio corretto di un sistema operativo su un PC in modalità UEFI.\n"
+#
 

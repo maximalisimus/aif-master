@@ -283,6 +283,8 @@ icontheme_configuration(){
 		done
 		wait
 		rm -rf "${_icontheme_pkg[*]}"
+		wait
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_greeter_ttl" --msgbox "$_icontheme_bd" 0 0
 	fi
 }
 
@@ -343,6 +345,9 @@ greeter_configuration(){
 			echo -e -n "~separator;~language;~separator;~a11y;~separator;~power;" >> ${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf
 			echo -e -n "~separator;~spacer;~host;~spacer;~clock;~spacer" >> ${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf
 		fi
+		wait
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_greeter_ttl" --msgbox "$_greeter_bd" 0 0
+		wait
 	fi
 }
 
@@ -371,9 +376,11 @@ multiple_question(){
     case $variable in
         "1") _multiple_system=1
 			_multiple_once=1
+			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstMultipleTitle" --msgbox "$_multiple_bd_one" 0 0
              ;;
         "2") _multiple_system=0
 			_multiple_once=1
+			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstMultipleTitle" --msgbox "$_multiple_bd_two" 0 0
              ;;
         "3") prep_menu
              ;;

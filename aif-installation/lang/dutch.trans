@@ -747,3 +747,11 @@ _InstMultiple_one="Het enige OS"
 _refind_yn_title="Refind installeren"
 _refind_yn_body="\nAls rEFInd al op een van uw schijven is geïnstalleerd, weigert u deze installatie.\nWilt u nog steeds rEFInd op schijf installeren?\n"
 #
+# Icon-theme, Wallpapers, DM theme
+#
+_greeter_ttl="Het uiterlijk aanpassen"
+_greeter_bd="\nElke gebruiker in de home directory ~ / heeft een wallpapers map met HD beelden voor het bureaublad.\nHet pad ${MOUNTPOINT}/usr/share/ wallpapers / bevat afbeeldingen voor LightDM (een kopie van de vorige map).\n"
+_icontheme_bd="\nElke gebruiker heeft een .icons map in de home directory~/, die een extra thema bevat met Linux-Lex-8 iconen voor het bureaublad van elke gebruiker afzonderlijk.\n"
+_multiple_bd_one="\nToepassing van installatieparameters voor het correct opstarten van verschillende besturingssystemen op één PC in UEFI-modus.\n"
+_multiple_bd_two="\nToepassing van installatieparameters voor het correct opstarten van één besturingssysteem op één PC in UEFI-modus.\n"
+#

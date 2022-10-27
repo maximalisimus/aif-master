@@ -750,4 +750,12 @@ _InstMultiple_one="Das einzige Betriebssystem"
 _refind_yn_title="Installieren von rEFInd"
 _refind_yn_body="\nWenn rEFInd bereits auf einem Ihrer Laufwerke installiert ist, verzichten Sie auf diese Installation.\nMöchten Sie rEFInd trotzdem auf der Festplatte installieren?\n"
 #
+# Icon-theme, Wallpapers, DM theme
+#
+_greeter_ttl="Anpassen des Aussehens"
+_greeter_bd="\nJeder Benutzer hat im Home-Verzeichnis ~/ einen Ordner wallpapers mit HD-Bildern für den Desktop.\nDer Pfad ${MOUNTPOINT}/usr/share/wallpapers/ enthält Bilder für LightDM (eine Kopie des vorherigen Ordners).\n"
+_icontheme_bd="\nJeder Benutzer hat einen Ordner im Home-Verzeichnis ~/ .icons, die ein zusätzliches Thema mit Linux-Lex-8-Symbolen für den Desktop jedes Benutzers separat enthält.\n"
+_multiple_bd_one="\nWendet die Installationsoptionen an, um mehrere Betriebssysteme im UEFI-Modus auf demselben PC zu booten.\n"
+_multiple_bd_two="\nWendet die Installationsoptionen an, um ein Betriebssystem im UEFI-Modus auf einem PC zu booten.\n"
+#
 

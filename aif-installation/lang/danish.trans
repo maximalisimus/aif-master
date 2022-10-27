@@ -758,3 +758,11 @@ _InstMultiple_one="Det eneste OS"
 _refind_yn_title="Installation af rEFInd"
 _refind_yn_body="\nHvis rEFInd allerede er installeret på en af dine diske, skal du nægte denne installation.\nVil du stadig installere rEFInd til disk?\n"
 #
+# Icon-theme, Wallpapers, DM theme
+#
+_greeter_ttl="Tilpasning af udseendet"
+_greeter_bd="\nHver bruger i hjemmemappen ~ / har en tapetmappe med HD-billeder til skrivebordet.\nStien ${MOUNTPOINT}/usr/share/ baggrunde / indeholder billeder til LightDM (en kopi af den forrige mappe).\n"
+_icontheme_bd="\nHver bruger har en .ikonmappe i hjemmemappen~/, som indeholder et ekstra tema med ikoner for hver brugers skrivebord separat.\n"
+_multiple_bd_one="\nAnvendelse af installationsparametre til korrekt opstart af flere operativsystemer på en PC i UEFI-tilstand.\n"
+_multiple_bd_two="\nAnvendelse af installationsparametre til korrekt opstart af et operativsystem på en PC i UEFI-tilstand.\n"
+#

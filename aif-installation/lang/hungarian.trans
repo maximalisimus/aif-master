@@ -769,4 +769,12 @@ _InstMultiple_one="Az egyetlen operációs rendszer"
 _refind_yn_title="Refind telepítése"
 _refind_yn_body="\nHa a rEFInd már telepítve van az egyik lemezére, utasítsa el ezt a telepítést.\nMég mindig szeretné telepíteni a rEFInd-et a lemezre?\n"
 #
+# Icon-theme, Wallpapers, DM theme
+#
+_greeter_ttl="A megjelenés testreszabása"
+_greeter_bd="\nA ~ / otthoni könyvtár minden felhasználójának van egy háttérkép mappája HD képekkel az asztalhoz.\nA ${MOUNTPOINT}/usr/share/wallpapers / elérési út képeket tartalmaz a LightDM számára (az előző mappa másolata).\n"
+_icontheme_bd="\nMinden felhasználónak van egy .ikonok mappát a home könyvtárban~/, amely egy további témát tartalmaz Linux-Lex-8 ikonokkal minden felhasználó asztalához külön-külön.\n"
+_multiple_bd_one="\nTelepítési paraméterek alkalmazása több operációs rendszer helyes indításához egy számítógépen UEFI módban.\n"
+_multiple_bd_two="\nTelepítési paraméterek alkalmazása egy operációs rendszer helyes indításához egy számítógépen UEFI módban.\n"
+#
 
