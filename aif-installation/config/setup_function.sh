@@ -272,32 +272,32 @@ systemdboot_configuration(){
 icontheme_configuration(){
 	if [[ $_icontheme_once == "0" ]]; then
 		_icontheme_once=1
-		wget "${_icontheme_url[*]}" -O "${_icontheme_pkg[*]}"
+		wget "${_icontheme_url[*]}" -O /tmp/"${_icontheme_pkg[*]}"
 		wait
 		_user_list=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
 		for i in ${_user_list[*]}; do
 			mkdir -p ${MOUNTPOINT}/home/"${i}"/.icons/
 			wait
-			tar -C ${MOUNTPOINT}/home/"${i}"/.icons/ -xvzf "${_icontheme_pkg[*]}"
+			tar -C ${MOUNTPOINT}/home/"${i}"/.icons/ -xvzf /tmp/"${_icontheme_pkg[*]}"
 			wait
 		done
 		wait
-		rm -rf "${_icontheme_pkg[*]}"
+		rm -rf /tmp/"${_icontheme_pkg[*]}"
 		wait
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_greeter_ttl" --msgbox "$_icontheme_bd" 0 0
 	fi
 }
 
 wallpapers_configuration(){
-	wget "${_wallpapers_url[*]}" -O "${_wallpapers_pkg[*]}"
+	wget "${_wallpapers_url[*]}" -O /tmp/"${_wallpapers_pkg[*]}"
 	wait
 	mkdir -p ${MOUNTPOINT}/usr/share/wallpapers/
 	wait
-	tar -C ${MOUNTPOINT}/usr/share/wallpapers/ --strip-components=1 -xvzf "${_wallpapers_pkg[*]}" wallpapers/Full-HD/
+	tar -C ${MOUNTPOINT}/usr/share/wallpapers/ --strip-components=1 -xvzf /tmp/"${_wallpapers_pkg[*]}" wallpapers/Full-HD/
 	wait
-	tar -C ${MOUNTPOINT}/usr/share/wallpapers/ --strip-components=1 -xvzf "${_wallpapers_pkg[*]}" wallpapers/Carbon-Mesh/
+	tar -C ${MOUNTPOINT}/usr/share/wallpapers/ --strip-components=1 -xvzf /tmp/"${_wallpapers_pkg[*]}" wallpapers/Carbon-Mesh/
 	wait
-	tar -xvzf "${_wallpapers_pkg[*]}"
+	tar -xvzf /tmp/"${_wallpapers_pkg[*]}"
 	wait
 	mkdir -p ${MOUNTPOINT}/usr/share/wallpapers/{Full-HD,Carbon-Mesh}
 	wait
@@ -315,7 +315,7 @@ wallpapers_configuration(){
 		wait
 	done
 	wait
-	rm -rf /tmp/wallpapers/  "${_wallpapers_pkg[*]}"
+	rm -rf /tmp/wallpapers/  /tmp/"${_wallpapers_pkg[*]}"
 	wait
 }
 
@@ -354,11 +354,11 @@ greeter_configuration(){
 fonts_configuration(){
 	if [[ $_truetype_once == "0" ]]; then
 		_truetype_once=1
-		wget "${_truetype_url[*]}" -O "${_truetype_pkg[*]}"
+		wget "${_truetype_url[*]}" -O /tmp/"${_truetype_pkg[*]}"
 		wait
-		tar -C ${MOUNTPOINT}/usr/share/fonts/ -xvzf "${_truetype_pkg[*]}"
+		tar -C ${MOUNTPOINT}/usr/share/fonts/ -xvzf /tmp/"${_truetype_pkg[*]}"
 		wait
-		rm -rf "${_truetype_pkg[*]}"
+		rm -rf /tmp/"${_truetype_pkg[*]}"
 		wait
 		arch-chroot $MOUNTPOINT /bin/bash -c "fc-cache –fv" 2>/tmp/.errlog
 		wait

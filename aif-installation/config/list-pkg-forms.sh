@@ -147,15 +147,15 @@ _theme_pkg=(gnome-icon-theme-extras breeze breeze-grub breeze-icons fontforge ${
 _ttf_theme_pkg=( ${_ttf_pkg[*]} ${_theme_pkg[*]} )
 #
 _icontheme_url="https://github.com/maximalisimus/Archivers-Configs-Linux/releases/download/v1.0/LinuxLex-8.tar.gz"
-_icontheme_pkg="/tmp/LinuxLex-8.tar.gz"
+_icontheme_pkg="LinuxLex-8.tar.gz"
 _wallpapers_url="https://github.com/maximalisimus/Archivers-Configs-Linux/releases/download/v1.0/wallpapers.tar.gz"
-_wallpapers_pkg="/tmp/wallpapers.tar.gz"
+_wallpapers_pkg="wallpapers.tar.gz"
 _truetype_url="https://github.com/maximalisimus/Archivers-Configs-Linux/releases/download/v1.0/MS-TrueType-Core-Fonts.tar.gz"
-_truetype_pkg="/tmp/MS-TrueType-Core-Fonts.tar.gz"
+_truetype_pkg="MS-TrueType-Core-Fonts.tar.gz"
 _grub_theme_destiny="https://github.com/maximalisimus/Archivers-Configs-Linux/releases/download/v1.0/grub-theme-destiny.tar.gz"
-_grub_theme_destiny_pkg="/tmp/grub-theme-destiny.tar.gz"
+_grub_theme_destiny_pkg="grub-theme-destiny.tar.gz"
 _grub_theme_starfield="https://github.com/maximalisimus/Archivers-Configs-Linux/releases/download/v1.0/grub-theme-starfield.tar.gz"
-_grub_theme_starfield_pkg="/tmp/grub-theme-starfield.tar.gz"
+_grub_theme_starfield_pkg="grub-theme-starfield.tar.gz"
 #
 # gimp gimp-help-ru
 _gr_editor=(gimp)
