@@ -748,4 +748,13 @@ _restrinct_desc_3="For at give mulighed for ændringer"
 _restrinct_desc_4="Ikke at synkronisere med værten"
 _restrinct_desc_5="Accepterer ikke anmodninger"
 #
-
+#
+# Multiple System
+#
+_InstMultipleTitle="Flere OS"
+_InstMultipleBody="Installer en BIOS med et andet operativsystem?"
+_InstMultiple_msg="Nær"
+_InstMultiple_one="Det eneste OS"
+_refind_yn_title="Installation af rEFInd"
+_refind_yn_body="\nHvis rEFInd allerede er installeret på en af dine diske, skal du nægte denne installation.\nVil du stadig installere rEFInd til disk?\n"
+#

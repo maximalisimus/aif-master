@@ -732,5 +732,14 @@ _restrinct_desc_3="Vietare modifiche"
 _restrinct_desc_4="Non è sincronizzato con l'host"
 _restrinct_desc_5="Non accettare le richieste"
 #
-
+#
+# Multiple System
+#
+_InstMultipleTitle="Sistemi operativi multipli"
+_InstMultipleBody="Installare ryudos con un altro sistema operativo?"
+_InstMultiple_msg="Vicino a"
+_InstMultiple_one="Sistema operativo singolo"
+_refind_yn_title="Installazione di rEFInd"
+_refind_yn_body="\nSe uno dei tuoi dischi ha già rEFInd installato, rifiuta questa installazione.\nVuoi comunque installare rEFInd su disco?\n"
+#
 

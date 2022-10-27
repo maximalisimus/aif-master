@@ -738,5 +738,14 @@ _restrinct_desc_3="To allow changes"
 _restrinct_desc_4="Not sync with the host"
 _restrinct_desc_5="Don't accept requests"
 #
-
+#
+# Multiple System
+#
+_InstMultipleTitle="Multiple OS"
+_InstMultipleBody="Install a BIOS with another OS?"
+_InstMultiple_msg="Next to"
+_InstMultiple_one="The only OS"
+_refind_yn_title="Installing rEFInd"
+_refind_yn_body="\nIf rEFInd is already installed on one of your disks, refuse this installation.\nWould you still like to install rEFInd to disk?\n"
+#
 

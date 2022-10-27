@@ -740,5 +740,14 @@ _restrinct_desc_3="Verhindern, dass Benutzer änderungen"
 _restrinct_desc_4="Nicht mit dem Host synchronisiert werden"
 _restrinct_desc_5="Nicht akzeptieren Anfragen"
 #
-
+#
+# Multiple System
+#
+_InstMultipleTitle="Mehrere Betriebssysteme"
+_InstMultipleBody="Mit einem anderen Betriebssystem installieren?"
+_InstMultiple_msg="Neben dem"
+_InstMultiple_one="Das einzige Betriebssystem"
+_refind_yn_title="Installieren von rEFInd"
+_refind_yn_body="\nWenn rEFInd bereits auf einem Ihrer Laufwerke installiert ist, verzichten Sie auf diese Installation.\nMöchten Sie rEFInd trotzdem auf der Festplatte installieren?\n"
+#
 

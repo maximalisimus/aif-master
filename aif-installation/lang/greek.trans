@@ -749,5 +749,14 @@ _restrinct_desc_3="Απαγόρευση τροποποιήσεων"
 _restrinct_desc_4="Δεν συγχρονίζονται με υποδοχής"
 _restrinct_desc_5="Δεν δέχεται αιτήσεις"
 #
-
+#
+# Multiple System
+#
+_InstMultipleTitle="Πολλαπλά λειτουργικά συστήματα"
+_InstMultipleBody="Εγκαταστήστε ένα BIOS με άλλο λειτουργικό σύστημα;"
+_InstMultiple_msg="Δίπλα στο"
+_InstMultiple_one="Το μόνο λειτουργικό σύστημα"
+_refind_yn_title="Εγκατάσταση rEFInd"
+_refind_yn_body="\nΕάν το rEFInd είναι ήδη εγκατεστημένο σε έναν από τους δίσκους σας, απορρίψτε αυτήν την εγκατάσταση.\nΘα θέλατε ακόμα να εγκαταστήσετε το rEFInd στο δίσκο;\n"
+#
 

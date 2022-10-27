@@ -766,8 +766,9 @@ _restrinct_desc_5="Не принимать запросы"
 # Multiple System
 #
 _InstMultipleTitle="Несколько ОС"
-_InstMultipleBody="\nУстановить рядос с другой ОС? \n"
+_InstMultipleBody="\nУстановить рядос с другой ОС?\n"
 _InstMultiple_msg="Рядом с"
-_InstMultiple_one="Единственная"
+_InstMultiple_one="Единственная ОС"
 _refind_yn_title="Установка rEFInd"
-_refind_yn_body="\nЕсли на одном из ваших дисков уже установлен rEFInd откажитесь от этой установки.\nВсё равно устанавить rEFInd на диск?\n"
+_refind_yn_body="\nЕсли на одном из ваших дисков уже установлен rEFInd откажитесь от этой установки.\nВсё равно желаете устанавить rEFInd на диск?\n"
+#

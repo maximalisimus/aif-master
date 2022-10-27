@@ -737,4 +737,13 @@ _restrinct_desc_3="Om wijzigingen toe te staan"
 _restrinct_desc_4="Niet gesynchroniseerd met de host"
 _restrinct_desc_5="Het niet accepteren van aanvragen"
 #
-
+#
+# Multiple System
+#
+_InstMultipleTitle="Meerdere OS"
+_InstMultipleBody="Een BIOS installeren met een ander OS?"
+_InstMultiple_msg="Naast"
+_InstMultiple_one="Het enige OS"
+_refind_yn_title="Refind installeren"
+_refind_yn_body="\nAls rEFInd al op een van uw schijven is geïnstalleerd, weigert u deze installatie.\nWilt u nog steeds rEFInd op schijf installeren?\n"
+#

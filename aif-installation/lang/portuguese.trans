@@ -743,5 +743,13 @@ _restrinct_desc_3="Impedir alterações"
 _restrinct_desc_4="Não sincronizar com o host"
 _restrinct_desc_5="Não aceitar pedidos"
 #
-
+# Multiple System
+#
+_InstMultipleTitle="Vários os"
+_InstMultipleBody="\nInstalar linhas com outro sistema operacional?\n"
+_InstMultiple_msg="Ao lado de"
+_InstMultiple_one="Único os"
+_refind_yn_title="Instalação rEFInd"
+_refind_yn_body="\nSe um dos seus discos já tiver o rEFInd instalado, desista dessa instalação.\nAinda quer instalar o rEFInd no disco?\n"
+#
 

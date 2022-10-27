@@ -759,5 +759,14 @@ _restrinct_desc_3="Lehetővé változások"
 _restrinct_desc_4="Nem fordította a fogadó"
 _restrinct_desc_5="Nem fogad el"
 #
-
+#
+# Multiple System
+#
+_InstMultipleTitle="Több operációs rendszer"
+_InstMultipleBody="Telepítsen egy BIOS-t egy másik operációs rendszerrel?"
+_InstMultiple_msg="Mellette"
+_InstMultiple_one="Az egyetlen operációs rendszer"
+_refind_yn_title="Refind telepítése"
+_refind_yn_body="\nHa a rEFInd már telepítve van az egyik lemezére, utasítsa el ezt a telepítést.\nMég mindig szeretné telepíteni a rEFInd-et a lemezre?\n"
+#
 
