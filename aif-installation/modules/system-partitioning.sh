@@ -528,55 +528,6 @@ btrfs_mount_opts() {
        fi
     fi
     
-    # Extra Step for VFAT UEFI Partition. This cannot be in an LVM container.
-    if [[ $SYSTEM == "UEFI" ]]; then
-    
-       dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SelUefiTitle" --menu "$_SelUefiBody" 0 0 4 ${PARTITIONS} 2>${ANSWER} || config_base_menu  
-       PARTITION=$(cat ${ANSWER})
-       UEFI_PART=$"/dev/"${PARTITION}
-       
-       # If it is already a fat/vfat partition...
-       if [[ $(fsck -N /dev/$PARTITION | grep fat) ]]; then
-          dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FormUefiTitle" --yesno "$_FormUefiBody $PARTITION $_FormUefiBody2" 0 0 && mkfs.vfat -F32 $"/dev/"${PARTITION} >/dev/null 2>/tmp/.errlog
-       else 
-          mkfs.vfat -F32 $"/dev/"${PARTITION} >/dev/null 2>/tmp/.errlog
-       fi
-       check_for_error
-       
-       # Inform users of the mountpoint options and consequences
-       if [[ "${_multiple_system}" == "1" ]]; then
-			UEFI_MOUNT="/boot/efi"
-       else
-			dialog --default-item 2 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MntUefiTitle" --menu "$_MntUefiBody"  0 0 2 \
-			   "1" $"/boot" \
-			   "2" $"/boot/efi" 2>${ANSWER}
-			   
-			   case $(cat ${ANSWER}) in
-				"1") UEFI_MOUNT="/boot"
-					 ;;
-				"2") UEFI_MOUNT="/boot/efi"
-					 ;;
-				  *) config_base_menu
-					 ;;
-			   esac
-       fi
-       
-       mkdir -p ${MOUNTPOINT}${UEFI_MOUNT} 2>/tmp/.errlog
-       # UEFI
-        # Get mounting options for appropriate filesystems
-        [[ $fs_opts != "" ]] && mount_opts
-        # Use special mounting options if selected, else standard mount
-        if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
-            mount -o $(cat ${MOUNT_OPTS}) $"/dev/"${PARTITION} ${MOUNTPOINT}${UEFI_MOUNT} 2>>/tmp/.errlog
-        else
-            mount $"/dev/"${PARTITION} ${MOUNTPOINT}${UEFI_MOUNT} 2>>/tmp/.errlog
-        fi
-       # mount $"/dev/"${PARTITION} ${MOUNTPOINT}${UEFI_MOUNT} 2>>/tmp/.errlog
-       check_for_error
-       confirm_mount ${MOUNTPOINT}${UEFI_MOUNT}     
-       
-    fi
-    
     # All other partitions
        while [[ $NUMBER_PARTITIONS > 0 ]]; do 
              dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_ExtPartTitle" --menu "$_ExtPartBody" 0 0 4 "$_Done" $"-" ${PARTITIONS} 2>${ANSWER} || config_base_menu 
@@ -648,4 +599,53 @@ btrfs_mount_opts() {
                 fi                   
              fi
        done
+       
+    # Extra Step for VFAT UEFI Partition. This cannot be in an LVM container.
+    if [[ $SYSTEM == "UEFI" ]]; then
+    
+       dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SelUefiTitle" --menu "$_SelUefiBody" 0 0 4 ${PARTITIONS} 2>${ANSWER} || config_base_menu  
+       PARTITION=$(cat ${ANSWER})
+       UEFI_PART=$"/dev/"${PARTITION}
+       
+       # If it is already a fat/vfat partition...
+       if [[ $(fsck -N /dev/$PARTITION | grep fat) ]]; then
+          dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FormUefiTitle" --yesno "$_FormUefiBody $PARTITION $_FormUefiBody2" 0 0 && mkfs.vfat -F32 $"/dev/"${PARTITION} >/dev/null 2>/tmp/.errlog
+       else 
+          mkfs.vfat -F32 $"/dev/"${PARTITION} >/dev/null 2>/tmp/.errlog
+       fi
+       check_for_error
+       
+       # Inform users of the mountpoint options and consequences
+       if [[ "${_multiple_system}" == "1" ]]; then
+			UEFI_MOUNT="/boot/efi"
+       else
+			dialog --default-item 2 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MntUefiTitle" --menu "$_MntUefiBody"  0 0 2 \
+			   "1" $"/boot" \
+			   "2" $"/boot/efi" 2>${ANSWER}
+			   
+			   case $(cat ${ANSWER}) in
+				"1") UEFI_MOUNT="/boot"
+					 ;;
+				"2") UEFI_MOUNT="/boot/efi"
+					 ;;
+				  *) config_base_menu
+					 ;;
+			   esac
+       fi
+       
+       mkdir -p ${MOUNTPOINT}${UEFI_MOUNT} 2>/tmp/.errlog
+       # UEFI
+        # Get mounting options for appropriate filesystems
+        [[ $fs_opts != "" ]] && mount_opts
+        # Use special mounting options if selected, else standard mount
+        if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
+            mount -o $(cat ${MOUNT_OPTS}) $"/dev/"${PARTITION} ${MOUNTPOINT}${UEFI_MOUNT} 2>>/tmp/.errlog
+        else
+            mount $"/dev/"${PARTITION} ${MOUNTPOINT}${UEFI_MOUNT} 2>>/tmp/.errlog
+        fi
+       # mount $"/dev/"${PARTITION} ${MOUNTPOINT}${UEFI_MOUNT} 2>>/tmp/.errlog
+       check_for_error
+       confirm_mount ${MOUNTPOINT}${UEFI_MOUNT}     
+       
+    fi
 }

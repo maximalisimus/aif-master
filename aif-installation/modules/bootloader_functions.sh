@@ -104,7 +104,13 @@ grub_uefi_install(){
 	  dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " Grub-install " --infobox "$_PlsWaitBody" 0 0
 	  sleep 1
 	  arch_chroot "grub-install --target=x86_64-efi --efi-directory=${UEFI_MOUNT} --bootloader-id=arch_grub --recheck" 2>/tmp/.errlog
+	  wait
+	  arch-chroot $MOUNTPOINT /bin/bash -c "grub-install --target=x86_64-efi --efi-directory=${UEFI_MOUNT} --bootloader-id=arch_grub --recheck" 2>>/tmp/.errlog
+	  wait
 	  arch_chroot "grub-mkconfig -o /boot/grub/grub.cfg" 2>>/tmp/.errlog
+	  wait
+	  arch-chroot $MOUNTPOINT /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg" 2>>/tmp/.errlog
+	  wait
 	  check_for_error
 	  if [[ "${_multiple_system}" == "0" ]]; then
 		  # Ask if user wishes to set Grub as the default bootloader and act accordingly
@@ -155,9 +161,15 @@ refind_uefi_install(){
 	   if [[ $? -eq 0 ]]; then
 		 clear
 		 arch_chroot "refind-install --usedefault ${UEFI_PART} --alldrivers" 2>/tmp/.errlog
+		 wait
+		 arch-chroot $MOUNTPOINT /bin/bash -c "refind-install --usedefault ${UEFI_PART} --alldrivers" 2>>/tmp/.errlog
+		 wait
 	  else   
 		clear
 		arch_chroot "refind-install" 2>/tmp/.errlog
+		wait
+		arch-chroot $MOUNTPOINT /bin/bash -c "refind-install" 2>>/tmp/.errlog
+		wait
 	  fi   
 	  
 	  check_for_error
