@@ -749,5 +749,10 @@ _greeter_bd="\nOgni utente nella home directory ~ / ha una cartella sfondi con i
 _icontheme_bd="\nOgni utente nella home directory ~/ ha una cartella .icons, che contiene un tema aggiuntivo con le icone Linux-Lex-8 per il desktop di ogni utente separatamente.\n"
 _multiple_bd_one="\nUtilizzare i parametri di installazione per l'avvio corretto di più sistemi operativi sullo stesso PC in modalità UEFI.\n"
 _multiple_bd_two="\nUtilizzare i parametri di installazione per l'avvio corretto di un sistema operativo su un PC in modalità UEFI.\n"
+_grub_theme_stp_ttl="Installazione del tema GRUB"
+_grub_theme_stp_menu="\nSi prega di selezionare il tema GRUB da installare.\n"
+_grub_theme_stp_bd_one="\nTema GRUB"
+_grub_theme_stp_bd_two="installato e attivato.\n"
+_no_grub_theme_stp_bd="\nIl tema Grub vuoto senza immagini, effetti e caratteri è installato e attivato per impostazione predefinita.\n"
 #
 

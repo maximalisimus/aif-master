@@ -220,16 +220,65 @@ function check_q_lst_pkg(){
 }
 
 grub_theme_destiny_setup(){
-	
-	#sed -i '//s///' ${MOUNTPOINT}/etc/default/grub
-	#sed -i '//s///' ${MOUNTPOINT}/etc/default/grub
-	#sed -i '//s///' ${MOUNTPOINT}/etc/default/grub
-	# GRUB_TIMEOUT="15"
-	# GRUB_GFXMODE="auto"
-	# GRUB_THEME="/boot/grub/themes/destiny/theme.txt"
+	_grub_theme_name="Destiny"
+	wait
+	_grub_theme_stp_bd="${_grub_theme_stp_bd_one[*]} ${_grub_theme_name[*]} ${_grub_theme_stp_bd_two[*]}"
+	wait
+	wget "${_grub_theme_destiny[*]}" -O "${_grub_theme_destiny_pkg[*]}"
+	wait
+	mkdir -p ${MOUNTPOINT}/boot/grub/themes/
+	wait
+	tar -C "${MOUNTPOINT}/boot/grub/themes/" -xvzf "${_grub_theme_destiny_pkg[*]}"
+	wait
+	tar -xvzf "${_grub_theme_destiny_pkg[*]}"
+	wait
+	mkdir -p "${MOUNTPOINT}/boot/grub/themes/destiny/"
+	wait
+	cp -Rf "${_grub_theme_destiny_tmp_dir[*]}"/* "${MOUNTPOINT}/boot/grub/themes/destiny/"
+	wait
+	rm -rf "${_grub_theme_destiny_tmp_dir[*]}" "${_grub_theme_destiny_pkg[*]}"
+	wait
+	sed -i '/GRUB_TIMEOUT=/c GRUB_TIMEOUT="15"' ${MOUNTPOINT}/etc/default/grub
+	sed -i '/GRUB_GFXMODE=/c GRUB_GFXMODE="auto"' ${MOUNTPOINT}/etc/default/grub
+	wait
+	if [[ -e "${MOUNTPOINT}/boot/grub/themes/destiny/theme.txt" ]]; then
+		sed -i '/GRUB_THEME=/c GRUB_THEME="/boot/grub/themes/destiny/theme.txt"' ${MOUNTPOINT}/etc/default/grub
+		wait
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_grub_theme_stp_ttl" --msgbox "$_grub_theme_stp_bd" 0 0
+	fi
 }
+
 grub_theme_starfield_setup(){
-	#
+	_grub_theme_name="Starfield"
+	wait
+	_grub_theme_stp_bd="${_grub_theme_stp_bd_one[*]} ${_grub_theme_name[*]} ${_grub_theme_stp_bd_two[*]}"
+	wait
+	wget "${_grub_theme_starfield[*]}" -O "${_grub_theme_starfield_pkg[*]}"
+	wait
+	mkdir -p ${MOUNTPOINT}/boot/grub/themes/
+	wait
+	tar -C "${MOUNTPOINT}/boot/grub/themes/" -xvzf "${_grub_theme_starfield_pkg[*]}"
+	wait
+	tar -xvzf "${_grub_theme_starfield_pkg[*]}"
+	wait
+	mkdir -p "${MOUNTPOINT}/boot/grub/themes/starfield/"
+	wait
+	cp -Rf "${_grub_theme_starfield_tmp_dir[*]}"/* "${MOUNTPOINT}/boot/grub/themes/starfield/"
+	wait
+	rm -rf "${_grub_theme_starfield_tmp_dir[*]}" "${_grub_theme_starfield_pkg[*]}"
+	wait
+	sed -i '/GRUB_TIMEOUT=/c GRUB_TIMEOUT="15"' ${MOUNTPOINT}/etc/default/grub
+	sed -i '/GRUB_GFXMODE=/c GRUB_GFXMODE="auto"' ${MOUNTPOINT}/etc/default/grub
+	wait
+	if [[ -e "${MOUNTPOINT}/boot/grub/themes/starfield/theme.txt" ]]; then
+		sed -i '/GRUB_THEME=/c GRUB_THEME="/boot/grub/themes/starfield/theme.txt"' ${MOUNTPOINT}/etc/default/grub
+		wait
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_grub_theme_stp_ttl" --msgbox "$_grub_theme_stp_bd" 0 0
+	fi
+}
+
+no_grub_theme_setup(){
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_grub_theme_stp_ttl" --msgbox "$_no_grub_theme_stp_bd" 0 0
 }
 
 osprober_configuration(){

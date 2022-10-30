@@ -765,4 +765,9 @@ _greeter_bd="\nHver bruger i hjemmemappen ~ / har en tapetmappe med HD-billeder 
 _icontheme_bd="\nHver bruger har en .ikonmappe i hjemmemappen~/, som indeholder et ekstra tema med ikoner for hver brugers skrivebord separat.\n"
 _multiple_bd_one="\nAnvendelse af installationsparametre til korrekt opstart af flere operativsystemer på en PC i UEFI-tilstand.\n"
 _multiple_bd_two="\nAnvendelse af installationsparametre til korrekt opstart af et operativsystem på en PC i UEFI-tilstand.\n"
+_grub_theme_stp_ttl="Installation af GRUB-temaet"
+_grub_theme_stp_menu="\nVælg GRUB-temaet, der skal installeres.\n"
+_grub_theme_stp_bd_one="\nGRUB tema"
+_grub_theme_stp_bd_two="installeret og aktiveret.\n"
+_no_grub_theme_stp_bd="\nEn tom GRUB tema uden billeder, effekter og skrifttyper er installeret og aktiveret som standard.\n"
 #

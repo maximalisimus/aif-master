@@ -785,4 +785,9 @@ _greeter_bd="\nEv dizinindeki her kullanıcının ~/ masaüstü için HD görün
 _icontheme_bd="\nHer kullanıcının ~/ ana dizinindeki bir klasörü vardır.Her kullanıcının masaüstüne ayrı ayrı Linux-Lex-8 simgeleri içeren isteğe bağlı bir tema içeren simgeler.\n"
 _multiple_bd_one="\nUEFI modunda aynı PC'de birden fazla işletim sisteminin düzgün şekilde önyüklenmesi için ayar parametrelerini uygulama.\n"
 _multiple_bd_two="\nUEFI modunda tek bir bilgisayara tek bir işletim sisteminin düzgün şekilde önyüklenmesi için ayar parametrelerini uygulama.\n"
+_grub_theme_stp_ttl="GRUB temasını yükleme"
+_grub_theme_stp_menu="\nYüklemek için GRUB temasını seçiniz.\n"
+_grub_theme_stp_bd_one="\nGRUB Tema"
+_grub_theme_stp_bd_two="yüklü ve etkinleştirildi.\n"
+_no_grub_theme_stp_bd="\nResim, efekt ve yazı tipi olmayan boş GRUB teması varsayılan olarak yüklenir ve etkinleştirilir.\n"
 #

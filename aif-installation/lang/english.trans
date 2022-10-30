@@ -755,5 +755,10 @@ _greeter_bd="\nEach user in the home directory ~/ has a wallpapers folder with H
 _icontheme_bd="\nEach user has a .icons folder in the home directory ~/, which contains an additional theme with Linux-Lex-8 icons for each user's desktop separately.\n"
 _multiple_bd_one="\nApplication of installation parameters for the correct booting of several operating systems on one PC in UEFI mode.\n"
 _multiple_bd_two="\nApplication of installation parameters for the correct boot of one OS on one PC in UEFI mode.\n"
+_grub_theme_stp_ttl="Installing the GRUB theme"
+_grub_theme_stp_menu="\nPlease select the GRUB theme to install.\n"
+_grub_theme_stp_bd_one="\nGRUB Theme"
+_grub_theme_stp_bd_two="installed and activated.\n"
+_no_grub_theme_stp_bd="\nAn empty GRUB theme without pictures, effects and fonts is installed and activated by default.\n"
 #
 

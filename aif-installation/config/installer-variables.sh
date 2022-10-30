@@ -175,6 +175,7 @@ _multiple_system=0             # How to install system - multiple or one?
 _multiple_once=0               # Once run qeustion multiple system in prep mount menu.
 _refind_question=0             # Search else system rEFInd
 _refind_setup_once=0           # One run search else sustem rEFInd
+_grub_theme_name="None"        # Grub theme setup
 
 # Language Support
 CURR_LOCALE="en_US.UTF-8"      # Default Locale

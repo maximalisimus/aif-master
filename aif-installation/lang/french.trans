@@ -749,5 +749,10 @@ _greeter_bd="\nChaque utilisateur dans le répertoire personnel ~ / a un dossier
 _icontheme_bd="\nChaque utilisateur a un dossier dans le répertoire personnel~/.icônes qui contient un thème supplémentaire avec des icônes Linux-Lex-8 pour le bureau de chaque utilisateur séparément.\n"
 _multiple_bd_one="\nUtilisez les paramètres de configuration pour démarrer plusieurs systèmes d'exploitation sur le même PC en mode UEFI.\n"
 _multiple_bd_two="\nUtilisez les paramètres de configuration pour démarrer un système d'exploitation sur un PC en mode UEFI.\n"
+_grub_theme_stp_ttl="Installation du thème GRUB"
+_grub_theme_stp_menu="\nS'il vous plaît choisir GRUB thème à installer.\n"
+_grub_theme_stp_bd_one="\nGRUB Thème"
+_grub_theme_stp_bd_two="installé et activé.\n"
+_no_grub_theme_stp_bd="\nLe thème GRUB vide sans images, effets et polices est installé et activé par défaut.\n"
 #
 

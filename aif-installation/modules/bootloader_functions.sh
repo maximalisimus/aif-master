@@ -4,6 +4,25 @@
 ##                                                                  ##
 ######################################################################  
 
+grub_theme_menu(){
+	dialog --default-item 2 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_grub_theme_stp_ttl" --menu "$_grub_theme_stp_menu" 0 0 4 \
+	"1" "No Theme" \
+	"2" "Destiny" \
+	"3" "Starfield" \
+	"4" "$_Back" 2>${ANSWER}
+	
+	case $(cat ${ANSWER}) in
+		"1") no_grub_theme_setup
+			;;
+		"2") grub_theme_destiny_setup
+			;;
+		"3") grub_theme_starfield_setup
+			;; 
+		*) install_base_menu
+			;;
+	esac
+}
+
 grub_bios_install(){
 	# Grub
 	clear
@@ -41,6 +60,8 @@ grub_bios_install(){
 	osprober_configuration
 	wait
 	 BOOTLOADER="Grub"
+	 wait
+	 grub_theme_menu
 }
 
 syslinux_bios_install(){
@@ -101,6 +122,8 @@ grub_uefi_install(){
 	  osprober_configuration
 	  wait
 	  BOOTLOADER="Grub"
+	  wait
+	  grub_theme_menu
 }
 
 refind_uefi_install(){

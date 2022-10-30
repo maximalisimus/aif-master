@@ -776,5 +776,10 @@ _greeter_bd="\nA ~ / otthoni könyvtár minden felhasználójának van egy hátt
 _icontheme_bd="\nMinden felhasználónak van egy .ikonok mappát a home könyvtárban~/, amely egy további témát tartalmaz Linux-Lex-8 ikonokkal minden felhasználó asztalához külön-külön.\n"
 _multiple_bd_one="\nTelepítési paraméterek alkalmazása több operációs rendszer helyes indításához egy számítógépen UEFI módban.\n"
 _multiple_bd_two="\nTelepítési paraméterek alkalmazása egy operációs rendszer helyes indításához egy számítógépen UEFI módban.\n"
+_grub_theme_stp_ttl="A GRUB téma telepítése"
+_grub_theme_stp_menu="\nKérjük, válassza ki a telepíteni kívánt GRUB témát.\n"
+_grub_theme_stp_bd_one="\nGRUB téma"
+_grub_theme_stp_bd_two="telepítve és aktiválva.\n"
+_no_grub_theme_stp_bd="\nA képek, effektusok és betűtípusok nélküli üres grub téma alapértelmezés szerint telepítve és aktiválva van.\n"
 #
 
