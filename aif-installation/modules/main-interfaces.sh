@@ -332,53 +332,83 @@ edit_configs() {
 	fi
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
-    case $(cat ${ANSWER}) in
-		"1") FILE="${MOUNTPOINT}/etc/vconsole.conf"
-			;;
-		"2") FILE="${MOUNTPOINT}/etc/locale.conf" 
-			;;
-		"3") FILE="${MOUNTPOINT}/etc/hostname"
-			;;
-		"4") FILE="${MOUNTPOINT}/etc/hosts"
-			;;
-		"5") FILE="${MOUNTPOINT}/etc/sudoers"
-			;;
-		"6") FILE="${MOUNTPOINT}/etc/mkinitcpio.conf"
-			;;
-		"7") FILE="${MOUNTPOINT}/etc/fstab"
-			;;
-		"8") FILE="${MOUNTPOINT}/etc/resolv.conf"
-			;;
-		"9") FILE="${MOUNTPOINT}/etc/sysctl.d/00-sysctl.conf"
-			;;
-		"10") FILE="${MOUNTPOINT}/etc/dhcpcd.conf"
-			;;
-		"11") [ -e $_netctl_edit ] && FILE="$_netctl_edit"
-			;;
-		"12") FILE="${MOUNTPOINT}/etc/ntp.conf"
-			;;
-		"13") FILE="${MOUNTPOINT}/etc/systemd/timesyncd.conf"
-			;;
-		if [[ $SYSTEM == "BIOS" ]]; then
+    if [[ $SYSTEM == "BIOS" ]]; then
+		case $(cat ${ANSWER}) in
+			"1") FILE="${MOUNTPOINT}/etc/vconsole.conf"
+				;;
+			"2") FILE="${MOUNTPOINT}/etc/locale.conf" 
+				;;
+			"3") FILE="${MOUNTPOINT}/etc/hostname"
+				;;
+			"4") FILE="${MOUNTPOINT}/etc/hosts"
+				;;
+			"5") FILE="${MOUNTPOINT}/etc/sudoers"
+				;;
+			"6") FILE="${MOUNTPOINT}/etc/mkinitcpio.conf"
+				;;
+			"7") FILE="${MOUNTPOINT}/etc/fstab"
+				;;
+			"8") FILE="${MOUNTPOINT}/etc/resolv.conf"
+				;;
+			"9") FILE="${MOUNTPOINT}/etc/sysctl.d/00-sysctl.conf"
+				;;
+			"10") FILE="${MOUNTPOINT}/etc/dhcpcd.conf"
+				;;
+			"11") [ -e $_netctl_edit ] && FILE="$_netctl_edit"
+				;;
+			"12") FILE="${MOUNTPOINT}/etc/ntp.conf"
+				;;
+			"13") FILE="${MOUNTPOINT}/etc/systemd/timesyncd.conf"
+				;;
 			"14") case $BOOTLOADER in
-				"Grub") FILE="${MOUNTPOINT}/etc/default/grub"
-						;;
-				"Syslinux") FILE="${MOUNTPOINT}/boot/syslinux/syslinux.cfg"
+					"Grub") FILE="${MOUNTPOINT}/etc/default/grub"
 							;;
-				esac
-				;;
+					"Syslinux") FILE="${MOUNTPOINT}/boot/syslinux/syslinux.cfg"
+								;;
+					esac
+					;;
 			"15") case $DM in
-					"LXDM") FILE="${MOUNTPOINT}/etc/lxdm/lxdm.conf" 
-							;;
-					"LightDM") FILE="${MOUNTPOINT}/etc/lightdm/lightdm.conf" 
-							;;
-					"SDDM") FILE="${MOUNTPOINT}/etc/sddm.conf"
-							;;
-					"SLiM") FILE="${MOUNTPOINT}/etc/slim.conf"
-							;;
-				esac
+						"LXDM") FILE="${MOUNTPOINT}/etc/lxdm/lxdm.conf" 
+								;;
+						"LightDM") FILE="${MOUNTPOINT}/etc/lightdm/lightdm.conf" 
+								;;
+						"SDDM") FILE="${MOUNTPOINT}/etc/sddm.conf"
+								;;
+						"SLiM") FILE="${MOUNTPOINT}/etc/slim.conf"
+								;;
+					esac
+					;;
+			*) main_menu_online
 				;;
-		else
+		esac
+	else
+		case $(cat ${ANSWER}) in
+			"1") FILE="${MOUNTPOINT}/etc/vconsole.conf"
+				;;
+			"2") FILE="${MOUNTPOINT}/etc/locale.conf" 
+				;;
+			"3") FILE="${MOUNTPOINT}/etc/hostname"
+				;;
+			"4") FILE="${MOUNTPOINT}/etc/hosts"
+				;;
+			"5") FILE="${MOUNTPOINT}/etc/sudoers"
+				;;
+			"6") FILE="${MOUNTPOINT}/etc/mkinitcpio.conf"
+				;;
+			"7") FILE="${MOUNTPOINT}/etc/fstab"
+				;;
+			"8") FILE="${MOUNTPOINT}/etc/resolv.conf"
+				;;
+			"9") FILE="${MOUNTPOINT}/etc/sysctl.d/00-sysctl.conf"
+				;;
+			"10") FILE="${MOUNTPOINT}/etc/dhcpcd.conf"
+				;;
+			"11") [ -e $_netctl_edit ] && FILE="$_netctl_edit"
+				;;
+			"12") FILE="${MOUNTPOINT}/etc/ntp.conf"
+				;;
+			"13") FILE="${MOUNTPOINT}/etc/systemd/timesyncd.conf"
+				;;
 			"14") FILE="${MOUNTPOINT}/etc/default/grub"
 				;;
 			"15") [[ -e ${MOUNTPOINT}${UEFI_MOUNT}/EFI/refind/refind.conf ]] \
@@ -399,10 +429,10 @@ edit_configs() {
 							;;
 				esac
 				;;
-		fi
-		*) main_menu_online
-			;;
-     esac
+			*) main_menu_online
+				;;
+	fi
+		
      
         # open file(s) with nano   
         if [[ -e $FILE ]] && [[ $FILE2 != "" ]]; then
