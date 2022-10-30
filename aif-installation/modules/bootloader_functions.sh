@@ -142,23 +142,23 @@ refind_uefi_install(){
 	  
 	  clear
 	  
-	  if [[ "${_refind_question[*]}" -gt 0 ]]; then
-			arch_chroot "refind-install --usedefault ${UEFI_PART} --alldrivers" 2>/tmp/.errlog
-	  else
-			arch_chroot "refind-install" 2>/tmp/.errlog
-	  fi
+	  #if [[ "${_refind_question[*]}" -eq 0 ]]; then
+		#	arch_chroot "refind-install --usedefault ${UEFI_PART} --alldrivers" 2>/tmp/.errlog
+	  #else
+		#	arch_chroot "refind-install" 2>/tmp/.errlog
+	  #fi
 	  
 	  wait
 	  
-	  #dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SetRefiDefTitle" --yesno "$_SetRefiDefBody ${UEFI_MOUNT}/EFI/boot $_SetRefiDefBody2" 0 0
+	  dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SetRefiDefTitle" --yesno "$_SetRefiDefBody ${UEFI_MOUNT}/EFI/boot $_SetRefiDefBody2" 0 0
 	  
-	  # if [[ $? -eq 0 ]]; then
-		# clear
-		# arch_chroot "refind-install --usedefault ${UEFI_PART} --alldrivers" 2>/tmp/.errlog
-	  # else   
-		# clear
-		# arch_chroot "refind-install" 2>/tmp/.errlog
-	  # fi   
+	   if [[ $? -eq 0 ]]; then
+		 clear
+		 arch_chroot "refind-install --usedefault ${UEFI_PART} --alldrivers" 2>/tmp/.errlog
+	  else   
+		clear
+		arch_chroot "refind-install" 2>/tmp/.errlog
+	  fi   
 	  
 	  check_for_error
 	  
@@ -290,10 +290,10 @@ install_bootloader() {
        else
 			grub_uefi_install
 			wait
-			if [[ "${_refind_question[*]}" -gt 0 ]]; then
+			if [[ "${_refind_question[*]}" -eq 0 ]]; then
 				refind_uefi_install
 			else
-				 dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "$_refind_yn_body" 0 0
+				dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "$_refind_yn_body" 0 0
 				 
 				if [[ $? -eq 0 ]]; then
 					refind_uefi_install
