@@ -281,35 +281,7 @@ edit_configs() {
     FILE=""
     FILE2=""
     user_list=""
-	
-	if [[ $SYSTEM == "BIOS" ]]; then
-		if [[ $SUB_MENU != "edit_configs" ]]; then
-			SUB_MENU="edit_configs"
-			HIGHLIGHT_SUB=1
-		else
-			if [[ $HIGHLIGHT_SUB != 16 ]]; then
-				HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
-			fi
-		fi
-	
-		dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SeeConfOptTitle" --menu "$_SeeConfOptBody" 0 0 14 \
-		"1" "/etc/vconsole.conf" \
-		"2" "/etc/locale.conf" \
-		"3" "/etc/hostname" \
-		"4" "/etc/hosts" \
-		"5" "/etc/sudoers" \
-		"6" "/etc/mkinitcpio.conf" \
-		"7" "/etc/fstab" \
-		"8" "/etc/resolv.conf" \
-		"9" "/etc/sysctl.d/00-sysctl.conf" \
-		"10" "/etc/dhcpcd.conf" \
-		"11" "$_ncl_nname" \
-		"12" "/etc/ntp.conf" \
-		"13" "/etc/systemd/timesyncd.conf" \
-		"14" "$BOOTLOADER" \
-		"15" "$DM" \
-		"16" "$_Back" 2>${ANSWER}
-	else
+    
 		if [[ $SUB_MENU != "edit_configs" ]]; then
 			SUB_MENU="edit_configs"
 			HIGHLIGHT_SUB=1
@@ -318,7 +290,7 @@ edit_configs() {
 				HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
 			fi
 		fi
-		
+
 		dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SeeConfOptTitle" --menu "$_SeeConfOptBody" 0 0 14 \
 		"1" "/etc/vconsole.conf" \
 		"2" "/etc/locale.conf" \
@@ -333,115 +305,68 @@ edit_configs() {
 		"11" "$_ncl_nname" \
 		"12" "/etc/ntp.conf" \
 		"13" "/etc/systemd/timesyncd.conf" \
-		"14" "/etc/default/grub" \
+		"14" "grub.cfg" \
 		"15" "refind.conf" \
-		"16" "arch.conf / loader.conf" \
+		"16" "systemd-boot" \
 		"17" "$DM" \
 		"18" "$_Back" 2>${ANSWER}
-	fi
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
-    if [[ $SYSTEM == "BIOS" ]]; then
-		case $(cat ${ANSWER}) in
-			"1") FILE="${MOUNTPOINT}/etc/vconsole.conf"
-				;;
-			"2") FILE="${MOUNTPOINT}/etc/locale.conf" 
-				;;
-			"3") FILE="${MOUNTPOINT}/etc/hostname"
-				;;
-			"4") FILE="${MOUNTPOINT}/etc/hosts"
-				;;
-			"5") FILE="${MOUNTPOINT}/etc/sudoers"
-				;;
-			"6") FILE="${MOUNTPOINT}/etc/mkinitcpio.conf"
-				;;
-			"7") FILE="${MOUNTPOINT}/etc/fstab"
-				;;
-			"8") FILE="${MOUNTPOINT}/etc/resolv.conf"
-				;;
-			"9") FILE="${MOUNTPOINT}/etc/sysctl.d/00-sysctl.conf"
-				;;
-			"10") FILE="${MOUNTPOINT}/etc/dhcpcd.conf"
-				;;
-			"11") [ -e $_netctl_edit ] && FILE="$_netctl_edit"
-				;;
-			"12") FILE="${MOUNTPOINT}/etc/ntp.conf"
-				;;
-			"13") FILE="${MOUNTPOINT}/etc/systemd/timesyncd.conf"
-				;;
-			"14") case $BOOTLOADER in
-					"Grub") FILE="${MOUNTPOINT}/etc/default/grub"
-							;;
-					"Syslinux") FILE="${MOUNTPOINT}/boot/syslinux/syslinux.cfg"
-								;;
-					esac
-					;;
-			"15") case $DM in
-						"LXDM") FILE="${MOUNTPOINT}/etc/lxdm/lxdm.conf" 
-								;;
-						"LightDM") FILE="${MOUNTPOINT}/etc/lightdm/lightdm.conf" 
-								;;
-						"SDDM") FILE="${MOUNTPOINT}/etc/sddm.conf"
-								;;
-						"SLiM") FILE="${MOUNTPOINT}/etc/slim.conf"
-								;;
-					esac
-					;;
-			*) main_menu_online
-				;;
-		esac
-	else
-		case $(cat ${ANSWER}) in
-			"1") FILE="${MOUNTPOINT}/etc/vconsole.conf"
-				;;
-			"2") FILE="${MOUNTPOINT}/etc/locale.conf" 
-				;;
-			"3") FILE="${MOUNTPOINT}/etc/hostname"
-				;;
-			"4") FILE="${MOUNTPOINT}/etc/hosts"
-				;;
-			"5") FILE="${MOUNTPOINT}/etc/sudoers"
-				;;
-			"6") FILE="${MOUNTPOINT}/etc/mkinitcpio.conf"
-				;;
-			"7") FILE="${MOUNTPOINT}/etc/fstab"
-				;;
-			"8") FILE="${MOUNTPOINT}/etc/resolv.conf"
-				;;
-			"9") FILE="${MOUNTPOINT}/etc/sysctl.d/00-sysctl.conf"
-				;;
-			"10") FILE="${MOUNTPOINT}/etc/dhcpcd.conf"
-				;;
-			"11") [ -e $_netctl_edit ] && FILE="$_netctl_edit"
-				;;
-			"12") FILE="${MOUNTPOINT}/etc/ntp.conf"
-				;;
-			"13") FILE="${MOUNTPOINT}/etc/systemd/timesyncd.conf"
-				;;
-			"14") FILE="${MOUNTPOINT}/etc/default/grub"
-				;;
-			"15") [[ -e ${MOUNTPOINT}${UEFI_MOUNT}/EFI/refind/refind.conf ]] \
-				&& FILE="${MOUNTPOINT}${UEFI_MOUNT}/EFI/refind/refind.conf" || FILE="${MOUNTPOINT}${UEFI_MOUNT}/EFI/BOOT/refind.conf"
-				FILE2="${MOUNTPOINT}/boot/refind_linux.conf"
-				;;
-			"16") FILE="${MOUNTPOINT}${UEFI_MOUNT}/loader/entries/arch.conf" 
-				FILE2="${MOUNTPOINT}${UEFI_MOUNT}/loader/loader.conf"
-				;;
-			"17") case $DM in
-					"LXDM") FILE="${MOUNTPOINT}/etc/lxdm/lxdm.conf" 
-							;;
-					"LightDM") FILE="${MOUNTPOINT}/etc/lightdm/lightdm.conf" 
-							;;
-					"SDDM") FILE="${MOUNTPOINT}/etc/sddm.conf"
-							;;
-					"SLiM") FILE="${MOUNTPOINT}/etc/slim.conf"
+    case $(cat ${ANSWER}) in
+		"1") FILE="${MOUNTPOINT}/etc/vconsole.conf"
+			;;
+		"2") FILE="${MOUNTPOINT}/etc/locale.conf" 
+			;;
+		"3") FILE="${MOUNTPOINT}/etc/hostname"
+			;;
+		"4") FILE="${MOUNTPOINT}/etc/hosts"
+			;;
+		"5") FILE="${MOUNTPOINT}/etc/sudoers"
+			;;
+		"6") FILE="${MOUNTPOINT}/etc/mkinitcpio.conf"
+			;;
+		"7") FILE="${MOUNTPOINT}/etc/fstab"
+			;;
+		"8") FILE="${MOUNTPOINT}/etc/resolv.conf"
+			;;
+		"9") FILE="${MOUNTPOINT}/etc/sysctl.d/00-sysctl.conf"
+			;;
+		"10") FILE="${MOUNTPOINT}/etc/dhcpcd.conf"
+			;;
+		"11") [ -e $_netctl_edit ] && FILE="$_netctl_edit"
+			;;
+		"12") FILE="${MOUNTPOINT}/etc/ntp.conf"
+			;;
+		"13") FILE="${MOUNTPOINT}/etc/systemd/timesyncd.conf"
+			;;
+		"14") case $BOOTLOADER in
+				"Grub|rEFInd") FILE="${MOUNTPOINT}/etc/default/grub"
+						;;
+				"Syslinux") FILE="${MOUNTPOINT}/boot/syslinux/syslinux.cfg"
 							;;
 				esac
 				;;
-			*) main_menu_online
+		"15") [[ -e ${MOUNTPOINT}${UEFI_MOUNT}/EFI/refind/refind.conf ]] \
+				&& FILE="${MOUNTPOINT}${UEFI_MOUNT}/EFI/refind/refind.conf" || FILE="${MOUNTPOINT}${UEFI_MOUNT}/EFI/BOOT/refind.conf"
+				FILE2="${MOUNTPOINT}/boot/refind_linux.conf"
 				;;
-	fi
-		
+		"16") FILE="${MOUNTPOINT}${UEFI_MOUNT}/loader/entries/arch.conf" 
+				FILE2="${MOUNTPOINT}${UEFI_MOUNT}/loader/loader.conf"
+				;;
+		"17") case $DM in
+				"LXDM") FILE="${MOUNTPOINT}/etc/lxdm/lxdm.conf" 
+						;;
+				"LightDM") FILE="${MOUNTPOINT}/etc/lightdm/lightdm.conf" 
+						;;
+				"SDDM") FILE="${MOUNTPOINT}/etc/sddm.conf"
+						;;
+				"SLiM") FILE="${MOUNTPOINT}/etc/slim.conf"
+						;;
+			esac
+			;;
+		*) main_menu_online
+			;;
+     esac
      
         # open file(s) with nano   
         if [[ -e $FILE ]] && [[ $FILE2 != "" ]]; then
