@@ -120,9 +120,7 @@ _list_shells_sh=""
 _list_bash_sh=""
 _list_zsh_sh=""
 _mn_shll_sh=""
-_icontheme_once=0
 _wallpapers_once=0
-_truetype_once=0
 _greeter_once=0
 
 # Create a temporary file to store menu selections

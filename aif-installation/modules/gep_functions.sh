@@ -75,8 +75,8 @@ install_ttftheme()
     wait
     icontheme_configuration
     wait
-    # fonts_configuration
-    # wait
+    fonts_configuration
+    wait
 }
 
 install_standartpkg()

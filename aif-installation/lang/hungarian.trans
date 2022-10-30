@@ -771,11 +771,16 @@ _refind_yn_body="\nHa a rEFInd már telepítve van az egyik lemezére, utasítsa
 #
 # Icon-theme, Wallpapers, DM theme
 #
+_yn_truetype_ttl="A Windows Betűtípusok Telepítése"
+_yn_truetype_bd="\nTelepítse a Windows betűtípusokat?\n"
+_yn_truetype_bd_two="\nFrissítse az alkalmazás betűtípus-gyorsítótárát?\n"
+_yn_icontheme_ttl="Az ikon Téma telepítése"
+_yn_icontheme_bd="\nTelepítse a LinuxLex-8 asztali ikon témát minden felhasználó számára?\n"
 _greeter_ttl="A megjelenés testreszabása"
-_greeter_bd="\nA ~ / otthoni könyvtár minden felhasználójának van egy háttérkép mappája HD képekkel az asztalhoz.\nA ${MOUNTPOINT}/usr/share/wallpapers / elérési út képeket tartalmaz a LightDM számára (az előző mappa másolata).\n"
+_greeter_bd="\nA ~ / otthoni könyvtár minden felhasználójának van egy háttérkép mappája HD képekkel az asztalhoz.\nA /usr/share/wallpapers / elérési út képeket tartalmaz a LightDM számára (az előző mappa másolata).\n"
 _icontheme_bd="\nMinden felhasználónak van egy .ikonok mappát a home könyvtárban~/, amely egy további témát tartalmaz Linux-Lex-8 ikonokkal minden felhasználó asztalához külön-külön.\n"
-_multiple_bd_one="\nTelepítési paraméterek alkalmazása több operációs rendszer helyes indításához egy számítógépen UEFI módban.\n"
-_multiple_bd_two="\nTelepítési paraméterek alkalmazása egy operációs rendszer helyes indításához egy számítógépen UEFI módban.\n"
+_multiple_bd_one="\nTelepítési paraméterek alkalmazása több operációs rendszer helyes indításához egy számítógépen ${SYSTEM} módban.\n"
+_multiple_bd_two="\nTelepítési paraméterek alkalmazása egy operációs rendszer helyes indításához egy számítógépen ${SYSTEM} módban.\n"
 _grub_theme_stp_ttl="A GRUB téma telepítése"
 _grub_theme_stp_menu="\nKérjük, válassza ki a telepíteni kívánt GRUB témát.\n"
 _grub_theme_stp_bd_one="\nGRUB téma"

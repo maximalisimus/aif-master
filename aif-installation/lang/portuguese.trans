@@ -754,11 +754,16 @@ _refind_yn_body="\nSe um dos seus discos já tiver o rEFInd instalado, desista d
 #
 # Icon-theme, Wallpapers, DM theme
 #
+_yn_truetype_ttl="Instalar fontes do Windows"
+_yn_truetype_bd="\nInstalar fontes do Windows?\n"
+_yn_truetype_bd_two="\nDeseja actualizar a 'cache' de fontes para aplicar?\n"
+_yn_icontheme_ttl="Instalar o tema dos ícones"
+_yn_icontheme_bd="\nInstalar o tema de ícones de área de trabalho LinuxLex-8 para todos os usuários?\n"
 _greeter_ttl="Personalizar a aparência"
-_greeter_bd="\nCada usuário no diretório home ~ / tem uma pasta wallpapers com imagens HD para a área de trabalho.\nNo caminho ${MOUNTPOINT}/usr/share/ wallpapers / há imagens para LightDM (cópia da pasta anterior).\n"
+_greeter_bd="\nCada usuário no diretório home ~ / tem uma pasta wallpapers com imagens HD para a área de trabalho.\nNo caminho /usr/share/ wallpapers / há imagens para LightDM (cópia da pasta anterior).\n"
 _icontheme_bd="\nCada usuário tem uma pasta no diretório home~/.icons, que contém um tema adicional com ícones Linux-Lex - 8 para a área de trabalho de cada usuário separadamente.\n"
-_multiple_bd_one="\nAplicar parâmetros de configuração para inicialização correta de vários sistemas operacionais em um PC no modo UEFI.\n"
-_multiple_bd_two="\nAplicar parâmetros de configuração para inicialização correta de um SO em um PC no modo UEFI.\n"
+_multiple_bd_one="\nAplicar parâmetros de configuração para inicialização correta de vários sistemas operacionais em um PC no modo ${SYSTEM}.\n"
+_multiple_bd_two="\nAplicar parâmetros de configuração para inicialização correta de um SO em um PC no modo ${SYSTEM}.\n"
 _grub_theme_stp_ttl="Instalação do tema GRUB"
 _grub_theme_stp_menu="\nPor favor, selecione o tema GRUB para instalar.\n"
 _grub_theme_stp_bd_one="\nGRUB tema"

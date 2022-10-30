@@ -36,6 +36,13 @@ fixed_xfce4_desktop(){
 
 }
 
+fixed_all_de_desktop(){
+	_user_list=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
+	for i in ${_user_list[*]}; do
+		rm -rf ${MOUNTPOINT}/home/${i}/.config/ ${MOUNTPOINT}/home/${i}/.cache/
+	done
+}
+
 fixed_deepin_desktop()
 {
     # /etc/systemd/system/resume@.service
@@ -244,6 +251,9 @@ grub_theme_destiny_setup(){
 	if [[ -e "${MOUNTPOINT}/boot/grub/themes/destiny/theme.txt" ]]; then
 		sed -i '/GRUB_THEME=/c GRUB_THEME="/boot/grub/themes/destiny/theme.txt"' ${MOUNTPOINT}/etc/default/grub
 		wait
+		arch_chroot "grub-mkconfig -o /boot/grub/grub.cfg" 2>/tmp/.errlog
+		check_for_error
+		wait
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_grub_theme_stp_ttl" --msgbox "$_grub_theme_stp_bd" 0 0
 	fi
 }
@@ -272,6 +282,9 @@ grub_theme_starfield_setup(){
 	wait
 	if [[ -e "${MOUNTPOINT}/boot/grub/themes/starfield/theme.txt" ]]; then
 		sed -i '/GRUB_THEME=/c GRUB_THEME="/boot/grub/themes/starfield/theme.txt"' ${MOUNTPOINT}/etc/default/grub
+		wait
+		arch_chroot "grub-mkconfig -o /boot/grub/grub.cfg" 2>/tmp/.errlog
+		check_for_error
 		wait
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_grub_theme_stp_ttl" --msgbox "$_grub_theme_stp_bd" 0 0
 	fi
@@ -323,8 +336,10 @@ systemdboot_configuration(){
 }
 
 icontheme_configuration(){
-	if [[ $_icontheme_once == "0" ]]; then
-		_icontheme_once=1
+	
+	dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_icontheme_ttl" --yesno "$_yn_icontheme_bd" 0 0
+
+	if [[ $? -eq 0 ]]; then
 		wget "${_icontheme_url[*]}" -O "${_icontheme_pkg[*]}"
 		wait
 		_user_list=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
@@ -346,25 +361,31 @@ wallpapers_configuration(){
 	wait
 	mkdir -p ${MOUNTPOINT}/usr/share/wallpapers/
 	wait
-	tar -C ${MOUNTPOINT}/usr/share/wallpapers/ --strip-components=1 -xvzf "${_wallpapers_pkg[*]}" wallpapers/Full-HD/
+	tar -C "${MOUNTPOINT}/usr/share/wallpapers/" --strip-components=1 -xvzf "${_wallpapers_pkg[*]}" wallpapers/Full-HD/
 	wait
-	tar -C ${MOUNTPOINT}/usr/share/wallpapers/ --strip-components=1 -xvzf "${_wallpapers_pkg[*]}" wallpapers/Carbon-Mesh/
+	tar -C "${MOUNTPOINT}/usr/share/wallpapers/" --strip-components=1 -xvzf "${_wallpapers_pkg[*]}" wallpapers/Carbon-Mesh/
 	wait
 	tar -xvzf "${_wallpapers_pkg[*]}"
 	wait
-	mkdir -p ${MOUNTPOINT}/usr/share/wallpapers/{Full-HD,Carbon-Mesh}
+	mkdir -p "${MOUNTPOINT}/usr/share/wallpapers"/{Full-HD,Carbon-Mesh}
 	wait
-	cp -Rf "${_wallpapers_tmp_dir}"/Full-HD/* ${MOUNTPOINT}/usr/share/wallpapers/Full-HD/
+	cp -Rf "${_wallpapers_tmp_dir}"/Full-HD/* "${MOUNTPOINT}/usr/share/wallpapers/Full-HD/"
 	wait
-	cp -Rf "${_wallpapers_tmp_dir}"/Carbon-Mesh/* ${MOUNTPOINT}/usr/share/wallpapers/Carbon-Mesh/
+	cp -Rf "${_wallpapers_tmp_dir}"/Carbon-Mesh/* "${MOUNTPOINT}/usr/share/wallpapers/Carbon-Mesh/"
 	wait
 	_user_list=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
 	for i in ${_user_list[*]}; do
-		mkdir -p ${MOUNTPOINT}/home/"${i}"/wallpapers/{Full-HD,Carbon-Mesh}
+		mkdir -p "${MOUNTPOINT}/home/${i}/wallpapers/"
 		wait
-		cp -Rf "${_wallpapers_tmp_dir}"/Full-HD/* ${MOUNTPOINT}/home/"${i}"/wallpapers/Full-HD/
+		tar -C "${MOUNTPOINT}/home/${i}/wallpapers/" --strip-components=1 -xvzf "${_wallpapers_pkg[*]}" wallpapers/Full-HD/
 		wait
-		cp -Rf "${_wallpapers_tmp_dir}"/Carbon-Mesh/* ${MOUNTPOINT}/home/"${i}"/wallpapers/Carbon-Mesh/
+		tar -C "${MOUNTPOINT}/home/${i}/wallpapers/" --strip-components=1 -xvzf "${_wallpapers_pkg[*]}" wallpapers/Carbon-Mesh/
+		wait
+		mkdir -p "${MOUNTPOINT}/home/${i}/wallpapers"/{Full-HD,Carbon-Mesh}
+		wait
+		cp -Rf "${_wallpapers_tmp_dir}"/Full-HD/* "${MOUNTPOINT}/home/${i}/wallpapers/Full-HD/"
+		wait
+		cp -Rf "${_wallpapers_tmp_dir}"/Carbon-Mesh/* "${MOUNTPOINT}/home/${i}/wallpapers/Carbon-Mesh/"
 		wait
 	done
 	wait
@@ -405,17 +426,22 @@ greeter_configuration(){
 }
 
 fonts_configuration(){
-	if [[ $_truetype_once == "0" ]]; then
-		_truetype_once=1
+	dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_truetype_ttl" --yesno "$_yn_truetype_bd" 0 0
+
+	if [[ $? -eq 0 ]]; then
 		wget "${_truetype_url[*]}" -O "${_truetype_pkg[*]}"
 		wait
 		tar -C ${MOUNTPOINT}/usr/share/fonts/ -xvzf "${_truetype_pkg[*]}"
 		wait
 		rm -rf "${_truetype_pkg[*]}"
 		wait
-		arch-chroot $MOUNTPOINT /bin/bash -c "fc-cache –fv" 2>/tmp/.errlog
-		wait
-		check_for_error
+		dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_truetype_ttl" --yesno "$_yn_truetype_bd_two" 0 0
+		if [[ $? -eq 0 ]]; then
+			arch-chroot $MOUNTPOINT /bin/bash -c "fc-cache –fv" 2>/tmp/.errlog
+			wait
+			check_for_error
+			wait
+		fi
 	fi
 }
 

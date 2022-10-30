@@ -752,11 +752,16 @@ _refind_yn_body="\nWenn rEFInd bereits auf einem Ihrer Laufwerke installiert ist
 #
 # Icon-theme, Wallpapers, DM theme
 #
+_yn_truetype_ttl="Installieren von Windows-Schriftarten"
+_yn_truetype_bd="\nInstallieren Sie Windows-Schriftarten?\n"
+_yn_truetype_bd_two="\nSoll der Schriftcache für die Anwendung aktualisiert werden?\n"
+_yn_icontheme_ttl="Icon-Theme installieren"
+_yn_icontheme_bd="\nInstallieren Sie das LinuxLex-8 Desktop Icon-Design für alle Benutzer?\n"
 _greeter_ttl="Anpassen des Aussehens"
-_greeter_bd="\nJeder Benutzer hat im Home-Verzeichnis ~/ einen Ordner wallpapers mit HD-Bildern für den Desktop.\nDer Pfad ${MOUNTPOINT}/usr/share/wallpapers/ enthält Bilder für LightDM (eine Kopie des vorherigen Ordners).\n"
+_greeter_bd="\nJeder Benutzer hat im Home-Verzeichnis ~/ einen Ordner wallpapers mit HD-Bildern für den Desktop.\nDer Pfad /usr/share/wallpapers/ enthält Bilder für LightDM (eine Kopie des vorherigen Ordners).\n"
 _icontheme_bd="\nJeder Benutzer hat einen Ordner im Home-Verzeichnis ~/ .icons, die ein zusätzliches Thema mit Linux-Lex-8-Symbolen für den Desktop jedes Benutzers separat enthält.\n"
-_multiple_bd_one="\nWendet die Installationsoptionen an, um mehrere Betriebssysteme im UEFI-Modus auf demselben PC zu booten.\n"
-_multiple_bd_two="\nWendet die Installationsoptionen an, um ein Betriebssystem im UEFI-Modus auf einem PC zu booten.\n"
+_multiple_bd_one="\nWendet die Installationsoptionen an, um mehrere Betriebssysteme im ${SYSTEM}-Modus auf demselben PC zu booten.\n"
+_multiple_bd_two="\nWendet die Installationsoptionen an, um ein Betriebssystem im ${SYSTEM}-Modus auf einem PC zu booten.\n"
 _grub_theme_stp_ttl="Installieren des GRUB-Designs"
 _grub_theme_stp_menu="\nBitte wählen Sie GRUB Thema zu installieren.\n"
 _grub_theme_stp_bd_one="\nGRUB Thema"

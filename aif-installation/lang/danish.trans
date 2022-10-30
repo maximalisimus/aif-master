@@ -760,11 +760,16 @@ _refind_yn_body="\nHvis rEFInd allerede er installeret på en af dine diske, ska
 #
 # Icon-theme, Wallpapers, DM theme
 #
+_yn_truetype_ttl="Installation Af Vinduer Skrifttyper"
+_yn_truetype_bd="\nInstaller vinduer skrifttyper?\n"
+_yn_truetype_bd_two="\nOpdater skrifttypecachen til applikationen?\n"
+_yn_icontheme_ttl="Installation af ikon tema"
+_yn_icontheme_bd="\n8 desktop ikon tema for alle brugere?\n"
 _greeter_ttl="Tilpasning af udseendet"
-_greeter_bd="\nHver bruger i hjemmemappen ~ / har en tapetmappe med HD-billeder til skrivebordet.\nStien ${MOUNTPOINT}/usr/share/ baggrunde / indeholder billeder til LightDM (en kopi af den forrige mappe).\n"
+_greeter_bd="\nHver bruger i hjemmemappen ~ / har en tapetmappe med HD-billeder til skrivebordet.\nStien /usr/share/ baggrunde / indeholder billeder til LightDM (en kopi af den forrige mappe).\n"
 _icontheme_bd="\nHver bruger har en .ikonmappe i hjemmemappen~/, som indeholder et ekstra tema med ikoner for hver brugers skrivebord separat.\n"
-_multiple_bd_one="\nAnvendelse af installationsparametre til korrekt opstart af flere operativsystemer på en PC i UEFI-tilstand.\n"
-_multiple_bd_two="\nAnvendelse af installationsparametre til korrekt opstart af et operativsystem på en PC i UEFI-tilstand.\n"
+_multiple_bd_one="\nAnvendelse af installationsparametre til korrekt opstart af flere operativsystemer på en PC i ${SYSTEM}-tilstand.\n"
+_multiple_bd_two="\nAnvendelse af installationsparametre til korrekt opstart af et operativsystem på en PC i ${SYSTEM}-tilstand.\n"
 _grub_theme_stp_ttl="Installation af GRUB-temaet"
 _grub_theme_stp_menu="\nVælg GRUB-temaet, der skal installeres.\n"
 _grub_theme_stp_bd_one="\nGRUB tema"

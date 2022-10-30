@@ -749,11 +749,16 @@ _refind_yn_body="\nAls rEFInd al op een van uw schijven is geïnstalleerd, weige
 #
 # Icon-theme, Wallpapers, DM theme
 #
+_yn_truetype_ttl="Windows Fonts Installeren"
+_yn_truetype_bd="\nWindows fonts installeren?\n"
+_yn_truetype_bd_two="\nDe lettertypecache voor de toepassing bijwerken?\n"
+_yn_icontheme_ttl="Het icon-thema installeren"
+_yn_icontheme_bd="\nHet LinuxLex-8 desktop icon thema installeren voor alle gebruikers?\n"
 _greeter_ttl="Het uiterlijk aanpassen"
-_greeter_bd="\nElke gebruiker in de home directory ~ / heeft een wallpapers map met HD beelden voor het bureaublad.\nHet pad ${MOUNTPOINT}/usr/share/ wallpapers / bevat afbeeldingen voor LightDM (een kopie van de vorige map).\n"
+_greeter_bd="\nElke gebruiker in de home directory ~ / heeft een wallpapers map met HD beelden voor het bureaublad.\nHet pad /usr/share/ wallpapers / bevat afbeeldingen voor LightDM (een kopie van de vorige map).\n"
 _icontheme_bd="\nElke gebruiker heeft een .icons map in de home directory~/, die een extra thema bevat met Linux-Lex-8 iconen voor het bureaublad van elke gebruiker afzonderlijk.\n"
-_multiple_bd_one="\nToepassing van installatieparameters voor het correct opstarten van verschillende besturingssystemen op één PC in UEFI-modus.\n"
-_multiple_bd_two="\nToepassing van installatieparameters voor het correct opstarten van één besturingssysteem op één PC in UEFI-modus.\n"
+_multiple_bd_one="\nToepassing van installatieparameters voor het correct opstarten van verschillende besturingssystemen op één PC in ${SYSTEM}-modus.\n"
+_multiple_bd_two="\nToepassing van installatieparameters voor het correct opstarten van één besturingssysteem op één PC in ${SYSTEM}-modus.\n"
 _grub_theme_stp_ttl="Het GRUB thema installeren"
 _grub_theme_stp_menu="\nSelecteer het GRUB thema om te installeren.\n"
 _grub_theme_stp_bd_one="\nGRUB thema"

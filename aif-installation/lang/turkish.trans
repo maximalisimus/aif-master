@@ -780,11 +780,16 @@ _refind_yn_body="\nDisklerinizden birinde zaten rEFInd yüklüyse, bu yüklemeyi
 #
 # Icon-theme, Wallpapers, DM theme
 #
+_yn_truetype_ttl="Windows yazı tiplerini yükleme"
+_yn_truetype_bd="\nWindows yazı tiplerini yükle?\n"
+_yn_truetype_bd_two="\nUygulama için yazı tipi önbelleğini güncelle?\n"
+_yn_icontheme_ttl="Simge temasını yükleme"
+_yn_icontheme_bd="\nTüm kullanıcılar için LinuxLex-8 masaüstü simgeleri temasını yükleyin?\n"
 _greeter_ttl="Görünümü özelleştirme"
-_greeter_bd="\nEv dizinindeki her kullanıcının ~/ masaüstü için HD görüntüleri olan bir wallpapers klasörü vardır.\n${MOUNTPOİNT}/usr/share/wallpapers/ yolunda LightDM için resimler var (önceki klasörün bir kopyası).\n"
+_greeter_bd="\nEv dizinindeki her kullanıcının ~/ masaüstü için HD görüntüleri olan bir wallpapers klasörü vardır.\n/usr/share/wallpapers/ yolunda LightDM için resimler var (önceki klasörün bir kopyası).\n"
 _icontheme_bd="\nHer kullanıcının ~/ ana dizinindeki bir klasörü vardır.Her kullanıcının masaüstüne ayrı ayrı Linux-Lex-8 simgeleri içeren isteğe bağlı bir tema içeren simgeler.\n"
-_multiple_bd_one="\nUEFI modunda aynı PC'de birden fazla işletim sisteminin düzgün şekilde önyüklenmesi için ayar parametrelerini uygulama.\n"
-_multiple_bd_two="\nUEFI modunda tek bir bilgisayara tek bir işletim sisteminin düzgün şekilde önyüklenmesi için ayar parametrelerini uygulama.\n"
+_multiple_bd_one="\n${SYSTEM} modunda aynı PC'de birden fazla işletim sisteminin düzgün şekilde önyüklenmesi için ayar parametrelerini uygulama.\n"
+_multiple_bd_two="\n${SYSTEM} modunda tek bir bilgisayara tek bir işletim sisteminin düzgün şekilde önyüklenmesi için ayar parametrelerini uygulama.\n"
 _grub_theme_stp_ttl="GRUB temasını yükleme"
 _grub_theme_stp_menu="\nYüklemek için GRUB temasını seçiniz.\n"
 _grub_theme_stp_bd_one="\nGRUB Tema"

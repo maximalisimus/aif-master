@@ -276,7 +276,7 @@ install_de_wm() {
             wait
             [[ "${_list_xfce4_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_xfce4_dep[*]}" 2>>/tmp/.errlog
             wait
-            fixed_xfce4_desktop
+            #fixed_xfce4_desktop
             wait
              ;;            
         "${_desktop_menu[14]}") # Xfce + Extras
@@ -286,7 +286,7 @@ install_de_wm() {
             wait
             [[ "${_list_xfce4_extra_dep[*]}" != "" ]] && pacstrap ${MOUNTPOINT} "${_list_xfce4_extra_dep[*]}" 2>>/tmp/.errlog
             wait
-            fixed_xfce4_desktop
+            #fixed_xfce4_desktop
             wait
              ;;
         "${_desktop_menu[15]}") # Awesome
@@ -348,6 +348,10 @@ install_de_wm() {
           *) install_desktop_menu
              ;;
     esac  
+    
+    wait
+    fixed_all_de_desktop
+    wait
     
     check_for_error
 }

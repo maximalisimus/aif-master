@@ -744,11 +744,16 @@ _refind_yn_body="\nSe uno dei tuoi dischi ha già rEFInd installato, rifiuta que
 #
 # Icon-theme, Wallpapers, DM theme
 #
+_yn_truetype_ttl="Installazione di Windows font"
+_yn_truetype_bd="\nInstallare i caratteri di Windows?\n"
+_yn_truetype_bd_two="\nAggiornare la cache dei caratteri per l'applicazione?\n"
+_yn_icontheme_ttl="Installazione del tema delle icone"
+_yn_icontheme_bd="\nInstallare il tema Dell'icona Desktop LinuxLex - 8 per tutti gli utenti?\n"
 _greeter_ttl="Personalizzazione dell'aspetto"
-_greeter_bd="\nOgni utente nella home directory ~ / ha una cartella sfondi con immagini HD per il desktop.\nNel percorso ${MOUNTPOINT} / usr/share/ wallpapers / ci sono le immagini per LightDM (copia della cartella precedente).\n"
+_greeter_bd="\nOgni utente nella home directory ~ / ha una cartella sfondi con immagini HD per il desktop.\nNel percorso / usr/share/ wallpapers / ci sono le immagini per LightDM (copia della cartella precedente).\n"
 _icontheme_bd="\nOgni utente nella home directory ~/ ha una cartella .icons, che contiene un tema aggiuntivo con le icone Linux-Lex-8 per il desktop di ogni utente separatamente.\n"
-_multiple_bd_one="\nUtilizzare i parametri di installazione per l'avvio corretto di più sistemi operativi sullo stesso PC in modalità UEFI.\n"
-_multiple_bd_two="\nUtilizzare i parametri di installazione per l'avvio corretto di un sistema operativo su un PC in modalità UEFI.\n"
+_multiple_bd_one="\nUtilizzare i parametri di installazione per l'avvio corretto di più sistemi operativi sullo stesso PC in modalità ${SYSTEM}.\n"
+_multiple_bd_two="\nUtilizzare i parametri di installazione per l'avvio corretto di un sistema operativo su un PC in modalità ${SYSTEM}.\n"
 _grub_theme_stp_ttl="Installazione del tema GRUB"
 _grub_theme_stp_menu="\nSi prega di selezionare il tema GRUB da installare.\n"
 _grub_theme_stp_bd_one="\nTema GRUB"
