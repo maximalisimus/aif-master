@@ -281,17 +281,17 @@ edit_configs() {
     FILE=""
     FILE2=""
     user_list=""
-    
-    if [[ $SUB_MENU != "edit_configs" ]]; then
-       SUB_MENU="edit_configs"
-       HIGHLIGHT_SUB=1
-    else
-       if [[ $HIGHLIGHT_SUB != 14 ]]; then
-          HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
-       fi
-    fi
 	
 	if [[ $SYSTEM == "BIOS" ]]; then
+		if [[ $SUB_MENU != "edit_configs" ]]; then
+			SUB_MENU="edit_configs"
+			HIGHLIGHT_SUB=1
+		else
+			if [[ $HIGHLIGHT_SUB != 16 ]]; then
+				HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
+			fi
+		fi
+	
 		dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SeeConfOptTitle" --menu "$_SeeConfOptBody" 0 0 14 \
 		"1" "/etc/vconsole.conf" \
 		"2" "/etc/locale.conf" \
@@ -310,6 +310,15 @@ edit_configs() {
 		"15" "$DM" \
 		"16" "$_Back" 2>${ANSWER}
 	else
+		if [[ $SUB_MENU != "edit_configs" ]]; then
+			SUB_MENU="edit_configs"
+			HIGHLIGHT_SUB=1
+		else
+			if [[ $HIGHLIGHT_SUB != 18 ]]; then
+				HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
+			fi
+		fi
+		
 		dialog --default-item ${HIGHLIGHT_SUB} --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SeeConfOptTitle" --menu "$_SeeConfOptBody" 0 0 14 \
 		"1" "/etc/vconsole.conf" \
 		"2" "/etc/locale.conf" \
