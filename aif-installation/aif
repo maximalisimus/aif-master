@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
-# Architect Installation Framework (version 1.6.3 - 17-Dec-2015)
+# maximalisimus Installation Framework (version 2.0 - 20-Aug-2019)
 #
-# Written by Carl Duff for Architect Linux
+# Written by Carl Duff for maximalisimus ArchLinux
 #
 # This program is free software, provided under the GNU General Public License
 # as published by the Free Software Foundation. So feel free to copy, distribute,
@@ -26,9 +26,7 @@ _archi=$(uname -m)
 
 for i in "$filesdir"/config/*.sh; do source "$i" ; done ;
 
-
 for i in "$filesdir"/modules/*.sh; do source "$i"; done ;
-
 
 ######################################################################
 ##                                                                  ##
@@ -42,6 +40,6 @@ id_system
 select_language
 check_requirements
 greeting
-    while true; do
-          main_menu_online      
-    done
+	while true; do
+		main_menu_online      
+	done
