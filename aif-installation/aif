@@ -20,7 +20,7 @@ ANSWER="/tmp/.aif"
 ABSOLUT_FILENAME=$(readlink -e "$0")
 filesdir=$(dirname "$ABSOLUT_FILENAME")
 # Save retyping
-VERSION="MAXIMALISIMUS Installation Framework 2.7"
+VERSION="MAXIMALISIMUS Installation Framework 2.8"
 # Constant to 32 or 64 bit system
 _archi=$(uname -m)
 
