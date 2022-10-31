@@ -6,7 +6,7 @@ aif-master - Bash скрипт для установки системы Archlinu
 
 aif-master - Bash script for installing the Archlinux system on a computer.
 
-![Application](./image/aif-image.jpg "aif-master")
+![Application](./image/aif-image.png "aif-master")
 
 <a name="Oglavlenie"></a>
 
