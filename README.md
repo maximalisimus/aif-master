@@ -1,12 +1,14 @@
 # aif-master
 
-****************************
+---
 
 aif-master - Bash скрипт для установки системы Archlinux на компьютер.
 
 aif-master - Bash script for installing the Archlinux system on a computer.
 
-<img src="https://raw.githubusercontent.com/maximalisimus/aif-master/master/image/aif-image.jpg"  height="400">
+![Application](./image/aif-image.jpg "aif-master")
+
+<a name="Oglavlenie"></a>
 
 ## Оглавление
 
@@ -17,7 +19,8 @@ aif-master - Bash script for installing the Archlinux system on a computer.
 6. [Обо Мне](#aboutrus)
 7. [About](#abouten)
 
-[:arrow_up:Информация](#Информация)
+
+## <a name="Информация">Информация</a>
 
 Данный скрипт предназначен для установки системы **Archlinux** в псевдографическом режиме, 
 с помощью утилиты **dialog**.
@@ -28,17 +31,21 @@ aif-master - Bash script for installing the Archlinux system on a computer.
 
 Данному установщику **не нужен** ни **XORG**, ни рабочее окружение ( **Desktop environment** ), ни дисплейный менеджер 
 ( **Display Manager** ). Данный скрипт работает полностью в консольном режиме. Достаточно только 
-наличия подключения к интернету и пакета **dialog**.
+наличия подключения к интернету и 2 пакетов **dialog** и **ncurses**.
 
 Вы можете использовать данный мастер установки для самых разных режимов использования системы ArchLinux.
 
-Например, не устанавливать графическую часть (XORG, Desktop Environment, Display Manager, драйвер видеокарты и другие). 
-После этого установить пакеты для сервера и использовать систему в качестве сервера с docker и docker-container.
+Например, не устанавливать графическую часть (XORG, Desktop Environment, Display Manager, драйвер видеокарты и другие), 
+чтобы использовать в качестве сервера.
 
 Или выбрать и установить только необходимые пакеты и использовать в качестве Настольного ПК.
-Независимо от местоположения вашего компьютера - будь то офис или домашняя лаборатория.
+Независимо от местоположения вашего компьютера - будь то офис или домашний ПК.
 
-[:arrow_up:Information](#Information)
+---
+
+[К оглавлению](#Oglavlenie)
+
+## <a name="Information">Information</a>
 
 This script is intended for installing the **Archlinux** system in pseudographic mode, 
 using the **dialog** utility.
@@ -50,18 +57,22 @@ This wizard supports **UEFI** installation mode when starting the *ArchLinux* sy
 
 This installer **does not need** either **XORG**, nor a working environment 
 ( **Desktop environment** ), nor a display manager ( **Display Manager** ). 
-This script works completely in console mode. Just enough availability of an 
-internet connection and the **dialog** package.
+This script works completely in console mode. It is enough only
+to have an Internet connection and 2 packages **dialog** and **ncurses**.
 
 You can use this installation wizard for a variety of modes of using the ArchLinux system.
 
-For example, do not install the graphics part (XORG, Desktop Environment, Display Manager, video card driver, and others).
-After that, install the packages for the server and use the system as a server with dokker and dokker-container.
+For example, do not install the graphics part (XORG, Desktop Environment, Display Manager, graphics card driver, and others)
+to use as a server.
 
-Or choose and install only the necessary packages and use it as a Desktop PC.
-Regardless of the location of your computer-whether it is an office or a home laboratory.
+Or choose and install only the necessary packages and use as a Desktop PC.
+Regardless of the location of your computer - whether it's an office or a home PC.
 
-[:arrow_up:Использование](#Использование)
+---
+
+[К оглавлению](#Oglavlenie)
+
+## <a name="Использование">Использование</a>
 
 ### Базовая информация
 
@@ -71,7 +82,7 @@ Regardless of the location of your computer-whether it is an office or a home la
 2. наличие настроенного подключения к интернету в вашем дистрибутиве
 3. Установите в Live дистрибутив несколько зависимостей для корректной работы скрипта. Без указанных ниже утилит, скрипт просто не запустится.
 
-$ sudo pacman -Syy ncurses git bash dialog --noconfirm
+$ sudo pacman -Syy ncurses bash dialog python --noconfirm
 
 **Данный скрипт можно запустить из любого места**.
  
@@ -87,7 +98,11 @@ $ sudo sh aif-installation/aif
 
 **Желаем вам удачи**.
 
-[:arrow_up:Uses](#Uses)
+---
+
+[К оглавлению](#Oglavlenie)
+
+## <a name="Uses">Uses</a>
 
 ### Basic information
 
@@ -97,7 +112,7 @@ To use this wizard, you must comply with 2 important conditions:
 2. the presence of a configured Internet connection in your distribution
 3. Install several dependencies in the Live distribution for the script to work correctly. Without the utilities listed below, the script simply won't run.
 
-$ sudo pacman -Syy ncurses git bash dialog --noconfirm
+$ sudo pacman -Syy ncurses bash dialog python --noconfirm
 
 **This script can be run from anywhere**.
 
@@ -112,7 +127,11 @@ Then just follow the instructions of the installation wizard.
 
 **We wish you good luck**.
 
-[:arrow_up:Обо Мне](#aboutrus)
+---
+
+[К оглавлению](#Oglavlenie)
+
+## <a name="aboutrus">Обо Мне</a>
 
 Автор данной разработки **Shadow**: [maximalisimus](https://github.com/maximalisimus).
 
@@ -122,7 +141,11 @@ Then just follow the instructions of the installation wizard.
 
 Начальная точка проекта: **Architect Linux installer**.
 
-[:arrow_up:About](#abouten)
+---
+
+[К оглавлению](#Oglavlenie)
+
+## <a name="abouten">About</a>
 
 The author of this development **Shadow**: [maximalisimus](https://github.com/maximalisimus).
 
