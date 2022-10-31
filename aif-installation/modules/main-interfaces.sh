@@ -307,7 +307,7 @@ edit_configs() {
 		"13" "/etc/systemd/timesyncd.conf" \
 		"14" "grub.cfg" \
 		"15" "refind.conf" \
-		"16" "systemd-boot" \
+		"16" "systemd-boot.conf" \
 		"17" "$DM" \
 		"18" "$_Back" 2>${ANSWER}
     
@@ -340,7 +340,7 @@ edit_configs() {
 		"13") FILE="${MOUNTPOINT}/etc/systemd/timesyncd.conf"
 			;;
 		"14") case $BOOTLOADER in
-				"Grub|rEFInd") FILE="${MOUNTPOINT}/etc/default/grub"
+				"Grub|rEFInd|systemd-boot") FILE="${MOUNTPOINT}/etc/default/grub"
 						;;
 				"Syslinux") FILE="${MOUNTPOINT}/boot/syslinux/syslinux.cfg"
 							;;
