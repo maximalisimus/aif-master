@@ -286,7 +286,7 @@ edit_configs() {
 			SUB_MENU="edit_configs"
 			HIGHLIGHT_SUB=1
 		else
-			if [[ $HIGHLIGHT_SUB != 18 ]]; then
+			if [[ $HIGHLIGHT_SUB != 16 ]]; then
 				HIGHLIGHT_SUB=$(( HIGHLIGHT_SUB + 1 ))
 			fi
 		fi
@@ -305,11 +305,9 @@ edit_configs() {
 		"11" "$_ncl_nname" \
 		"12" "/etc/ntp.conf" \
 		"13" "/etc/systemd/timesyncd.conf" \
-		"14" "grub.cfg" \
-		"15" "refind.conf" \
-		"16" "systemd-boot.conf" \
-		"17" "$DM" \
-		"18" "$_Back" 2>${ANSWER}
+		"14" "$BOOTLOADER" \
+		"15" "$DM" \
+		"16" "$_Back" 2>${ANSWER}
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
     case $(cat ${ANSWER}) in
@@ -340,20 +338,28 @@ edit_configs() {
 		"13") FILE="${MOUNTPOINT}/etc/systemd/timesyncd.conf"
 			;;
 		"14") case $BOOTLOADER in
-				"Grub|rEFInd|systemd-boot") FILE="${MOUNTPOINT}/etc/default/grub"
+				"Grub") if [[ "${_refind_is_install}" == "1" ]]; then
+							if [[ "${_case_grub_refind}" == "0" ]]; then
+								_case_grub_refind=1
+								FILE="${MOUNTPOINT}/etc/default/grub"
+							else
+								_case_grub_refind=0
+								[[ -e ${MOUNTPOINT}${UEFI_MOUNT}/EFI/refind/refind.conf ]] \
+								&& FILE="${MOUNTPOINT}${UEFI_MOUNT}/EFI/refind/refind.conf" || FILE="${MOUNTPOINT}${UEFI_MOUNT}/EFI/BOOT/refind.conf"
+								FILE2="${MOUNTPOINT}/boot/refind_linux.conf"
+							fi
+						else
+							FILE="${MOUNTPOINT}/etc/default/grub"
+						fi
 						;;
 				"Syslinux") FILE="${MOUNTPOINT}/boot/syslinux/syslinux.cfg"
 							;;
+				"systemd-boot") FILE="${MOUNTPOINT}${UEFI_MOUNT}/loader/entries/arch.conf" 
+								FILE2="${MOUNTPOINT}${UEFI_MOUNT}/loader/loader.conf"
+								;;
 				esac
 				;;
-		"15") [[ -e ${MOUNTPOINT}${UEFI_MOUNT}/EFI/refind/refind.conf ]] \
-				&& FILE="${MOUNTPOINT}${UEFI_MOUNT}/EFI/refind/refind.conf" || FILE="${MOUNTPOINT}${UEFI_MOUNT}/EFI/BOOT/refind.conf"
-				FILE2="${MOUNTPOINT}/boot/refind_linux.conf"
-				;;
-		"16") FILE="${MOUNTPOINT}${UEFI_MOUNT}/loader/entries/arch.conf" 
-				FILE2="${MOUNTPOINT}${UEFI_MOUNT}/loader/loader.conf"
-				;;
-		"17") case $DM in
+		"15") case $DM in
 				"LXDM") FILE="${MOUNTPOINT}/etc/lxdm/lxdm.conf" 
 						;;
 				"LightDM") FILE="${MOUNTPOINT}/etc/lightdm/lightdm.conf" 
@@ -430,8 +436,9 @@ main_menu_online() {
     "6" "$_swap_menu_title" \
     "7" "$_rsrvd_menu_title" \
     "8" "$_MMRunMkinit" \
-    "9" "$_SeeConfOpt" \
-    "10" "$_Done" 2>${ANSWER}
+    "9" "$BOOTLOADER update"
+    "10" "$_SeeConfOpt" \
+    "11" "$_Done" 2>${ANSWER}
 
     HIGHLIGHT=$(cat ${ANSWER})
     
@@ -462,7 +469,9 @@ main_menu_online() {
             ;;
         "8") run_mkinitcpio
              ;;
-        "9") edit_configs
+        "9") bootloader_update
+			;;
+        "10") edit_configs
              ;;            
           *) dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --yesno "$_CloseInstBody" 0 0
           

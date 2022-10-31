@@ -4,6 +4,35 @@
 ##                                                                  ##
 ######################################################################  
 
+bootloader_update(){
+	clear
+	case $BOOTLOADER in
+		"Grub") arch-chroot $MOUNTPOINT /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg" 2>/tmp/.errlog
+				check_for_error
+				wait
+				if [[ "${_refind_is_install}" == "1" ]]; then
+					arch-chroot $MOUNTPOINT /bin/bash -c "refind-install" 2>/tmp/.errlog
+					check_for_error
+				fi
+				;;
+		"Syslinux") case $_syslinux_type in 
+						"2") arch-chroot $MOUNTPOINT /bin/bash -c "syslinux-install_update -iam" 2>/tmp/.errlog
+							check_for_error
+							;;
+						"3") arch-chroot $MOUNTPOINT /bin/bash -c "syslinux-install_update -i" 2>/tmp/.errlog
+							check_for_error
+							;;
+					esac
+					;;
+		"systemd-boot") arch_chroot "bootctl update" 2>/tmp/.errlog
+						check_for_error
+						;;
+		"None") dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$BOOTLOADER" --msgbox "Bootloader $BOOTLOADER Not Found" 0 0
+			;;
+	esac
+	wait
+}
+
 grub_theme_menu(){
 	dialog --default-item 2 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_grub_theme_stp_ttl" --menu "$_grub_theme_stp_menu" 0 0 4 \
 	"1" "No Theme" \
@@ -48,7 +77,8 @@ grub_bios_install(){
 			select_grub_device
 		fi
 	 fi
-			   
+	wait
+	clear
 	 arch_chroot "grub-mkconfig -o /boot/grub/grub.cfg" 2>/tmp/.errlog
 	 check_for_error
 	 
@@ -75,7 +105,9 @@ syslinux_bios_install(){
   
 	 # Install to MBR or root partition, accordingly
 	 [[ $(cat ${ANSWER}) == "2" ]] && arch_chroot "syslinux-install_update -iam" 2>>/tmp/.errlog
+	 [[ $(cat ${ANSWER}) == "2" ]] && _syslinux_type=2
 	 [[ $(cat ${ANSWER}) == "3" ]] && arch_chroot "syslinux-install_update -i" 2>>/tmp/.errlog
+	 [[ $(cat ${ANSWER}) == "3" ]] && _syslinux_type=3
 	 check_for_error
 	 
 	 # Amend configuration file depending on whether lvm used or not for root.
@@ -107,6 +139,7 @@ grub_uefi_install(){
 	  wait
 	  arch-chroot $MOUNTPOINT /bin/bash -c "grub-install --target=x86_64-efi --efi-directory=${UEFI_MOUNT} --bootloader-id=arch_grub --recheck" 2>>/tmp/.errlog
 	  wait
+	  clear
 	  arch_chroot "grub-mkconfig -o /boot/grub/grub.cfg" 2>>/tmp/.errlog
 	  wait
 	  arch-chroot $MOUNTPOINT /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg" 2>>/tmp/.errlog
@@ -175,13 +208,14 @@ refind_uefi_install(){
 	  check_for_error
 	  
 	  # Now generate config file to pass kernel parameters. Default read only (ro) changed to read-write (rw),
-	  # and amend where using btfs subvol root       
+	  # and amend where using btfs subvol root
 	  arch_chroot "refind-mkrlconf" 2>/tmp/.errlog
 	  check_for_error
 	  sed -i 's/ro /rw /g' ${MOUNTPOINT}/boot/refind_linux.conf
 	  [[ $BTRFS_MNT != "" ]] && sed -i "s/rw/rw $BTRFS_MNT/g" ${MOUNTPOINT}/boot/refind_linux.conf
 	  
-	  BOOTLOADER="rEFInd"
+	  #BOOTLOADER="rEFInd"
+	  _refind_is_install=1
    else 
 	  dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_RefiErrTitle" --msgbox "$_RefiErrBody" 0 0
 	  uefi_bootloader
@@ -227,6 +261,10 @@ systemd_boot_uefi_install(){
 	  check_for_error
 	  wait
 	  systemdboot_configuration
+	  wait
+	  clear
+	  arch_chroot "bootctl update" 2>/tmp/.errlog
+	  check_for_error
 	  wait
 }
 
