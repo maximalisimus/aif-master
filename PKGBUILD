@@ -5,15 +5,15 @@ pkgrel=2
 arch=('any')
 url="https://github.com/maximalisimus/$pkgname/"
 license=('GPL')
-depends=(dialog parted arch-install-scripts)
+depends=(arch-install-scripts dialog ncurses lib32-ncurses parted util-linux gptfdisk pacman-contrib python wget curl)
 makedepends=(git imagemagick)
 replaces=($pkgname)
 
 source=("$pkgname::git+https://github.com/maximalisimus/$pkgname.git"
 	)
 	
-md5sums=('SKIP'
-	)
+sha256sums=('SKIP'
+			)
 
 prepare() {
 	cd ${srcdir}/$pkgname
