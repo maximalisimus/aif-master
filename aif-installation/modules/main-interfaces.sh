@@ -436,7 +436,7 @@ main_menu_online() {
     "6" "$_swap_menu_title" \
     "7" "$_rsrvd_menu_title" \
     "8" "$_MMRunMkinit" \
-    "9" "$BOOTLOADER update"
+    "9" "$BOOTLOADER update" \
     "10" "$_SeeConfOpt" \
     "11" "$_Done" 2>${ANSWER}
 
