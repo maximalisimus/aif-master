@@ -32,7 +32,7 @@ bootloader_update(){
 				bootloader_check_and_uses
 				wait
 				if [[ "$BOOTLOADER" == "None" ]]; then
-					dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Error!" --msgbox "Bootloaders Not Found" 0 0
+					dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Error!" --msgbox "\nBootloaders Not Found!\n" 0 0
 				else
 					bootloader_update
 				fi
