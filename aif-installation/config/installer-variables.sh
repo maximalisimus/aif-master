@@ -75,6 +75,10 @@ _refind_is_install=0
 _case_grub_refind=0
 _syslinux_type=0
 BOOTLOADER="None"
+_grub_search=0
+_syslinux_search=0
+_refind_sarch=0
+_susytemd_boot_search=0
 
 declare -a _devices                                            # Array scan mnt mount devices variables declare
 declare -a _device_menu                                        # Array menu form on scan mnt mount devices variables declare

@@ -27,10 +27,45 @@ bootloader_update(){
 		"systemd-boot") arch_chroot "bootctl update" 2>/tmp/.errlog
 						check_for_error
 						;;
-		"None") dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$BOOTLOADER" --msgbox "Bootloader $BOOTLOADER Not Found" 0 0
+		"None") bootloader_searches
+				wait
+				bootloader_check_and_uses
+				wait
+				if [[ "$BOOTLOADER" == "None" ]]; then
+					dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Error!" --msgbox "Bootloaders Not Found" 0 0
+				else
+					bootloader_update
+				fi
 			;;
 	esac
 	wait
+}
+
+bootloader_searches()
+{
+	if [[ "$SYSTEM" == "BIOS" ]]; then
+		_grub_search=$(search_q_pkg "${_grub_pkg[0]}" | sed '2,$d' | wc -l)
+		_syslinux_search=$(search_q_pkg "${_syslinux_pkg[0]}" | sed '2,$d' | wc -l)
+	else
+		_grub_search=$(search_q_pkg "${_grub_uefi_pkg[0]}" | sed '2,$d' | wc -l)
+		_refind_sarch=$(search_q_pkg "${_reefind_pkg[0]}" | sed '2,$d' | wc -l)
+		_susytemd_boot_search=$(search_q_pkg "${_systemd_boot_pkg[0]}" | sed '2,$d' | wc -l)
+	fi
+}
+
+bootloader_check_and_uses()
+{
+	if [[ "$SYSTEM" == "BIOS" ]]; then
+		[[ "${_syslinux_search[*]}" == "1" ]] && BOOTLOADER="Syslinux"
+		[[ "${_grub_search[*]}" == "1" ]] && BOOTLOADER="Grub"
+	else
+		if [[ "${_grub_search[*]}" == 1 ]]; then
+			[[ "${_refind_sarch[*]}" == "1" ]] && _refind_is_install=1
+			BOOTLOADER="Grub"
+		else
+			[[ "${_susytemd_boot_search[*]}" == "1" ]] && BOOTLOADER="systemd-boot"
+		fi
+	fi
 }
 
 grub_theme_menu(){
