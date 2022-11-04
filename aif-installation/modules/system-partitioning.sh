@@ -232,8 +232,10 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
 
     case $(cat ${ANSWER}) in
         "1") FILESYSTEM="skip"
+			_filesystem="skip"
              ;;
         "2") FILESYSTEM="mkfs.btrfs -f"
+			_filesystem="btrfs"
              modprobe btrfs
              
              dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_btrfsSVTitle" --yesno "$_btrfsSVBody" 0 0
@@ -242,41 +244,50 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
              else
                 BTRFS=1
              fi
-             # fs_opts="noatime nodiratime relatime nodev nosuid noexec ro sync usrquota grpqutoa"
              ;;
         "3") FILESYSTEM="mkfs.ext2 -F"
+			_filesystem="ext2"
 			fs_opts="noatime nodiratime relatime nodev nosuid noexec ro sync usrquota grpquota user_xattr"
              ;;
         "4") FILESYSTEM="mkfs.ext3 -F"
+			_filesystem="ext3"
 			fs_opts="noatime relatime nodev nosuid noexec ro sync usrquota grpquota user_xattr"
              ;;            
         "5") FILESYSTEM="mkfs.ext4 -F"
+			_filesystem="ext4"
              CHK_NUM=8
              fs_opts="data=journal data=writeback dealloc discard noacl noatime nobarrier nodelalloc nodiratime relatime nodev nosuid noexec ro sync usrquota grpquota user_xattr"
              ;;
         "6") FILESYSTEM="mkfs.f2fs"
+			_filesystem="f2fs"
              modprobe f2fs
              fs_opts="data_flush disable_roll_forward disable_ext_identify discard fastboot flush_merge inline_xattr inline_data inline_dentry no_heap noacl nobarrier noextent_cache noinline_data norecovery"
              CHK_NUM=16
              ;;
         "7") FILESYSTEM="mkfs.jfs -q"
+			_filesystem="jfs"
              CHK_NUM=4
              fs_opts="discard errors=continue errors=panic nointegrity noatime relatime nodev nosuid noexec ro sync"
              ;;
         "8") FILESYSTEM="mkfs.nilfs2 -f"
+			_filesystem="nilfs2"
              CHK_NUM=7
              fs_opts="discard nobarrier errors=continue errors=panic order=relaxed order=strict norecovery"
              ;;  
         "9") FILESYSTEM="mkfs.ntfs -q"
+			_filesystem="ntfs"
              ;;  
         "10") FILESYSTEM="mkfs.reiserfs -f -f"
+			_filesystem="reiserfs"
              CHK_NUM=5
              fs_opts="acl nolog notail replayonly user_xattr"
              ;;  
        "11") FILESYSTEM="mkfs.vfat -F32"
+			_filesystem="vfat"
 			fs_opts="noatime nodiratime relatime ro sync quiet discard"
              ;;  
        "12") FILESYSTEM="mkfs.xfs -f"
+			_filesystem="xfs"
              CHK_NUM=9
              fs_opts="discard filestreams ikeep largeio noalign nobarrier norecovery noquota wsync noatime relatime nodev nosuid noexec ro sync usrquota grpquota"
              ;;      
@@ -301,7 +312,7 @@ mount_opts() {
     
     # Now clean up the file
     sed -i 's/ /,/g' ${MOUNT_OPTS}
-    sed -i '$s/,$//' ${MOUNT_OPTS}   
+    sed -i '$s/,$//' ${MOUNT_OPTS}
     
     # If mount options selected, confirm choice 
     if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then

@@ -4,7 +4,8 @@
 ##                                                                  ##
 ######################################################################
 
-btrfs_mounted_options(){
+btrfs_mounted_options()
+{
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_btrfsMntTitle" --clear --checklist "$_btrfsMntBody" 0 0 16 \
 	"autodefrag" "$_mnt_autodefrag_bd" off \
 	"discard" "$_mnt_discard_bd" off \
@@ -34,4 +35,249 @@ btrfs_mounted_options(){
 	
 	sed -i 's/ /,/g' ${BTRFS_OPTS}
 	sed -i '$s/,$//' ${BTRFS_OPTS}
+	
+	if [[ $(cat ${BTRFS_OPTS}) != "" ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_btrfsMntTitle" --yesno "$_btrfsMntConfBody $(cat $BTRFS_OPTS)\n" 0 0
+		[[ $? -eq 1 ]] && btrfs_mounted_options
+	fi
+}
+
+ext2_mounted_options()
+{
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 11 \
+	"noatime" "$_mnt_noatime_bd" off \
+	"nodiratime" "$_mnt_nodiratime_bd" off \
+	"relatime" "$_mnt_relatime_bd" off \
+	"nodev" "$_mnt_nodev_bd" off \
+	"nosuid" "$_mnt_nosuid_bd" off \
+	"noexec" "$_mnt_noexec_bd" off \
+	"ro" "$_mnt_ro_bd" off \
+	"sync" "$_mnt_sync_bd" off \
+	"usrquota" "$_mnt_usrquota_bd" off \
+	"grpquota" "$_mnt_grpqutoa_bd" off \
+	"user_xattr" "$_mnt_user_xattr_bd" off 2>${MOUNT_OPTS}
+	
+	# Now clean up the file
+	sed -i 's/ /,/g' ${MOUNT_OPTS}
+	sed -i '$s/,$//' ${MOUNT_OPTS}
+	
+	# If mount options selected, confirm choice 
+	if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_Mnt_Status_Title " --yesno "\n${_Mnt_Conf_Body}$(cat ${MOUNT_OPTS})\n" 10 75
+		[[ $? -eq 1 ]] && ext2_mounted_options
+	fi
+}
+
+ext3_mounted_options()
+{
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 10 \
+	"noatime" "$_mnt_noatime_bd" off \
+	"relatime" "$_mnt_relatime_bd" off \
+	"nodev" "$_mnt_nodev_bd" off \
+	"nosuid" "$_mnt_nosuid_bd" off \
+	"noexec" "$_mnt_noexec_bd" off \
+	"ro" "$_mnt_ro_bd" off \
+	"sync" "$_mnt_sync_bd" off \
+	"usrquota" "$_mnt_usrquota_bd" off \
+	"grpquota" "$_mnt_grpqutoa_bd" off \
+	"user_xattr" "$_mnt_user_xattr_bd" off 2>${MOUNT_OPTS}
+	
+	# Now clean up the file
+	sed -i 's/ /,/g' ${MOUNT_OPTS}
+	sed -i '$s/,$//' ${MOUNT_OPTS}
+	
+	# If mount options selected, confirm choice 
+	if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_Mnt_Status_Title " --yesno "\n${_Mnt_Conf_Body}$(cat ${MOUNT_OPTS})\n" 10 75
+		[[ $? -eq 1 ]] && ext3_mounted_options
+	fi
+}
+
+ext4_mounted_options()
+{
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 16 \
+	"journal" "$_mnt_journal_bd" off \
+	"data=writeback" "$_mnt_writeback_bd" off \
+	"dealloc" "$_mnt_dealloc_bd" off \
+	"discard" "$_mnt_discard_bd" off \
+	"noacl" "$_mnt_noacl_bd" off \
+	"noatime" "$_mnt_noatime_bd" off \
+	"nobarrier" "$_mnt_nobarrier_bd" off \
+	"nodelalloc" "$_mnt_nodelalloc_bd" off \
+	"nodiratime" "$_mnt_nodiratime_bd" off \
+	"relatime" "$_mnt_relatime_bd" off \
+	"nodev" "$_mnt_nodev_bd" off \
+	"nosuid" "$_mnt_nosuid_bd" off \
+	"noexec" "$_mnt_noexec_bd" off \
+	"ro" "$_mnt_ro_bd" off \
+	"sync" "$_mnt_sync_bd" off \
+	"usrquota" "$_mnt_usrquota_bd" off \
+	"grpquota" "$_mnt_grpqutoa_bd" off \
+	"user_xattr" "$_mnt_user_xattr_bd" off 2>${MOUNT_OPTS}
+	
+	# Now clean up the file
+	sed -i 's/ /,/g' ${MOUNT_OPTS}
+	sed -i '$s/,$//' ${MOUNT_OPTS}
+	
+	# If mount options selected, confirm choice 
+	if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_Mnt_Status_Title " --yesno "\n${_Mnt_Conf_Body}$(cat ${MOUNT_OPTS})\n" 10 75
+		[[ $? -eq 1 ]] && ext4_mounted_options
+	fi
+}
+
+f2fs_mounted_options()
+{
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 15 \
+	"data_flush" "$_mnt_data_flush_bd" off \
+	"disable_roll_forward" "$_mnt_disable_roll_forward_bd" off \
+	"disable_ext_identify" "$_mnt_disable_ext_identify_bd" off \
+	"discard" "$_mnt_discard_bd" off \
+	"fastboot" "$_mnt_fastboot_bd" off \
+	"flush_merge" "$_mnt_flush_merge_bd" off \
+	"inline_xattr" "$_mnt_inline_xattr_bd" off \
+	"inline_data" "$_mnt_inline_data_bd" off \
+	"inline_dentry" "$v" off \
+	"no_heap" "$_mnt_no_heap_bd" off \
+	"noacl" "$_mnt_noacl_bd" off \
+	"nobarrier" "$_mnt_nobarrier_bd" off \
+	"noextent_cache" "$_mnt_noextent_cache_bd" off \
+	"noinline_data" "$_mnt_noinline_data_bd" off \
+	"norecovery" "$_mnt_norecovery_bd" off 2>${MOUNT_OPTS}
+	
+	# Now clean up the file
+	sed -i 's/ /,/g' ${MOUNT_OPTS}
+	sed -i '$s/,$//' ${MOUNT_OPTS}
+	
+	# If mount options selected, confirm choice 
+	if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_Mnt_Status_Title " --yesno "\n${_Mnt_Conf_Body}$(cat ${MOUNT_OPTS})\n" 10 75
+		[[ $? -eq 1 ]] && f2fs_mounted_options
+	fi
+}
+
+jfs_mounted_options()
+{
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 11 \
+	"discard" "$_mnt_discard_bd" off \
+	"errors=continue" "$_mnt_continue_bd" off \
+	"errors=panic" "$_mnt_panic_bd" off \
+	"nointegrity" "$_mnt_nointegrity_bd" off \
+	"noatime" "$_mnt_noatime_bd" off \
+	"relatime" "$_mnt_relatime_bd" off \
+	"nodev" "$_mnt_nodev_bd" off \
+	"nosuid" "$_mnt_nosuid_bd" off \
+	"noexec" "$_mnt_noexec_bd" off \
+	"ro" "$_mnt_ro_bd" off \
+	"sync" "$_mnt_sync_bd" off 2>${MOUNT_OPTS}
+	
+	# Now clean up the file
+	sed -i 's/ /,/g' ${MOUNT_OPTS}
+	sed -i '$s/,$//' ${MOUNT_OPTS}
+	
+	# If mount options selected, confirm choice 
+	if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_Mnt_Status_Title " --yesno "\n${_Mnt_Conf_Body}$(cat ${MOUNT_OPTS})\n" 10 75
+		[[ $? -eq 1 ]] && jfs_mounted_options
+	fi
+}
+
+nilfs2_mounted_options()
+{
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 16 \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off 2>${MOUNT_OPTS}
+	# fs_opts="discard nobarrier errors=continue errors=panic order=relaxed order=strict norecovery"
+	# Now clean up the file
+	sed -i 's/ /,/g' ${MOUNT_OPTS}
+	sed -i '$s/,$//' ${MOUNT_OPTS}
+	
+	# If mount options selected, confirm choice 
+	if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_Mnt_Status_Title " --yesno "\n${_Mnt_Conf_Body}$(cat ${MOUNT_OPTS})\n" 10 75
+		[[ $? -eq 1 ]] && nilfs2_mounted_options
+	fi
+}
+
+reiserfs_mounted_options()
+{
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 16 \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off 2>${MOUNT_OPTS}
+	# fs_opts="acl nolog notail replayonly user_xattr"
+	# Now clean up the file
+	sed -i 's/ /,/g' ${MOUNT_OPTS}
+	sed -i '$s/,$//' ${MOUNT_OPTS}
+	
+	# If mount options selected, confirm choice 
+	if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_Mnt_Status_Title " --yesno "\n${_Mnt_Conf_Body}$(cat ${MOUNT_OPTS})\n" 10 75
+		[[ $? -eq 1 ]] && reiserfs_mounted_options
+	fi
+}
+
+vfat_mounted_options()
+{
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 16 \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off 2>${MOUNT_OPTS}
+	# fs_opts="noatime nodiratime relatime ro sync quiet discard"
+	# Now clean up the file
+	sed -i 's/ /,/g' ${MOUNT_OPTS}
+	sed -i '$s/,$//' ${MOUNT_OPTS}
+	
+	# If mount options selected, confirm choice 
+	if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_Mnt_Status_Title " --yesno "\n${_Mnt_Conf_Body}$(cat ${MOUNT_OPTS})\n" 10 75
+		[[ $? -eq 1 ]] && vfat_mounted_options
+	fi
+}
+
+xfs_mounted_options()
+{
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 16 \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off \
+	"" "$" off 2>${MOUNT_OPTS}
+	# fs_opts="discard filestreams ikeep largeio noalign nobarrier norecovery noquota wsync noatime relatime nodev nosuid noexec ro sync usrquota grpquota"
+	# Now clean up the file
+	sed -i 's/ /,/g' ${MOUNT_OPTS}
+	sed -i '$s/,$//' ${MOUNT_OPTS}
+	
+	# If mount options selected, confirm choice 
+	if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_Mnt_Status_Title " --yesno "\n${_Mnt_Conf_Body}$(cat ${MOUNT_OPTS})\n" 10 75
+		[[ $? -eq 1 ]] && xfs_mounted_options
+	fi
 }
