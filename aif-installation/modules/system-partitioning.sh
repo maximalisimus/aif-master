@@ -244,6 +244,7 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
              else
                 BTRFS=1
              fi
+             fs_opts="autodefrag discard nodev nosuid noexec noacl ro sync usrquota grpqutoa noatime nodiratime relatime nodatasum nospace_cache recovery skip_balance space_cache ssd ssd_spread compress=zlib compress=lzo compress=no compress-force=zlib compress-force=lzo"
              ;;
         "3") FILESYSTEM="mkfs.ext2 -F"
 			_filesystem="ext2"
@@ -255,23 +256,23 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
              ;;            
         "5") FILESYSTEM="mkfs.ext4 -F"
 			_filesystem="ext4"
-             CHK_NUM=8
+             # CHK_NUM=8
              fs_opts="data=journal data=writeback dealloc discard noacl noatime nobarrier nodelalloc nodiratime relatime nodev nosuid noexec ro sync usrquota grpquota user_xattr"
              ;;
         "6") FILESYSTEM="mkfs.f2fs"
 			_filesystem="f2fs"
              modprobe f2fs
              fs_opts="data_flush disable_roll_forward disable_ext_identify discard fastboot flush_merge inline_xattr inline_data inline_dentry no_heap noacl nobarrier noextent_cache noinline_data norecovery"
-             CHK_NUM=16
+             # CHK_NUM=16
              ;;
         "7") FILESYSTEM="mkfs.jfs -q"
 			_filesystem="jfs"
-             CHK_NUM=4
+             # CHK_NUM=4
              fs_opts="discard errors=continue errors=panic nointegrity noatime relatime nodev nosuid noexec ro sync"
              ;;
         "8") FILESYSTEM="mkfs.nilfs2 -f"
 			_filesystem="nilfs2"
-             CHK_NUM=7
+             # CHK_NUM=7
              fs_opts="discard nobarrier errors=continue errors=panic order=relaxed order=strict norecovery"
              ;;  
         "9") FILESYSTEM="mkfs.ntfs -q"
@@ -279,18 +280,18 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
              ;;  
         "10") FILESYSTEM="mkfs.reiserfs -f -f"
 			_filesystem="reiserfs"
-             CHK_NUM=5
+             # CHK_NUM=5
              fs_opts="acl nolog notail replayonly user_xattr"
              ;;  
        "11") FILESYSTEM="mkfs.vfat -F32"
 			_filesystem="vfat"
-			fs_opts="noatime nodiratime relatime ro sync quiet discard"
+			 fs_opts="noatime nodiratime relatime ro sync quiet discard"
              ;;  
        "12") FILESYSTEM="mkfs.xfs -f"
 			_filesystem="xfs"
-             CHK_NUM=9
+             # CHK_NUM=9
              fs_opts="discard filestreams ikeep largeio noalign nobarrier norecovery noquota wsync noatime relatime nodev nosuid noexec ro sync usrquota grpquota"
-             ;;      
+             ;; 
           *) prep_menu
              ;;
     esac
@@ -300,25 +301,56 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
 # Seperate subfunction for neatness.
 mount_opts() {
 
-    FS_OPTS=""
-    echo "" > ${MOUNT_OPTS}
+    #FS_OPTS=""
+    #echo "" > ${MOUNT_OPTS}
     
-    for i in ${fs_opts}; do
-        FS_OPTS="${FS_OPTS} ${i} - off"
-    done
+    #for i in ${fs_opts}; do
+    #    FS_OPTS="${FS_OPTS} ${i} - off"
+    #done
 
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $(echo $FILESYSTEM | sed "s/.*\.//g" | sed "s/-.*//g") " --checklist "$_Mnt_Body" 0 0 $CHK_NUM \
-    $FS_OPTS 2>${MOUNT_OPTS}
+    #dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $(echo $FILESYSTEM | sed "s/.*\.//g" | sed "s/-.*//g") " --checklist "$_Mnt_Body" 0 0 $CHK_NUM \
+    #$FS_OPTS 2>${MOUNT_OPTS}
     
-    # Now clean up the file
-    sed -i 's/ /,/g' ${MOUNT_OPTS}
-    sed -i '$s/,$//' ${MOUNT_OPTS}
+    ## Now clean up the file
+    #sed -i 's/ /,/g' ${MOUNT_OPTS}
+    #sed -i '$s/,$//' ${MOUNT_OPTS}
     
     # If mount options selected, confirm choice 
-    if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
-        dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_Mnt_Status_Title " --yesno "\n${_Mnt_Conf_Body}$(cat ${MOUNT_OPTS})\n" 10 75
-        [[ $? -eq 1 ]] && mount_opts
-    fi 
+    #if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
+    #    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_Mnt_Status_Title " --yesno "\n${_Mnt_Conf_Body}$(cat ${MOUNT_OPTS})\n" 10 75
+    #    [[ $? -eq 1 ]] && mount_opts
+    #fi
+	echo "" > ${MOUNT_OPTS}
+	case ${_filesystem} in
+		"skip") clear
+					echo -e -n "\n\nSkip mount options ...\n"
+					sleep 2
+				;;
+		"ntfs") clear
+					echo -e -n "\n\NTFS not mount options ...\n"
+					sleep 2
+				;;
+		"btrfs") btrfs_mounted_options
+			;;
+		"ext2") ext2_mounted_options
+			;;
+		"ext3") ext3_mounted_options
+			;;
+		"ext4") ext4_mounted_options
+			;;
+		"f2fs") f2fs_mounted_options
+			;;
+		"jfs") jfs_mounted_options
+				;;
+		"nilfs2") nilfs2_mounted_options
+				;;
+		"reiserfs") reiserfs_mounted_options
+					;;
+		"vfat") vfat_mounted_options
+				;;
+		"xfs") xfs_mounted_options
+				;;
+	esac
 }
 
 mount_partitions() {
@@ -491,7 +523,7 @@ btrfs_mount_opts() {
     mkdir -p ${MOUNTPOINT} 2>/tmp/.errlog
 
     # If btrfs without subvolumes has been selected, get the mount options
-    [[ $BTRFS -eq 1 ]] && btrfs_mount_opts
+    [[ $BTRFS -eq 1 ]] && mount_opts
     
     # If btrfs has been selected without subvolumes - and at least one btrfs mount option selected - then
     # mount with options. Otherwise, basic mount.
@@ -506,8 +538,7 @@ btrfs_mount_opts() {
            mount -o $(cat ${MOUNT_OPTS}) ${MOUNT_TYPE}${PARTITION} ${MOUNTPOINT} 2>>/tmp/.errlog
        else
            mount ${MOUNT_TYPE}${PARTITION} ${MOUNTPOINT} 2>>/tmp/.errlog
-       fi  
-       # mount ${MOUNT_TYPE}${PARTITION} ${MOUNTPOINT} 2>>/tmp/.errlog
+       fi
     fi
       
     # Check for error, confirm mount, and deal with BTRFS with subvolumes if applicable  
