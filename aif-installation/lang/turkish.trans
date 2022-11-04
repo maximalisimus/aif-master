@@ -669,7 +669,7 @@ _rmt_rpstr_ttl="Uzak depodan paketleri güncelleme"
 #
 # User groups
 _ug_select_ttl="Kullanıcı gruplarını seçme"
-ug_select_bd="\nLütfen yeni kullanıcı eklemek istediğiniz grupları seçin\n"
+_ug_select_bd="\nLütfen yeni kullanıcı eklemek istediğiniz grupları seçin\n"
 #
 # User Groups for user
 #
@@ -688,15 +688,15 @@ _ugd_wheel="Sudo ve su ile yönetim"
 # User Groups for system
 #
 _ugd_dbus="Dbus içinde kullanılır"
-_ugd_kmem="-"
-_ugd_locate="-"
+_ugd_kmem="Çekirdek sanal belleğine erişim"
+_ugd_locate="Dosyalara isme göre hızlı arama yapma erişimi"
 _ugd_lp="Paralel port cihazlarına erişim"
-_ugd_mail="-"
+_ugd_mail="E-posta istemcilerine erişim"
 _ugd_nobody="Ayrıcalıklı olmayan grup"
 _ugd_proc="Süreç bilgilerine erişim"
 _ugd_smmsp="sendmail grubu"
-_ugd_tty="-"
-_ugd_utmp="-"
+_ugd_tty="Seri ve paralel bağlantı noktalarına erişim"
+_ugd_utmp="Sistem kullanıcıları hakkında tam görüşler"
 #
 # User Groups for Pre-Systemd
 #

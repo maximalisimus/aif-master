@@ -641,7 +641,7 @@ _rmt_rpstr_ttl="Aktualisieren von Paketen aus einem Remote-Repository"
 #
 # User groups
 _ug_select_ttl="Benutzergruppen auswählen"
-ug_select_bd="\nBitte wählen Sie die Gruppen aus, zu denen Sie einen neuen Benutzer hinzufügen möchten\n"
+_ug_select_bd="\nBitte wählen Sie die Gruppen aus, zu denen Sie einen neuen Benutzer hinzufügen möchten\n"
 #
 # User Groups for user
 #
@@ -660,15 +660,15 @@ _ugd_wheel="Verwaltung über sudo und su"
 # User Groups for system
 #
 _ugd_dbus="Verwendet in dbus"
-_ugd_kmem="-"
-_ugd_locate="-"
+_ugd_kmem="Zugriff auf den virtuellen Kernel-Speicher"
+_ugd_locate="Zugriff auf eine schnelle Suche nach Dateien nach Namen"
 _ugd_lp="Zugriff auf parallele Geräte"
-_ugd_mail="-"
+_ugd_mail="Zugriff auf E-Mail-Clients"
 _ugd_nobody="Keine privilegierte Gruppe"
 _ugd_proc="Zugriff auf Prozessinformationen"
 _ugd_smmsp="sendmail Gruppe"
-_ugd_tty="-"
-_ugd_utmp="-"
+_ugd_tty="Zugriff auf serielle und parallele Anschlüsse"
+_ugd_utmp="Vollständige Einblicke in Systembenutzer"
 #
 # User Groups for Pre-Systemd
 #

@@ -649,7 +649,7 @@ _rmt_rpstr_ttl="Opdaterer pakker fra et fjernlager"
 #
 # User groups
 _ug_select_ttl="Valg af brugergrupper"
-ug_select_bd="\nVælg grupperne at tilføje en ny bruger til\n"
+_ug_select_bd="\nVælg grupperne at tilføje en ny bruger til\n"
 #
 # User Groups for user
 #
@@ -668,15 +668,15 @@ _ugd_wheel="Administration via sudo og su"
 # User Groups for system
 #
 _ugd_dbus="Bruges inde i dbus"
-_ugd_kmem="-"
-_ugd_locate="-"
+_ugd_kmem="Adgang til kernel virtuel hukommelse"
+_ugd_locate="Adgang til hurtig filsøgning efter navn"
 _ugd_lp="Adgang til parallelle portanordninger"
-_ugd_mail="-"
+_ugd_mail="Adgang til e-mail-klienter"
 _ugd_nobody="Ikke en privilegeret gruppe"
 _ugd_proc="Adgang til oplysninger om processerne"
 _ugd_smmsp="sendmail-gruppen"
-_ugd_tty="-"
-_ugd_utmp="-"
+_ugd_tty="Adgang til serielle og parallelle porte"
+_ugd_utmp="Komplette visninger af brugerne af systemet"
 #
 # User Groups for Pre-Systemd
 #

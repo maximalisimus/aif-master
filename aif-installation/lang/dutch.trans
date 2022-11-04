@@ -638,7 +638,7 @@ _rmt_rpstr_ttl="Pakketten van een remote repository bijwerken"
 #
 # User groups
 _ug_select_ttl="De keuze van de groepen van de gebruiker"
-ug_select_bd="\nSelecteer de groepen om een nieuwe gebruiker toe te voegen aan\n"
+_ug_select_bd="\nSelecteer de groepen om een nieuwe gebruiker toe te voegen aan\n"
 #
 # User Groups for user
 #
@@ -657,15 +657,15 @@ _ugd_wheel="Toediening via sudo en su"
 # User Groups for system
 #
 _ugd_dbus="Gebruikt in dbus"
-_ugd_kmem="-"
-_ugd_locate="-"
+_ugd_kmem="Toegang tot het virtuele kernelgeheugen"
+_ugd_locate="Toegang tot snel zoeken naar bestanden op naam"
 _ugd_lp="Toegang tot parallelle poortvoorzieningen"
-_ugd_mail="-"
+_ugd_mail="Toegang tot e-mailclients"
 _ugd_nobody="Geen bevoorrechte groep"
 _ugd_proc="Toegang tot informatie over de processen"
 _ugd_smmsp="sendmail-groep"
-_ugd_tty="-"
-_ugd_utmp="-"
+_ugd_tty="Toegang tot seriële en parallelle poorten"
+_ugd_utmp="Volledige weergaven van de gebruikers van het systeem"
 #
 # User Groups for Pre-Systemd
 #

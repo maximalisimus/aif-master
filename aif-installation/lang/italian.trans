@@ -633,7 +633,7 @@ _rmt_rpstr_ttl="Aggiornamento dei pacchetti da un repository remoto"
 #
 # User groups
 _ug_select_ttl="Selezione dei gruppi utente"
-ug_select_bd="\nSelezionare i gruppi a cui si desidera aggiungere un nuovo utente\n"
+_ug_select_bd="\nSelezionare i gruppi a cui si desidera aggiungere un nuovo utente\n"
 #
 # User Groups for user
 #
@@ -652,15 +652,15 @@ _ugd_wheel="Amministrazione tramite sudo e su"
 # User Groups for system
 #
 _ugd_dbus="Utilizzato all'interno di dbus"
-_ugd_kmem="-"
-_ugd_locate="-"
+_ugd_kmem="Accesso alla memoria virtuale del kernel"
+_ugd_locate="Accedi alla ricerca rapida dei file per nome"
 _ugd_lp="Accesso ai dispositivi della porta parallela"
-_ugd_mail="-"
+_ugd_mail="Accesso ai client di posta elettronica"
 _ugd_nobody="Gruppo non privilegiato"
 _ugd_proc="Accesso alle informazioni sui processi"
 _ugd_smmsp="sendmail gruppo"
-_ugd_tty="-"
-_ugd_utmp="-"
+_ugd_tty="Accesso a porte seriali e parallele"
+_ugd_utmp="Viste complete sugli utenti del sistema"
 #
 # User Groups for Pre-Systemd
 #

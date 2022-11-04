@@ -434,7 +434,7 @@ set_root_password() {
 usgr_to_sel() {
     
    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_ug_select_ttl" \
-    --checklist "$ug_select_bd" 0 0 16 \
+    --checklist "$_ug_select_bd" 0 0 16 \
     "${_us_gr_users[0]}" "$_ugd_adm" "OFF" \
     "${_us_gr_users[1]}" "$_ugd_ftp" "ON" \
     "${_us_gr_users[2]}" "$_ugd_games" "OFF" \

@@ -639,7 +639,7 @@ _rmt_rpstr_ttl="Updating packages from a remote repository"
 #
 # User groups
 _ug_select_ttl="The choice of the user's groups"
-ug_select_bd="\nPlease select the groups to add a new user to\n"
+_ug_select_bd="\nPlease select the groups to add a new user to\n"
 #
 # User Groups for user
 #
@@ -658,15 +658,15 @@ _ugd_wheel="Administration via sudo and su"
 # User Groups for system
 #
 _ugd_dbus="Used inside dbus"
-_ugd_kmem="-"
-_ugd_locate="-"
+_ugd_kmem="Access to kernel virtual memory"
+_ugd_locate="Access to quick file search by name"
 _ugd_lp="Access to parallel port devices"
-_ugd_mail="-"
+_ugd_mail="Access to email clients"
 _ugd_nobody="Not a privileged group"
 _ugd_proc="Access to information about the processes"
 _ugd_smmsp="sendmail group"
-_ugd_tty="-"
-_ugd_utmp="-"
+_ugd_tty="Access to serial and parallel ports"
+_ugd_utmp="Complete views of the users of the system"
 #
 # User Groups for Pre-Systemd
 #
