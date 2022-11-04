@@ -233,6 +233,7 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
     case $(cat ${ANSWER}) in
         "1") FILESYSTEM="skip"
 			_filesystem="skip"
+			fs_opts=""
              ;;
         "2") FILESYSTEM="mkfs.btrfs -f"
 			_filesystem="btrfs"
@@ -277,6 +278,7 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
              ;;  
         "9") FILESYSTEM="mkfs.ntfs -q"
 			_filesystem="ntfs"
+			fs_opts=""
              ;;  
         "10") FILESYSTEM="mkfs.reiserfs -f -f"
 			_filesystem="reiserfs"
@@ -610,7 +612,7 @@ btrfs_mount_opts() {
                 mkdir -p ${MOUNTPOINT}${MOUNT} 2>/tmp/.errlog
                 
                 # If btrfs without subvolumes has been selected, get the mount options
-                [[ $BTRFS -eq 1 ]] && btrfs_mount_opts
+                [[ $BTRFS -eq 1 ]] && mount_opts
     
                 # If btrfs has been selected without subvolumes - and at least one btrfs mount option selected - then
                 # mount with options. Otherwise, basic mount.
