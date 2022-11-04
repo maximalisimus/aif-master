@@ -357,8 +357,18 @@ edit_configs() {
 				"systemd-boot") FILE="${MOUNTPOINT}${UEFI_MOUNT}/loader/entries/arch.conf" 
 								FILE2="${MOUNTPOINT}${UEFI_MOUNT}/loader/loader.conf"
 								;;
-				esac
-				;;
+				"None") bootloader_searches
+						wait
+						bootloader_check_and_uses
+						wait
+						if [[ "$BOOTLOADER" == "None" ]]; then
+							dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Error!" --msgbox "\nBootloaders Not Found!\n" 0 0
+						else
+							edit_configs
+						fi
+						;;
+			esac
+			;;
 		"15") case $DM in
 				"LXDM") FILE="${MOUNTPOINT}/etc/lxdm/lxdm.conf" 
 						;;
