@@ -184,18 +184,15 @@ jfs_mounted_options()
 
 nilfs2_mounted_options()
 {
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 16 \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off 2>${MOUNT_OPTS}
-	# fs_opts="discard nobarrier errors=continue errors=panic order=relaxed order=strict norecovery"
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 7 \
+	"discard" "$_mnt_discard_bd" off \
+	"nobarrier" "$_mnt_nobarrier_bd" off \
+	"errors=continue" "$_mnt_continue_bd" off \
+	"errors=panic" "$_mnt_panic_bd" off \
+	"order=relaxed" "$_mnt_relaxed_bd" off \
+	"order=strict" "$_mnt_strict_bd" off \
+	"norecovery" "$_mnt_norecovery_bd" off 2>${MOUNT_OPTS}
+	
 	# Now clean up the file
 	sed -i 's/ /,/g' ${MOUNT_OPTS}
 	sed -i '$s/,$//' ${MOUNT_OPTS}
@@ -209,18 +206,13 @@ nilfs2_mounted_options()
 
 reiserfs_mounted_options()
 {
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 16 \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off 2>${MOUNT_OPTS}
-	# fs_opts="acl nolog notail replayonly user_xattr"
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 5 \
+	"acl" "$_mnt_acl_bd" off \
+	"nolog" "$_mnt_nolog_bd" off \
+	"notail" "$_mnt_notail_bd" off \
+	"replayonly" "$_mnt_replayonly_bd" off \
+	"user_xattr" "$_mnt_user_xattr_bd" off 2>${MOUNT_OPTS}
+	
 	# Now clean up the file
 	sed -i 's/ /,/g' ${MOUNT_OPTS}
 	sed -i '$s/,$//' ${MOUNT_OPTS}
@@ -234,18 +226,15 @@ reiserfs_mounted_options()
 
 vfat_mounted_options()
 {
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 16 \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off 2>${MOUNT_OPTS}
-	# fs_opts="noatime nodiratime relatime ro sync quiet discard"
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 7 \
+	"noatime" "$_mnt_noatime_bd" off \
+	"nodiratime" "$_mnt_nodiratime_bd" off \
+	"relatime" "$_mnt_relatime_bd" off \
+	"ro" "$_mnt_ro_bd" off \
+	"sync" "$_mnt_sync_bd" off \
+	"quiet" "$_mnt_quiet_bd" off \
+	"discard" "$_mnt_discard_bd" off 2>${MOUNT_OPTS}
+	
 	# Now clean up the file
 	sed -i 's/ /,/g' ${MOUNT_OPTS}
 	sed -i '$s/,$//' ${MOUNT_OPTS}
@@ -260,17 +249,25 @@ vfat_mounted_options()
 xfs_mounted_options()
 {
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 16 \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off \
-	"" "$" off 2>${MOUNT_OPTS}
-	# fs_opts="discard filestreams ikeep largeio noalign nobarrier norecovery noquota wsync noatime relatime nodev nosuid noexec ro sync usrquota grpquota"
+	"discard" "$" off \
+	"filestreams" "$" off \
+	"ikeep" "$" off \
+	"largeio" "$" off \
+	"noalign" "$" off \
+	"nobarrier" "$" off \
+	"norecovery" "$" off \
+	"noquota" "$" off \
+	"wsync" "$" off \
+	"noatime" "$" off \
+	"relatime" "$" off \
+	"nodev" "$" off \
+	"nosuid" "$" off \
+	"noexec" "$" off \
+	"ro" "$" off \
+	"sync" "$" off \
+	"usrquota" "$" off \
+	"grpquota" "$" off 2>${MOUNT_OPTS}
+	
 	# Now clean up the file
 	sed -i 's/ /,/g' ${MOUNT_OPTS}
 	sed -i '$s/,$//' ${MOUNT_OPTS}
