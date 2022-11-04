@@ -242,7 +242,7 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
              else
                 BTRFS=1
              fi
-             fs_opts="noatime nodiratime relatime nodev nosuid noexec ro sync usrquota grpqutoa"
+             # fs_opts="noatime nodiratime relatime nodev nosuid noexec ro sync usrquota grpqutoa"
              ;;
         "3") FILESYSTEM="mkfs.ext2 -F"
 			fs_opts="noatime nodiratime relatime nodev nosuid noexec ro sync usrquota grpquota user_xattr"
