@@ -17,7 +17,7 @@ btrfs_mounted_options(){
 	"usrquota" "$_mnt_usrquota_bd" off \
 	"grpqutoa" "$_mnt_grpqutoa_bd" off \
 	"noatime" "$_mnt_noatime_bd" off \
-	"nodiratime" "$_mnt_nodiratime_bd" off \ 
+	"nodiratime" "$_mnt_nodiratime_bd" off \
 	"relatime" "$_mnt_relatime_bd" off \
 	"nodatasum" "$_mnt_nodatasum_bd" off \
 	"nospace_cache" "$_mnt_nospace_cache_bd" off \
