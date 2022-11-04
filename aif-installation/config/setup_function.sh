@@ -433,3 +433,23 @@ multiple_question(){
              ;;
      esac
 }
+
+search_display_manager()
+{
+	_lxdm_search=$(find "${MOUNTPOINT}/etc/" -type f -iname "lxdm.conf" | wc -l)
+	wait
+	_lightdm_search=$(find "${MOUNTPOINT}/etc/" -type f -iname "lightdm.conf" | wc -l)
+	wait
+	_sddm_search=$(find "${MOUNTPOINT}/etc/" -type f -iname "sddm.conf" | wc -l)
+	wait
+	_slim_search=$(find "${MOUNTPOINT}/etc/" -type f -iname "slim.conf" | wc -l)
+	wait
+	[[ "${_lxdm_search[*]}" == "1" ]] && DM="LXDM"
+	wait
+	[[ "${_lightdm_search[*]}" == "1" ]] && DM="LightDM"
+	wait
+	[[ "${_sddm_search[*]}" == "1" ]] && DM="SDDM"
+	wait
+	[[ "${_slim_search[*]}" == "1" ]] && DM="SLiM"
+	wait
+}

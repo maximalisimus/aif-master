@@ -368,6 +368,14 @@ edit_configs() {
 						;;
 				"SLiM") FILE="${MOUNTPOINT}/etc/slim.conf"
 						;;
+				"n/a") [[ "${DM}" == "n/a" ]] && search_display_manager
+						wait
+						if [[ "${DM}" == "n/a" ]]; then
+							dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Error!" --msgbox "\nDisplay Manager Not Found!\n" 0 0
+						else
+							edit_configs
+						fi
+						;;
 			esac
 			;;
 		*) main_menu_online

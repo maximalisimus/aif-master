@@ -29,6 +29,7 @@ KEYMAP="us"                 # Virtual console keymap. Default is "us"
 XKBMAP="us"                 # X11 keyboard layout. Default is "us"
 ZONE=""                     # For time
 SUBZONE=""                  # For time
+_ncl_nname="n/a"
 _h_c=0
 _sethwclock=""
 LOCALE="en_US.UTF-8"        # System locale. Default is "en_US.UTF-8"
