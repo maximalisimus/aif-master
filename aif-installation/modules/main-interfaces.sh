@@ -378,10 +378,16 @@ edit_configs() {
 						;;
 				"SLiM") FILE="${MOUNTPOINT}/etc/slim.conf"
 						;;
+				"GDM") dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " No Files " --msgbox "\nNo files to edit!\n" 0 0
+						wait
+						FILE=""
+						FILE2=""
+						wait
+						;;
 				"n/a") [[ "${DM}" == "n/a" ]] && search_display_manager
 						wait
 						if [[ "${DM}" == "n/a" ]]; then
-							dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Error!" --msgbox "\nDisplay Manager Not Found!\n" 0 0
+							dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " Error! " --msgbox "\nDisplay Manager Not Found!\n" 0 0
 						else
 							edit_configs
 						fi

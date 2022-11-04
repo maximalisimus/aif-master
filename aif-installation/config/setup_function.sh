@@ -444,6 +444,8 @@ search_display_manager()
 	wait
 	_slim_search=$(find "${MOUNTPOINT}/etc/" -type f -iname "slim.conf" | wc -l)
 	wait
+	_gdm_search=$(find "${MOUNTPOINT}/etc/gdm/" -type f -iname "custom.conf" | wc -l)
+	wait
 	[[ "${_lxdm_search[*]}" == "1" ]] && DM="LXDM"
 	wait
 	[[ "${_lightdm_search[*]}" == "1" ]] && DM="LightDM"
@@ -451,5 +453,7 @@ search_display_manager()
 	[[ "${_sddm_search[*]}" == "1" ]] && DM="SDDM"
 	wait
 	[[ "${_slim_search[*]}" == "1" ]] && DM="SLiM"
+	wait
+	[[ "${_gdm_search[*]}" == "1" ]] && DM="GDM"
 	wait
 }
