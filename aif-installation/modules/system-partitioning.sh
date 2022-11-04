@@ -151,35 +151,44 @@ delete_partitions(){
 
 }
 
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_PartToolTitle" \
-    --menu "$_PartToolBody" 0 0 6 \
-    "1" $"Auto Partition (BIOS & UEFI)" \
-    "2" $"Parted (BIOS & UEFI)" \
-    "3" $"CFDisk (BIOS/MBR)" \
-    "4" $"CGDisk (UEFI/GPT)" \
-    "5" $"FDisk  (BIOS & UEFI)" \
-    "6" $"GDisk  (UEFI/GPT)" \
-    "7" "$_Back" 2>${ANSWER}    
+	if [[ "${SYSTEM}" == "BIOS" ]]; then
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_PartToolTitle" \
+		--menu "$_PartToolBody" 0 0 6 \
+		"auto" $"Auto Partition (BIOS)" \
+		"parted" $"Parted (BIOS)" \
+		"cfdisk" $"CFDisk (BIOS/MBR)" \
+		"fdisk" $"FDisk  (BIOS)" \
+		"back" "$_Back" 2>${ANSWER}
+	else
+		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_PartToolTitle" \
+		--menu "$_PartToolBody" 0 0 6 \
+		"auto" $"Auto Partition (UEFI)" \
+		"parted" $"Parted (UEFI)" \
+		"cgdisk" $"CGDisk (UEFI/GPT)" \
+		"fdisk" $"FDisk  (UEFI)" \
+		"gdisk" $"GDisk  (UEFI/GPT)" \
+		"back" "$_Back" 2>${ANSWER}
+	fi
 
-    case $(cat ${ANSWER}) in
-        "1") auto_partition
-             ;;
-        "2") clear
-             parted ${DEVICE}
-             ;;
-        "3") cfdisk ${DEVICE}
-             ;;
-        "4") cgdisk ${DEVICE}
-             ;;       
-        "5") clear
-             fdisk ${DEVICE}
-             ;;
-        "6") clear
-             gdisk ${DEVICE}
-             ;;
-          *) prep_menu
-             ;;
-    esac    
+	case $(cat ${ANSWER}) in
+		"auto") auto_partition
+				;;
+		"parted") clear
+				parted ${DEVICE}
+				;;
+		"cfdisk") cfdisk ${DEVICE}
+				;;
+		"cgdisk") cgdisk ${DEVICE}
+				;;       
+		"fdisk") clear
+				fdisk ${DEVICE}
+				;;
+		"gdisk") clear
+				gdisk ${DEVICE}
+				;;
+		*) prep_menu
+			;;
+	esac    
 }   
 
 # find all available partitions and generate a list of them
@@ -233,66 +242,59 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
     case $(cat ${ANSWER}) in
         "1") FILESYSTEM="skip"
 			_filesystem="skip"
-			fs_opts=""
+			_mount_opts_run=0
              ;;
         "2") FILESYSTEM="mkfs.btrfs -f"
-			_filesystem="btrfs"
+			 _filesystem="btrfs"
              modprobe btrfs
-             
+             _mount_opts_run=1
              dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_btrfsSVTitle" --yesno "$_btrfsSVBody" 0 0
              if [[ $? -eq 0 ]];then
                 BTRFS=2
              else
                 BTRFS=1
              fi
-             fs_opts="autodefrag discard nodev nosuid noexec noacl ro sync usrquota grpqutoa noatime nodiratime relatime nodatasum nospace_cache recovery skip_balance space_cache ssd ssd_spread compress=zlib compress=lzo compress=no compress-force=zlib compress-force=lzo"
              ;;
         "3") FILESYSTEM="mkfs.ext2 -F"
 			_filesystem="ext2"
-			fs_opts="noatime nodiratime relatime nodev nosuid noexec ro sync usrquota grpquota user_xattr"
+			 _mount_opts_run=1
              ;;
         "4") FILESYSTEM="mkfs.ext3 -F"
-			_filesystem="ext3"
-			fs_opts="noatime relatime nodev nosuid noexec ro sync usrquota grpquota user_xattr"
+			 _filesystem="ext3"
+			 _mount_opts_run=1
              ;;            
         "5") FILESYSTEM="mkfs.ext4 -F"
-			_filesystem="ext4"
-             # CHK_NUM=8
-             fs_opts="data=journal data=writeback dealloc discard noacl noatime nobarrier nodelalloc nodiratime relatime nodev nosuid noexec ro sync usrquota grpquota user_xattr"
+			 _filesystem="ext4"
+			 _mount_opts_run=1
              ;;
         "6") FILESYSTEM="mkfs.f2fs"
-			_filesystem="f2fs"
+			 _filesystem="f2fs"
              modprobe f2fs
-             fs_opts="data_flush disable_roll_forward disable_ext_identify discard fastboot flush_merge inline_xattr inline_data inline_dentry no_heap noacl nobarrier noextent_cache noinline_data norecovery"
-             # CHK_NUM=16
+             _mount_opts_run=1
              ;;
         "7") FILESYSTEM="mkfs.jfs -q"
-			_filesystem="jfs"
-             # CHK_NUM=4
-             fs_opts="discard errors=continue errors=panic nointegrity noatime relatime nodev nosuid noexec ro sync"
+			 _filesystem="jfs"
+			 _mount_opts_run=1
              ;;
         "8") FILESYSTEM="mkfs.nilfs2 -f"
-			_filesystem="nilfs2"
-             # CHK_NUM=7
-             fs_opts="discard nobarrier errors=continue errors=panic order=relaxed order=strict norecovery"
+			 _filesystem="nilfs2"
+			 _mount_opts_run=1
              ;;  
         "9") FILESYSTEM="mkfs.ntfs -q"
-			_filesystem="ntfs"
-			fs_opts=""
+			 _filesystem="ntfs"
+			 _mount_opts_run=0
              ;;  
         "10") FILESYSTEM="mkfs.reiserfs -f -f"
-			_filesystem="reiserfs"
-             # CHK_NUM=5
-             fs_opts="acl nolog notail replayonly user_xattr"
+			 _filesystem="reiserfs"
+			 _mount_opts_run=1
              ;;  
        "11") FILESYSTEM="mkfs.vfat -F32"
-			_filesystem="vfat"
-			 fs_opts="noatime nodiratime relatime ro sync quiet discard"
+			 _filesystem="vfat"
+			 _mount_opts_run=1
              ;;  
        "12") FILESYSTEM="mkfs.xfs -f"
-			_filesystem="xfs"
-             # CHK_NUM=9
-             fs_opts="discard filestreams ikeep largeio noalign nobarrier norecovery noquota wsync noatime relatime nodev nosuid noexec ro sync usrquota grpquota"
+			 _filesystem="xfs"
+			 _mount_opts_run=1
              ;; 
           *) prep_menu
              ;;
@@ -302,26 +304,7 @@ dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FSTitle" \
 
 # Seperate subfunction for neatness.
 mount_opts() {
-
-    #FS_OPTS=""
-    #echo "" > ${MOUNT_OPTS}
-    
-    #for i in ${fs_opts}; do
-    #    FS_OPTS="${FS_OPTS} ${i} - off"
-    #done
-
-    #dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $(echo $FILESYSTEM | sed "s/.*\.//g" | sed "s/-.*//g") " --checklist "$_Mnt_Body" 0 0 $CHK_NUM \
-    #$FS_OPTS 2>${MOUNT_OPTS}
-    
-    ## Now clean up the file
-    #sed -i 's/ /,/g' ${MOUNT_OPTS}
-    #sed -i '$s/,$//' ${MOUNT_OPTS}
-    
-    # If mount options selected, confirm choice 
-    #if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
-    #    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_Mnt_Status_Title " --yesno "\n${_Mnt_Conf_Body}$(cat ${MOUNT_OPTS})\n" 10 75
-    #    [[ $? -eq 1 ]] && mount_opts
-    #fi
+	
 	echo "" > ${MOUNT_OPTS}
 	case ${_filesystem} in
 		"skip") clear
@@ -434,60 +417,6 @@ btrfs_subvols() {
  cd
 }
 
-# This function allows for btrfs-specific mounting options to be applied. Written as a seperate function
-# for neatness.
-btrfs_mount_opts() {
-
-    echo "" > ${BTRFS_OPTS}
-
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_btrfsMntTitle" --checklist "$_btrfsMntBody" 0 0 16 \
-    "1" "autodefrag" off \
-    "2" "compress=zlib" off \
-    "3" "compress=lzo" off \
-    "4" "compress=no" off \
-    "5" "compress-force=zlib" off \
-    "6" "compress-force=lzo" off \
-    "7" "discard" off \
-    "8" "noacl" off \
-    "9" "noatime" off \
-   "10" "nodatasum" off \
-   "11" "nospace_cache" off \
-   "12" "recovery" off \
-   "13" "skip_balance" off \
-   "14" "space_cache" off  \
-   "15" "ssd" off \
-   "16" "ssd_spread" off 2>${BTRFS_OPTS}
- 
-   # Double-digits first       
-   sed -i 's/10/nodatasum,/' ${BTRFS_OPTS}
-   sed -i 's/11/nospace_cache,/' ${BTRFS_OPTS}
-   sed -i 's/12/recovery,/' ${BTRFS_OPTS}
-   sed -i 's/13/skip_balance,/' ${BTRFS_OPTS}
-   sed -i 's/14/space_cache,/' ${BTRFS_OPTS}
-   sed -i 's/15/ssd,/' ${BTRFS_OPTS}
-   sed -i 's/16/ssd_spread,/' ${BTRFS_OPTS}
-   # then single digits
-   sed -i 's/1/autodefrag,/' ${BTRFS_OPTS}
-   sed -i 's/2/compress=zlib,/' ${BTRFS_OPTS}
-   sed -i 's/3/compress=lzo,/' ${BTRFS_OPTS}
-   sed -i 's/4/compress=no,/' ${BTRFS_OPTS}
-   sed -i 's/5/compress-force=zlib,/' ${BTRFS_OPTS}
-   sed -i 's/6/compress-force=lzo,/' ${BTRFS_OPTS}
-   sed -i 's/7/noatime,/' ${BTRFS_OPTS}
-   sed -i 's/8/noacl,/' ${BTRFS_OPTS}
-   sed -i 's/9/noatime,/' ${BTRFS_OPTS}
-   # Now clean up the file
-   sed -i 's/ //g' ${BTRFS_OPTS}
-   sed -i '$s/,$//' ${BTRFS_OPTS}
-
-   
-   if [[ $(cat ${BTRFS_OPTS}) != "" ]]; then
-      dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_btrfsMntTitle" --yesno "$_btrfsMntConfBody $(cat $BTRFS_OPTS)\n" 0 0 
-      [[ $? -eq 1 ]] && btrfs_mount_opts
-   fi  
-
-}
-
     # LVM Detection. If detected, activate.
     detect_lvm
     if [[ $LVM -eq 1 ]]; then
@@ -534,7 +463,7 @@ btrfs_mount_opts() {
     else
         # BIOS
        # Get mounting options for appropriate filesystems
-       [[ $fs_opts != "" ]] && mount_opts
+       [[ "${_mount_opts_run}" == "1" ]] && mount_opts
        # Use special mounting options if selected, else standard mount
        if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
            mount -o $(cat ${MOUNT_OPTS}) ${MOUNT_TYPE}${PARTITION} ${MOUNTPOINT} 2>>/tmp/.errlog
@@ -621,7 +550,7 @@ btrfs_mount_opts() {
                 else
                     # BIOS
                     # Get mounting options for appropriate filesystems
-                    [[ $fs_opts != "" ]] && mount_opts
+                    [[ "${_mount_opts_run}" == "1" ]] && mount_opts
                     # Use special mounting options if selected, else standard mount
                     if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
                         mount -o $(cat ${MOUNT_OPTS}) ${MOUNT_TYPE}${PARTITION} ${MOUNTPOINT}${MOUNT} 2>>/tmp/.errlog
@@ -680,7 +609,7 @@ btrfs_mount_opts() {
        mkdir -p ${MOUNTPOINT}${UEFI_MOUNT} 2>/tmp/.errlog
        # UEFI
         # Get mounting options for appropriate filesystems
-        [[ $fs_opts != "" ]] && mount_opts
+        [[ "${_mount_opts_run}" == "1" ]] && mount_opts
         # Use special mounting options if selected, else standard mount
         if [[ $(cat ${MOUNT_OPTS}) != "" ]]; then
             mount -o $(cat ${MOUNT_OPTS}) $"/dev/"${PARTITION} ${MOUNTPOINT}${UEFI_MOUNT} 2>>/tmp/.errlog
