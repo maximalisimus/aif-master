@@ -30,7 +30,7 @@ btrfs_mounted_options(){
 	"compress=lzo" "$_mnt_compress_bd" off \
 	"compress=no" "$_mnt_compress_bd no" off \
 	"compress-force=zlib" "$_mnt_compress_force_bd" off \
-	"compress-force=lzo" "$_mnt_compress_force_bd" off 2>${MOUNT_OPTS}
+	"compress-force=lzo" "$_mnt_compress_force_bd" off 2>${BTRFS_OPTS}
 	
 	sed -i 's/ /,/g' ${BTRFS_OPTS}
 	sed -i '$s/,$//' ${BTRFS_OPTS}
