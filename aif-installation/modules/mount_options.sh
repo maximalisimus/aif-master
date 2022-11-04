@@ -98,7 +98,7 @@ ext4_mounted_options()
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 16 \
 	"journal" "$_mnt_journal_bd" off \
 	"data=writeback" "$_mnt_writeback_bd" off \
-	"dealloc" "$_mnt_dealloc_bd" off \
+	"delalloc" "$_mnt_delalloc_bd" off \
 	"discard" "$_mnt_discard_bd" off \
 	"noacl" "$_mnt_noacl_bd" off \
 	"noatime" "$_mnt_noatime_bd" off \
@@ -249,24 +249,24 @@ vfat_mounted_options()
 xfs_mounted_options()
 {
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_filesystem " --checklist "$_Mnt_Body" 0 0 16 \
-	"discard" "$" off \
-	"filestreams" "$" off \
-	"ikeep" "$" off \
-	"largeio" "$" off \
-	"noalign" "$" off \
-	"nobarrier" "$" off \
-	"norecovery" "$" off \
-	"noquota" "$" off \
-	"wsync" "$" off \
-	"noatime" "$" off \
-	"relatime" "$" off \
-	"nodev" "$" off \
-	"nosuid" "$" off \
-	"noexec" "$" off \
-	"ro" "$" off \
-	"sync" "$" off \
-	"usrquota" "$" off \
-	"grpquota" "$" off 2>${MOUNT_OPTS}
+	"discard" "$_mnt_discard_bd" off \
+	"filestreams" "$_mnt_filestreams_bd" off \
+	"ikeep" "$_mnt_ikeep_bd" off \
+	"largeio" "$_mnt_largeio_bd" off \
+	"noalign" "$_mnt_noalign_bd" off \
+	"nobarrier" "$_mnt_nobarrier_bd" off \
+	"norecovery" "$_mnt_norecovery_bd" off \
+	"noquota" "$_mnt_noquota_bd" off \
+	"wsync" "$_mnt_wsync_bd" off \
+	"noatime" "$_mnt_noatime_bd" off \
+	"relatime" "$_mnt_relatime_bd" off \
+	"nodev" "$_mnt_nodev_bd" off \
+	"nosuid" "$_mnt_nosuid_bd" off \
+	"noexec" "$_mnt_noexec_bd" off \
+	"ro" "$_mnt_ro_bd" off \
+	"sync" "$_mnt_sync_bd" off \
+	"usrquota" "$_mnt_usrquota_bd" off \
+	"grpquota" "$_mnt_grpqutoa_bd" off 2>${MOUNT_OPTS}
 	
 	# Now clean up the file
 	sed -i 's/ /,/g' ${MOUNT_OPTS}
