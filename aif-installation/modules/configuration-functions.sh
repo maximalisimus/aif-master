@@ -39,7 +39,7 @@ mirror_by_country() {
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --yesno "$_MirrorGenQ" 0 0
 
 	if [[ $? -eq 0 ]];then
-		mv -f "/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig"
+		mv -f "/etc/pacman.d/mirrorlist" "/etc/pacman.d/mirrorlist.orig"
 		mv -f "${MIRROR_TEMP}" "/etc/pacman.d/mirrorlist"
 		chmod +r "/etc/pacman.d/mirrorlist"
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --infobox "$_DoneMsg" 0 0
