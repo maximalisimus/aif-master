@@ -5,7 +5,7 @@
 ######################################################################
 
 btrfs_mounted_options(){
-	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_btrfsMntTitle" --checklist "$_btrfsMntBody" 0 0 16 \
+	dialog --backtitle "VERSION - SYSTEM (ARCHI)" --title "_btrfsMntTitle" --clear --checklist "_btrfsMntBody" 0 0 16 \
 	"autodefrag" "$_mnt_autodefrag_bd" off \
 	"discard" "$_mnt_discard_bd" off \
 	"nodev" "$_mnt_nodev_bd" off \
