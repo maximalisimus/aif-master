@@ -79,7 +79,6 @@ _mem_2=""
 _refind_is_install=0
 _case_grub_refind=0
 _syslinux_type=0
-BOOTLOADER="None"
 _grub_search=0
 _syslinux_search=0
 _refind_sarch=0
