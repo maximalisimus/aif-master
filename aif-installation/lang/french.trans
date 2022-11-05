@@ -357,6 +357,16 @@ _OptUefiBody="\nLe(s) gestionnaire(s) de démarrage pouvant être installé(s) u
 # Point de montage UEFI
 _MntUefiTitle=" Sélectionner un point de montage UEFI "
 _MntUefiBody="\nrEFInd requiert /boot/efi. systemd-boot requiert /boot. Grub fonctionne avec l'un ou l'autre point de montage."
+_Mnt_Uefi_1="Choisissez le bon chargeur de démarrage à l'avance en fonction du nombre de systèmes d'exploitation disponibles sur votre disque."
+_Mnt_Uefi_2="Le fait est que systemd-boot n'est pas compatible avec d'autres systèmes d'exploitation."
+_Mnt_Uefi_3="Il n'a pas d'images, de polices."
+_Mnt_Uefi_4="Il est préférable de le mettre quand vous avez un Archlinux."
+_Mnt_Uefi_5="Ce téléchargeur est assez simple pour les utilisateurs novices."
+_Mnt_Uefi_6="Lors de l'installation à côté d'autres OS doit être Grub2."
+_Mnt_Uefi_7="C'est assez avancé, beau et a beaucoup de paramètres."
+_Mnt_Uefi_8="Avec elle, rEFInd doit être installé pour détecter d'autres Chargeurs de démarrage."
+_Mnt_Uefi_9="Si vous l'avez déjà installé dans /boot/efi/, une question de clarification sera posée lors de sa détection."
+_Mnt_Uefi_Msg="\n${_Mnt_Uefi_1}\n${_Mnt_Uefi_2}\n${_Mnt_Uefi_3}\n${_Mnt_Uefi_4}\n${_Mnt_Uefi_5}\n${_Mnt_Uefi_6}\n${_Mnt_Uefi_7}\n${_Mnt_Uefi_8}\n${_Mnt_Uefi_9}\n"
 
 # Partitions supplémentaires
 _ExtPartTitle=" Sélectionner une partition additionnelle "

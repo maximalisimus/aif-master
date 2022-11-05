@@ -352,6 +352,16 @@ _OptUefiBody="\nO Bootloader que vai ser instalado mais tarde vai depender de on
 # UEFI Mountpoint - Translate
 _MntUefiTitle=" Selecionar ponto de montagem UEFI "
 _MntUefiBody="\nrEFInd requer montagem em /boot/efi. systemd-boot requer montagem em /boot."
+_Mnt_Uefi_1="Selecione o carregador de inicialização correto com antecedência, dependendo do número de sistemas operacionais disponíveis em seu disco."
+_Mnt_Uefi_2="O systemd-boot não é compatível com outros sistemas operacionais."
+_Mnt_Uefi_3="Não tem imagens, nem fontes."
+_Mnt_Uefi_4="É melhor colocá-lo quando você tem um Archlinux."
+_Mnt_Uefi_5="Este downloader é bastante simples para usuários iniciantes."
+_Mnt_Uefi_6="Ao instalar ao lado de outros sistemas operacionais, é necessário ter Grub2."
+_Mnt_Uefi_7="É bastante avançado, bonito e tem muitos parâmetros."
+_Mnt_Uefi_8="Junto com ele, o rEFInd deve ser instalado para detectar outros carregadores."
+_Mnt_Uefi_9="Se você já tiver um refund instalado em/boot / efi/, uma pergunta de esclarecimento será feita quando for encontrada."
+_Mnt_Uefi_Msg="\n${_Mnt_Uefi_1}\n${_Mnt_Uefi_2}\n${_Mnt_Uefi_3}\n${_Mnt_Uefi_4}\n${_Mnt_Uefi_5}\n${_Mnt_Uefi_6}\n${_Mnt_Uefi_7}\n${_Mnt_Uefi_8}\n${_Mnt_Uefi_9}\n"
 
 # Extra Partitions
 _ExtPartTitle=" Selecionar Partições Adicionais "

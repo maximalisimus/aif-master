@@ -326,25 +326,32 @@ bios_bootloader() {
 
 uefi_bootloader() {
 
-    #Ensure again that efivarfs is mounted
-    [[ -z $(mount | grep /sys/firmware/efi/efivars) ]] && mount -t efivarfs efivarfs /sys/firmware/efi/efivars
-     
-    dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstUefiBtTitle" \
-    --menu "$_InstUefiBtBody" 0 0 3 \
-    "1" $"Grub2" \
-    "2" $"systemd-boot" \
-    "3" "$_Back" 2>${ANSWER}
+	#Ensure again that efivarfs is mounted
+	[[ -z $(mount | grep /sys/firmware/efi/efivars) ]] && mount -t efivarfs efivarfs /sys/firmware/efi/efivars
+	
+	if [[ "${_bootloader}" == "n/a" ]]; then
+		dialog --default-item 1 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstUefiBtTitle" \
+		--menu "$_InstUefiBtBody" 0 0 3 \
+		"1" "Grub2" \
+		"2" "systemd-boot" \
+		"3" "$_Back" 2>${ANSWER}
 
-     case $(cat ${ANSWER}) in
-     "1") grub_uefi_install
-          ;;
-     "2") systemd_boot_uefi_install
-          ;;
-          
-      *) install_base_menu
-         ;;
-      esac 
-
+		case $(cat ${ANSWER}) in
+			"1") grub_uefi_install
+				;;
+			"2") systemd_boot_uefi_install
+				;;
+			*) install_base_menu
+				;;
+		esac
+	else
+		case ${_bootloader} in
+			"systemd-boot") systemd_boot_uefi_install
+							;;
+			"Grub") grub_uefi_install
+					;;
+		esac
+	fi
 }
 
 # Adapted from AIS. Integrated the configuration elements.

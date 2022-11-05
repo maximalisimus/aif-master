@@ -356,6 +356,16 @@ _OptUefiBody="\nDe bootlader kan later geinstalleerd worden, afhankelijk van waa
 # UEFI koppelpunt
 _MntUefiTitle=" Selecteer UEFI koppelpunt "
 _MntUefiBody="\nrEFInd vereist /boot/efi, Zowel Grub en systemd-boot zullen werken met dit koppelpunt."
+_Mnt_Uefi_1="Kies vooraf de juiste bootloader, afhankelijk van het aantal besturingssystemen dat beschikbaar is op uw schijf."
+_Mnt_Uefi_2="Feit is dat systemd-boot niet compatibel is met andere besturingssystemen."
+_Mnt_Uefi_3="Het heeft geen foto' s, lettertypen."
+_Mnt_Uefi_4="Het is beter om het te zetten als je een Archlinux hebt."
+_Mnt_Uefi_5="Deze loader is vrij eenvoudig voor beginnende gebruikers."
+_Mnt_Uefi_6="Wanneer Grub2 naast andere besturingssystemen wordt geïnstalleerd, moet Grub2 worden geïnstalleerd."
+_Mnt_Uefi_7="Het is vrij geavanceerd, mooi en heeft veel parameters."
+_Mnt_Uefi_8="rEFInd zou samen met het moeten worden geïnstalleerd om andere laders te ontdekken."
+_Mnt_Uefi_9="Als refund al is geïnstalleerd in/boot/ efi/, wordt er een verduidelijkende vraag gesteld wanneer deze wordt gedetecteerd."
+_Mnt_Uefi_Msg="\n${_Mnt_Uefi_1}\n${_Mnt_Uefi_2}\n${_Mnt_Uefi_3}\n${_Mnt_Uefi_4}\n${_Mnt_Uefi_5}\n${_Mnt_Uefi_6}\n${_Mnt_Uefi_7}\n${_Mnt_Uefi_8}\n${_Mnt_Uefi_9}\n"
 
 # Extra Partities
 _ExtPartTitle=" Selecteer een volgende Partitie "

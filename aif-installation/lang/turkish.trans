@@ -361,6 +361,16 @@ _OptUefiBody="\nDaha sonra kurulabilecek önyükleyici(ler) UEFI bölümünün n
 # UEFI Mountpoint
 _MntUefiTitle=" UEFI Bağlama Noktası Seç "
 _MntUefiBody="\nrEFInd /boot/efi gerektirir. systemd-boot /boot gerektirir."
+_Mnt_Uefi_1="Sürücünüzdeki mevcut işletim sisteminin sayısına bağlı olarak doğru önyükleyiciyi önceden seçin."
+_Mnt_Uefi_2="Mesele şu ki, systemd-boot diğer işletim sistemleriyle uyumlu değil."
+_Mnt_Uefi_3="Resimleri ve yazı tipleri yok."
+_Mnt_Uefi_4="Bir Archlinux'unuz olduğunda onu koymak daha iyidir."
+_Mnt_Uefi_5="Bu yükleyici yeni başlayanlar için yeterince basittir."
+_Mnt_Uefi_6="Diğer işletim sistemlerinin yanında kurulurken mutlaka Grub2 olmalıdır."
+_Mnt_Uefi_7="Oldukça gelişmiş, güzel ve birçok parametreye sahip."
+_Mnt_Uefi_8="Bununla birlikte, diğer önyükleme yükleyicilerini algılamak için rEFInd yüklenmelidir."
+_Mnt_Uefi_9="Refund zaten /boot /efı/ olarak ayarlanmışsa, onu bulduğunuzda açıklayıcı bir soru sorulacaktır."
+_Mnt_Uefi_Msg="\n${_Mnt_Uefi_1}\n${_Mnt_Uefi_2}\n${_Mnt_Uefi_3}\n${_Mnt_Uefi_4}\n${_Mnt_Uefi_5}\n${_Mnt_Uefi_6}\n${_Mnt_Uefi_7}\n${_Mnt_Uefi_8}\n${_Mnt_Uefi_9}\n"
 
 # Extra Partitions
 _ExtPartTitle=" Ek Bölüm Seçin "

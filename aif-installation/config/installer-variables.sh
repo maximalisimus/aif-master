@@ -22,6 +22,7 @@ _xorg_pkg_menu=""
 _ugch=""
 _current_pkgs=""
 BOOTLOADER="n/a"            # Which bootloader has been installed?
+_bootloader="n/a"
 EVOBOXFM=""                 # Which file manager has been selected for EvoBox?
 EVOBOXIB=""                 # Which Internet Browser has been selected for EvoBox?
 DM="n/a"                    # Which display manager has been installed?

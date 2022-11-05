@@ -353,6 +353,16 @@ _OptUefiBody="\nA később telepíthető rendszerbetöltők választéka függ a
 # UEFI Mountpoint
 _MntUefiTitle=" Válassz UEFI csatolási pontot "
 _MntUefiBody="\nA rEFInd -nak szükséges /boot/efi mappa felcsatolása. systemd-boot-nak szükséges /boot mappa felcsatolása. Grub2 működik akár."
+_Mnt_Uefi_1="Válassza ki előre a megfelelő rendszerbetöltőt, a lemezen elérhető operációs rendszerek számától függően."
+_Mnt_Uefi_2="Az a tény, hogy a systemd-boot nem kompatibilis más operációs rendszerekkel."
+_Mnt_Uefi_3="Nincsenek képek, betűtípusok."
+_Mnt_Uefi_4="Sokkal jobb, hogy azt, ha van egy Archlinux."
+_Mnt_Uefi_5="Ez a betöltő nagyon egyszerű A kezdő felhasználók számára."
+_Mnt_Uefi_6="Ha más operációs rendszerek mellé van telepítve, a Grub2-t telepíteni kell."
+_Mnt_Uefi_7="Nagyon fejlett, gyönyörű és sok paraméterrel rendelkezik."
+_Mnt_Uefi_8="a rEFInd - et vele együtt kell telepíteni a többi rakodó észlelésére."
+_Mnt_Uefi_9="Ha a visszatérítés már telepítve van a /boot/efi/ fájlban, akkor egy tisztázó kérdés merül fel, amikor észleli."
+_Mnt_Uefi_Msg="\n${_Mnt_Uefi_1}\n${_Mnt_Uefi_2}\n${_Mnt_Uefi_3}\n${_Mnt_Uefi_4}\n${_Mnt_Uefi_5}\n${_Mnt_Uefi_6}\n${_Mnt_Uefi_7}\n${_Mnt_Uefi_8}\n${_Mnt_Uefi_9}\n"
  
 # Extra Partitions
 _ExtPartTitle=" További partíciók kiválasztása "
