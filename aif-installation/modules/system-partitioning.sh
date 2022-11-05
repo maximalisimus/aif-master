@@ -575,7 +575,9 @@ btrfs_subvols() {
        
     # Extra Step for VFAT UEFI Partition. This cannot be in an LVM container.
     if [[ $SYSTEM == "UEFI" ]]; then
-    
+       _filesystem="vfat"
+       _mount_opts_run=1
+       wait
        dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SelUefiTitle" --menu "$_SelUefiBody" 0 0 4 ${PARTITIONS} 2>${ANSWER} || config_base_menu  
        PARTITION=$(cat ${ANSWER})
        UEFI_PART=$"/dev/"${PARTITION}
