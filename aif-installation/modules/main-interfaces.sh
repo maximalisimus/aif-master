@@ -278,9 +278,9 @@ install_desktop_menu() {
 edit_configs() {
     
     if [[ "$DM" == "n/a" ]]; then
-		_Menu_DM="Search DM"
+		_Menu_DM_Edit="Search DM"
     else
-		_Menu_DM="$DM"
+		_Menu_DM_Edit="$DM"
     fi
     
     wait
@@ -322,7 +322,7 @@ edit_configs() {
 		"12" "/etc/ntp.conf" \
 		"13" "/etc/systemd/timesyncd.conf" \
 		"14" "$_Menu_Bootloader_Edit" \
-		"15" "$_Menu_DM" \
+		"15" "$_Menu_DM_Edit" \
 		"16" "$_Back" 2>${ANSWER}
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
@@ -463,9 +463,9 @@ function mainmenu_finishexit()
 main_menu_online() {
     
     if [[ "$BOOTLOADER" == "n/a" ]]; then
-		_Menu_Bootloader="Search Bootloaders"
+		_Menu_Bootloader_Global="Search Bootloaders"
     else
-		_Menu_Bootloader="$BOOTLOADER update"
+		_Menu_Bootloader_Global="$BOOTLOADER update"
     fi
     
     wait
@@ -484,7 +484,7 @@ main_menu_online() {
     "6" "$_swap_menu_title" \
     "7" "$_rsrvd_menu_title" \
     "8" "$_MMRunMkinit" \
-    "9" "$_Menu_Bootloader" \
+    "9" "$_Menu_Bootloader_Global" \
     "10" "$_SeeConfOpt" \
     "11" "$_Done" 2>${ANSWER}
 
