@@ -94,12 +94,12 @@ bluetooth_install()
 
 bluetooth_question()
 {
-    if [[ _bltth == "0"  ]]; then
-        dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yesno_bluetooth_ttl" --yesno "$_yesno_bluetooth_bd" 0 0
-        if [[ $? -eq 0 ]]; then
-            bluetooth_install
-            _bltth=1
-        fi
-    fi
+	if [[ "${_bltth}" == "0"  ]]; then
+		dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yesno_bluetooth_ttl" --yesno "$_yesno_bluetooth_bd" 0 0
+		if [[ $? -eq 0 ]]; then
+			bluetooth_install
+			_bltth=1
+		fi
+	fi
 }
 
