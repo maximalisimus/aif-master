@@ -277,6 +277,22 @@ install_desktop_menu() {
 
 edit_configs() {
     
+    if [[ "$DM" == "n/a" ]]; then
+		_Menu_DM="Search DM"
+    else
+		_Menu_DM="$DM"
+    fi
+    
+    wait
+    
+    if [[ "$BOOTLOADER" == "n/a" ]]; then
+		_Menu_Bootloader_Edit="Search Bootloaders"
+    else
+		_Menu_Bootloader_Edit="$BOOTLOADER"
+    fi
+    
+    wait
+    
     # Clear the file variables
     FILE=""
     FILE2=""
@@ -305,8 +321,8 @@ edit_configs() {
 		"11" "$_ncl_nname" \
 		"12" "/etc/ntp.conf" \
 		"13" "/etc/systemd/timesyncd.conf" \
-		"14" "$BOOTLOADER" \
-		"15" "$DM" \
+		"14" "$_Menu_Bootloader_Edit" \
+		"15" "$_Menu_DM" \
 		"16" "$_Back" 2>${ANSWER}
     
     HIGHLIGHT_SUB=$(cat ${ANSWER})
@@ -357,11 +373,11 @@ edit_configs() {
 				"systemd-boot") FILE="${MOUNTPOINT}${UEFI_MOUNT}/loader/entries/arch.conf" 
 								FILE2="${MOUNTPOINT}${UEFI_MOUNT}/loader/loader.conf"
 								;;
-				"None") bootloader_searches
+				"n/a") bootloader_searches
 						wait
 						bootloader_check_and_uses
 						wait
-						if [[ "$BOOTLOADER" == "None" ]]; then
+						if [[ "$BOOTLOADER" == "n/a" ]]; then
 							dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "Error!" --msgbox "\nBootloaders Not Found!\n" 0 0
 						else
 							edit_configs
@@ -446,6 +462,14 @@ function mainmenu_finishexit()
 
 main_menu_online() {
     
+    if [[ "$BOOTLOADER" == "n/a" ]]; then
+		_Menu_Bootloader="Search Bootloaders"
+    else
+		_Menu_Bootloader="$BOOTLOADER update"
+    fi
+    
+    wait
+    
     if [[ $HIGHLIGHT != 11 ]]; then
        HIGHLIGHT=$(( HIGHLIGHT + 1 ))
     fi
@@ -460,7 +484,7 @@ main_menu_online() {
     "6" "$_swap_menu_title" \
     "7" "$_rsrvd_menu_title" \
     "8" "$_MMRunMkinit" \
-    "9" "$BOOTLOADER update" \
+    "9" "$_Menu_Bootloader" \
     "10" "$_SeeConfOpt" \
     "11" "$_Done" 2>${ANSWER}
 

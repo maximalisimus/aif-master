@@ -27,11 +27,11 @@ bootloader_update(){
 		"systemd-boot") arch_chroot "bootctl update" 2>/tmp/.errlog
 						check_for_error
 						;;
-		"None") bootloader_searches
+		"n/a") bootloader_searches
 				wait
 				bootloader_check_and_uses
 				wait
-				if [[ "$BOOTLOADER" == "None" ]]; then
+				if [[ "$BOOTLOADER" == "n/a" ]]; then
 					dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " Error! " --msgbox "\nBootloaders Not Found!\n" 0 0
 				else
 					bootloader_update
