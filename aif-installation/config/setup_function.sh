@@ -414,7 +414,7 @@ fonts_configuration(){
 }
 
 multiple_question(){
-	dialog --default-item 2 --backtitle "VERSION - SYSTEM (ARCHI)" --title "$_InstMultipleTitle" \
+	dialog --default-item 2 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstMultipleTitle" \
     --menu "$_InstMultipleBody" 0 0 3 \
  	"1" "${_InstMultiple_msg} Windows/Linux/MacOS" \
 	"2" "${_InstMultiple_one}" \
