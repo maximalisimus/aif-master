@@ -414,6 +414,8 @@ fonts_configuration(){
 }
 
 multiple_question(){
+	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " ${_MntUefiTitle} " --msgbox "${_Mnt_Uefi_Msg}" 0 0
+	wait
 	dialog --default-item 2 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_InstMultipleTitle" \
     --menu "$_InstMultipleBody" 0 0 3 \
  	"1" "${_InstMultiple_msg} Windows/Linux/MacOS" \

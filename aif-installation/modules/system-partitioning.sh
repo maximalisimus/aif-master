@@ -594,8 +594,6 @@ btrfs_subvols() {
        if [[ "${_multiple_system}" == "1" ]]; then
 			UEFI_MOUNT="/boot/efi"
        else
-			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " ${_MntUefiTitle} " --msgbox "${_Mnt_Uefi_Msg}" 0 0
-			wait
 			dialog --default-item 2 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MntUefiTitle" --menu "$_MntUefiBody"  0 0 2 \
 			   "1" "systemd-boot: /boot" \
 			   "2" "Grub2: /boot/efi" 2>${ANSWER}
