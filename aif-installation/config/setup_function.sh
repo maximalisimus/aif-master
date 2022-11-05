@@ -418,7 +418,7 @@ multiple_question(){
     --menu "$_InstMultipleBody" 0 0 3 \
  	"1" "${_InstMultiple_msg} Windows/Linux/MacOS" \
 	"2" "${_InstMultiple_one}" \
-	"3" "$_Back"	2>${ANSWER}	
+	"3" "$_Back" 2>${ANSWER}	
 	variable=($(cat ${ANSWER}))
     case $variable in
         "1") _multiple_system=1
