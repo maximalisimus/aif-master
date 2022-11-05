@@ -49,7 +49,8 @@ install_wireless_firmware() {
 			;;
 		"2") # Broadcom
 				clear
-				pacstrap ${MOUNTPOINT} ${_broadcom[*]} 2>/tmp/.errlog
+				_list_broadcom=$(check_s_lst_pkg "${_broadcom[*]}")
+				[[ "${_list_broadcom[*]}" != "" ]] && pacstrap ${MOUNTPOINT} ${_list_broadcom[*]} 2>/tmp/.errlog
 				wait
 				install_wireless_programm
 			;;
