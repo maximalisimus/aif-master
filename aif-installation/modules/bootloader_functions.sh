@@ -397,6 +397,18 @@ install_bootloader() {
 			wait
        fi
     else
+		if [[ "${ROOT_PART}" == "" ]]; then
+			manual_select_devices
+			wait
+			manual_select_root
+			wait
+		fi
+		if [[ "${UEFI_PART}" == "" ]]; then
+			manual_select_devices
+			wait
+			manual_select_uefi
+			wait
+		fi
 		if [[ "${UEFI_MOUNT}" == "" ]]; then
 			dialog --default-item 2 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MntUefiTitle" --menu "$_MntUefiBody"  0 0 3 \
 			   "1" "/boot" \

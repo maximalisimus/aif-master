@@ -338,8 +338,6 @@ mount_opts() {
 	esac
 }
 
-mount_partitions() {
-
 # function created to save repetition of code. Checks and determines if standard partition or LVM LV,
 # and sets the prefix accordingly.
 set_mount_type() {
@@ -347,6 +345,8 @@ set_mount_type() {
 [[ $(echo ${PARTITION} | grep 'sd\|hd\|vd[a-z][1-99]') != "" ]] && MOUNT_TYPE="/dev/" || MOUNT_TYPE="/dev/mapper/"
     
 }
+
+mount_partitions() {
 
 btrfs_subvols() {
 
@@ -445,7 +445,7 @@ btrfs_subvols() {
     else
        LVM_ROOT=1
     fi
-        
+    
     select_filesystem
     [[ $FILESYSTEM != "skip" ]] && ${FILESYSTEM} ${MOUNT_TYPE}${PARTITION} >/dev/null 2>/tmp/.errlog
     check_for_error
@@ -584,7 +584,7 @@ btrfs_subvols() {
        
        # If it is already a fat/vfat partition...
        if [[ $(fsck -N /dev/$PARTITION | grep fat) ]]; then
-          dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FormUefiTitle" --yesno "$_FormUefiBody $PARTITION $_FormUefiBody2" 0 0 && mkfs.vfat -F32 $"/dev/"${PARTITION} >/dev/null 2>/tmp/.errlog
+          dialog --defaultno --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FormUefiTitle" --yesno "$_FormUefiBody $PARTITION $_FormUefiBody2" 0 0 && mkfs.vfat -F32 $"/dev/"${PARTITION} >/dev/null 2>/tmp/.errlog
        else 
           mkfs.vfat -F32 $"/dev/"${PARTITION} >/dev/null 2>/tmp/.errlog
        fi
@@ -635,4 +635,42 @@ btrfs_subvols() {
        confirm_mount ${MOUNTPOINT}${UEFI_MOUNT}     
        
     fi
+}
+
+manual_select_devices()
+{
+	if [[ "${_select_devices_once}" == 0 ]]; then
+		_select_devices_once=1
+		_devices=$(lsblk -d | awk '{print "/dev/" $1}' | grep 'sd\|hd\|vd')
+		_all_devices=""
+		for i in ${_devices[*]}; do
+			_all_devices="${_all_devices[*]} ${i} -"
+		done
+		dialog --clear --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_DevSelTitle" --menu "$_DevSelBody" 0 0 4 ${_all_devices} 2>${ANSWER}
+		_select_devices=$(cat ${ANSWER} | rev | cut -d '/' -f1 | rev)
+	fi
+}
+
+manual_select_root()
+{
+	_root_partitions=$(lsblk -l | grep 'part\|lvm' | sed 's/[\t ].*//' | sort -u | grep -Ei "${_select_devices[*]}")
+	_all_root=""
+	for i in ${_root_partitions[*]}; do
+		_all_root="${_all_root} ${i} -"
+	done
+	dialog --clear --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SelRootTitle" --menu "$_SelRootBody" 0 0 16 ${_all_root} 2>${ANSWER}
+	_select_root=$(cat ${ANSWER})
+	ROOT_PART="${_select_root[*]}"
+}
+
+manual_select_uefi()
+{
+	_efi_partition=$(lsblk -l | grep 'part\|lvm' | sed 's/[\t ].*//' | sort -u | grep -Ei "${_select_devices[*]}" | grep -Evi "${_select_root[*]}")
+	_all_efi=""
+	for i in ${_efi_partition[*]}; do
+		_all_efi="${_all_efi[*]} ${i} -"
+	done
+	dialog --clear --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SelUefiTitle" --menu "$_SelUefiBody" 0 0 16 ${_all_efi} 2>${ANSWER}
+	_select_efi=$(cat ${ANSWER})
+	UEFI_PART="/dev/${_select_efi[*]}"
 }
