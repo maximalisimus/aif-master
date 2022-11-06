@@ -760,7 +760,10 @@ _InstMultipleBody="\nInstalar linhas com outro sistema operacional?\n"
 _InstMultiple_msg="Ao lado de"
 _InstMultiple_one="Único os"
 _refind_yn_title="Instalação rEFInd"
-_refind_yn_body="\nSe um dos seus discos já tiver o rEFInd instalado, desista dessa instalação.\nAinda quer instalar o rEFInd no disco?\n"
+_refind_yn_body_1="Se um dos seus discos já tiver o rEFInd instalado, desista dessa instalação."
+_refind_yn_body_2="Ainda deseja instalar o rEFInd no disco?"
+_refind_yn_body_msg="Se o rEFInd já estiver instalado em um de seus discos, você pode optar por não instalá-lo."
+_refind_yn_body_full="\n${_refind_yn_body_1}\n${_refind_yn_body_2}\n"
 _refind_yn_body_else="\nInstalar o refund no disco?\n"
 #
 # Icon-theme, Wallpapers, DM theme

@@ -756,7 +756,10 @@ _InstMultipleBody="Install a BIOS with another OS?"
 _InstMultiple_msg="Next to"
 _InstMultiple_one="The only OS"
 _refind_yn_title="Installing rEFInd"
-_refind_yn_body="\nIf rEFInd is already installed on one of your disks, refuse this installation.\nWould you still like to install rEFInd to disk?\n"
+_refind_yn_body_1="If rEFInd is already installed on one of your disks, refuse this installation."
+_refind_yn_body_2="Would you still like to install rEFInd on disk?"
+_refind_yn_body_msg="If rEFInd is already installed on one of your disks, you don't have to install it."
+_refind_yn_body_full="\n${_refind_yn_body_1}\n${_refind_yn_body_2}\n"
 _refind_yn_body_else="\nInstall refund to disk?\n"
 #
 # Icon-theme, Wallpapers, DM theme

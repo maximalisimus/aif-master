@@ -750,7 +750,10 @@ _InstMultipleBody="Installer ryados avec un autre système d'exploitation?"
 _InstMultiple_msg="Proche"
 _InstMultiple_one="Système d'exploitation unique"
 _refind_yn_title="Installer rEFInd"
-_refind_yn_body="\nSi rEFInd est déjà installé sur l'un de vos disques, refusez cette installation.\nVoulez-vous toujours installer rEFInd sur le disque?\n"
+_refind_yn_body_1="Si rEFInd est déjà installé sur l'un de vos disques, refusez cette installation."
+_refind_yn_body_2="Voulez-vous toujours installer rEFInd sur le disque?"
+_refind_yn_body_msg="Si rEFInd est déjà installé sur l'un de vos disques, vous pouvez ne pas l'installer."
+_refind_yn_body_full="\n${_refind_yn_body_1}\n${_refind_yn_body_2}\n"
 _refind_yn_body_else="\nInstaller refund sur le disque?\n"
 #
 # Icon-theme, Wallpapers, DM theme

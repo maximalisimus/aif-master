@@ -786,7 +786,10 @@ _InstMultipleBody="Farklı bir işletim sistemi ile bir sırayı mı kuracaksın
 _InstMultiple_msg="Yanında"
 _InstMultiple_one="Tek işletim sistemi"
 _refind_yn_title="rEFInd kurulumu"
-_refind_yn_body="\nDisklerinizden birinde zaten rEFInd yüklüyse, bu yüklemeyi reddedin.\nYine de refind'i diske sıkıştırmaktan yorulmak ister misiniz?\n"
+_refind_yn_body_1="Disklerinizden birinde zaten rEFInd yüklüyse, bu yüklemeyi reddedin."
+_refind_yn_body_2="Yine de refind'i diske yüklemek ister misiniz?"
+_refind_yn_body_msg="Disklerinizden birine zaten rEFInd yüklüyse, onu yüklemeyebilirsiniz."
+_refind_yn_body_full="\n${_refind_yn_body_1}\n${_refind_yn_body_2}\n"
 _refind_yn_body_else="\nRefund'u diske yüklemek için?\n"
 #
 # Icon-theme, Wallpapers, DM theme

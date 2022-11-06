@@ -767,7 +767,10 @@ _InstMultipleBody="Εγκαταστήστε ένα BIOS με άλλο λειτο
 _InstMultiple_msg="Δίπλα στο"
 _InstMultiple_one="Το μόνο λειτουργικό σύστημα"
 _refind_yn_title="Εγκατάσταση rEFInd"
-_refind_yn_body="\nΕάν το rEFInd είναι ήδη εγκατεστημένο σε έναν από τους δίσκους σας, απορρίψτε αυτήν την εγκατάσταση.\nΘα θέλατε ακόμα να εγκαταστήσετε το rEFInd στο δίσκο;\n"
+_refind_yn_body_1="Εάν το rEFInd είναι ήδη εγκατεστημένο σε έναν από τους δίσκους σας, απορρίψτε αυτήν την εγκατάσταση."
+_refind_yn_body_2="Θα θέλατε ακόμα να εγκαταστήσετε το rEFInd στο δίσκο;"
+_refind_yn_body_msg="Εάν το rEFInd είναι ήδη εγκατεστημένο σε έναν από τους δίσκους σας, δεν χρειάζεται να το εγκαταστήσετε."
+_refind_yn_body_full="\n${_refind_yn_body_1}\n${_refind_yn_body_2}\n"
 _refind_yn_body_else="\nΕγκατάσταση επιστροφής χρημάτων στο δίσκο;\n"
 #
 # Icon-theme, Wallpapers, DM theme

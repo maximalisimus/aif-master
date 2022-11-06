@@ -779,7 +779,10 @@ _InstMultipleBody="\nУстановить рядос с другой ОС?\n"
 _InstMultiple_msg="Рядом с"
 _InstMultiple_one="Единственная ОС"
 _refind_yn_title="Установка rEFInd"
-_refind_yn_body="\nЕсли на одном из ваших дисков уже установлен rEFInd откажитесь от этой установки.\nВсё равно желаете устанавить rEFInd на диск?\n"
+_refind_yn_body_1="Если на одном из ваших дисков уже установлен rEFInd откажитесь от этой установки."
+_refind_yn_body_2="Всё равно желаете устанавить rEFInd на диск?"
+_refind_yn_body_msg="Если на одном из ваших дисков уже установлен rEFInd, можете не устанавливать его."
+_refind_yn_body_full="\n${_refind_yn_body_1}\n${_refind_yn_body_2}\n"
 _refind_yn_body_else="\nУстанавить rEFInd на диск?\n"
 #
 # Icon-theme, Wallpapers, DM theme

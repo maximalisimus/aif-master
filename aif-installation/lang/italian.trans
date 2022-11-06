@@ -750,7 +750,10 @@ _InstMultipleBody="Installare ryudos con un altro sistema operativo?"
 _InstMultiple_msg="Vicino a"
 _InstMultiple_one="Sistema operativo singolo"
 _refind_yn_title="Installazione di rEFInd"
-_refind_yn_body="\nSe uno dei tuoi dischi ha già rEFInd installato, rifiuta questa installazione.\nVuoi comunque installare rEFInd su disco?\n"
+_refind_yn_body_1="Se uno dei tuoi dischi ha già rEFInd installato, rifiuta questa installazione."
+_refind_yn_body_2="Vuoi comunque installare rEFInd su disco?"
+_refind_yn_body_msg="Se rEFInd è già installato su una delle tue unità, Puoi scegliere di non installarlo."
+_refind_yn_body_full="\n${_refind_yn_body_1}\n${_refind_yn_body_2}\n"
 _refind_yn_body_else="\nInstallare refund su disco?\n"
 #
 # Icon-theme, Wallpapers, DM theme

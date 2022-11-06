@@ -420,7 +420,7 @@ install_bootloader() {
 				fi
 			else
 				if [[ "${UEFI_MOUNT}" == "/boot/efi" ]]; then
-					dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "$_refind_yn_body" 0 0
+					dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "$_refind_yn_body_full" 0 0
 					 
 					if [[ $? -eq 0 ]]; then
 						refind_uefi_install

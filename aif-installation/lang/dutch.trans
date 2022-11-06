@@ -755,7 +755,10 @@ _InstMultipleBody="Een BIOS installeren met een ander OS?"
 _InstMultiple_msg="Naast"
 _InstMultiple_one="Het enige OS"
 _refind_yn_title="Refind installeren"
-_refind_yn_body="\nAls rEFInd al op een van uw schijven is geïnstalleerd, weigert u deze installatie.\nWilt u nog steeds rEFInd op schijf installeren?\n"
+_refind_yn_body_1="Als rEFInd al op een van uw schijven is geïnstalleerd, weigert u deze installatie."
+_refind_yn_body_2="Wilt u rEFInd nog steeds op schijf installeren?"
+_refind_yn_body_msg="Als rEFInd al op een van uw schijven is geïnstalleerd, hoeft u deze niet te installeren."
+_refind_yn_body_full="\n${_refind_yn_body_1}\n${_refind_yn_body_2}\n"
 _refind_yn_body_else="\nTerugbetaling naar schijf installeren?\n"
 #
 # Icon-theme, Wallpapers, DM theme

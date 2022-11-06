@@ -766,7 +766,10 @@ _InstMultipleBody="Installer en BIOS med et andet operativsystem?"
 _InstMultiple_msg="Nær"
 _InstMultiple_one="Det eneste OS"
 _refind_yn_title="Installation af rEFInd"
-_refind_yn_body="\nHvis rEFInd allerede er installeret på en af dine diske, skal du nægte denne installation.\nVil du stadig installere rEFInd til disk?\n"
+_refind_yn_body_1="Hvis rEFInd allerede er installeret på en af dine diske, skal du nægte denne installation."
+_refind_yn_body_2="Vil du stadig installere rEFInd på disken?"
+_refind_yn_body_msg="Hvis rEFInd allerede er installeret på en af dine diske, behøver du ikke installere den."
+_refind_yn_body_full="\n${_refind_yn_body_1}\n${_refind_yn_body_2}\n"
 _refind_yn_body_else="\nInstaller refusion til disk?\n"
 #
 # Icon-theme, Wallpapers, DM theme
