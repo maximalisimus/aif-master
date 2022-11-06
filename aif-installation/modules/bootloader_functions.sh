@@ -172,10 +172,17 @@ grub_uefi_install(){
 	  
 	  dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " Grub-install " --infobox "$_PlsWaitBody" 0 0
 	  sleep 1
-	  arch_chroot "grub-install --target=x86_64-efi --efi-directory=${UEFI_MOUNT} --bootloader-id=arch_grub --recheck" 2>/tmp/.errlog
-	  wait
-	  arch-chroot $MOUNTPOINT /bin/bash -c "grub-install --target=x86_64-efi --efi-directory=${UEFI_MOUNT} --bootloader-id=arch_grub --recheck" 2>>/tmp/.errlog
-	  wait
+	  if [[ "${_archi[*]}" == "x86_64" ]]; then
+		arch_chroot "grub-install --target=x86_64-efi --efi-directory=${UEFI_MOUNT} --bootloader-id=arch_grub --recheck" 2>/tmp/.errlog
+		wait
+		arch-chroot $MOUNTPOINT /bin/bash -c "grub-install --target=x86_64-efi --efi-directory=${UEFI_MOUNT} --bootloader-id=arch_grub --recheck" 2>>/tmp/.errlog
+		wait
+	  else
+		arch_chroot "grub-install --target=i386-efi --efi-directory=${UEFI_MOUNT} --bootloader-id=arch_grub --recheck" 2>/tmp/.errlog
+		wait
+		arch-chroot $MOUNTPOINT /bin/bash -c "grub-install --target=i386-efi --efi-directory=${UEFI_MOUNT} --bootloader-id=arch_grub --recheck" 2>>/tmp/.errlog
+		wait
+	  fi
 	  clear
 	  arch_chroot "grub-mkconfig -o /boot/grub/grub.cfg" 2>>/tmp/.errlog
 	  wait
@@ -188,7 +195,11 @@ grub_uefi_install(){
 		  
 		  if [[ $? -eq 0 ]]; then
 			 arch_chroot "mkdir -p ${UEFI_MOUNT}/EFI/boot" 2>/tmp/.errlog
-			 arch_chroot "cp -r ${UEFI_MOUNT}/EFI/arch_grub/grubx64.efi ${UEFI_MOUNT}/EFI/boot/bootx64.efi" 2>>/tmp/.errlog
+			 if [[ "${_archi[*]}" == "x86_64" ]]; then
+				arch_chroot "cp -r ${UEFI_MOUNT}/EFI/arch_grub/grubx64.efi ${UEFI_MOUNT}/EFI/boot/bootx64.efi" 2>>/tmp/.errlog
+			 else
+				arch_chroot "cp -r ${UEFI_MOUNT}/EFI/arch_grub/grubia32.efi ${UEFI_MOUNT}/EFI/boot/bootia32.efi" 2>>/tmp/.errlog
+			 fi
 			 check_for_error
 			 dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_SetDefDoneTitle" --infobox "\nGrub $_SetDefDoneBody" 0 0
 			 sleep 2
@@ -389,26 +400,49 @@ install_bootloader() {
 	fi
 	
     if [[ $SYSTEM == "BIOS" ]]; then
-       if [[ "${_multiple_system}" == "0" ]]; then
+		if [[ "${ROOT_PART}" == "" ]]; then
+			manual_select_devices
+			wait
+			manual_select_root
+			wait
+			[[ $(echo ${ROOT_PART} | grep 'sd\|hd\|vd[a-z][1-99]') != "" ]] && MOUNT_TYPE="/dev/" || MOUNT_TYPE="/dev/mapper/"
+			if [[ $MOUNT_TYPE == "/dev/" ]]; then   
+				LVM_ROOT=0
+				INST_DEV=${MOUNT_TYPE}$(cat ${ANSWER} | sed 's/[0-9]*//g')
+			else
+				LVM_ROOT=1
+			fi
+		fi
+		wait
+		if [[ "${_multiple_system}" == "0" ]]; then
 			bios_bootloader
 			wait
-       else
+		else
 			grub_bios_install
 			wait
-       fi
+		fi
     else
 		if [[ "${ROOT_PART}" == "" ]]; then
 			manual_select_devices
 			wait
 			manual_select_root
 			wait
+			[[ $(echo ${ROOT_PART} | grep 'sd\|hd\|vd[a-z][1-99]') != "" ]] && MOUNT_TYPE="/dev/" || MOUNT_TYPE="/dev/mapper/"
+			if [[ $MOUNT_TYPE == "/dev/" ]]; then   
+				LVM_ROOT=0
+				INST_DEV=${MOUNT_TYPE}$(cat ${ANSWER} | sed 's/[0-9]*//g')
+			else
+				LVM_ROOT=1
+			fi
 		fi
+		wait
 		if [[ "${UEFI_PART}" == "" ]]; then
 			manual_select_devices
 			wait
 			manual_select_uefi
 			wait
 		fi
+		wait
 		if [[ "${UEFI_MOUNT}" == "" ]]; then
 			dialog --default-item 2 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MntUefiTitle" --menu "$_MntUefiBody"  0 0 3 \
 			   "1" "/boot" \
