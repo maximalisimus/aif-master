@@ -641,7 +641,7 @@ manual_select_devices()
 {
 	if [[ "${_select_devices_once}" == 0 ]]; then
 		_select_devices_once=1
-		_devices=$(lsblk -d | awk '{print "/dev/" $1}' | grep 'sd\|hd\|vd')
+		_devices=$(lsblk -l | grep -Ei "${MOUNTPOINT}" | awk '{print "/dev/" $1}' | grep 'sd\|hd\|vd' | sed 's/[0-9]//g' | sort -u)
 		_all_devices=""
 		for i in ${_devices[*]}; do
 			_all_devices="${_all_devices[*]} ${i} -"
