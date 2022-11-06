@@ -394,11 +394,6 @@ install_bootloader() {
     arch_chroot "PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/core_perl" 2>/tmp/.errlog
     check_for_error
 	
-	if [[ "${_refind_setup_once}" == "0" ]]; then
-		_refind_setup_once=1
-		_refind_question=$(find ${MOUNTPOINT}/boot/efi/ -type f -iname "refind*" | grep -Ei "conf" | wc -l)
-	fi
-	
     if [[ $SYSTEM == "BIOS" ]]; then
 		if [[ "${ROOT_PART}" == "" ]]; then
 			manual_select_devices
@@ -422,6 +417,11 @@ install_bootloader() {
 			wait
 		fi
     else
+		if [[ "${_refind_setup_once}" == "0" ]]; then
+			_refind_setup_once=1
+			_refind_question=$(find ${MOUNTPOINT}/boot/efi/ -type f -iname "refind*" | grep -Ei "conf" | wc -l)
+		fi
+		wait
 		if [[ "${ROOT_PART}" == "" ]]; then
 			manual_select_devices
 			wait
