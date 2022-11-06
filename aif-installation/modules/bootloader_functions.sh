@@ -376,6 +376,25 @@ install_bootloader() {
 			wait
        fi
     else
+		if [[ "${UEFI_MOUNT}" == "" ]]; then
+			dialog --default-item 2 --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_MntUefiTitle" --menu "$_MntUefiBody"  0 0 3 \
+			   "1" "/boot" \
+			   "2" "/boot/efi" \
+			   "3" "$_Back" 2>${ANSWER}
+			   
+			   case $(cat ${ANSWER}) in
+				"1") UEFI_MOUNT="/boot"
+					_bootloader="n/a"
+					 ;;
+				"2") UEFI_MOUNT="/boot/efi"
+					_bootloader="n/a"
+					 ;;
+				  *) _bootloader="n/a"
+					install_base_menu
+					 ;;
+			   esac
+		fi
+		wait
 		if [[ "${_multiple_system}" == "0" ]]; then
 			uefi_bootloader
 			wait
