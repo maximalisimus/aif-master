@@ -365,7 +365,7 @@ _Mnt_Uefi_5="This loader is quite simple for novice users."
 _Mnt_Uefi_6="When installed next to other operating systems, Grub2 must be installed."
 _Mnt_Uefi_7="It is quite advanced, beautiful and has many parameters."
 _Mnt_Uefi_8="rEFInd should be installed along with it to detect other loaders."
-_Mnt_Uefi_9="If refund is already installed in /boot/efi/, then a clarifying question will be asked when it is detected."
+_Mnt_Uefi_9="If rEFInd is already installed in /boot/efi/, then a clarifying question will be asked when it is detected."
 _Mnt_Uefi_Msg="\n${_Mnt_Uefi_1}\n${_Mnt_Uefi_2}\n${_Mnt_Uefi_3}\n${_Mnt_Uefi_4}\n${_Mnt_Uefi_5}\n${_Mnt_Uefi_6}\n${_Mnt_Uefi_7}\n${_Mnt_Uefi_8}\n${_Mnt_Uefi_9}\n"
 
 # Extra Partitions

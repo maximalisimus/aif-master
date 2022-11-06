@@ -365,7 +365,7 @@ _Mnt_Uefi_5="Ce téléchargeur est assez simple pour les utilisateurs novices."
 _Mnt_Uefi_6="Lors de l'installation à côté d'autres OS doit être Grub2."
 _Mnt_Uefi_7="C'est assez avancé, beau et a beaucoup de paramètres."
 _Mnt_Uefi_8="Avec elle, rEFInd doit être installé pour détecter d'autres Chargeurs de démarrage."
-_Mnt_Uefi_9="Si vous l'avez déjà installé dans /boot/efi/, une question de clarification sera posée lors de sa détection."
+_Mnt_Uefi_9="Si rEFInd est déjà installé dans /boot/efi/, une question de clarification sera posée lors de sa détection."
 _Mnt_Uefi_Msg="\n${_Mnt_Uefi_1}\n${_Mnt_Uefi_2}\n${_Mnt_Uefi_3}\n${_Mnt_Uefi_4}\n${_Mnt_Uefi_5}\n${_Mnt_Uefi_6}\n${_Mnt_Uefi_7}\n${_Mnt_Uefi_8}\n${_Mnt_Uefi_9}\n"
 
 # Partitions supplémentaires

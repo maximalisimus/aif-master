@@ -361,7 +361,7 @@ _Mnt_Uefi_5="Ez a betöltő nagyon egyszerű A kezdő felhasználók számára."
 _Mnt_Uefi_6="Ha más operációs rendszerek mellé van telepítve, a Grub2-t telepíteni kell."
 _Mnt_Uefi_7="Nagyon fejlett, gyönyörű és sok paraméterrel rendelkezik."
 _Mnt_Uefi_8="a rEFInd - et vele együtt kell telepíteni a többi rakodó észlelésére."
-_Mnt_Uefi_9="Ha a visszatérítés már telepítve van a /boot/efi/ fájlban, akkor egy tisztázó kérdés merül fel, amikor észleli."
+_Mnt_Uefi_9="Ha a rEFInd már telepítve van a /boot/efi/ állományban, akkor a rendszer pontosító kérdést tesz fel az észleléskor."
 _Mnt_Uefi_Msg="\n${_Mnt_Uefi_1}\n${_Mnt_Uefi_2}\n${_Mnt_Uefi_3}\n${_Mnt_Uefi_4}\n${_Mnt_Uefi_5}\n${_Mnt_Uefi_6}\n${_Mnt_Uefi_7}\n${_Mnt_Uefi_8}\n${_Mnt_Uefi_9}\n"
  
 # Extra Partitions

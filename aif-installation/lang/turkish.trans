@@ -369,7 +369,7 @@ _Mnt_Uefi_5="Bu yükleyici yeni başlayanlar için yeterince basittir."
 _Mnt_Uefi_6="Diğer işletim sistemlerinin yanında kurulurken mutlaka Grub2 olmalıdır."
 _Mnt_Uefi_7="Oldukça gelişmiş, güzel ve birçok parametreye sahip."
 _Mnt_Uefi_8="Bununla birlikte, diğer önyükleme yükleyicilerini algılamak için rEFInd yüklenmelidir."
-_Mnt_Uefi_9="Refund zaten /boot /efı/ olarak ayarlanmışsa, onu bulduğunuzda açıklayıcı bir soru sorulacaktır."
+_Mnt_Uefi_9="Eğer rEFİnd zaten /boot/efı/ olarak ayarlanmışsa, onu bulduğunuzda açıklayıcı bir soru sorulacaktır."
 _Mnt_Uefi_Msg="\n${_Mnt_Uefi_1}\n${_Mnt_Uefi_2}\n${_Mnt_Uefi_3}\n${_Mnt_Uefi_4}\n${_Mnt_Uefi_5}\n${_Mnt_Uefi_6}\n${_Mnt_Uefi_7}\n${_Mnt_Uefi_8}\n${_Mnt_Uefi_9}\n"
 
 # Extra Partitions

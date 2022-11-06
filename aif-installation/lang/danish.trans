@@ -367,7 +367,7 @@ _Mnt_Uefi_5="Denne læsser er ret simpel for nybegyndere."
 _Mnt_Uefi_6="Når der installeres ved siden af andre operativsystemer, skal Grub2 installeres."
 _Mnt_Uefi_7="Det er ret avanceret, smukt og har mange parametre."
 _Mnt_Uefi_8="rEFInd skal installeres sammen med det for at registrere Andre læssere."
-_Mnt_Uefi_9="Hvis refusion allerede er installeret i / boot/ efi/, vil der blive stillet et afklarende spørgsmål, når det registreres."
+_Mnt_Uefi_9="Hvis rEFInd allerede er installeret i / boot/ efi/, vil der blive stillet et afklarende spørgsmål, når det registreres."
 _Mnt_Uefi_Msg="\n${_Mnt_Uefi_1}\n${_Mnt_Uefi_2}\n${_Mnt_Uefi_3}\n${_Mnt_Uefi_4}\n${_Mnt_Uefi_5}\n${_Mnt_Uefi_6}\n${_Mnt_Uefi_7}\n${_Mnt_Uefi_8}\n${_Mnt_Uefi_9}\n"
 
 # Extra Partitions

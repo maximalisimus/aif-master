@@ -352,6 +352,13 @@ uefi_bootloader() {
 					;;
 		esac
 	fi
+	if [[ "${UEFI_MOUNT}" == "/boot/efi" ]]; then
+		dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "${_refind_yn_body_else}" 0 0
+		
+		if [[ $? -eq 0 ]]; then
+			refind_uefi_install
+		fi
+	fi
 }
 
 # Adapted from AIS. Integrated the configuration elements.
@@ -404,6 +411,7 @@ install_bootloader() {
 			if [[ "${_refind_question[*]}" -eq 0 ]]; then
 				if [[ "${UEFI_MOUNT}" == "/boot/efi" ]]; then
 					dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "${_InstUefiBtBody}${_refind_yn_body_else}" 0 0
+					
 					if [[ $? -eq 0 ]]; then
 						refind_uefi_install
 					fi

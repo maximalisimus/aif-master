@@ -360,7 +360,7 @@ _Mnt_Uefi_5="Este downloader é bastante simples para usuários iniciantes."
 _Mnt_Uefi_6="Ao instalar ao lado de outros sistemas operacionais, é necessário ter Grub2."
 _Mnt_Uefi_7="É bastante avançado, bonito e tem muitos parâmetros."
 _Mnt_Uefi_8="Junto com ele, o rEFInd deve ser instalado para detectar outros carregadores."
-_Mnt_Uefi_9="Se você já tiver um refund instalado em/boot / efi/, uma pergunta de esclarecimento será feita quando for encontrada."
+_Mnt_Uefi_9="Se você já tem o rEFInd instalado em/boot / efi/, uma pergunta esclarecedora será feita quando for encontrada."
 _Mnt_Uefi_Msg="\n${_Mnt_Uefi_1}\n${_Mnt_Uefi_2}\n${_Mnt_Uefi_3}\n${_Mnt_Uefi_4}\n${_Mnt_Uefi_5}\n${_Mnt_Uefi_6}\n${_Mnt_Uefi_7}\n${_Mnt_Uefi_8}\n${_Mnt_Uefi_9}\n"
 
 # Extra Partitions
