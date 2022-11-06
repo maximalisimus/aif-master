@@ -842,6 +842,11 @@ _mnt_largeio_bd="Activar a entrada / saída óptima"
 _mnt_noalign_bd="Não distribuir dados por limites de Stripe"
 _mnt_noquota_bd="Desactivar a contabilidade e a aplicação de quotas"
 _mnt_wsync_bd="Execução síncrona de operações (armazenamento estável)"
+_mnt_rw_bd="Montar no modo de leitura e gravação"
+_mnt_norelatime_bd="Não atualizar a hora de acesso ao inode em caso de alterações"
+_mnt_async_bd="Activar entrada assíncrona saída"
+_mnt_noautodefrag_bd="Desactivar a desfragmentação automática"
+_mnt_ordered_bd="Predefinição"
 #
 
 

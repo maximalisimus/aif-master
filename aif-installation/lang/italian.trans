@@ -832,5 +832,10 @@ _mnt_largeio_bd="Abilita I / O ottimale"
 _mnt_noalign_bd="Non distribuire i dati sui confini degli stripes"
 _mnt_noquota_bd="Disabilita la contabilità e l'applicazione delle quote"
 _mnt_wsync_bd="Esecuzione sincrona di operazioni (in memoria stabile)"
+_mnt_rw_bd="Montare in modalità di lettura e scrittura"
+_mnt_norelatime_bd="Non aggiornare il tempo di accesso all'inode in caso di modifiche"
+_mnt_async_bd="Abilita input asincrono output"
+_mnt_noautodefrag_bd="Disattiva l'autoframmentazione"
+_mnt_ordered_bd="Per impostazione predefinita"
 #
 

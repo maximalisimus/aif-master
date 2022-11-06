@@ -868,5 +868,10 @@ _mnt_largeio_bd="Optimum G / Ç'yi etkinleştir"
 _mnt_noalign_bd="Verileri şerit sınırlarına göre dağıtmayın"
 _mnt_noquota_bd="Kotaların muhasebesini ve uygulanmasını devre dışı bırak"
 _mnt_wsync_bd="Eşzamanlı işlem yürütme (kararlı bir depoda)"
+_mnt_rw_bd="Okuma/yazma modunda monte edin"
+_mnt_norelatime_bd="Değişikliklerde inode'a erişim süresini güncelleme"
+_mnt_async_bd="Zaman uyumsuz girişi etkinleştir çıktı"
+_mnt_noautodefrag_bd="Otomatik birleştirmeyi kapat"
+_mnt_ordered_bd="Varsayılan olarak"
 #
 
