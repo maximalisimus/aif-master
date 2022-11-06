@@ -62,8 +62,10 @@ bootloader_check_and_uses()
 		if [[ "${_grub_search[*]}" == 1 ]]; then
 			[[ "${_refind_sarch[*]}" == "1" ]] && _refind_is_install=1
 			BOOTLOADER="Grub"
+			_bootloader="Grub"
 		else
 			[[ "${_susytemd_boot_search[*]}" == "1" ]] && BOOTLOADER="systemd-boot"
+			[[ "${_susytemd_boot_search[*]}" == "1" ]] && _bootloader="systemd-boot"
 		fi
 	fi
 }
@@ -260,6 +262,25 @@ refind_uefi_install(){
    wait
 }
 
+refind_qestion()
+{
+	if [[ "${UEFI_MOUNT}" == "/boot/efi" ]]; then
+		if [[ "${_refind_question[*]}" == "0" ]]; then
+			dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "rEFInd is not found. ${_refind_yn_body_else}" 0 0
+			
+			if [[ $? -eq 0 ]]; then
+				refind_uefi_install
+			fi
+		else
+			dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "rEFInd is found.\n${_refind_yn_body_2}\n" 0 0
+			
+			if [[ $? -eq 0 ]]; then
+				refind_uefi_install
+			fi
+		fi
+	fi
+}
+
 systemd_boot_uefi_install(){
 	# systemd-boot
 	  clear
@@ -338,6 +359,7 @@ uefi_bootloader() {
 
 		case $(cat ${ANSWER}) in
 			"1") grub_uefi_install
+				refind_qestion
 				;;
 			"2") systemd_boot_uefi_install
 				;;
@@ -349,23 +371,10 @@ uefi_bootloader() {
 			"systemd-boot") systemd_boot_uefi_install
 							;;
 			"Grub") grub_uefi_install
+					wait
+					refind_qestion
 					;;
 		esac
-	fi
-	if [[ "${UEFI_MOUNT}" == "/boot/efi" ]]; then
-		if [[ "${_refind_question[*]}" -eq 0 ]]; then
-			dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "rEFInd is not found. ${_refind_yn_body_else}" 0 0
-			
-			if [[ $? -eq 0 ]]; then
-				refind_uefi_install
-			fi
-		else
-			dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "rEFInd is found.\n${_refind_yn_body_2}\n" 0 0
-			
-			if [[ $? -eq 0 ]]; then
-				refind_uefi_install
-			fi
-		fi
 	fi
 }
 
@@ -416,7 +425,7 @@ install_bootloader() {
        else
 			grub_uefi_install
 			wait
-			if [[ "${_refind_question[*]}" -eq 0 ]]; then
+			if [[ "${_refind_question[*]}" == "0" ]]; then
 				if [[ "${UEFI_MOUNT}" == "/boot/efi" ]]; then
 					dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "rEFInd is not found.\n ${_InstUefiBtBody}${_refind_yn_body_else}" 0 0
 					if [[ $? -eq 0 ]]; then
