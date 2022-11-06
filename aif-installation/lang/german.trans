@@ -759,6 +759,7 @@ _InstMultiple_msg="Neben dem"
 _InstMultiple_one="Das einzige Betriebssystem"
 _refind_yn_title="Installieren von rEFInd"
 _refind_yn_body="\nWenn rEFInd bereits auf einem Ihrer Laufwerke installiert ist, verzichten Sie auf diese Installation.\nMöchten Sie rEFInd trotzdem auf der Festplatte installieren?\n"
+_refind_yn_body_else="\nRefund auf Festplatte installieren?\n"
 #
 # Icon-theme, Wallpapers, DM theme
 #

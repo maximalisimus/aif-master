@@ -780,6 +780,7 @@ _InstMultiple_msg="Рядом с"
 _InstMultiple_one="Единственная ОС"
 _refind_yn_title="Установка rEFInd"
 _refind_yn_body="\nЕсли на одном из ваших дисков уже установлен rEFInd откажитесь от этой установки.\nВсё равно желаете устанавить rEFInd на диск?\n"
+_refind_yn_body_else="\nУстанавить rEFInd на диск?\n"
 #
 # Icon-theme, Wallpapers, DM theme
 #

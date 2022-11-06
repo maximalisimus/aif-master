@@ -761,6 +761,7 @@ _InstMultiple_msg="Ao lado de"
 _InstMultiple_one="Único os"
 _refind_yn_title="Instalação rEFInd"
 _refind_yn_body="\nSe um dos seus discos já tiver o rEFInd instalado, desista dessa instalação.\nAinda quer instalar o rEFInd no disco?\n"
+_refind_yn_body_else="\nInstalar o refund no disco?\n"
 #
 # Icon-theme, Wallpapers, DM theme
 #

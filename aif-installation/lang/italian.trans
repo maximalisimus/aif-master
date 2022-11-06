@@ -751,6 +751,7 @@ _InstMultiple_msg="Vicino a"
 _InstMultiple_one="Sistema operativo singolo"
 _refind_yn_title="Installazione di rEFInd"
 _refind_yn_body="\nSe uno dei tuoi dischi ha già rEFInd installato, rifiuta questa installazione.\nVuoi comunque installare rEFInd su disco?\n"
+_refind_yn_body_else="\nInstallare refund su disco?\n"
 #
 # Icon-theme, Wallpapers, DM theme
 #

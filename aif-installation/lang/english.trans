@@ -757,6 +757,7 @@ _InstMultiple_msg="Next to"
 _InstMultiple_one="The only OS"
 _refind_yn_title="Installing rEFInd"
 _refind_yn_body="\nIf rEFInd is already installed on one of your disks, refuse this installation.\nWould you still like to install rEFInd to disk?\n"
+_refind_yn_body_else="\nInstall refund to disk?\n"
 #
 # Icon-theme, Wallpapers, DM theme
 #

@@ -767,6 +767,7 @@ _InstMultiple_msg="Nær"
 _InstMultiple_one="Det eneste OS"
 _refind_yn_title="Installation af rEFInd"
 _refind_yn_body="\nHvis rEFInd allerede er installeret på en af dine diske, skal du nægte denne installation.\nVil du stadig installere rEFInd til disk?\n"
+_refind_yn_body_else="\nInstaller refusion til disk?\n"
 #
 # Icon-theme, Wallpapers, DM theme
 #

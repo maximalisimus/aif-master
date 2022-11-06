@@ -402,13 +402,24 @@ install_bootloader() {
 			grub_uefi_install
 			wait
 			if [[ "${_refind_question[*]}" -eq 0 ]]; then
-				refind_uefi_install
+				if [[ "${UEFI_MOUNT}" == "/boot/efi" ]]; then
+					dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "${_InstUefiBtBody}${_refind_yn_body_else}" 0 0
+					if [[ $? -eq 0 ]]; then
+						refind_uefi_install
+					fi
+				else
+					dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_OptUefiTitle " --msgbox "${_UefiPartErrBody}${_RefiErrBody}" 0 0
+				fi
 			else
-				dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "$_refind_yn_body" 0 0
-				 
-				if [[ $? -eq 0 ]]; then
-					refind_uefi_install
-				fi   
+				if [[ "${UEFI_MOUNT}" == "/boot/efi" ]]; then
+					dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_refind_yn_title" --yesno "$_refind_yn_body" 0 0
+					 
+					if [[ $? -eq 0 ]]; then
+						refind_uefi_install
+					fi
+				else
+					dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_OptUefiTitle " --msgbox "${_UefiPartErrBody}${_RefiErrBody}" 0 0
+				fi 
 			fi
        fi
     fi

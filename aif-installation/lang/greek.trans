@@ -768,6 +768,7 @@ _InstMultiple_msg="Δίπλα στο"
 _InstMultiple_one="Το μόνο λειτουργικό σύστημα"
 _refind_yn_title="Εγκατάσταση rEFInd"
 _refind_yn_body="\nΕάν το rEFInd είναι ήδη εγκατεστημένο σε έναν από τους δίσκους σας, απορρίψτε αυτήν την εγκατάσταση.\nΘα θέλατε ακόμα να εγκαταστήσετε το rEFInd στο δίσκο;\n"
+_refind_yn_body_else="\nΕγκατάσταση επιστροφής χρημάτων στο δίσκο;\n"
 #
 # Icon-theme, Wallpapers, DM theme
 #
