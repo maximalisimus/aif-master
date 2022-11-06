@@ -584,7 +584,7 @@ btrfs_subvols() {
        
        # If it is already a fat/vfat partition...
        if [[ $(fsck -N /dev/$PARTITION | grep fat) ]]; then
-          dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FormUefiTitle" --yesno "$_FormUefiBody $PARTITION $_FormUefiBody2" 0 0 && mkfs.vfat -F32 $"/dev/"${PARTITION} >/dev/null 2>/tmp/.errlog
+          dialog --default-no --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_FormUefiTitle" --yesno "$_FormUefiBody $PARTITION $_FormUefiBody2" 0 0 && mkfs.vfat -F32 $"/dev/"${PARTITION} >/dev/null 2>/tmp/.errlog
        else 
           mkfs.vfat -F32 $"/dev/"${PARTITION} >/dev/null 2>/tmp/.errlog
        fi
