@@ -30,8 +30,21 @@ aif-master - Bash script for installing the Archlinux system on a computer.
 Данный мастер поддерживает **UEFI** режим установки при запуске системы *ArchLinux* в режиме *UEFI*.
 
 Данному установщику **не нужен** ни **XORG**, ни рабочее окружение ( **Desktop environment** ), ни дисплейный менеджер 
-( **Display Manager** ). Данный скрипт работает полностью в консольном режиме. Достаточно только 
-наличия подключения к интернету и 2 пакетов **dialog** и **ncurses**.
+( **Display Manager** ). Данный скрипт работает полностью в консольном режиме. 
+
+Для работы скрипта необходим следующий список пакетов:
+
+* arch-install-scripts
+* dialog
+* ncurses
+* lib32-ncurses
+* parted
+* util-linux
+* gptfdisk
+* pacman-contrib
+* python (2 или 3)
+* wget
+* curl
 
 Вы можете использовать данный мастер установки для самых разных режимов использования системы ArchLinux.
 
@@ -57,8 +70,21 @@ This wizard supports **UEFI** installation mode when starting the *ArchLinux* sy
 
 This installer **does not need** either **XORG**, nor a working environment 
 ( **Desktop environment** ), nor a display manager ( **Display Manager** ). 
-This script works completely in console mode. It is enough only
-to have an Internet connection and 2 packages **dialog** and **ncurses**.
+This script works completely in console mode. 
+
+The following list of packages is required for the script to work:
+
+* arch-install-scripts
+* dialog
+* ncurses
+* lib32-ncurses
+* parted
+* util-linux
+* gptfdisk
+* pacman-contrib
+* python (2 или 3)
+* wget
+* curl
 
 You can use this installation wizard for a variety of modes of using the ArchLinux system.
 
