@@ -1,7 +1,7 @@
 pkgname=aif-master
 _pkgrun="aif"
 pkgver=2.8
-pkgrel=2
+pkgrel=1
 arch=('any')
 url="https://github.com/maximalisimus/${pkgname}.git"
 license=('GPL')
