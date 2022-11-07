@@ -1,15 +1,15 @@
 pkgname=aif-master
 _pkgrun="aif"
-pkgver=2.7
+pkgver=2.8
 pkgrel=2
 arch=('any')
-url="https://github.com/maximalisimus/$pkgname/"
+url="https://github.com/maximalisimus/${pkgname}.git"
 license=('GPL')
 depends=(arch-install-scripts dialog ncurses lib32-ncurses parted util-linux gptfdisk pacman-contrib python wget curl)
 makedepends=(git imagemagick)
 replaces=($pkgname)
 
-source=("$pkgname::git+https://github.com/maximalisimus/$pkgname.git"
+source=("$pkgname::git+https://github.com/maximalisimus/${pkgname}.git"
 	)
 	
 sha256sums=('SKIP'
