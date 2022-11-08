@@ -18,7 +18,7 @@ fixed_users_and_groups()
 	_user_list=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
 	wait
 	for i in ${_user_list[*]}; do
-		_pass=$(echo "${_all_user_pass[*]}" | grep -Ei "${i}" | cut -d ':' -f2 )
+		_pass=$(echo "${_all_user_pass[*]}" | grep -Ei "${i}" | cut -d ':' -f2-9 )
 		echo -e "${_pass[*]}\n${_pass[*]}" > "${ONCE_PASSWORDS}"
 		arch-chroot /mnt /bin/bash -c "chown -R ${i}:users /home/${i}" < "${ONCE_PASSWORDS}"
 		wait
