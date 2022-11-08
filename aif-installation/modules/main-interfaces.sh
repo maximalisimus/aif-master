@@ -431,6 +431,8 @@ function mainmenu_finishexit()
 	echo -n  -e "\e[1;31mPlease wait ...\e[0m"\\r
 	[[ $DEEPIN_INSTALLED -eq 1 ]] && fixed_deepin_desktop
 	wait
+	fixed_users_and_groups
+	wait
 	echo -n  -e "\e[1;32mPlease wait ...\e[0m"\\r
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_yn_umprt_mn_ttl" --yesno "$_yn_umprt_mn_bd" 0 0
 	if [[ $? -eq 0 ]]; then
