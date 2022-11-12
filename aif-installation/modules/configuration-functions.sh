@@ -517,7 +517,7 @@ create_new_user() {
         unset _ugch
         echo -e "${PASSWD}\n${PASSWD}" > /tmp/.passwd
         arch_chroot "passwd ${USER}" < /tmp/.passwd >/dev/null 2>/tmp/.errlog
-        echo "${USER}:${PASSWD}" >> "${ALL_USER_PASSWORD}"
+        echo "${USER}:${PASSWD}" >> "${ALL_USER_PASSWORDS}"
         rm /tmp/.passwd
         check_for_error
         # Set up basic configuration files and permissions for user

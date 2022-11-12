@@ -346,7 +346,7 @@ install_de_wm() {
     esac  
     
     wait
-    fixed_all_de_desktop
+    # fixed_all_de_desktop
     wait
     
     check_for_error

@@ -13,8 +13,8 @@ fixed_all_de_desktop(){
 
 fixed_users_and_groups()
 {
-	if [[ -e "${ALL_USER_PASSWORD}" ]]; then
-		_all_user_pass=$(cat "${ALL_USER_PASSWORD}")
+	if [[ -e "${ALL_USER_PASSWORDS}" ]]; then
+		_all_user_pass=$(cat "${ALL_USER_PASSWORDS}")
 		wait
 		_user_list=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
 		wait
@@ -25,7 +25,36 @@ fixed_users_and_groups()
 			wait
 		done
 		wait
-		rm -rf "${ALL_USER_PASSWORD}" "${ONCE_PASSWORDS}"
+		rm -rf "${ALL_USER_PASSWORDS}" "${ONCE_PASSWORDS}"
+		unset PASSWD
+		unset PASSWD2
+		wait
+	else
+		_user_list=$(ls ${MOUNTPOINT}/home/ | sed "s/lost+found//")
+		wait
+		for i in ${_user_list[*]}; do
+			USER="${i}"
+			dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_NUsrSetTitle" --clear --insecure --passwordbox "$_PassNUsrBody $USER\n\n" 0 0 2> ${ANSWER}
+			wait
+			PASSWD=$(cat ${ANSWER}) 
+			wait
+			echo "${USER}:${PASSWD[*]}" >> "${ALL_USER_PASSWORDS}"
+			wait
+		done
+		wait
+		_all_user_pass=$(cat "${ALL_USER_PASSWORDS}")
+		wait
+		for i in ${_user_list[*]}; do
+			_pass=$(echo "${_all_user_pass[*]}" | grep -Ei "${i}" | cut -d ':' -f2-9 )
+			echo -e "${_pass[*]}\n${_pass[*]}" > "${ONCE_PASSWORDS}"
+			arch-chroot /mnt /bin/bash -c "chown -R ${i}:users /home/${i}" < "${ONCE_PASSWORDS}"
+			wait
+		done
+		wait
+		rm -rf "${ALL_USER_PASSWORDS}" "${ONCE_PASSWORDS}"
+		unset PASSWD
+		unset PASSWD2
+		unset USER
 		wait
 	fi
 }
