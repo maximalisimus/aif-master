@@ -153,20 +153,21 @@ delete_partitions(){
 
 	if [[ "${SYSTEM}" == "BIOS" ]]; then
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_PartToolTitle" \
-		--menu "$_PartToolBody" 0 0 6 \
-		"auto" $"Auto Partition (BIOS)" \
-		"parted" $"Parted (BIOS)" \
-		"cfdisk" $"CFDisk (BIOS/MBR)" \
-		"fdisk" $"FDisk  (BIOS)" \
+		--menu "$_PartToolBody" 0 0 5 \
+		"auto" "Auto Partition (BIOS)" \
+		"parted" "Parted (BIOS)" \
+		"cfdisk" "CFDisk (BIOS/MBR (DOS))" \
+		"fdisk" "FDisk  (BIOS)" \
 		"back" "$_Back" 2>${ANSWER}
 	else
 		dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_PartToolTitle" \
-		--menu "$_PartToolBody" 0 0 6 \
-		"auto" $"Auto Partition (UEFI)" \
-		"parted" $"Parted (UEFI)" \
-		"cgdisk" $"CGDisk (UEFI/GPT)" \
-		"fdisk" $"FDisk  (UEFI)" \
-		"gdisk" $"GDisk  (UEFI/GPT)" \
+		--menu "$_PartToolBody" 0 0 7 \
+		"auto" "Auto Partition (UEFI)" \
+		"parted" "Parted (UEFI)" \
+		"cfdisk" "CFDisk (BIOS/MBR (DOS) / UEFI/GPT)" \
+		"cgdisk" "CGDisk (UEFI/GPT)" \
+		"fdisk" "FDisk  (UEFI)" \
+		"gdisk" "GDisk  (UEFI/GPT)" \
 		"back" "$_Back" 2>${ANSWER}
 	fi
 
