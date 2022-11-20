@@ -5,7 +5,7 @@ pkgrel=1
 arch=('any')
 url="https://github.com/maximalisimus/${pkgname}.git"
 license=('GPL')
-depends=(arch-install-scripts dialog ncurses lib32-ncurses pacman-contrib parted util-linux gptfdisk python wget curl)
+depends=(arch-install-scripts dialog ncurses lib32-ncurses pacman-contrib parted util-linux gptfdisk python wget curl sed gawk grep)
 makedepends=(git imagemagick)
 replaces=($pkgname)
 
