@@ -98,6 +98,10 @@ $ sudo sh aif-installation/aif
 
 ---
 
+[К оглавлению](#Oglavlenie)
+
+---
+
 <a name="English"></a>
 
 <a name="EngOglavlenie"></a>
@@ -189,4 +193,7 @@ Date of creation: **20.08.2019**
 
 Starting point of the project: **Architect Linux installer**.
 
+---
+
+[To the table of contents](#EngOglavlenie)
 
