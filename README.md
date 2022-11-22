@@ -2,9 +2,12 @@
 
 ---
 
-aif-master - Bash скрипт для установки системы Archlinux на компьютер.
+* [Russian Text](#Russian)
+* [English Text](#English)
 
-aif-master - Bash script for installing the Archlinux system on a computer.
+<a name="Russian"></a>
+
+aif-master - Bash скрипт для установки системы Archlinux на компьютер.
 
 ![Application](./image/aif-image.png "aif-master")
 
@@ -12,15 +15,12 @@ aif-master - Bash script for installing the Archlinux system on a computer.
 
 ## Оглавление
 
-1. [Информация](#Информация)
-2. [Information](#Information)
-4. [Использование](#Использование)
-5. [Uses](#Uses)
-6. [Обо Мне](#aboutrus)
-7. [About](#abouten)
+1. [Информация](#Information)
+2. [Использование](#Uses)
+3. [Обо Мне](#about)
 
 
-## <a name="Информация">Информация</a>
+## <a name="Information">1. Информация</a>
 
 Данный скрипт предназначен для установки системы **Archlinux** в псевдографическом режиме, 
 с помощью утилиты **dialog**.
@@ -58,7 +58,61 @@ aif-master - Bash script for installing the Archlinux system on a computer.
 
 [К оглавлению](#Oglavlenie)
 
-## <a name="Information">Information</a>
+## <a name="Uses">2. Использование</a>
+
+Для использования данного мастера необходимо соблюдать 2 важных условий:
+
+1. Запуск из под суперпользователя **root**.
+2. наличие настроенного подключения к интернету в вашем дистрибутиве
+3. Установите в Live дистрибутив несколько зависимостей для корректной работы скрипта. Без указанных ниже утилит, скрипт просто не запустится.
+
+$ sudo pacman -Syy ncurses bash dialog python --noconfirm
+
+**Данный скрипт можно запустить из любого места**.
+ 
+Достаточно сделать один из файлов - испольняемым и запустить его из консоли:
+
+```
+$ chmod ugo+x aif-installation/aif
+
+$ sudo sh aif-installation/aif
+```
+
+Далее просто следуйсте указаниям мастер-установки.
+
+**Желаем вам удачи**.
+
+---
+
+[К оглавлению](#Oglavlenie)
+
+## <a name="about">3. Обо Мне</a>
+
+Автор данной разработки **Shadow**: [maximalisimus](https://github.com/maximalisimus).
+
+Имя автора: **maximalisimus**: [E-Mail](mailto:maximalis171091@yandex.ru).
+
+Дата создания: **20.08.2019**
+
+Начальная точка проекта: **Architect Linux installer**.
+
+---
+
+<a name="English"></a>
+
+<a name="EngOglavlenie"></a>
+
+aif-master - Bash script for installing the Archlinux system on a computer.
+
+![Application](./image/aif-image.png "aif-master")
+
+## Table of contents
+
+1. [Information](#EngInformation)
+2. [Uses](#EngUses)
+3. [About](#Engabout)
+
+## <a name="EngInformation">1. Information</a>
 
 This script is intended for installing the **Archlinux** system in pseudographic mode, 
 using the **dialog** utility.
@@ -96,41 +150,9 @@ Regardless of the location of your computer - whether it's an office or a home P
 
 ---
 
-[К оглавлению](#Oglavlenie)
+[To the table of contents](#EngOglavlenie)
 
-## <a name="Использование">Использование</a>
-
-### Базовая информация
-
-Для использования данного мастера необходимо соблюдать 2 важных условий:
-
-1. Запуск из под суперпользователя **root**.
-2. наличие настроенного подключения к интернету в вашем дистрибутиве
-3. Установите в Live дистрибутив несколько зависимостей для корректной работы скрипта. Без указанных ниже утилит, скрипт просто не запустится.
-
-$ sudo pacman -Syy ncurses bash dialog python --noconfirm
-
-**Данный скрипт можно запустить из любого места**.
- 
-Достаточно сделать один из файлов - испольняемым и запустить его из консоли:
-
-```
-$ chmod ugo+x aif-installation/aif
-
-$ sudo sh aif-installation/aif
-```
-
-Далее просто следуйсте указаниям мастер-установки.
-
-**Желаем вам удачи**.
-
----
-
-[К оглавлению](#Oglavlenie)
-
-## <a name="Uses">Uses</a>
-
-### Basic information
+## <a name="EngUses">2. Uses</a>
 
 To use this wizard, you must comply with 2 important conditions:
 
@@ -155,23 +177,9 @@ Then just follow the instructions of the installation wizard.
 
 ---
 
-[К оглавлению](#Oglavlenie)
+[To the table of contents](#EngOglavlenie)
 
-## <a name="aboutrus">Обо Мне</a>
-
-Автор данной разработки **Shadow**: [maximalisimus](https://github.com/maximalisimus).
-
-Имя автора: **maximalisimus**: [E-Mail](mailto:maximalis171091@yandex.ru).
-
-Дата создания: **20.08.2019**
-
-Начальная точка проекта: **Architect Linux installer**.
-
----
-
-[К оглавлению](#Oglavlenie)
-
-## <a name="abouten">About</a>
+## <a name="Engabout">3. About</a>
 
 The author of this development **Shadow**: [maximalisimus](https://github.com/maximalisimus).
 
