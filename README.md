@@ -7,7 +7,7 @@
 
 <a name="Russian"></a>
 
-aif-master - Bash скрипт для установки системы Archlinux на компьютер.
+aif-master - Bash скрипт для установки системы Archlinux с нуля на компьютер.
 
 ![Application](./image/aif-image.png "aif-master")
 
@@ -106,7 +106,7 @@ $ sudo sh aif-installation/aif
 
 <a name="EngOglavlenie"></a>
 
-aif-master - Bash script for installing the Archlinux system on a computer.
+air-master - Bash script for installing the Archlinux system from scratch on a computer.
 
 ![Application](./image/aif-image.png "aif-master")
 
