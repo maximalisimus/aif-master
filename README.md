@@ -45,6 +45,10 @@ aif-master - Bash скрипт для установки системы Archlinu
 
 <img src="https://github.com/maximalisimus/aif-master/blob/master/image/scr-1-50/scr-3.png">  
 
+Естественно перед этим окном пользователей в обязательном порядке спрашивают какой язык нтерфейса для этого скрипта применить. В данном случае, на выбор предлагается 11 языков.
+
+<img src="https://github.com/maximalisimus/aif-master/blob/master/image/scr-1-50/scr-1.png">
+
 Скрипт можно использовать с абсолютно любым дистрибутивом **Archlunux**, кроме **bootstrap** и **arm** версии. 
 
 Данный скрипт поддерживает **UEFI** режим установки, если вы вдруг запустили систему **ArchLinux** в режиме **UEFI**.
@@ -222,6 +226,10 @@ With the help of such pseudo-windows, the actions selected by the user are proce
 This is how the window looks when running this installer script.
 
 <img src="https://github.com/maximalisimus/aif-master/blob/master/image/scr-1-50/scr-3.png">  
+
+Naturally, before this window, users are necessarily asked which interface language to use for this script. In this case, there are 11 languages to choose from.
+
+<img src="https://github.com/maximalisimus/aif-master/blob/master/image/scr-1-50/scr-1.png">
 
 The script can be used with absolutely any **Archlunux** distribution, except **bootstrap** and **arm** versions. 
 
