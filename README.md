@@ -187,7 +187,7 @@ $ /usr/bin/aif-master
 
 <a name="EngOglavlenie"></a>
 
-air-master - Bash script for installing the Archlinux system from scratch on a computer.
+aif-master - Bash script for installing the Archlinux system from scratch on a computer or virtual machine.
 
 ## Table of contents
 
