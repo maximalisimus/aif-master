@@ -140,7 +140,7 @@ $ sudo sh ./aif
 
 ### <a name="Installed">2.2. Использование с установкой.</a>
 
-Чтобы воспользоваться запуском скрипта с установкой скачайте готовый пакет из последней доступной [**Release** версией](https://github.com/maximalisimus/aif-master/releases) скрипта.
+Чтобы воспользоваться запуском скрипта с установкой скачайте готовый пакет из последней доступной [**Release** версии](https://github.com/maximalisimus/aif-master/releases) скрипта.
 
 После того как скачаете пакет, его необходимо установить. Кстати, скачать можно прямо из консоли, не открывая барузер.
 
@@ -318,7 +318,7 @@ Then just follow the instructions of the menu that appears. For a more accurate 
 
 ### <a name="EngInstalled">2.2. Use with installation.</a>
 
-To use the launch of the script with the installation, download the finished package from the latest available [**Release** version](https://github.com/maximalisimus/aif-master/releases) the script.
+To use the launch of the script with the installation, download the finished package from the latest available [**Release** versions](https://github.com/maximalisimus/aif-master/releases) the script.
 
 After you download the package, you need to install it. By the way, you can download it directly from the console without opening the browser.
 
