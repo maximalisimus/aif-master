@@ -165,6 +165,8 @@ $ /usr/bin/aif-master
 
 Также, в главном меню в категории **«Утилиты»** имеется ярлык для запуске скрипта от имени суперпользователя.
 
+Далее просто следуйсте указаниям появившегося меню. Для более точного руководства воспользуйтесь нашей [Wiki](https://github.com/maximalisimus/aif-master/wiki), где вы сможете получить ответы на большинство вопросов касательно не только данного скрипта.
+
 ---
 
 [К оглавлению](#Oglavlenie)
@@ -346,6 +348,8 @@ $ /usr/bin/aif-master
 ```
 
 Also, in the main menu in the category **"Utilities"** there is a shortcut for running the script on behalf of the superuser.
+
+Then just follow the instructions of the menu that appears. For a more accurate guide, use our [Wiki](https://github.com/maximalisimus/aif-master/wiki), where you can get answers to most of the questions about not only this script.
 
 ---
 
