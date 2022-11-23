@@ -45,7 +45,7 @@ aif-master - Bash скрипт для установки системы Archlinu
 
 <img src="https://github.com/maximalisimus/aif-master/blob/master/image/scr-1-50/scr-3.png">  
 
-Скрипт можно использовать с абсолютно любым дистрибутивом *Archlunux*, кроме **bootstrap** и **arm** версии. 
+Скрипт можно использовать с абсолютно любым дистрибутивом **Archlunux**, кроме **bootstrap** и **arm** версии. 
 
 Данный скрипт поддерживает **UEFI** режим установки, если вы вдруг запустили систему **ArchLinux** в режиме **UEFI**.
 
