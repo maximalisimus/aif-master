@@ -154,9 +154,9 @@ $ sudo pacman -U ./aif-master-x.x-x-any.pkg.tar.zzz --nocnfirm
 После установки запустить можно следующей командой.
 
 ``` bash
-aif-master
+$ aif-master
 # или
-/usr/bin/aif-master
+$ /usr/bin/aif-master
 ```
 
 Также, в главном меню в категории **«Утилиты»** имеется ярлык для запуске скрипта от имени суперпользователя.
@@ -332,9 +332,9 @@ Where **«x.x-x»** — this is a version and release in two places, and **«zzz
 After installation, you can run the following command.
 
 ``` bash
-aif-master
+$ aif-master
 # или
-/usr/bin/aif-master
+$ /usr/bin/aif-master
 ```
 
 Also, in the main menu in the category **"Utilities"** there is a shortcut for running the script on behalf of the superuser.
