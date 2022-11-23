@@ -7,20 +7,23 @@
 
 <a name="Russian"></a>
 
-aif-master - Bash скрипт для установки системы Archlinux с нуля на компьютер.
-
-![Application](./image/aif-image.png "aif-master")
+aif-master - Bash скрипт для установки системы Archlinux с нуля на компьютер или виртуальную машину.
 
 <a name="Oglavlenie"></a>
 
 ## Оглавление
 
-1. [Информация](#Information)
+1. [Обзор.](#Overview)
+	1. [Введение.](#Information)
+	2. [Зависимости.](#Depends)
 2. [Использование](#Uses)
-3. [Обо Мне](#about)
+	1. [Использование без установки.](#NotInstalled)
+	2. [Использование с установкой.](#Installed)
+3. [Об авторе.](#About)
 
+## <a name="Overview">1. Обзор.</a>
 
-## <a name="Information">1. Информация</a>
+### <a name="Information">1.1. Введение.</a>
 
 Данный скрипт предназначен для установки системы **Archlinux** в псевдографическом режиме, 
 с помощью утилиты **dialog**.
@@ -118,66 +121,7 @@ air-master - Bash script for installing the Archlinux system from scratch on a c
 
 ## <a name="EngInformation">1. Information</a>
 
-This script is intended for installing the **Archlinux** system in pseudographic mode, 
-using the **dialog** utility.
 
-The script can be used with absolutely any *Archlinux* distribution, except for 
-**bootstrap** and **arm** versions.
-
-This wizard supports **UEFI** installation mode when starting the *ArchLinux* system in *UEFI* mode.
-
-This installer **does not need** either **XORG**, nor a working environment 
-( **Desktop environment** ), nor a display manager ( **Display Manager** ). 
-This script works completely in console mode. 
-
-The following list of packages is required for the script to work:
-
-* arch-install-scripts
-* dialog
-* ncurses
-* lib32-ncurses
-* parted
-* util-linux
-* gptfdisk
-* pacman-contrib
-* python (2 или 3)
-* wget
-* curl
-
-You can use this installation wizard for a variety of modes of using the ArchLinux system.
-
-For example, do not install the graphics part (XORG, Desktop Environment, Display Manager, graphics card driver, and others)
-to use as a server.
-
-Or choose and install only the necessary packages and use as a Desktop PC.
-Regardless of the location of your computer - whether it's an office or a home PC.
-
----
-
-[To the table of contents](#EngOglavlenie)
-
-## <a name="EngUses">2. Uses</a>
-
-To use this wizard, you must comply with 2 important conditions:
-
-1. Start from under the superuser **root**.
-2. the presence of a configured Internet connection in your distribution
-3. Install several dependencies in the Live distribution for the script to work correctly. Without the utilities listed below, the script simply won't run.
-
-$ sudo pacman -Syy ncurses bash dialog python --noconfirm
-
-**This script can be run from anywhere**.
-
-It is enough to make one of the files executable and run it from the console:
-
-```
-$ chmod ugo+x aif-installation/aif
-
-$ sudo sh aif-installation/aif
-```
-Then just follow the instructions of the installation wizard.
-
-**We wish you good luck**.
 
 ---
 
