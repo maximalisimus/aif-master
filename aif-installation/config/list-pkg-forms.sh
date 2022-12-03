@@ -614,7 +614,7 @@ if [[ "${_archi[*]}" == "x86_64" ]]; then
 	_golang_pkg=(go go-tools)
 	_python_pkg=(python python-pip python-setuptools python-virtualenv python-virtualenvwrapper python-wheel)
 	_python2_pkg=(python2 python2-pip python2-setuptools python2-virtualenv python2-wheel)
-	pycharm-community-edition
+	_python_ide_pkg=(pycharm-community-edition)
 	_qt_creator_pkg=(qtcreator qt5-base qt5-doc qt6-base qt6-doc)
 	_gtk3_pkg=(gtk3 libcolord)
 	_gtkmm3_pkg=(gtkmm3)
