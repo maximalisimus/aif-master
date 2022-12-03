@@ -510,3 +510,27 @@ search_display_manager()
 	[[ "${_slim_search[*]}" == "1" ]] && DM="SLiM"
 	wait
 }
+synaptic_installation()
+{
+	touchpad_detect=$(echo "${_current_pkgs[*]}" | grep -oi "xf86-input-synaptics" | wc -l)
+	if [[ ${touchpad_detect[*]} == 1 ]]; then
+		cp -f "${MOUNTPOINT}"/usr/share/X11/xorg.conf.d/70-synaptics.conf "${MOUNTPOINT}"/etc/X11/xorg.conf.d/
+		echo -e -n "\n\nSection \"InputClass\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\tIdentifier \"touchpad\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\tDriver \"synaptics\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\tMatchIsTouchpad \"on\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\t\tOption \"TapButton1\" \"1\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\t\tOption \"TapButton2\" \"3\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\t\tOption \"VertEdgeScroll\" \"on\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\t\tOption \"HorizEdgeScroll\" \"on\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\t\tOption \"CircularScrolling\" \"on\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\t\tOption \"CircScrollTrigger\" \"2\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\t\tOption \"EmulateTwoFingerMinZ\" \"40\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\t\tOption \"EmulateTwoFingerMinW\" \"8\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\t\tOption \"CoastingSpeed\" \"0\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\t\tOption \"FingerLow\" \"30\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\t\tOption \"FingerHigh\" \"50\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "\t\tOption \"MaxTapTime\" \"125\"\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+		echo -e -n "EndSection\n\n" >> "${MOUNTPOINT}"/etc/X11/xorg.conf.d/70-synaptics.conf
+	fi
+}

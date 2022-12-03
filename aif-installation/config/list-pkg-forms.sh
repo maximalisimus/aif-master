@@ -42,10 +42,7 @@ _ntp_pkg=(ntp networkmanager-dispatcher-ntpd)
 #
 # Packages for wireless tools
 _wifi_pkg=(iw wireless_tools wpa_actiond wpa_supplicant wicd)
-_wifi_menu=""
-_broadcom=(b43-fwcutter)
-_list_broadcom=""
-_menu_wifi=("Show_Devices" "Broadcom_802.11b/g/n" "Intel_PRO/Wireless_2100" "Intel_PRO/Wireless_2200" "All" "Back")
+_broadcom=(b43-fwcutter broadcom-wl-dkms)
 _bluetooth=(blueman bluez bluez-libs bluez-plugins bluez-utils bluez-tools)
 #
 # Package for grub and uefi menu

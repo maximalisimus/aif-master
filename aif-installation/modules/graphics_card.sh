@@ -25,10 +25,15 @@ install_alsa_xorg_input() {
         if [[ $? -eq 0 ]]; then
             dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_chl_xpkg_ttl" --checklist "$_chl_xpkg_bd" 0 0 16 ${_x_pkg_menu_cl} 2>${ANSWER}
             _chl_x_pkg=$(cat ${ANSWER})
-            [[ ${_chl_x_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_chl_x_pkg[*]} 2>/tmp/.errlog  
+            [[ ${_chl_x_pkg[*]} != "" ]] && pacstrap ${MOUNTPOINT} ${_chl_x_pkg[*]} 2>/tmp/.errlog
+            [[ ${_chl_x_pkg[*]} != "" ]] && _current_pkgs="${_chl_x_pkg[*]}"
         else
             pacstrap ${MOUNTPOINT} ${_clist_x_pkg[*]} 2>/tmp/.errlog
+            _current_pkgs="${_clist_x_pkg[*]}"
         fi
+        wait
+        synaptic_installation
+        wait
     fi
     check_for_error
     wait

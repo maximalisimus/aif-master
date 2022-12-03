@@ -34,7 +34,7 @@ install_wireless_firmware() {
 	
 	dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title "$_WirelssFirmTitle" --menu "$_WirelssFirmBody" 0 0 3 \
 	"1" "${_SeeWirelessDev}" \
-	"2" "Broadcom_802.11b/g/n" \
+	"2" "Broadcom 802.11b/g/n" \
 	"3" "$_Back" 2>${ANSWER}
 	
 	case $(cat ${ANSWER}) in
