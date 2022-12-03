@@ -418,7 +418,7 @@ greeter_configuration(){
 			echo "[greeter]" > ${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf
 			echo "theme-name = Adwaita" >> ${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf
 			echo "icon-theme-name = Adwaita" >> ${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf
-			echo "background = /usr/share/wallpapers/Full-HD/looking-out.png" >> ${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf
+			echo "background = /usr/share/wallpapers/Full-HD/looking-out.jpg" >> ${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf
 			echo "default-user-image = #avatar-default-symbolic" >> ${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf
 			echo "panel-position = bottom" >> ${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf
 			echo -e -n "indicators = ~spacer;~separator;~session;~separator;~layout;" >> ${MOUNTPOINT}/etc/lightdm/lightdm-gtk-greeter.conf
