@@ -370,4 +370,3 @@ Starting point of the project: **Architect Linux installer**.
 ---
 
 [To the table of contents](#EngOglavlenie)
-
