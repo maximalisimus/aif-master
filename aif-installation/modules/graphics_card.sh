@@ -31,9 +31,6 @@ install_alsa_xorg_input() {
             pacstrap ${MOUNTPOINT} ${_clist_x_pkg[*]} 2>/tmp/.errlog
             _current_pkgs="${_clist_x_pkg[*]}"
         fi
-        wait
-        synaptic_installation
-        wait
     fi
     check_for_error
     wait
@@ -77,7 +74,10 @@ install_alsa_xorg_input() {
          cp -f ${MOUNTPOINT}/etc/X11/xinit/xinitrc ${MOUNTPOINT}/home/$i
          arch_chroot "chown -R ${i}:users /home/${i}"
      done
-          
+     wait
+     synaptic_installation
+     wait
+     
      AXI_INSTALLED=1
 }
 
