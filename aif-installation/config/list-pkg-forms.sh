@@ -306,7 +306,8 @@ _cad_pkg=(kicad kicad-library kicad-library-3d geda-gaf)
 #
 _virtualization=(virtualbox qemu)
 _vbox_pkg=(virtualbox virtualbox-guest-iso virtualbox-guest-utils virtualbox-host-dkms virtualbox-host-modules-arch)
-_qemu_pkg(qemu qemu-arch-extra edk2-ovmf qemu-block-iscsi qemu-headless qemu-block-gluster qemu-block-rbd)
+_qemu_pkg(qemu-full qemu-img qemu-ui-gtk qemu-tools edk2-ovmf qemu-block-gluster qemu-block-iscsi)
+
 #
 _games_pkg=(steam teeworlds supertuxkart xonotic warsow aisleriot kpat kmines gnome-chess gnuchess pychess gnome-sudoku hitori bomber)
 #
